@@ -35,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         if (id == R.id.action_auto) {  // 수동추가 버튼
             Toast.makeText(getApplicationContext(), "수동추가", Toast.LENGTH_LONG).show();
+            // 여기에 팝업창 하나 넣고싶어
+        }
+        if (id == R.id.action_ble) {  // 블루투스 연결
+            Toast.makeText(getApplicationContext(), "BLE연결", Toast.LENGTH_LONG).show();
+            // 블루투스 연결
         }
         if (id == R.id.action_setting) {  // 설정 페이지로 이동
             Intent intent = new Intent(MainActivity.this, SettingActivity.class);

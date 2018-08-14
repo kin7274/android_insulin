@@ -43,8 +43,9 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         set_btn.setOnClickListener(this);
         exit_btn.setOnClickListener(this);
 
-
-        final String[] items = {"초속효성", "속효성", "중간형", "혼합형", "지속형"};  // 스피너 1번 : 인슐린 종류
+        // 스피너1 : 인슐린 종류
+        final String[] items = {"초속효성", "속효성", "중간형", "혼합형", "지속형"};
+        // 스피너2 (5가지)
         final String[] items1 = {"휴머로그", "노보래피드", "애피드라"};  // 초속효성
         final String[] items2 = {"휴먼인슐린"};  // 속효성
         final String[] items3 = {"노보린", "노보렛", "휴물린", "인슈라타드"};  // 중간형
@@ -96,24 +97,24 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view) {  // 버튼 이벤트
         String abc_str = (String) abc_num.getText();
         int inabc = (int) Integer.parseInt(abc_str);
         switch (view.getId()) {
-            case R.id.set_btn:
+            case R.id.set_btn:  // 저장 버튼
                 Toast.makeText(SettingActivity.this, "저장할게유", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.exit_btn:
+            case R.id.exit_btn:  // 나가기 버튼
                 Toast.makeText(SettingActivity.this, "취소할게유", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.abc_inc:
+            case R.id.abc_inc:  // 단위 - 증가 버튼
                 inabc++;
                 abc_num.setText(String.valueOf(inabc));
                 break;
-            case R.id.abc_dec:
-                if (inabc == 1) {  // 음수 구분용   MAX는 필요할까?
+            case R.id.abc_dec:  // 단위 - 감소 버튼
+                if (inabc == 1) {  // 음수 구분용 - MAX는 필요할까? 10-30? 몇이 적당할까?
                     Toast.makeText(SettingActivity.this, "1 이하는 입력X", Toast.LENGTH_SHORT).show();
-                } else {
+                } else {  // 음수 아니면 원래대로 감소
                     inabc--;
                     abc_num.setText(String.valueOf(inabc));
                 }
@@ -123,7 +124,6 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
     }
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {}
-
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {}
 }

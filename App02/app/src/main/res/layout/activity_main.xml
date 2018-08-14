@@ -22,6 +22,35 @@
             android:textSize="20dp" />
     </android.support.v7.widget.Toolbar>
 
+    <LinearLayout
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <Button
+        android:id="@+id/bt_support"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="btnClick"
+        android:layout_weight="1"
+        android:text="블루투스 지원여부" />
+
+    <Button
+        android:id="@+id/bt_turnon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="btnClick"
+        android:layout_weight="1"
+        android:text="블루투스 켜기" />
+
+    <Button
+        android:id="@+id/bt_pared"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="btnClick"
+        android:layout_weight="1"
+        android:text="페어링 목록" />
+    </LinearLayout>
     <TextView
         android:textSize="40dp"
         android:gravity="center"

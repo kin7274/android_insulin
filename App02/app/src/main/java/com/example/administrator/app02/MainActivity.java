@@ -1,18 +1,24 @@
 package com.example.administrator.app02;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
-import static com.example.administrator.app02.R.*;
+import static com.example.administrator.app02.R.layout;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
+
+    Dialog dialog;
+    final int[] selectedItem = {0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +39,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
-        if (id == R.id.action_auto) {  // 수동추가 버튼
-            Toast.makeText(getApplicationContext(), "수동추가", Toast.LENGTH_LONG).show();
-            // 여기에 팝업창 하나 넣고싶어
+        if (id == R.id.action_auto) {
+            final String[] items = new String[]{"아침식전", "아침식후", "점심식전", "점심식후","저녁식전","저녁식후"};
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            dialog.setTitle("식사상태를선택하세요.").setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    selectedItem[0] = which;}
+            }).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int which) {
+                    Toast.makeText(getApplicationContext(),items[selectedItem[0]] + "을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
+                }
+            });
+            dialog.create();
+            dialog.show();
         }
         if (id == R.id.action_ble) {  // 블루투스 연결
             Toast.makeText(getApplicationContext(), "BLE연결", Toast.LENGTH_LONG).show();

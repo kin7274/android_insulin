@@ -33,11 +33,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
-        if (id == R.id.action_setting) {
+        if (id == R.id.action_auto) {  // 수동추가 버튼
+            Toast.makeText(getApplicationContext(), "수동추가", Toast.LENGTH_LONG).show();
+        }
+        if (id == R.id.action_setting) {  // 설정 페이지로 이동
             Intent intent = new Intent(MainActivity.this, SettingActivity.class);
             startActivity(intent);
         }
-        if (id == R.id.action_education) {
+        if (id == R.id.action_education) {  // 교육(추가자료) 페이지로 이동
             Intent intent2 = new Intent(MainActivity.this, EducationActivity.class);
             startActivity(intent2);
         }

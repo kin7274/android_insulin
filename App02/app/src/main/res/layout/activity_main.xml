@@ -29,5 +29,4 @@
         android:text="메인_타임라인형식"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
 </RelativeLayout>

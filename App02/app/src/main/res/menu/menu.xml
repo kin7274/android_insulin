@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
+    <item android:id="@+id/action_auto"
+        android:title="수동"
+        app:showAsAction="always"/>
     <item android:id="@+id/action_setting"
         android:title="설정"
         app:showAsAction="withText"/>

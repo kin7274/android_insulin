@@ -21,8 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
-        getSupportActionBar().setTitle("");  // 툴바 타이틀 변경
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
     }
 
     @Override

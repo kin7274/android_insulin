@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_education) {
             Intent intent2 = new Intent(MainActivity.this, EducationActivity.class);
             startActivity(intent2);
-            return true;
         }
         return super.onOptionsItemSelected(item);
     }

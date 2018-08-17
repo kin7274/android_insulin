@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import static com.example.administrator.app02.R.layout;
@@ -17,6 +20,11 @@ public class MainActivity extends AppCompatActivity{
 
     Dialog dialog;  // 팝업창
     final int[] selectedItem = {0};  // 팝업창의 선택목록 표시
+
+
+    Button bt_support;
+    Button bt_turnon;
+    Button bt_pared;
 
     // 메인
     @Override
@@ -27,12 +35,36 @@ public class MainActivity extends AppCompatActivity{
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
         getSupportActionBar().setTitle("");
+
+        bt_support = (Button) findViewById(R.id.bt_support);
+        bt_support.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"bt_support", Toast.LENGTH_SHORT).show();
+            }
+        });
+        bt_turnon = (Button) findViewById(R.id.bt_turnon);
+        bt_turnon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"bt_turnon", Toast.LENGTH_SHORT).show();
+            }
+        });
+        bt_pared = (Button) findViewById(R.id.bt_pared);
+        bt_pared.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(),"bt_pared", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
@@ -58,7 +90,7 @@ public class MainActivity extends AppCompatActivity{
         if (id == R.id.action_ble) {  // 블루투스 연결
             Toast.makeText(getApplicationContext(), "BLE연결", Toast.LENGTH_LONG).show();
             // 블루투스 연결
-
+            // 다이얼로그 넣자
         }
         if (id == R.id.action_setting) {  // 설정 페이지로 이동
             Intent intent = new Intent(MainActivity.this, SettingActivity.class);

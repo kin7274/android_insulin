@@ -31,7 +31,6 @@
         android:id="@+id/bt_support"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="btnClick"
         android:layout_weight="1"
         android:text="블루투스 지원여부" />
 
@@ -39,7 +38,6 @@
         android:id="@+id/bt_turnon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="btnClick"
         android:layout_weight="1"
         android:text="블루투스 켜기" />
 
@@ -47,7 +45,6 @@
         android:id="@+id/bt_pared"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="btnClick"
         android:layout_weight="1"
         android:text="페어링 목록" />
     </LinearLayout>

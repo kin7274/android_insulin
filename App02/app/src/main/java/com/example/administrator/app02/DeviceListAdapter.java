@@ -40,7 +40,6 @@ public class DeviceListAdapter extends ArrayAdapter<BluetoothDevice> {
                 deviceAdress.setText(device.getAddress());
             }
         }
-
         return convertView;
     }
 

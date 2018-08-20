@@ -26,13 +26,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-
-
-    // 유튜브용
-    //    private static final String ARG_YOUTUBE_PLAYLIST_ID = "AIzaSyBE12xBlnHBOUCLQssNuBhZ37s1qd3Bbic";
-    //    private static final String KEY_SAVED_INSTANCE_PLAYLIST = "txifUq2nBHo";
-    //    View v = inflater.inflate(R.layout.fragment2, container, false);
-
     Dialog dialog;  // 팝업창
     final int[] selectedItem = {0};  // 팝업창의 선택목록 표시
 
@@ -366,13 +359,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(intent);
                 break;
             case R.id.action_education:
-                // 교육(추가자료) 페이지로 이동
+                // 영상 페이지로 이동
                 Intent intent_edu = new Intent(MainActivity.this, EducationActivity.class);
                 startActivity(intent_edu);
                 break;
             case R.id.action_guide:
                 // 어플에 대한 사용법 간단하게
-                // dialog
+                // dialog로 할까?
                 Toast.makeText(getApplicationContext(), "준비중이예유", Toast.LENGTH_SHORT).show();
                 break;
         }

@@ -19,48 +19,23 @@
             android:textColor="#ff000000"
             android:textSize="20dp" />
     </android.support.v7.widget.Toolbar>
-]
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="9"
-        >
-        <FrameLayout
-            android:id="@+id/main_frame"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="vertical">
+
+        <view
+            class="com.google.android.youtube.player.YouTubePlayerView"
+            android:id="@+id/youtube_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></FrameLayout>
+            android:layout_height="150dp" />
+
+        <Button
+            android:id="@+id/youtubebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="유튜브버튼" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:id="@+id/button1"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_height="match_parent">
-            <TextView
-                android:text="PDF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/button2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_weight="1">
-            <TextView
-                android:text="YOUTUBE"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        </LinearLayout>
 </LinearLayout>

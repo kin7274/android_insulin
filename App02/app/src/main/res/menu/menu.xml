@@ -3,16 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
 
-    <item android:id="@+id/action_auto"
+    <item
+        android:id="@+id/action_auto"
         android:title="수동"
         app:showAsAction="always"/>
-    <item android:id="@+id/action_ble"
+    <item
+        android:id="@+id/action_ble"
         android:title="BLE"
         app:showAsAction="always"/>
-    <item android:id="@+id/action_setting"
+    <item
+        android:id="@+id/action_setting"
         android:title="설정"
         app:showAsAction="withText"/>
-    <item android:id="@+id/action_education"
-        android:title="추가자료"
+    <item
+        android:id="@+id/action_education"
+        android:title="공부합시다"
+        app:showAsAction="withText"/>
+    <item
+        android:id="@+id/action_guide"
+        android:title="사용법"
         app:showAsAction="withText"/>
 </menu>

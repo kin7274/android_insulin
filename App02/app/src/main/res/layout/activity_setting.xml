@@ -28,34 +28,46 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="설정을 위한 페이지입니다." />
+            android:text="설정을 위한 페이지입니다."
+            android:textSize="20dp"
+            android:typeface="sans"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1. 인슐린" />
+            android:text="1. 인슐린"
+            android:textSize="20dp"
+            android:typeface="sans"/>
 
         <Spinner
             android:id="@+id/spinner01"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:typeface="sans">
         </Spinner>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2. 하위품목" />
+            android:text="2. 하위품목"
+            android:textSize="20dp"
+            android:typeface="sans"/>
 
         <Spinner
             android:id="@+id/spinner02"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:typeface="sans">
         </Spinner>
 
         <TextView
             android:text="3. 단위"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:typeface="sans"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,7 +85,9 @@
                 android:gravity="center"
                 android:text="5"
                 android:layout_width="50dp"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:textSize="20dp"
+                android:typeface="sans"/>
 
             <Button
                 android:id="@+id/abc_inc"
@@ -82,7 +96,6 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
-
     <LinearLayout
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
@@ -93,13 +106,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="저장" />
-
-        <Button
-            android:id="@+id/exit_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="취소" />
+            android:text="저장"
+            android:textSize="20dp"
+            android:typeface="sans"/>
     </LinearLayout>
 </RelativeLayout>

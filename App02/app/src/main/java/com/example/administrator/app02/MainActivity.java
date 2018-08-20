@@ -27,6 +27,12 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
+
+    // 유튜브용
+    //    private static final String ARG_YOUTUBE_PLAYLIST_ID = "AIzaSyBE12xBlnHBOUCLQssNuBhZ37s1qd3Bbic";
+    //    private static final String KEY_SAVED_INSTANCE_PLAYLIST = "txifUq2nBHo";
+    //    View v = inflater.inflate(R.layout.fragment2, container, false);
+
     Dialog dialog;  // 팝업창
     final int[] selectedItem = {0};  // 팝업창의 선택목록 표시
 

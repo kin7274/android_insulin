@@ -8,9 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-//    private static final String ARG_YOUTUBE_PLAYLIST_ID = "AIzaSyBE12xBlnHBOUCLQssNuBhZ37s1qd3Bbic";
-//    private static final String KEY_SAVED_INSTANCE_PLAYLIST = "txifUq2nBHo";
-//    View v = inflater.inflate(R.layout.fragment2, container, false);
+
 
 public class MyFragment2 extends Fragment {
 

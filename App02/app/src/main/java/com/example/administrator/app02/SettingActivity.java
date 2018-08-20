@@ -24,7 +24,6 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
     Button abc_dec;  // 단위 감소
 
     Button set_btn;  // 저장버튼
-    Button exit_btn;  // 나가기, 취소
 
 
     @Override
@@ -36,12 +35,10 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         abc_inc = (Button) findViewById(R.id.abc_inc);
         abc_dec = (Button) findViewById(R.id.abc_dec);
         set_btn = (Button) findViewById(R.id.set_btn);
-        exit_btn = (Button) findViewById(R.id.exit_btn);
 
         abc_inc.setOnClickListener(this);
         abc_dec.setOnClickListener(this);
         set_btn.setOnClickListener(this);
-        exit_btn.setOnClickListener(this);
 
         // 스피너1 : 인슐린 종류
         final String[] items = {"초속효성", "속효성", "중간형", "혼합형", "지속형"};
@@ -103,9 +100,6 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         switch (view.getId()) {
             case R.id.set_btn:  // 저장 버튼
                 Toast.makeText(SettingActivity.this, "저장할게유", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.exit_btn:  // 나가기 버튼
-                Toast.makeText(SettingActivity.this, "취소할게유", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.abc_inc:  // 단위 - 증가 버튼
                 inabc++;

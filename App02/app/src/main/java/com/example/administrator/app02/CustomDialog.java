@@ -16,14 +16,11 @@ public class CustomDialog extends Dialog implements View.OnClickListener{
     private TextView textTitle;
     private TextView textContent;
     private String title;
-    private String content;
 
-
-    public CustomDialog(Context context, String title, String content){
+    public CustomDialog(Context context, String title){
         super(context);
         this.context = context;
         this.title = title;
-        this.content = content;
     }
 
     public void setDialogListener(MyDialogListener dialogListener){
@@ -34,17 +31,14 @@ public class CustomDialog extends Dialog implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_custom);
-
-        textTitle = ( TextView ) findViewById(R.id.textTitle);
-        textContent = ( TextView ) findViewById(R.id.textContent);
+        textTitle.setText(title);
 
         Button okButton = (Button) findViewById(R.id.okButton);
-        Button cancelButton = (Button) findViewById(R.id.cancelButton);
-        okButton.setOnClickListener(this);
-        cancelButton.setOnClickListener(this);
+        Button okButton = (Button) findViewById(R.id.okButton);
+        Button okButton = (Button) findViewById(R.id.okButton);
 
-        textTitle.setText(title);
-        textContent.setText(content);
+        Button okButton = (Button) findViewById(R.id.okButton);
+        okButton.setOnClickListener(this);
     }
 
     @Override
@@ -52,9 +46,6 @@ public class CustomDialog extends Dialog implements View.OnClickListener{
         switch (v.getId()){
             case R.id.okButton:
                 cancel();
-                break;
-            case R.id.cancelButton:
-                dismiss();
                 break;
         }
     }

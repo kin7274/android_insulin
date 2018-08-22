@@ -332,13 +332,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case R.id.action_ble:
                 // 블루투스 연결
-                CustomDialog dialog_ble = new CustomDialog(this, "블루투스 설정","띠용");
+                CustomDialog dialog_ble = new CustomDialog(this, "블루투스 설정");
                 dialog_ble.setCanceledOnTouchOutside(true);
                 dialog_ble.setDialogListener(new MyDialogListener() {
                     @Override
                     public void onPositiveClicked() {}
-                    @Override
-                    public void onNegativeClicked() {}
                 });
                 dialog_ble.show();
                 break;

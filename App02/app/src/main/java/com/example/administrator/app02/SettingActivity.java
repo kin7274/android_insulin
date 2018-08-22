@@ -1,5 +1,6 @@
 package com.example.administrator.app02;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
 
     Button set_btn;  // 저장버튼
 
+    @SuppressLint("ResourceType")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {

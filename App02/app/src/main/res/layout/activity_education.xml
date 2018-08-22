@@ -20,22 +20,27 @@
             android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:orientation="vertical">
+        android:layout_marginTop="?attr/actionBarSize">
 
         <view
+            android:id="@+id/youtubeView"
             class="com.google.android.youtube.player.YouTubePlayerView"
-            android:id="@+id/youtube_view"
-            android:layout_width="match_parent"
-            android:layout_height="150dp" />
+            id="@+id/view2"
+            android:layout_width="364dp"
+            android:layout_height="141dp" />
 
         <Button
-            android:id="@+id/youtubebutton"
+            android:id="@+id/youtubeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="유튜브버튼" />
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="163dp"
+            android:text="Button" />
+    </RelativeLayout>
+
+
 </LinearLayout>

@@ -313,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 // 식사상태 선택 팝업창 열림
                 final String[] aitems = new String[]{"아침식전", "아침식후", "점심식전", "점심식후","저녁식전","저녁식후"};
                 AlertDialog.Builder dialog_eat = new AlertDialog.Builder(this);
-                dialog_eat.setTitle("식사상태를선택하세요.").setSingleChoiceItems(aitems, 0, new DialogInterface.OnClickListener() {
+                dialog_eat.setTitle("식사상태를 선택하세요.").setSingleChoiceItems(aitems, 0, new DialogInterface.OnClickListener() {
                     // 선택된 하나 받아서
                     @Override
                     public void onClick(DialogInterface dialog_eat, int which) {

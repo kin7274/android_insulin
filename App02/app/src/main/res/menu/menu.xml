@@ -2,25 +2,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
-
+    <!--수동입력-->
     <item
         android:id="@+id/action_auto"
-        android:title="수동"
+        android:icon="@drawable/ic_add_white_24dp"
         app:showAsAction="always"/>
+    <!--블루투스-->
     <item
         android:id="@+id/action_ble"
-        android:title="BLE"
+        android:icon="@drawable/ic_bluetooth_white_24dp"
         app:showAsAction="always"/>
+
+    <!--오버플로우메뉴-->
+    <!--초기설정페이지-->
     <item
         android:id="@+id/action_setting"
-        android:title="설정"
+        android:title="SETTING"
         app:showAsAction="withText"/>
+    <!--영상링크, 유튜브-->
     <item
         android:id="@+id/action_education"
-        android:title="공부합시다"
+        android:title="YOUTUBE"
         app:showAsAction="withText"/>
     <item
         android:id="@+id/action_guide"
-        android:title="사용법"
+        android:title="APP GUIDE"
         app:showAsAction="withText"/>
 </menu>

@@ -16,8 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="INSULIN"
-        android:textColor="#ff000000"
-        android:textSize="20dp" />
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
 </android.support.v7.widget.Toolbar>
     <LinearLayout
         android:layout_marginTop="?attr/actionBarSize"

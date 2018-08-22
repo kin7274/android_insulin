@@ -332,40 +332,50 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case R.id.action_ble:
                 // 블루투스 연결
-                final String[] bitems = new String[]{"BLE 연결", "검색 허용", "장치 검색"};  // 3개 메뉴
-                AlertDialog.Builder dialog_ble = new AlertDialog.Builder(this);
-                dialog_ble.setTitle("").setSingleChoiceItems(bitems, 0, new DialogInterface.OnClickListener() {
-                    // 선택된 하나 받아서
+                CustomDialog dialog_ble = new CustomDialog(this, "블루투스 설정","띠용");
+                dialog_ble.setCanceledOnTouchOutside(true);
+                dialog_ble.setDialogListener(new MyDialogListener() {
                     @Override
-                    public void onClick(DialogInterface dialog_ble, int which) {
-                        selectedItem[0] = which;
-                    }
-                }).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    public void onPositiveClicked() {}
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int which) {
-//                        Toast.makeText(getApplicationContext(),bitems[selectedItem[0]] + "을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
-                        // 데이터 전송ㄱ
-                        switch(bitems[selectedItem[0]]){
-                            case "BLE 연결":
-//                                Toast.makeText(getApplicationContext(), "BLE 연결을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
-                                enableDisableBT();
-                                break;
-                            case "검색 허용":
-                                Toast.makeText(getApplicationContext(), "검색 허용을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
-                                break;
-                            case "장치 검색":
-                                Toast.makeText(getApplicationContext(), "장치 검색을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
-                                break;
-                        }
-                    }
+                    public void onNegativeClicked() {}
                 });
-                dialog_ble.create();
                 dialog_ble.show();
                 break;
+//                final String[] bitems = new String[]{"BLE 연결", "검색 허용", "장치 검색"};  // 3개 메뉴
+//                AlertDialog.Builder dialog_ble = new AlertDialog.Builder(this);
+//                dialog_ble.setTitle("").setSingleChoiceItems(bitems, 0, new DialogInterface.OnClickListener() {
+//                    // 선택된 하나 받아서
+//                    @Override
+//                    public void onClick(DialogInterface dialog_ble, int which) {
+//                        selectedItem[0] = which;
+//                    }
+//                }).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int which) {
+////                        Toast.makeText(getApplicationContext(),bitems[selectedItem[0]] + "을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
+//                        // 데이터 전송ㄱ
+//                        switch(bitems[selectedItem[0]]){
+//                            case "BLE 연결":
+////                                Toast.makeText(getApplicationContext(), "BLE 연결을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
+//                                enableDisableBT();
+//                                break;
+//                            case "검색 허용":
+//                                Toast.makeText(getApplicationContext(), "검색 허용을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
+//                                break;
+//                            case "장치 검색":
+//                                Toast.makeText(getApplicationContext(), "장치 검색을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
+//                                break;
+//                        }
+//                    }
+//                });
+//                dialog_ble.create();
+//                dialog_ble.show();
+//                break;
             case R.id.action_setting:
                 // 설정 페이지로 이동
-                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-                startActivity(intent);
+                Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);
+                startActivity(intent_setting);
                 break;
             case R.id.action_education:
                 // 영상 페이지로 이동

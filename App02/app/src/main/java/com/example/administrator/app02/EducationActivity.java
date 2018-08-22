@@ -1,5 +1,5 @@
 package com.example.administrator.app02;
-
+//TODO 수정해야함
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +10,6 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
 public class EducationActivity extends YouTubeBaseActivity {
-    //todo 수정해야함.
     YouTubePlayerView youTubeView;
     Button button;
     YouTubePlayer.OnInitializedListener listener;
@@ -29,12 +28,10 @@ public class EducationActivity extends YouTubeBaseActivity {
 
             @Override
             public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
             }
         };
 
         button.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View v) {
                 youTubeView.initialize("AIzaSyC12r-vWRn_wZHF9EAtUVP_93BioYKRYSM", listener);

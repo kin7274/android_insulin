@@ -28,4 +28,8 @@
         android:id="@+id/action_guide"
         android:title="앱 사용법"
         app:showAsAction="withText"/>
+    <item
+        android:id="@+id/action_myinfo"
+        android:title="개발자 정보"
+        app:showAsAction="withText"/>
 </menu>

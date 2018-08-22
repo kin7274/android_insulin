@@ -375,8 +375,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case R.id.action_guide:
                 // 어플에 대한 사용법 간단하게
                 AlertDialog.Builder dialog_app = new AlertDialog.Builder(this);
-                dialog_app.setTitle("앱 가이드")
-                        .setMessage("앱 사용법을 설명한다. 처음엔 이렇게이렇게이렇게")
+                dialog_app.setTitle("앱 정보")
+                        .setMessage("앱에 대한 설명 및 사용법을 설명한다. 처음엔 이렇게이렇게이렇게")
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
@@ -384,6 +384,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         });
                 dialog_app.create();
                 dialog_app.show();
+                break;
+            case R.id.action_myinfo:
+                // 어플에 대한 사용법 간단하게
+                AlertDialog.Builder dialog_info = new AlertDialog.Builder(this);
+                dialog_info.setTitle("개발자 정보")
+                        .setMessage("안녕하십니까 저는...")
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+                            }
+                        });
+                dialog_info.create();
+                dialog_info.show();
                 break;
         }
         return super.onOptionsItemSelected(item);

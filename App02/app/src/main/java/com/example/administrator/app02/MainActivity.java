@@ -13,6 +13,7 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -156,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     // 메인
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -372,8 +374,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case R.id.action_guide:
                 // 어플에 대한 사용법 간단하게
-                // dialog로 할까?
-                Toast.makeText(getApplicationContext(), "준비중이예유", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder dialog_app = new AlertDialog.Builder(this);
+                dialog_app.setTitle("앱 가이드")
+                        .setMessage("앱 사용법을 설명한다. 처음엔 이렇게이렇게이렇게")
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+                            }
+                        });
+                dialog_app.create();
+                dialog_app.show();
                 break;
         }
         return super.onOptionsItemSelected(item);

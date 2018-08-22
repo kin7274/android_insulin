@@ -17,15 +17,15 @@
     <!--초기설정페이지-->
     <item
         android:id="@+id/action_setting"
-        android:title="SETTING"
+        android:title="설정"
         app:showAsAction="withText"/>
     <!--영상링크, 유튜브-->
     <item
         android:id="@+id/action_education"
-        android:title="YOUTUBE"
+        android:title="유튜브"
         app:showAsAction="withText"/>
     <item
         android:id="@+id/action_guide"
-        android:title="APP GUIDE"
+        android:title="앱 사용법"
         app:showAsAction="withText"/>
 </menu>

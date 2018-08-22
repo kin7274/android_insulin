@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">App02</string>
-    <string name="temp_string">Menu</string>
+    <string name="toolbar_title">INSULIN</string>
 </resources>

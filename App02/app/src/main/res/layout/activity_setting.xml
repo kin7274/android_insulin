@@ -7,16 +7,16 @@
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#ffc400"
+        android:background="@color/colorPrimary"
         android:elevation="4dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="INSULIN"
-            android:textColor="#ff000000"
-            android:textSize="20dp" />
+            android:text="@string/toolbar_title"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout

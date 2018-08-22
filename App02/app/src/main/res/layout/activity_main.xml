@@ -6,19 +6,20 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
-    android:id="@+id/my_toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="#ffc400"
-    android:elevation="4dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="INSULIN"
-        android:textColor="#ffffff"
-        android:textSize="20sp" />
-</android.support.v7.widget.Toolbar>
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/toolbar_title"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </android.support.v7.widget.Toolbar>
     <LinearLayout
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"

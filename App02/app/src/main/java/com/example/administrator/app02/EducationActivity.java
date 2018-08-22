@@ -1,6 +1,10 @@
 package com.example.administrator.app02;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -23,10 +27,17 @@ public class EducationActivity extends YouTubeBaseActivity {
     Button youtubebutton;
     YouTubePlayer.OnInitializedListener listener;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_education);
+
+        // 상태바 색 변경
+        View view = getWindow().getDecorView();
+        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setStatusBarColor(Color.parseColor(getResources().getString(R.color.colorPrimaryPurle)));
 
         youtubebutton = (Button) findViewById(R.id.youtubebutton);
         youtube_view = (YouTubePlayerView) findViewById(R.id.youtube_view);

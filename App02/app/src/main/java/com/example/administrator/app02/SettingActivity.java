@@ -1,6 +1,9 @@
 package com.example.administrator.app02;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,10 +28,16 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
 
     Button set_btn;  // 저장버튼
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        // 상태바 색 변경
+        View view = getWindow().getDecorView();
+        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setStatusBarColor(Color.parseColor(getResources().getString(R.color.colorPrimaryPurle)));
 
         abc_num = (TextView) findViewById(R.id.abc_num);
         abc_inc = (Button) findViewById(R.id.abc_inc);

@@ -28,44 +28,38 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="설정을 위한 페이지입니다."
-            android:textSize="20dp"
-            android:typeface="sans" />
+            android:text="@string/setting_title"
+            android:textSize="20sp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1. 인슐린"
-            android:textSize="20dp"
-            android:typeface="sans" />
+            android:text="@string/setting_1"
+            android:textSize="20sp" />
 
         <Spinner
             android:id="@+id/spinner01"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:typeface="sans"></Spinner>
+            android:textSize="20sp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2. 하위품목"
-            android:textSize="20dp"
-            android:typeface="sans" />
+            android:text="@string/setting_2"
+            android:textSize="20sp"/>
 
         <Spinner
             android:id="@+id/spinner02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:typeface="sans"></Spinner>
+            android:textSize="20sp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="3. 단위"
-            android:textSize="20dp"
-            android:typeface="sans" />
+            android:text="@string/setting_3"
+            android:textSize="20sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,22 +70,22 @@
                 android:id="@+id/abc_dec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="-1" />
+                android:text="@string/num_dec" />
 
             <TextView
                 android:id="@+id/abc_num"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:text="5"
-                android:textSize="20dp"
+                android:text="@string/num"
+                android:textSize="20sp"
                 android:typeface="sans" />
 
             <Button
                 android:id="@+id/abc_inc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+1" />
+                android:text="@string/num_inc" />
         </LinearLayout>
     </LinearLayout>
 
@@ -103,11 +97,10 @@
 
         <Button
             android:id="@+id/set_btn"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="저장"
-            android:textSize="20dp"
-            android:typeface="sans" />
+            android:text="@string/set"
+            android:textSize="20sp"/>
     </LinearLayout>
 </RelativeLayout>

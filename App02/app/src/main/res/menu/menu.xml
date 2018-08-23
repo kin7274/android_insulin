@@ -6,30 +6,32 @@
     <item
         android:id="@+id/action_auto"
         android:icon="@drawable/ic_add_white_24dp"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
     <!--블루투스-->
     <item
         android:id="@+id/action_ble"
         android:icon="@drawable/ic_bluetooth_white_24dp"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
 
     <!--오버플로우메뉴-->
     <!--초기설정페이지-->
     <item
         android:id="@+id/action_setting"
-        android:title="설정"
+        android:title="@string/TapBar_setting"
         app:showAsAction="withText"/>
     <!--영상링크, 유튜브-->
     <item
         android:id="@+id/action_education"
-        android:title="유튜브"
+        android:title="@string/TapBar_youtube"
         app:showAsAction="withText"/>
+    <!--앱정보-->
     <item
         android:id="@+id/action_guide"
-        android:title="앱 사용법"
+        android:title="@string/dialog_app_title"
         app:showAsAction="withText"/>
+    <!--개발자정보-->
     <item
         android:id="@+id/action_myinfo"
-        android:title="개발자 정보"
+        android:title="@string/dialog_my_title"
         app:showAsAction="withText"/>
 </menu>

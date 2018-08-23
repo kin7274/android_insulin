@@ -61,7 +61,7 @@ public class CustomDialog2 extends Dialog {
             @Override
             public void onClick(View v) {
                 mychoice();
-                Toast.makeText(getContext(), "띠용" + " " + a1 + " " + a2, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), a1 + ", " + a2, Toast.LENGTH_SHORT).show();
                 cancel();
             }
         });

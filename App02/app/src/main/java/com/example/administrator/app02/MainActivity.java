@@ -312,7 +312,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case R.id.action_auto:
                 // 수동버튼 클릭 시
                 // 식사상태 선택 팝업창 열림
-                CustomDialog2 dialog_auto = new CustomDialog2(this, "블루투스 설정");
+                CustomDialog2 dialog_auto = new CustomDialog2(this,getResources().getString(R.string.custom_dialog_title));
                 dialog_auto.setCanceledOnTouchOutside(true);
                 dialog_auto.setDialogListener(new MyDialogListener() {
                     @Override
@@ -323,7 +323,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case R.id.action_ble:
                 // 블루투스 연결
-                CustomDialog dialog_ble = new CustomDialog(this, "블루투스 설정");
+                CustomDialog dialog_ble = new CustomDialog(this,getResources().getString(R.string.custom_dialog2_title));
                 dialog_ble.setCanceledOnTouchOutside(true);
                 dialog_ble.setDialogListener(new MyDialogListener() {
                     @Override
@@ -347,9 +347,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case R.id.action_guide:
                 // 어플에 대한 사용법 간단하게
                 AlertDialog.Builder dialog_app = new AlertDialog.Builder(this);
-                dialog_app.setTitle("앱 정보")
-                        .setMessage("앱에 대한 설명 및 사용법을 설명한다. 처음엔 이렇게이렇게이렇게")
-                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                dialog_app.setTitle(getResources().getString(R.string.dialog_app_title))
+                        .setMessage(getResources().getString(R.string.dialog_app_content))
+                        .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
                             }
@@ -360,9 +360,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case R.id.action_myinfo:
                 // 어플에 대한 사용법 간단하게
                 AlertDialog.Builder dialog_info = new AlertDialog.Builder(this);
-                dialog_info.setTitle("개발자 정보")
-                        .setMessage("안녕하십니까 저는...")
-                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                dialog_info.setTitle(getResources().getString(R.string.dialog_my_title))
+                        .setMessage(getResources().getString(R.string.dialog_my_content))
+                        .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
                             }

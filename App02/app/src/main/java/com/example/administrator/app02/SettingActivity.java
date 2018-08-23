@@ -20,13 +20,9 @@ import java.util.Set;
 
 public class SettingActivity extends AppCompatActivity implements OnClickListener, OnItemSelectedListener {
 
-    Spinner spinner01;  // 상위 스피너, 인슐린 종류(5)
-    Spinner spinner02;  // 하위 스피너, 하위 품목
-
+    Spinner spinner01, spinner02;  // 상위 스피너, 인슐린 종류(5).  하위 스피너, 하위 품목
     TextView abc_num;  // 단위 표시
-    Button abc_inc;  // 단위 증가
-    Button abc_dec;  // 단위 감소
-
+    Button abc_inc, abc_dec;  // 단위 증가, 감소
     Button set_btn;  // 저장버튼
 
     @SuppressLint("ResourceType")
@@ -51,19 +47,19 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         set_btn.setOnClickListener(this);
 
         // 상위 스피너, 인슐린 종류(5)
-        final String[] items = {"초속효성", "속효성", "중간형", "혼합형", "지속형"};
+        final String[] items = {getResources().getString(R.string.insulin_name), getResources().getString(R.string.insulin_name1), getResources().getString(R.string.insulin_name2), getResources().getString(R.string.insulin_name3), getResources().getString(R.string.insulin_name4)};
 
         // 하위 스피너, 하위 품목
         // 초속효성
-        final String[] items1 = {"휴머로그", "노보래피드", "애피드라"};
+        final String[] items1 = {getResources().getString(R.string.insulin_name0_0), getResources().getString(R.string.insulin_name0_1), getResources().getString(R.string.insulin_name0_2)};
         // 속효성
-        final String[] items2 = {"휴먼인슐린"};
+        final String[] items2 = {getResources().getString(R.string.insulin_name1_0)};
         // 중간형
-        final String[] items3 = {"노보린", "노보렛", "휴물린", "인슈라타드"};
+        final String[] items3 = {getResources().getString(R.string.insulin_name2_0), getResources().getString(R.string.insulin_name2_1), getResources().getString(R.string.insulin_name2_2), getResources().getString(R.string.insulin_name2_3)};
         // 혼합형
-        final String[] items4 = {"노보믹스", "휴머로그 믹스", "휴물린", "믹스타드"};
+        final String[] items4 = {getResources().getString(R.string.insulin_name3_0), getResources().getString(R.string.insulin_name3_1), getResources().getString(R.string.insulin_name3_2), getResources().getString(R.string.insulin_name3_3)};
         // 지속형
-        final String[] items5 = {"란투스", "레버미어"};
+        final String[] items5 = {getResources().getString(R.string.insulin_name4_0), getResources().getString(R.string.insulin_name4_1)};
 
         final Spinner spinner01 = (Spinner) findViewById(R.id.spinner01);
         spinner01.setOnItemSelectedListener((OnItemSelectedListener) this);
@@ -77,28 +73,28 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         spinner01.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (spinner01.getItemAtPosition(position) == "초속효성") {
+                if (spinner01.getItemAtPosition(position) == getResources().getString(R.string.insulin_name)) {
                     // 스피너 칸, 폰트, 크기 바꾸자!
                     ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(SettingActivity.this, android.R.layout.simple_spinner_item, items1);
                     adapter2.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
                     spinner02.setAdapter(adapter2);
                     spinner02.setSelection(0);
-                } else if (spinner01.getItemAtPosition(position) == "속효성") {
+                } else if (spinner01.getItemAtPosition(position) == getResources().getString(R.string.insulin_name1)) {
                     ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(SettingActivity.this, android.R.layout.simple_spinner_item, items2);
                     adapter3.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
                     spinner02.setAdapter(adapter3);
                     spinner02.setSelection(0);
-                } else if (spinner01.getItemAtPosition(position) == "중간형") {
+                } else if (spinner01.getItemAtPosition(position) == getResources().getString(R.string.insulin_name2)) {
                     ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(SettingActivity.this, android.R.layout.simple_spinner_item, items3);
                     adapter4.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
                     spinner02.setAdapter(adapter4);
                     spinner02.setSelection(0);
-                } else if (spinner01.getItemAtPosition(position) == "혼합형") {
+                } else if (spinner01.getItemAtPosition(position) == getResources().getString(R.string.insulin_name3)) {
                     ArrayAdapter<String> adapter5 = new ArrayAdapter<String>(SettingActivity.this, android.R.layout.simple_spinner_item, items4);
                     adapter5.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
                     spinner02.setAdapter(adapter5);
                     spinner02.setSelection(0);
-                } else if (spinner01.getItemAtPosition(position) == "지속형") {
+                } else if (spinner01.getItemAtPosition(position) == getResources().getString(R.string.insulin_name4)) {
                     ArrayAdapter<String> adapter6 = new ArrayAdapter<String>(SettingActivity.this, android.R.layout.simple_spinner_item, items5);
                     adapter6.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
                     spinner02.setAdapter(adapter6);
@@ -112,41 +108,41 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         });
     }
 
-    @Override
-    public void onClick(View view) {
-        // 버튼 이벤트
-        String abc_str = (String) abc_num.getText();
-        int inabc = (int) Integer.parseInt(abc_str);
-        switch (view.getId()) {
-            case R.id.set_btn:
-                // 저장 버튼
-                Toast.makeText(SettingActivity.this, "저장할게유", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.abc_inc:
-                // 단위 - 증가 버튼
-                inabc++;
-                abc_num.setText(String.valueOf(inabc));
-                break;
-            case R.id.abc_dec:
-                // 단위 - 감소 버튼
-                if (inabc == 1) {
-                    // 음수 구분용 - MAX는 필요할까? 10-30? 몇이 적당할까?
-                    Toast.makeText(SettingActivity.this, "1 이하는 입력X", Toast.LENGTH_SHORT).show();
-                } else {
-                    // 음수 아니면 원래대로 감소
-                    inabc--;
+        @Override
+        public void onClick (View view){
+            // 버튼 이벤트
+            String abc_str = (String) abc_num.getText();
+            int inabc = (int) Integer.parseInt(abc_str);
+            switch (view.getId()) {
+                case R.id.set_btn:
+                    // 저장 버튼
+                    Toast.makeText(SettingActivity.this, getResources().getString(R.string.set_plz), Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.abc_inc:
+                    // 단위 - 증가 버튼
+                    inabc++;
                     abc_num.setText(String.valueOf(inabc));
-                }
-                abc_num.setText(String.valueOf(inabc));
-                break;
+                    break;
+                case R.id.abc_dec:
+                    // 단위 - 감소 버튼
+                    if (inabc == 1) {
+                        // 음수 구분용 - MAX는 필요할까? 10-30? 몇이 적당할까?
+                        Toast.makeText(SettingActivity.this, getResources().getString(R.string.num_limit), Toast.LENGTH_SHORT).show();
+                    } else {
+                        // 음수 아니면 원래대로 감소
+                        inabc--;
+                        abc_num.setText(String.valueOf(inabc));
+                    }
+                    abc_num.setText(String.valueOf(inabc));
+                    break;
+            }
+        }
+
+        @Override
+        public void onItemSelected (AdapterView < ? > adapterView, View view,int i, long l){
+        }
+
+        @Override
+        public void onNothingSelected (AdapterView < ? > adapterView){
         }
     }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-    }
-}

@@ -1,4 +1,82 @@
 <resources>
     <string name="app_name">App02</string>
     <string name="toolbar_title">INSULIN</string>
+
+    <string name="set_plz">저장하겠습니다.</string>
+    <string name="ok">확인</string>
+    <string name="set">저장</string>
+    <string name="button">BUTTON</string>
+    <string name="TapBar_setting">설정</string>
+    <string name="TapBar_youtube">유튜브</string>
+
+    <!--블루투스-->
+    <string name="custom_dialog2_title">블루투스</string>
+    <string name="bluetooth1">ON/OFF</string>
+    <string name="bluetooth2">Enable Discoverable</string>
+    <string name="bluetooth3">Discover</string>
+    <string name="ble1">블루투스온오프</string>
+    <string name="ble2">장치검색허용</string>
+    <string name="ble3">장치검색</string>
+
+    <string name="dialog_app_title">앱정보</string>
+    <string name="dialog_app_content">앱에 대한 설명 및 사용법을 설명한다. 처음엔 이렇게이렇게이렇게</string>
+    <string name="dialog_my_title">개발자정보</string>
+    <string name="dialog_my_content">안녕하십니까 저는...</string>
+
+    <!--설정페이지-->
+    <string name="setting_title">설정을위한페이지입니다.</string>
+    <string name="setting_1">1. 인슐린</string>
+    <string name="setting_2">2. 하위품목</string>
+    <string name="setting_3">3. 단위</string>
+    <!--단위-->
+    <string name="num_limit">1이하는 입력할 수 없습니다.</string>
+    <string name="num_dec">-1</string>
+    <string name="num">5</string>
+    <string name="num_inc">+1</string>
+
+    <!--오토버튼-->
+    <string name="custom_dialog_title">식사상태를 선택해주세요.</string>
+    <!--1번 그룹-->
+    <string name="state_0_0">아침식전</string>
+    <string name="state_0_1">아침식사</string>
+    <string name="state_0_2">이침식후</string>
+    <string name="state_0_3">점심식전</string>
+    <string name="state_0_4">점심식사</string>
+    <string name="state_0_5">점심식후</string>
+    <string name="state_0_6">저녁식전</string>
+    <string name="state_0_7">저녁식사</string>
+    <string name="state_0_8">저녁식후</string>
+    <string name="state_0_9">간식</string>
+    <!--2번 그룹-->
+    <string name="state_1_0"> </string>
+    <string name="state_1_1">30분</string>
+    <string name="state_1_2">1시간</string>
+    <string name="state_1_3">2시간</string>
+
+    <!--인슐린 종류-->
+    <string name="insulin_name">초속효성</string>
+    <string name="insulin_name1">속효성</string>
+    <string name="insulin_name2">중간형</string>
+    <string name="insulin_name3">혼합형</string>
+    <string name="insulin_name4">지속형</string>
+    <!--하위 품명-->
+    <!--초속효성-->
+    <string name="insulin_name0_0">휴머로그</string>
+    <string name="insulin_name0_1">노보래피드</string>
+    <string name="insulin_name0_2">애피드라</string>
+    <!--속효성-->
+    <string name="insulin_name1_0">휴먼인슐린</string>
+    <!--중간형-->
+    <string name="insulin_name2_0">노보린</string>
+    <string name="insulin_name2_1">노보렛</string>
+    <string name="insulin_name2_2">휴불린</string>
+    <string name="insulin_name2_3">인슈라타드</string>
+    <!--혼합형-->
+    <string name="insulin_name3_0">노보믹스</string>
+    <string name="insulin_name3_1">휴머로그믹스</string>
+    <string name="insulin_name3_2">휴물린</string>
+    <string name="insulin_name3_3">믹스타드</string>
+    <!--지속형-->
+    <string name="insulin_name4_0">란투스</string>
+    <string name="insulin_name4_1">레버미어</string>
 </resources>

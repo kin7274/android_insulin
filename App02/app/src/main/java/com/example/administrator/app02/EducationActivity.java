@@ -1,5 +1,4 @@
 package com.example.administrator.app02;
-//TODO 유튜브 목록을 찾아보자, 저작권 조심!
 
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +13,10 @@ public class EducationActivity extends YouTubeBaseActivity {
     YouTubePlayerView youTubeView;
     Button button;
     YouTubePlayer.OnInitializedListener listener;
+
+    // 내 api 키 : AIzaSyC12r-vWRn_wZHF9EAtUVP_93BioYKRYSM
+    // 재생 리스트 1번 : 일단 유튭공부영상으로.. : vewH-f3fAes
+    // TODO 유튜브 목록을 찾아보자, 저작권 조심!
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

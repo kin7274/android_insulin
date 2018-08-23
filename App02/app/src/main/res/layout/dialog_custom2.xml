@@ -33,44 +33,58 @@
                 android:id="@+id/radioButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:checked="true"
-                android:text="아침식전" />
+                android:text="@string/state_0_0" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="아침식사" />
+                android:text="@string/state_0_1" />
 
             <RadioButton
                 android:id="@+id/radioButton3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="아침식후" />
+                android:text="@string/state_0_2" />
 
             <RadioButton
                 android:id="@+id/radioButton4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="점심식전" />
+                android:text="@string/state_0_3" />
 
             <RadioButton
                 android:id="@+id/radioButton5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="점심식사" />
+                android:text="@string/state_0_4" />
 
             <RadioButton
                 android:id="@+id/radioButton6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="점심식후" />
+                android:text="@string/state_0_5" />
+            <RadioButton
+                android:id="@+id/radioButton7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/state_0_6" />
+            <RadioButton
+                android:id="@+id/radioButton8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/state_0_7" />
+            <RadioButton
+                android:id="@+id/radioButton9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/state_0_8" />
+            <RadioButton
+                android:id="@+id/radioButton10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/state_0_9" />
         </RadioGroup>
 
         <RadioGroup
@@ -80,26 +94,28 @@
             android:layout_weight="1">
 
             <RadioButton
-                android:id="@+id/radioButton7"
+                android:id="@+id/radioButton11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:checked="true"
-                android:text="30분" />
-
+                android:text="" />
             <RadioButton
-                android:id="@+id/radioButton8"
+                android:id="@+id/radioButton12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="1시간" />
+                android:text="@string/state_1_0" />
 
             <RadioButton
-                android:id="@+id/radioButton9"
+                android:id="@+id/radioButton13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="2시간" />
+                android:text="@string/state_1_1" />
+
+            <RadioButton
+                android:id="@+id/radioButton14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/state_1_2" />
         </RadioGroup>
     </LinearLayout>
 
@@ -117,9 +133,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:clickable="true"
             android:gravity="center"
-            android:text="확인"
+            android:text="@string/ok"
             android:textColor="#000000"
             android:textSize="16sp" />
     </LinearLayout>

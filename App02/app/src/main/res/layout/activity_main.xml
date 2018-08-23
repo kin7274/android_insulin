@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:text="ON/OFF" />
+            android:text="@string/bluetooth1" />
 
         <Button
             android:id="@+id/btnDiscoverable_on_off"
@@ -41,14 +41,14 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:onClick="btnEnableDisable_Discoverable"
-            android:text="Enable Discoverable" />
+            android:text="@string/bluetooth2" />
 
         <Button
             android:id="@+id/btnFindUnpairedDevices"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="btnDiscover"
-            android:text="Discover" />
+            android:text="@string/bluetooth3" />
 
         <ListView
             android:id="@+id/lvNewDevices"

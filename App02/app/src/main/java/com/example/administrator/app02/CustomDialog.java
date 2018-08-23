@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.graphics.drawable.IconCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ public class CustomDialog extends Dialog {
     private Context context;
     private TextView textTitle;
     private String title;
+    private Context resources;
 
     public CustomDialog(Context context, String title) {
         super(context);
@@ -40,7 +42,7 @@ public class CustomDialog extends Dialog {
         btnONOFF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "ONOFF", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),getResources().getString(R.string.bluetooth1), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -49,7 +51,7 @@ public class CustomDialog extends Dialog {
         btnDiscoverable_on_off.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Discoverable_on_off", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),getResources().getString(R.string.bluetooth2), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -58,7 +60,7 @@ public class CustomDialog extends Dialog {
         btnFindUnpairedDevices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "pairedDevices", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),getResources().getString(R.string.bluetooth3), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -70,5 +72,9 @@ public class CustomDialog extends Dialog {
                 cancel();
             }
         });
+    }
+
+    public Context getResources() {
+        return resources;
     }
 }

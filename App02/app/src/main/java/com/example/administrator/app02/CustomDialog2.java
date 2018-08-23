@@ -25,7 +25,7 @@ public class CustomDialog2 extends Dialog {
 
     private RadioGroup radiogroup1, radiogroup2;
     private RadioButton radioButton, radioButton2, radioButton3, radioButton4, radioButton5, radioButton6
-            , radioButton7, radioButton8, radioButton9, radioButton10, radioButton11, radioButton12, radioButton13;
+            , radioButton7, radioButton8, radioButton9, radioButton10, radioButton11, radioButton12, radioButton13, radioButton14;
 
     public CustomDialog2(Context context, String title) {
         super(context);
@@ -61,6 +61,7 @@ public class CustomDialog2 extends Dialog {
         radioButton11 = (RadioButton) findViewById(R.id.radioButton11);
         radioButton12 = (RadioButton) findViewById(R.id.radioButton12);
         radioButton13 = (RadioButton) findViewById(R.id.radioButton13);
+        radioButton14 = (RadioButton) findViewById(R.id.radioButton14);
 
         // 확인 = 종료 버튼
         Button okButton = (Button) findViewById(R.id.okButton);
@@ -116,6 +117,9 @@ public class CustomDialog2 extends Dialog {
         }
         if (radioButton13.isChecked()) {
             a2 = (String) radioButton13.getText();
+        }
+        if (radioButton14.isChecked()) {
+            a2 = (String) radioButton14.getText();
         }
     }
 }

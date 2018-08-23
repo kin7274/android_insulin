@@ -1,5 +1,6 @@
 package com.example.administrator.app02;
 //TODO 유튜브 목록을 찾아보자, 저작권 조심!
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +15,7 @@ public class EducationActivity extends YouTubeBaseActivity {
     Button button;
     YouTubePlayer.OnInitializedListener listener;
 
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_education);
 
@@ -31,7 +32,7 @@ public class EducationActivity extends YouTubeBaseActivity {
             }
         };
 
-        button.setOnClickListener(new View.OnClickListener(){
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 youTubeView.initialize("AIzaSyC12r-vWRn_wZHF9EAtUVP_93BioYKRYSM", listener);

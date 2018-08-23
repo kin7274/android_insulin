@@ -1,6 +1,7 @@
 package com.example.administrator.app02;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             // When discovery finds a device
             if (action.equals(mBluetoothAdapter.ACTION_STATE_CHANGED)) {
                 final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, mBluetoothAdapter.ERROR);
-                switch(state){
+                switch (state) {
                     case BluetoothAdapter.STATE_OFF:
                         Log.d(TAG, "onReceive: STATE OFF");
                         break;
@@ -108,8 +109,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             final String action = intent.getAction();
             Log.d(TAG, "onReceive: ACTION FOUND.");
 
-            if (action.equals(BluetoothDevice.ACTION_FOUND)){
-                BluetoothDevice device = intent.getParcelableExtra (BluetoothDevice.EXTRA_DEVICE);
+            if (action.equals(BluetoothDevice.ACTION_FOUND)) {
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 mBTDevices.add(device);
                 Log.d(TAG, "onReceive: " + device.getName() + ": " + device.getAddress());
                 mDeviceListAdapter = new DeviceListAdapter(context, R.layout.device_adapter_view, mBTDevices);
@@ -126,11 +127,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
 
-            if(action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)){
+            if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
                 BluetoothDevice mDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 //3 cases:
                 //case1: bonded already
-                if (mDevice.getBondState() == BluetoothDevice.BOND_BONDED){
+                if (mDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
                     Log.d(TAG, "BroadcastReceiver: BOND_BONDED.");
                 }
                 //case2: creating a bone
@@ -157,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     // 메인
+    @SuppressLint("ResourceType")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +174,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         View view = getWindow().getDecorView();
         view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(Color.parseColor(getResources().getString(R.color.colorPrimaryPurle)));
-
 
         Button btnONOFF = (Button) findViewById(R.id.btnONOFF);
         btnEnableDisable_Discoverable = (Button) findViewById(R.id.btnDiscoverable_on_off);
@@ -196,11 +197,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });
     }
 
-    public void enableDisableBT(){
-        if(mBluetoothAdapter == null){
+    public void enableDisableBT() {
+        if (mBluetoothAdapter == null) {
             Log.d(TAG, "enableDisableBT: Does not have BT capabilities.");
         }
-        if(!mBluetoothAdapter.isEnabled()){
+        if (!mBluetoothAdapter.isEnabled()) {
             Log.d(TAG, "enableDisableBT: enabling BT.");
             Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivity(enableBTIntent);
@@ -208,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             IntentFilter BTIntent = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
             registerReceiver(mBroadcastReceiver1, BTIntent);
         }
-        if(mBluetoothAdapter.isEnabled()){
+        if (mBluetoothAdapter.isEnabled()) {
             Log.d(TAG, "enableDisableBT: disabling BT.");
             mBluetoothAdapter.disable();
             IntentFilter BTIntent = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
@@ -224,13 +225,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         startActivity(discoverableIntent);
 
         IntentFilter intentFilter = new IntentFilter(mBluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
-        registerReceiver(mBroadcastReceiver2,intentFilter);
+        registerReceiver(mBroadcastReceiver2, intentFilter);
     }
 
     public void btnDiscover(View view) {
         Log.d(TAG, "btnDiscover: Looking for unpaired devices.");
 
-        if(mBluetoothAdapter.isDiscovering()){
+        if (mBluetoothAdapter.isDiscovering()) {
             mBluetoothAdapter.cancelDiscovery();
             Log.d(TAG, "btnDiscover: Canceling discovery.");
 
@@ -241,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             IntentFilter discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
             registerReceiver(mBroadcastReceiver3, discoverDevicesIntent);
         }
-        if(!mBluetoothAdapter.isDiscovering()){
+        if (!mBluetoothAdapter.isDiscovering()) {
 
             //check BT permissions in manifest
             checkBTPermissions();
@@ -256,11 +257,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
      * This method is required for all devices running API23+
      * Android must programmatically check the permissions for bluetooth. Putting the proper permissions
      * in the manifest is not enough.
-     *
+     * <p>
      * NOTE: This will only execute on versions > LOLLIPOP because it is not needed otherwise.
      */
     private void checkBTPermissions() {
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             int permissionCheck = 0;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 permissionCheck = this.checkSelfPermission("Manifest.permission.ACCESS_FINE_LOCATION");
@@ -273,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1001); //Any number
                 }
             }
-        }else{
+        } else {
             Log.d(TAG, "checkBTPermissions: No need to check permissions. SDK version < LOLLIPOP.");
         }
     }
@@ -291,7 +292,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //create the bond.
         //NOTE: Requires API 17+? I think this is JellyBean
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
             Log.d(TAG, "Trying to pair with " + deviceName);
             mBTDevices.get(i).createBond();
         }
@@ -305,30 +306,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         // 툴바 탭 클릭 이벤트
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_auto:
                 // 수동버튼 클릭 시
                 // 식사상태 선택 팝업창 열림
-                final String[] aitems = new String[]{"아침식전", "아침식후", "점심식전", "점심식후","저녁식전","저녁식후"};
-                AlertDialog.Builder dialog_eat = new AlertDialog.Builder(this);
-                dialog_eat.setTitle("식사상태를 선택하세요.").setSingleChoiceItems(aitems, 0, new DialogInterface.OnClickListener() {
-                    // 선택된 하나 받아서
+                CustomDialog2 dialog_auto = new CustomDialog2(this, "블루투스 설정");
+                dialog_auto.setCanceledOnTouchOutside(true);
+                dialog_auto.setDialogListener(new MyDialogListener() {
                     @Override
-                    public void onClick(DialogInterface dialog_eat, int which) {
-                        selectedItem[0] = which;
-                    }
-                }).setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int which) {
-                        // 표시
-                        Toast.makeText(getApplicationContext(),aitems[selectedItem[0]] + "을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
-                        // 데이터 전송ㄱ
+                    public void onPositiveClicked() {
                     }
                 });
-                dialog_eat.create();
-                dialog_eat.show();
+                dialog_auto.show();
                 break;
             case R.id.action_ble:
                 // 블루투스 연결
@@ -336,40 +327,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 dialog_ble.setCanceledOnTouchOutside(true);
                 dialog_ble.setDialogListener(new MyDialogListener() {
                     @Override
-                    public void onPositiveClicked() {}
+                    public void onPositiveClicked() {
+                    }
                 });
                 dialog_ble.show();
                 break;
-//                final String[] bitems = new String[]{"BLE 연결", "검색 허용", "장치 검색"};  // 3개 메뉴
-//                AlertDialog.Builder dialog_ble = new AlertDialog.Builder(this);
-//                dialog_ble.setTitle("").setSingleChoiceItems(bitems, 0, new DialogInterface.OnClickListener() {
-//                    // 선택된 하나 받아서
-//                    @Override
-//                    public void onClick(DialogInterface dialog_ble, int which) {
-//                        selectedItem[0] = which;
-//                    }
-//                }).setPositiveButton("확인", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int which) {
-////                        Toast.makeText(getApplicationContext(),bitems[selectedItem[0]] + "을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
-//                        // 데이터 전송ㄱ
-//                        switch(bitems[selectedItem[0]]){
-//                            case "BLE 연결":
-////                                Toast.makeText(getApplicationContext(), "BLE 연결을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
-//                                enableDisableBT();
-//                                break;
-//                            case "검색 허용":
-//                                Toast.makeText(getApplicationContext(), "검색 허용을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
-//                                break;
-//                            case "장치 검색":
-//                                Toast.makeText(getApplicationContext(), "장치 검색을 선택하셨습니다.", Toast.LENGTH_SHORT).show();
-//                                break;
-//                        }
-//                    }
-//                });
-//                dialog_ble.create();
-//                dialog_ble.show();
-//                break;
+
+            // 오버플로우 메뉴
             case R.id.action_setting:
                 // 설정 페이지로 이동
                 Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);

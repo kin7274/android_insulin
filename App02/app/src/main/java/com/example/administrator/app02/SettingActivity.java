@@ -66,7 +66,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         final String[] items5 = {"란투스", "레버미어"};
 
         final Spinner spinner01 = (Spinner) findViewById(R.id.spinner01);
-        spinner01.setOnItemSelectedListener(( OnItemSelectedListener) this);
+        spinner01.setOnItemSelectedListener((OnItemSelectedListener) this);
         final Spinner spinner02 = (Spinner) findViewById(R.id.spinner02);
         spinner02.setOnItemSelectedListener((OnItemSelectedListener) this);
 
@@ -105,8 +105,10 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                     spinner02.setSelection(0);
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
         });
     }
 
@@ -139,8 +141,12 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                 break;
         }
     }
+
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {}
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+    }
+
     @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {}
+    public void onNothingSelected(AdapterView<?> adapterView) {
+    }
 }

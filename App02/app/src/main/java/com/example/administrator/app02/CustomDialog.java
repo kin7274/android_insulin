@@ -35,7 +35,7 @@ public class CustomDialog extends Dialog {
         textTitle = (TextView) findViewById(R.id.textTitle);
         textTitle.setText(title);
 
-//        블루투스를 킨다!
+        // 블루투스를 킨다!
         Button btnONOFF = (Button) findViewById(R.id.btnONOFF);
         btnONOFF.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +44,7 @@ public class CustomDialog extends Dialog {
             }
         });
 
-//        블루투스 장치 검색 허용!
+        // 블루투스 장치 검색 허용!
         Button btnDiscoverable_on_off = (Button) findViewById(R.id.btnDiscoverable_on_off);
         btnDiscoverable_on_off.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +53,7 @@ public class CustomDialog extends Dialog {
             }
         });
 
-//        장치 검색을 한다!
+        // 장치 검색을 한다!
         Button btnFindUnpairedDevices = (Button) findViewById(R.id.btnFindUnpairedDevices);
         btnFindUnpairedDevices.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +62,7 @@ public class CustomDialog extends Dialog {
             }
         });
 
-//        확인 = 종료 버튼
+        // 확인 = 종료 버튼
         Button okButton = (Button) findViewById(R.id.okButton);
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override

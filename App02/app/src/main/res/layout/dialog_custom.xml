@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#fff"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textTitle"
@@ -21,31 +19,35 @@
 
     <Button
         android:id="@+id/btnONOFF"
-        android:text="블루투스 온오프"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="블루투스 온오프" />
+
     <Button
         android:id="@+id/btnDiscoverable_on_off"
-        android:text="장치검색허용"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="장치검색허용" />
+
     <Button
         android:id="@+id/btnFindUnpairedDevices"
-        android:text="장치검색"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="장치검색" />
+
     <ListView
-        android:layout_below="@+id/btnFindUnpairedDevices"
+        android:id="@+id/lvNewDevices"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:id="@+id/lvNewDevices"/>
+        android:layout_below="@+id/btnFindUnpairedDevices" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
         android:orientation="horizontal"
-        android:paddingTop="4dp"
         android:paddingBottom="4dp"
+        android:paddingTop="4dp"
         android:weightSum="10">
 
         <Button
@@ -57,7 +59,6 @@
             android:gravity="center"
             android:text="확인"
             android:textColor="#000000"
-            android:textSize="16sp"
-            />
+            android:textSize="16sp" />
     </LinearLayout>
 </LinearLayout>

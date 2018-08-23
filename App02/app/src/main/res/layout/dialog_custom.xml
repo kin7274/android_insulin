@@ -20,21 +20,25 @@
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/recy_btnONOFF"
+        android:id="@+id/btnONOFF"
         android:text="블루투스 온오프"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <Button
-        android:id="@+id/recy_btnDiscoverable"
+        android:id="@+id/btnDiscoverable_on_off"
         android:text="장치검색허용"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <Button
-        android:id="@+id/recy_btnDiscover"
+        android:id="@+id/btnFindUnpairedDevices"
         android:text="장치검색"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
+    <ListView
+        android:layout_below="@+id/btnFindUnpairedDevices"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/lvNewDevices"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

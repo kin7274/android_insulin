@@ -312,7 +312,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case R.id.action_auto:
                 // 수동버튼 클릭 시
                 // 식사상태 선택 팝업창 열림
-                CustomDialog2 dialog_auto = new CustomDialog2(this,getResources().getString(R.string.custom_dialog_title));
+                CustomDialog2 dialog_auto = new CustomDialog2(this, getResources().getString(R.string.custom_dialog_title));
                 dialog_auto.setCanceledOnTouchOutside(true);
                 dialog_auto.setDialogListener(new MyDialogListener() {
                     @Override
@@ -323,7 +323,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case R.id.action_ble:
                 // 블루투스 연결
-                CustomDialog dialog_ble = new CustomDialog(this,getResources().getString(R.string.custom_dialog2_title));
+                CustomDialog dialog_ble = new CustomDialog(this, getResources().getString(R.string.custom_dialog2_title));
                 dialog_ble.setCanceledOnTouchOutside(true);
                 dialog_ble.setDialogListener(new MyDialogListener() {
                     @Override

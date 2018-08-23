@@ -42,7 +42,7 @@ public class CustomDialog extends Dialog {
         btnONOFF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),getResources().getString(R.string.bluetooth1), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.bluetooth1), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -51,7 +51,7 @@ public class CustomDialog extends Dialog {
         btnDiscoverable_on_off.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),getResources().getString(R.string.bluetooth2), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.bluetooth2), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -60,7 +60,7 @@ public class CustomDialog extends Dialog {
         btnFindUnpairedDevices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),getResources().getString(R.string.bluetooth3), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getString(R.string.bluetooth3), Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -65,21 +65,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/state_0_5" />
+
             <RadioButton
                 android:id="@+id/radioButton7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/state_0_6" />
+
             <RadioButton
                 android:id="@+id/radioButton8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/state_0_7" />
+
             <RadioButton
                 android:id="@+id/radioButton9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/state_0_8" />
+
             <RadioButton
                 android:id="@+id/radioButton10"
                 android:layout_width="match_parent"
@@ -99,6 +103,7 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="" />
+
             <RadioButton
                 android:id="@+id/radioButton12"
                 android:layout_width="match_parent"

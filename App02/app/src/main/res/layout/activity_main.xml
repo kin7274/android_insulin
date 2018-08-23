@@ -30,16 +30,12 @@
             android:id="@+id/btnONOFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
             android:text="@string/bluetooth1" />
 
         <Button
             android:id="@+id/btnDiscoverable_on_off"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:onClick="btnEnableDisable_Discoverable"
             android:text="@string/bluetooth2" />
 
@@ -53,7 +49,6 @@
         <ListView
             android:id="@+id/lvNewDevices"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_below="@+id/btnFindUnpairedDevices" />
+            android:layout_height="150dp" />
     </LinearLayout>
 </RelativeLayout>

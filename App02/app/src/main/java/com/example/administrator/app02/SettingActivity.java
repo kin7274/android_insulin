@@ -108,41 +108,41 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         });
     }
 
-        @Override
-        public void onClick (View view){
-            // 버튼 이벤트
-            String abc_str = (String) abc_num.getText();
-            int inabc = (int) Integer.parseInt(abc_str);
-            switch (view.getId()) {
-                case R.id.set_btn:
-                    // 저장 버튼
-                    Toast.makeText(SettingActivity.this, getResources().getString(R.string.set_plz), Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.abc_inc:
-                    // 단위 - 증가 버튼
-                    inabc++;
+    @Override
+    public void onClick(View view) {
+        // 버튼 이벤트
+        String abc_str = (String) abc_num.getText();
+        int inabc = (int) Integer.parseInt(abc_str);
+        switch (view.getId()) {
+            case R.id.set_btn:
+                // 저장 버튼
+                Toast.makeText(SettingActivity.this, getResources().getString(R.string.set_plz), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.abc_inc:
+                // 단위 - 증가 버튼
+                inabc++;
+                abc_num.setText(String.valueOf(inabc));
+                break;
+            case R.id.abc_dec:
+                // 단위 - 감소 버튼
+                if (inabc == 1) {
+                    // 음수 구분용 - MAX는 필요할까? 10-30? 몇이 적당할까?
+                    Toast.makeText(SettingActivity.this, getResources().getString(R.string.num_limit), Toast.LENGTH_SHORT).show();
+                } else {
+                    // 음수 아니면 원래대로 감소
+                    inabc--;
                     abc_num.setText(String.valueOf(inabc));
-                    break;
-                case R.id.abc_dec:
-                    // 단위 - 감소 버튼
-                    if (inabc == 1) {
-                        // 음수 구분용 - MAX는 필요할까? 10-30? 몇이 적당할까?
-                        Toast.makeText(SettingActivity.this, getResources().getString(R.string.num_limit), Toast.LENGTH_SHORT).show();
-                    } else {
-                        // 음수 아니면 원래대로 감소
-                        inabc--;
-                        abc_num.setText(String.valueOf(inabc));
-                    }
-                    abc_num.setText(String.valueOf(inabc));
-                    break;
-            }
-        }
-
-        @Override
-        public void onItemSelected (AdapterView < ? > adapterView, View view,int i, long l){
-        }
-
-        @Override
-        public void onNothingSelected (AdapterView < ? > adapterView){
+                }
+                abc_num.setText(String.valueOf(inabc));
+                break;
         }
     }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+    }
+}

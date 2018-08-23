@@ -51,4 +51,12 @@
             android:layout_width="match_parent"
             android:layout_height="150dp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/data_view"
+        android:layout_width="197dp"
+        android:layout_height="91dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="252dp"
+        android:text="TextView" />
 </RelativeLayout>

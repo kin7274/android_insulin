@@ -1,6 +1,7 @@
 package com.example.administrator.app02;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +27,10 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
     TextView abc_num;  // 단위 표시
     Button abc_inc, abc_dec;  // 단위 증가, 감소
     Button set_btn;  // 저장버튼
+
+    String a1="";
+    String a2="";
+    String a3="";
 
     @SuppressLint("ResourceType")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -72,7 +77,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner01.setAdapter(adapter);
         spinner01.setSelection(0);
-
+        a1 = (String) spinner01.getSelectedItem();
         spinner01.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -103,6 +108,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                     spinner02.setAdapter(adapter6);
                     spinner02.setSelection(0);
                 }
+                a2 = (String) spinner02.getSelectedItem();
             }
 
             @Override
@@ -117,10 +123,6 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         String abc_str = (String) abc_num.getText();
         int inabc = (int) Integer.parseInt(abc_str);
         switch (view.getId()) {
-            case R.id.set_btn:
-                // 저장 버튼
-                Toast.makeText(SettingActivity.this, getResources().getString(R.string.set_plz), Toast.LENGTH_SHORT).show();
-                break;
             case R.id.abc_inc:
                 // 단위 - 증가 버튼
                 inabc++;
@@ -138,7 +140,17 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                 }
                 abc_num.setText(String.valueOf(inabc));
                 break;
+            case R.id.set_btn:
+                // 저장 버튼
+                Toast.makeText(SettingActivity.this,a1 + ", " + a2 + ", " + a3 + getResources().getString(R.string.set_plz), Toast.LENGTH_SHORT).show();
+                // 데이터 전송
+                String AA = a1 + a2 + a3;
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("settingData", AA);
+                startActivity(intent);
+                break;
         }
+        a3 = (String) abc_num.getText();
     }
 
     @Override

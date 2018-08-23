@@ -24,7 +24,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -173,6 +176,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         View view = getWindow().getDecorView();
         view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(Color.parseColor(getResources().getString(R.color.colorPrimaryPurle)));
+
+        TextView data_view = (TextView) findViewById(R.id.data_view);
+
+        Intent intent = getIntent();
+        String AA = intent.getStringExtra("settingData");
+        data_view.setText(AA);
 
         Button btnONOFF = (Button) findViewById(R.id.btnONOFF);
         btnEnableDisable_Discoverable = (Button) findViewById(R.id.btnDiscoverable_on_off);

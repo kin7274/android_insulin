@@ -19,6 +19,8 @@ import android.widget.Toast;
 import java.util.Set;
 
 public class SettingActivity extends AppCompatActivity implements OnClickListener, OnItemSelectedListener {
+    // TODO 양식 통일
+    // TODO 데이터 꺼내기
 
     Spinner spinner01, spinner02;  // 상위 스피너, 인슐린 종류(5).  하위 스피너, 하위 품목
     TextView abc_num;  // 단위 표시

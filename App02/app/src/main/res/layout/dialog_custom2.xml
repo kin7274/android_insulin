@@ -108,16 +108,10 @@
                 android:id="@+id/radioButton12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/state_1_0" />
-
-            <RadioButton
-                android:id="@+id/radioButton13"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/state_1_1" />
 
             <RadioButton
-                android:id="@+id/radioButton14"
+                android:id="@+id/radioButton13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/state_1_2" />

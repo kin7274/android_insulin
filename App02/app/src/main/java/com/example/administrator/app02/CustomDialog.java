@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class CustomDialog extends Dialog {
+    // TODO 블루투스 기능 구현(메인에 한걸 일로..)
 
     private MyDialogListener dialogListener;
     private Context context;

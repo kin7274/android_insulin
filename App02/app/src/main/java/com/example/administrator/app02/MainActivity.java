@@ -29,8 +29,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    Dialog dialog;  // 팝업창
-    final int[] selectedItem = {0};  // 팝업창의 선택목록 표시
+    // TODO 타임라인형식
 
     private static final String TAG = "MainActivity";
 

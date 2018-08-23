@@ -16,7 +16,7 @@ public class EducationActivity extends YouTubeBaseActivity {
 
     // 내 api 키 : AIzaSyC12r-vWRn_wZHF9EAtUVP_93BioYKRYSM
     // 재생 리스트 1번 : 일단 유튭공부영상으로.. : vewH-f3fAes
-    // TODO 유튜브 목록을 찾아보자, 저작권 조심!
+    // TODO 유튜브 목록을 찾아보자! 저작권 조심!
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

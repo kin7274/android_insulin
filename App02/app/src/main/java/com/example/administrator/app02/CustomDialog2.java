@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class CustomDialog2 extends Dialog {
+    // TODO 커스텀다이얼로그 뷰 꾸미기(그룹간 경계선 포함)
+    // TODO 데이터 꺼내기
 
     private MyDialogListener dialogListener;
     private Context context;
@@ -21,8 +23,8 @@ public class CustomDialog2 extends Dialog {
     String a2 = "";
 
     private RadioGroup radiogroup1, radiogroup2;
-    private RadioButton radioButton, radioButton2, radioButton3, radioButton4, radioButton5,
-            radioButton6, radioButton7, radioButton8, radioButton9;
+    private RadioButton radioButton, radioButton2, radioButton3, radioButton4, radioButton5, radioButton6
+            , radioButton7, radioButton8, radioButton9, radioButton10, radioButton11, radioButton12, radioButton13;
 
     public CustomDialog2(Context context, String title) {
         super(context);
@@ -54,6 +56,10 @@ public class CustomDialog2 extends Dialog {
         radioButton7 = (RadioButton) findViewById(R.id.radioButton7);
         radioButton8 = (RadioButton) findViewById(R.id.radioButton8);
         radioButton9 = (RadioButton) findViewById(R.id.radioButton9);
+        radioButton10 = (RadioButton) findViewById(R.id.radioButton10);
+        radioButton11 = (RadioButton) findViewById(R.id.radioButton11);
+        radioButton12 = (RadioButton) findViewById(R.id.radioButton12);
+        radioButton13 = (RadioButton) findViewById(R.id.radioButton13);
 
         // 확인 = 종료 버튼
         Button okButton = (Button) findViewById(R.id.okButton);
@@ -88,15 +94,27 @@ public class CustomDialog2 extends Dialog {
         if (radioButton6.isChecked()) {
             a1 = (String) radioButton6.getText();
         }
-        // 우
         if (radioButton7.isChecked()) {
-            a2 = (String) radioButton7.getText();
+            a1 = (String) radioButton7.getText();
         }
         if (radioButton8.isChecked()) {
-            a2 = (String) radioButton8.getText();
+            a1 = (String) radioButton8.getText();
         }
         if (radioButton9.isChecked()) {
-            a2 = (String) radioButton9.getText();
+            a1 = (String) radioButton9.getText();
+        }
+        if (radioButton10.isChecked()) {
+            a1 = (String) radioButton10.getText();
+        }
+        // 우
+        if (radioButton11.isChecked()) {
+            a2 = (String) radioButton11.getText();
+        }
+        if (radioButton12.isChecked()) {
+            a2 = (String) radioButton12.getText();
+        }
+        if (radioButton13.isChecked()) {
+            a2 = (String) radioButton13.getText();
         }
     }
 }

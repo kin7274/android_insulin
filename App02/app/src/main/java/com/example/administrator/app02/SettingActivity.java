@@ -69,6 +69,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         spinner02.setOnItemSelectedListener((OnItemSelectedListener) this);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner01.setAdapter(adapter);
         spinner01.setSelection(0);
 

@@ -33,9 +33,9 @@ public class CustomDialog extends Dialog implements View.OnClickListener{
         setContentView(R.layout.dialog_custom);
         textTitle.setText(title);
 
-        Button okButton = (Button) findViewById(R.id.okButton);
-        Button okButton = (Button) findViewById(R.id.okButton);
-        Button okButton = (Button) findViewById(R.id.okButton);
+//        Button okButton = (Button) findViewById(R.id.okButton);
+//        Button okButton = (Button) findViewById(R.id.okButton);
+//        Button okButton = (Button) findViewById(R.id.okButton);
 
         Button okButton = (Button) findViewById(R.id.okButton);
         okButton.setOnClickListener(this);

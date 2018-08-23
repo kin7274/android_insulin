@@ -1,5 +1,5 @@
 package com.example.administrator.app02;
-//TODO 수정해야함
+//TODO 유튜브 목록을 찾아보자, 저작권 조심!
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;

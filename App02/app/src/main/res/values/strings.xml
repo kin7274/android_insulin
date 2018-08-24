@@ -38,20 +38,9 @@
     <string name="custom_dialog_title">식사상태를 선택해주세요.</string>
     <!--1번 그룹-->
     <string name="state_0_0">아침식전</string>
-    <string name="state_0_1">아침식사</string>
-    <string name="state_0_2">이침식후</string>
-    <string name="state_0_3">점심식전</string>
-    <string name="state_0_4">점심식사</string>
-    <string name="state_0_5">점심식후</string>
-    <string name="state_0_6">저녁식전</string>
-    <string name="state_0_7">저녁식사</string>
-    <string name="state_0_8">저녁식후</string>
-    <string name="state_0_9">간식</string>
-    <!--2번 그룹-->
-    <string name="state_1_0"> </string>
-    <string name="state_1_1">30분</string>
-    <string name="state_1_2">1시간</string>
-    <string name="state_1_3">2시간</string>
+    <string name="state_0_1">점심식전</string>
+    <string name="state_0_2">저녁식전</string>
+    <string name="state_0_3">취침전</string>
 
     <!--인슐린 종류-->
     <string name="insulin_name">초속효성</string>

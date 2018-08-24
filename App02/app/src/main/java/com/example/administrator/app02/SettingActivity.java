@@ -153,10 +153,10 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
-                                String AA = a1 + a2 + a3;
-                                Toast.makeText(SettingActivity.this,"저장된 값 : " + AA, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SettingActivity.this,"저장된 값 : " + a1 + ", " + a2 + ", " + a3, Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SettingActivity.this, MainActivity.class);
-                                intent.putExtra("settingData", AA);
+                                String AA = a1 + ", " + a2 + ", " + a3;
+                                intent.putExtra("settingData",AA);
                                 startActivity(intent);
                             }
                         })

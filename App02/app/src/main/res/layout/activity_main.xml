@@ -22,8 +22,9 @@
 
     <TextView
         android:id="@+id/data_view"
-        android:layout_width="197dp"
+        android:layout_width="match_parent"
         android:layout_height="91dp"
+        android:textSize="20sp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="252dp" />
 </RelativeLayout>

@@ -1,11 +1,13 @@
 package com.example.administrator.app02;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -142,15 +144,33 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                 break;
             case R.id.set_btn:
                 // 저장 버튼
-                Toast.makeText(SettingActivity.this,a1 + ", " + a2 + ", " + a3 + getResources().getString(R.string.set_plz), Toast.LENGTH_SHORT).show();
+                a3 = (String) abc_num.getText();
+                // 최종 확인
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("최종 확인")
+                        .setMessage("인슐린 : " + a1 + "\n하위품목 : " + a2 + "\n단위 : " + a3)
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                String AA = a1 + a2 + a3;
+                                Toast.makeText(SettingActivity.this,"저장된 값 : " + AA, Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SettingActivity.this, MainActivity.class);
+                                intent.putExtra("settingData", AA);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
                 // 데이터 전송
-                String AA = a1 + a2 + a3;
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("settingData", AA);
-                startActivity(intent);
                 break;
         }
-        a3 = (String) abc_num.getText();
     }
 
     @Override

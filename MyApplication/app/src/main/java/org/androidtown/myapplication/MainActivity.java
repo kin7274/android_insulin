@@ -1,35 +1,41 @@
 package com.example.administrator.app02;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.support.v4.graphics.drawable.IconCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.androidtown.myapplication.R;
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
-public class CustomDialog extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    // TODO 블루투스 기능 구현(메인에 한걸 일로..)
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+    // TODO 타임라인형식
 
-    private static final String TAG = "CustomDialog";
+    private static final String TAG = "MainActivity";
 
     BluetoothAdapter mBluetoothAdapter;
     Button btnEnableDisable_Discoverable;
@@ -37,17 +43,6 @@ public class CustomDialog extends AppCompatActivity implements AdapterView.OnIte
     public DeviceListAdapter mDeviceListAdapter;
 
     ListView lvNewDevices;
-
-    private MyDialogListener dialogListener;
-    private Context context;
-
-    public CustomDialog(Context context) {
-        this.context = context;
-    }
-
-    public void setDialogListener(MyDialogListener dialogListener) {
-        this.dialogListener = dialogListener;
-    }
 
     // Create a BroadcastReceiver for ACTION_FOUND
     private final BroadcastReceiver mBroadcastReceiver1 = new BroadcastReceiver() {
@@ -73,6 +68,7 @@ public class CustomDialog extends AppCompatActivity implements AdapterView.OnIte
             }
         }
     };
+
     /**
      * Broadcast Receiver for changes made to bluetooth states such as:
      * 1) Discoverability mode on/off or expire.
@@ -164,44 +160,52 @@ public class CustomDialog extends AppCompatActivity implements AdapterView.OnIte
         //mBluetoothAdapter.cancelDiscovery();
     }
 
-    // 커스텀다이얼로그 메인
+    // 메인z
+    @SuppressLint("ResourceType")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void callFunction(final MainActivity main_label) {
-        final Dialog dialog = new Dialog(context);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_custom);
-        dialog.show();
+        // 툴바
+        Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setTitle("");
 
-//        Button OkButton = ( Button ) dialog.findViewById(R.id.okButton);
-//        OkButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(context, "취소 했습니다.", Toast.LENGTH_SHORT).show();
-//                dialog.dismiss();
-//            }
-//        });
-        Button btnONOFF = ( Button ) dialog.findViewById(R.id.btnONOFF);
-        btnEnableDisable_Discoverable = ( Button ) dialog.findViewById(R.id.btnDiscoverable_on_off);
-        lvNewDevices = ( ListView ) dialog.findViewById(R.id.lvNewDevices);
+        // 상태바 색 변경
+        View view = getWindow().getDecorView();
+        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setStatusBarColor(Color.parseColor(getResources().getString(R.color.colorPrimaryPurle)));
+
+        TextView data_view = (TextView) findViewById(R.id.data_view);
+
+        Intent intent = getIntent();
+        String AA = intent.getStringExtra("settingData");
+        data_view.setText(AA);
+
+        Button btnONOFF = (Button) findViewById(R.id.btnONOFF);
+        btnEnableDisable_Discoverable = (Button) findViewById(R.id.btnDiscoverable_on_off);
+        lvNewDevices = (ListView) findViewById(R.id.lvNewDevices);
         mBTDevices = new ArrayList<>();
 
         //Broadcasts when bond state changes (ie:pairing)
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
-//        registerReceiver(mBroadcastReceiver4, filter);
+        registerReceiver(mBroadcastReceiver4, filter);
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        lvNewDevices.setOnItemClickListener(( AdapterView.OnItemClickListener ) CustomDialog.this);
+        lvNewDevices.setOnItemClickListener(MainActivity.this);
 
         btnONOFF.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
                 Log.d(TAG, "onClick: enabling/disabling bluetooth.");
                 enableDisableBT();
             }
         });
     }
+
     public void enableDisableBT() {
         if (mBluetoothAdapter == null) {
             Log.d(TAG, "enableDisableBT: Does not have BT capabilities.");
@@ -301,5 +305,79 @@ public class CustomDialog extends AppCompatActivity implements AdapterView.OnIte
             Log.d(TAG, "Trying to pair with " + deviceName);
             mBTDevices.get(i).createBond();
         }
+    }
+
+    // 메뉴.xml
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // 툴바 탭 클릭 이벤트
+        switch (item.getItemId()) {
+            case R.id.action_auto:
+                // 수동버튼 클릭 시
+                // 식사상태 선택 팝업창 열림
+                CustomDialog2 dialog_auto = new CustomDialog2(this, getResources().getString(R.string.custom_dialog_title));
+                dialog_auto.setCanceledOnTouchOutside(true);
+                dialog_auto.setDialogListener(new MyDialogListener() {
+                    @Override
+                    public void onPositiveClicked() {
+                    }
+                });
+                dialog_auto.show();
+                break;
+            case R.id.action_ble:
+                // 블루투스 연결
+                CustomDialog dialog_ble = new CustomDialog(this);
+                dialog_ble.setDialogListener(new MyDialogListener() {
+                    @Override
+                    public void onPositiveClicked() {
+                    }
+                });
+                dialog_ble.callFunction(this);
+                break;
+            // 오버플로우 메뉴
+            case R.id.action_setting:
+                // 설정 페이지로 이동
+                Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);
+                startActivity(intent_setting);
+                break;
+            case R.id.action_education:
+                // 영상 페이지로 이동
+                Intent intent_edu = new Intent(MainActivity.this, EducationActivity.class);
+                startActivity(intent_edu);
+                break;
+            case R.id.action_guide:
+                // 어플에 대한 사용법 간단하게
+                AlertDialog.Builder dialog_app = new AlertDialog.Builder(this);
+                dialog_app.setTitle(getResources().getString(R.string.dialog_app_title))
+                        .setMessage(getResources().getString(R.string.dialog_app_content))
+                        .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+                            }
+                        });
+                dialog_app.create();
+                dialog_app.show();
+                break;
+            case R.id.action_myinfo:
+                // 어플에 대한 사용법 간단하게
+                AlertDialog.Builder dialog_info = new AlertDialog.Builder(this);
+                dialog_info.setTitle(getResources().getString(R.string.dialog_my_title))
+                        .setMessage(getResources().getString(R.string.dialog_my_content))
+                        .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+                            }
+                        });
+                dialog_info.create();
+                dialog_info.show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

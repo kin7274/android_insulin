@@ -7,6 +7,7 @@
 
     <TextView
         android:id="@+id/textTitle"
+        android:text="블루투스 연결용"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

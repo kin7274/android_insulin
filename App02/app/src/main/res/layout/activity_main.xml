@@ -20,43 +20,10 @@
             android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnONOFF"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bluetooth1" />
-
-        <Button
-            android:id="@+id/btnDiscoverable_on_off"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="btnEnableDisable_Discoverable"
-            android:text="@string/bluetooth2" />
-
-        <Button
-            android:id="@+id/btnFindUnpairedDevices"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="btnDiscover"
-            android:text="@string/bluetooth3" />
-
-        <ListView
-            android:id="@+id/lvNewDevices"
-            android:layout_width="match_parent"
-            android:layout_height="150dp" />
-    </LinearLayout>
-
     <TextView
         android:id="@+id/data_view"
         android:layout_width="197dp"
         android:layout_height="91dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="252dp"
-        android:text="TextView" />
+        android:layout_marginTop="252dp" />
 </RelativeLayout>

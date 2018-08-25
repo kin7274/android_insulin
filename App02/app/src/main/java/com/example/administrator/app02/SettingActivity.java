@@ -19,6 +19,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Set;
+
 public class SettingActivity extends AppCompatActivity implements OnClickListener, OnItemSelectedListener {
     // TODO 양식 통일
     // TODO 데이터 꺼내기
@@ -146,9 +148,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                 // 최종 확인
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("최종 확인")
-                        .setMessage("인슐린 : " + a1 + "<br />" +
-                                "하위품목 : " + a2 + "<br />" +
-                                "단위 : " + a3)
+                        .setMessage("인슐린 : " + a1 + "\n하위품목 : " + a2 + "\n단위 : " + a3)
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -168,6 +168,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                         });
                 AlertDialog dialog = builder.create();
                 dialog.show();
+                // 데이터 전송
                 break;
         }
     }

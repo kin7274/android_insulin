@@ -15,26 +15,17 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements OnItemClickListener, OnClickListener {
+public class MainActivity extends AppCompatActivity implements OnItemClickListener {
     // TODO 타임라인형식
-
-    // 추가될 아이템 내용을 입력받는 EditText
-    private EditText mEtInputText;
-
-    // 아이템 추가 버튼
-    private Button mBInputToList;
 
     // 리스트뷰
     private ListView mLvList;
@@ -47,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     final int[] selectedItem = {0};
 
+    TextView data_view;
+
     // 메인
     @SuppressLint("ResourceType")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -56,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         setContentView(R.layout.activity_main);
 
         // 툴바
-        Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar mytoolbar = ( Toolbar ) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
         getSupportActionBar().setTitle("");
 
@@ -65,26 +58,15 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(Color.parseColor(getResources().getString(R.color.colorPrimaryPurle)));
 
-        TextView data_view = (TextView) findViewById(R.id.data_view);
+        data_view = ( TextView ) findViewById(R.id.data_view);
+
 
         // 설정페이지로부터 저장되있는 값 받음 "AA"
         Intent intent = getIntent();
         String AA = intent.getStringExtra("settingData");
         data_view.setText(AA);
 
-        //////////////////////////////////////////////////////////////
-        // 위젯 레퍼런스 시작
-
-        mEtInputText = ( EditText ) findViewById(R.id.main_et_text);
-        mBInputToList = ( Button ) findViewById(R.id.main_b_input_to_list);
-
         mLvList = ( ListView ) findViewById(R.id.main_lv_list);
-
-        // 위젯 레퍼런스 끝
-        ////////////////////////////////////////////////////////////
-
-        // 아이템 추가 버튼에 클릭리스너를 등록한다.
-        mBInputToList.setOnClickListener(this);
 
         // ArrayList 생성
         mAlData = new ArrayList<String>();
@@ -106,32 +88,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         // ArrayList 초기화
         mAlData.clear();
 
-        // ArrayList에 더미 데이터 입력
-        defaultData();
+//        defaultData();
     }
-
-    private void defaultData() {
-        mAlData.add("아이템 00");
-        mAlData.add("아이템 01");
-        mAlData.add("아이템 02");
-        mAlData.add("아이템 03");
-        mAlData.add("아이템 04");
-        mAlData.add("아이템 05");
-        mAlData.add("아이템 06");
-        mAlData.add("아이템 07");
-        mAlData.add("아이템 08");
-        mAlData.add("아이템 09");
-        mAlData.add("아이템 10");
-        mAlData.add("아이템 11");
-        mAlData.add("아이템 12");
-        mAlData.add("아이템 13");
-        mAlData.add("아이템 14");
-        mAlData.add("아이템 15");
-        mAlData.add("아이템 16");
-        mAlData.add("아이템 17");
-        mAlData.add("아이템 18");
-        mAlData.add("아이템 19");
-    }
+    // 초기설정
+//    private void defaultData() {}
 
     public void onItemClick(AdapterView<?> parent, View v, final int position, long id) {
         // 리스트에서 데이터를 받아온다.
@@ -141,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         // 삭제 다이얼로그에 보여줄 메시지를 만든다.
         String message = "해당 데이터를 삭제하시겠습니까?<br />" +
                 "data : " + data + "<br />";
+
+        // 삭제 설정
         DialogInterface.OnClickListener deleteListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
@@ -154,40 +116,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
         // 삭제를 물어보는 다이얼로그를 생성한다.
         new AlertDialog.Builder(this)
-                .setTitle("http://croute.me - 예제")
+                .setTitle("진짜지울건가욥")
                 .setMessage(Html.fromHtml(message))
                 .setPositiveButton("삭제", deleteListener)
                 .show();
-    }
-
-    public void onClick(View v) {
-        switch (v.getId()) {
-            // 리스트에 추가 버튼이 클릭되었을때의 처리
-            case R.id.main_b_input_to_list:
-                if (mEtInputText.getText().length() == 0) {
-                    // 데이터를 입력하라는 메시지 토스트를 출력한다.
-                    Toast.makeText(this, "데이터를 입력하세요.", Toast.LENGTH_SHORT).show();
-                } else {
-                    // 입력할 데이터를 받아온다.
-                    String data = mEtInputText.getText().toString();
-
-                    // 리스트에 데이터를 입력한다.
-                    mAlData.add(data);
-
-                    // Adapter에 데이터가 바뀐걸 알리고 리스트뷰에 다시 그린다.
-                    mAaString.notifyDataSetChanged();
-
-                    // 데이터 추가 성공 메시지 토스트를 출력한다.
-                    Toast.makeText(this, "데이터가 추가되었습니다.", Toast.LENGTH_SHORT).show();
-
-                    // EditText의 내용을 지운다.
-                    mEtInputText.setText("");
-
-                    // 데이터가 추가된 위치(리스트뷰의 마지막)으로 포커스를 이동시킨다.
-                    mLvList.setSelection(mAlData.size() - 1);
-                }
-                break;
-        }
     }
 
     // 메뉴.xml
@@ -219,16 +151,34 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 //                                Toast.makeText(MainActivity.this, items[selectedItem[0]], Toast.LENGTH_SHORT).show();
-                                String BB = items[selectedItem[0]];
-                                dialog.cancel();
-                                Toast.makeText(MainActivity.this, "선택된 값은 " + BB +"입니다.", Toast.LENGTH_SHORT).show();
+
+                                if (data_view.getText().toString() == "") {
+                                    // 데이터를 입력하라는 메시지 토스트를 출력한다.
+                                    Toast.makeText(getApplicationContext(), "설정부터하세요.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    // 입력할 데이터를 받아온다.
+                                    Toast.makeText(getApplicationContext(), data_view.getText().toString() + ", " + items[selectedItem[0]], Toast.LENGTH_SHORT).show();
+
+                    String data = data_view.getText().toString() + ", " + items[selectedItem[0]];
+
+                                    // 리스트에 데이터를 입력한다.
+                    mAlData.add(data);
+                                    // Adapter에 데이터가 바뀐걸 알리고 리스트뷰에 다시 그린다.
+                    mAaString.notifyDataSetChanged();
+
+                                    // 데이터 추가 성공 메시지 토스트를 출력한다.
+                    Toast.makeText(getApplicationContext(), "입력 완료", Toast.LENGTH_SHORT).show();
+
+                                    // 데이터가 추가된 위치(리스트뷰의 마지막)으로 포커스를 이동시킨다.
+                    mLvList.setSelection(mAlData.size() - 1);
+                                    dialog.cancel();
+                                }
                             }
                         })
                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Toast.makeText(MainActivity.this, "취소", Toast.LENGTH_SHORT).show();
-
                                 dialog.cancel();
                             }
                         });
@@ -270,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 dialog_app.show();
                 break;
             case R.id.action_myinfo:
-                // 어플에 대한 사용법 간단하게
+                // 개발자에 대한 사용법 간단하게
                 AlertDialog.Builder dialog_info = new AlertDialog.Builder(this);
                 dialog_info.setTitle(getResources().getString(R.string.dialog_my_title))
                         .setMessage(getResources().getString(R.string.dialog_my_content))

@@ -19,8 +19,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Set;
-
 public class SettingActivity extends AppCompatActivity implements OnClickListener, OnItemSelectedListener {
     // TODO 양식 통일
     // TODO 데이터 꺼내기
@@ -30,9 +28,9 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
     Button abc_inc, abc_dec;  // 단위 증가, 감소
     Button set_btn;  // 저장버튼
 
-    String a1="";
-    String a2="";
-    String a3="";
+    String a1 = "";
+    String a2 = "";
+    String a3 = "";
 
     @SuppressLint("ResourceType")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -152,7 +150,6 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                finish();
                                 Toast.makeText(SettingActivity.this,"저장된 값 : " + a1 + ", " + a2 + ", " + a3, Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SettingActivity.this, MainActivity.class);
                                 String AA = a1 + ", " + a2 + ", " + a3;

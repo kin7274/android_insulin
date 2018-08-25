@@ -27,11 +27,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements OnItemClickListener {
     // TODO 타임라인형식
 
-    private ListView mLvList;
-    private ArrayList<String> mAlData;
-    private ArrayAdapter<String> mAaString;
+    ListView mLvList;
+    ArrayList<String> mAlData;
+    ArrayAdapter<String> mAaString;
 
-    // 커스텀 다이얼로그 선택된 값
+    // 다이얼로그 선택된 값
     final int[] selectedItem = {0};
 
     // 설정 페이지에서 저장된 값 표시
@@ -55,11 +55,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(Color.parseColor(getResources().getString(R.color.colorPrimaryPurle)));
 
-        data_view = ( TextView ) findViewById(R.id.data_view);
-
         // 설정페이지로부터 저장되있는 값 받음 AA = 설정페이지에서 설정한 값
         Intent intent = getIntent();
         String AA = intent.getStringExtra("settingData");
+        data_view = ( TextView ) findViewById(R.id.data_view);
         data_view.setText(AA);
 
         mLvList = ( ListView ) findViewById(R.id.main_lv_list);
@@ -69,30 +68,16 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         mLvList.setAdapter(mAaString);
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-////        mAlData.clear();
-////        defaultData();
-//    }
-
-    // 입력 형식 예시
-//    public void defaultData(){
-//        mAlData.add("현재 시간, 인슐린, 하위품명, 단위, 식사상태");
-//    }
-
     public void onItemClick(AdapterView<?> parent, View v, final int position, long id) {
-        // 리스트에서 데이터를 받음
         String data = mAlData.get(position);
-
         // 삭제 설정
         OnClickListener deleteListener = new OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 // 선택된 아이템을 리스트에서 삭제
                 mAlData.remove(position);
-                // Adapter에 데이터가 바뀐걸 알리고 리스트뷰에 다시 그림
-//                mAaString.notifyDataSetChanged();
+                // 리스트 갱신
+                mAaString.notifyDataSetChanged();
             }
         };
 
@@ -133,17 +118,17 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 //                                Toast.makeText(MainActivity.this, items[selectedItem[0]], Toast.LENGTH_SHORT).show();
-
                                 if (data_view.getText().toString() == "") {
                                     // 설정을 안한 경우
                                     Toast.makeText(getApplicationContext(), "설정부터하세요.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), data_view.getText().toString() + ", " + items[selectedItem[0]], Toast.LENGTH_SHORT).show();
-                                    // 현재시간은 아직 미구현
+                                    // 현재시간 미구현
                                     String data = "현재시간, " + data_view.getText().toString() + ", " + items[selectedItem[0]];
                                     // 리스트에 데이터를 입력
                                     mAlData.add(data);
-//                                    mAaString.notifyDataSetChanged();
+                                    mAaString.notifyDataSetChanged();
+
                                     // 입력 완료
                                     Toast.makeText(getApplicationContext(), "입력 완료", Toast.LENGTH_SHORT).show();
                                     // 데이터가 추가된 위치(리스트뷰의 마지막)으로 포커스를 이동시킨다.

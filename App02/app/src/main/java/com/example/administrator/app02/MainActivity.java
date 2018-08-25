@@ -69,11 +69,17 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         mLvList.setAdapter(mAaString);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mAlData.clear();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+////        mAlData.clear();
+////        defaultData();
+//    }
+
+    // 입력 형식 예시
+//    public void defaultData(){
+//        mAlData.add("현재 시간, 인슐린, 하위품명, 단위, 식사상태");
+//    }
 
     public void onItemClick(AdapterView<?> parent, View v, final int position, long id) {
         // 리스트에서 데이터를 받음
@@ -85,16 +91,15 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
             public void onClick(DialogInterface arg0, int arg1) {
                 // 선택된 아이템을 리스트에서 삭제
                 mAlData.remove(position);
-
                 // Adapter에 데이터가 바뀐걸 알리고 리스트뷰에 다시 그림
-                mAaString.notifyDataSetChanged();
+//                mAaString.notifyDataSetChanged();
             }
         };
 
         // 삭제
         new AlertDialog.Builder(this)
                 .setTitle("진짜지울건가욥")
-                .setMessage("해당 데이터를 삭제하시겠습니까?<br /> data : " + data)
+                .setMessage("해당 데이터를 삭제하시겠습니까?" + "\ndata : " + data)
                 .setPositiveButton("삭제", deleteListener)
                 .show();
     }
@@ -134,10 +139,11 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                                     Toast.makeText(getApplicationContext(), "설정부터하세요.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), data_view.getText().toString() + ", " + items[selectedItem[0]], Toast.LENGTH_SHORT).show();
-                                    String data = data_view.getText().toString() + ", " + items[selectedItem[0]];
+                                    // 현재시간은 아직 미구현
+                                    String data = "현재시간, " + data_view.getText().toString() + ", " + items[selectedItem[0]];
                                     // 리스트에 데이터를 입력
                                     mAlData.add(data);
-                                    mAaString.notifyDataSetChanged();
+//                                    mAaString.notifyDataSetChanged();
                                     // 입력 완료
                                     Toast.makeText(getApplicationContext(), "입력 완료", Toast.LENGTH_SHORT).show();
                                     // 데이터가 추가된 위치(리스트뷰의 마지막)으로 포커스를 이동시킨다.

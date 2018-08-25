@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -11,7 +12,6 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,17 +27,14 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements OnItemClickListener {
     // TODO 타임라인형식
 
-    // 리스트뷰
     private ListView mLvList;
-
-    // 데이터 리스트
     private ArrayList<String> mAlData;
-
-    // 리스트뷰에 사용되는 ArrayAdapter
     private ArrayAdapter<String> mAaString;
 
+    // 커스텀 다이얼로그 선택된 값
     final int[] selectedItem = {0};
 
+    // 설정 페이지에서 저장된 값 표시
     TextView data_view;
 
     // 메인
@@ -60,64 +57,44 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
         data_view = ( TextView ) findViewById(R.id.data_view);
 
-
-        // 설정페이지로부터 저장되있는 값 받음 "AA"
+        // 설정페이지로부터 저장되있는 값 받음 AA = 설정페이지에서 설정한 값
         Intent intent = getIntent();
         String AA = intent.getStringExtra("settingData");
         data_view.setText(AA);
 
         mLvList = ( ListView ) findViewById(R.id.main_lv_list);
-
-        // ArrayList 생성
-        mAlData = new ArrayList<String>();
-
-        // ArrayAdapter 생성
-        mAaString = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mAlData);
-
-        // 어뎁터를 리스트뷰에 세팅한다.
-        mLvList.setAdapter(mAaString);
-
-        // 리스트뷰에 아이템클릭리스너를 등록한다.
         mLvList.setOnItemClickListener(this);
+        mAlData = new ArrayList<String>();
+        mAaString = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mAlData);
+        mLvList.setAdapter(mAaString);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // ArrayList 초기화
         mAlData.clear();
-
-//        defaultData();
     }
-    // 초기설정
-//    private void defaultData() {}
 
     public void onItemClick(AdapterView<?> parent, View v, final int position, long id) {
-        // 리스트에서 데이터를 받아온다.
-//      String data = (String) parent.getItemAtPosition(position);
+        // 리스트에서 데이터를 받음
         String data = mAlData.get(position);
 
-        // 삭제 다이얼로그에 보여줄 메시지를 만든다.
-        String message = "해당 데이터를 삭제하시겠습니까?<br />" +
-                "data : " + data + "<br />";
-
         // 삭제 설정
-        DialogInterface.OnClickListener deleteListener = new DialogInterface.OnClickListener() {
+        OnClickListener deleteListener = new OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
-                // 선택된 아이템을 리스트에서 삭제한다.
+                // 선택된 아이템을 리스트에서 삭제
                 mAlData.remove(position);
 
-                // Adapter에 데이터가 바뀐걸 알리고 리스트뷰에 다시 그린다.
+                // Adapter에 데이터가 바뀐걸 알리고 리스트뷰에 다시 그림
                 mAaString.notifyDataSetChanged();
             }
         };
 
-        // 삭제를 물어보는 다이얼로그를 생성한다.
+        // 삭제
         new AlertDialog.Builder(this)
                 .setTitle("진짜지울건가욥")
-                .setMessage(Html.fromHtml(message))
+                .setMessage("해당 데이터를 삭제하시겠습니까?<br /> data : " + data)
                 .setPositiveButton("삭제", deleteListener)
                 .show();
     }
@@ -138,44 +115,38 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
             case R.id.action_auto:
                 // 수동버튼 클릭 시
                 // 식사상태 선택 팝업창 열림
-                final String [] items = {"아침식전", "점심식전", "저녁식전", "취침전"};
+                final String[] items = {"아침식전", "점심식전", "저녁식전", "취침전"};
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("식사상태를 선택해주세요.")
-                .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        selectedItem[0] = which;
-                    }
-                })
-                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        .setSingleChoiceItems(items, 0, new OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                selectedItem[0] = which;
+                            }
+                        })
+                        .setPositiveButton("확인", new OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 //                                Toast.makeText(MainActivity.this, items[selectedItem[0]], Toast.LENGTH_SHORT).show();
 
                                 if (data_view.getText().toString() == "") {
-                                    // 데이터를 입력하라는 메시지 토스트를 출력한다.
+                                    // 설정을 안한 경우
                                     Toast.makeText(getApplicationContext(), "설정부터하세요.", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    // 입력할 데이터를 받아온다.
                                     Toast.makeText(getApplicationContext(), data_view.getText().toString() + ", " + items[selectedItem[0]], Toast.LENGTH_SHORT).show();
-
-                    String data = data_view.getText().toString() + ", " + items[selectedItem[0]];
-
-                                    // 리스트에 데이터를 입력한다.
-                    mAlData.add(data);
-                                    // Adapter에 데이터가 바뀐걸 알리고 리스트뷰에 다시 그린다.
-                    mAaString.notifyDataSetChanged();
-
-                                    // 데이터 추가 성공 메시지 토스트를 출력한다.
-                    Toast.makeText(getApplicationContext(), "입력 완료", Toast.LENGTH_SHORT).show();
-
+                                    String data = data_view.getText().toString() + ", " + items[selectedItem[0]];
+                                    // 리스트에 데이터를 입력
+                                    mAlData.add(data);
+                                    mAaString.notifyDataSetChanged();
+                                    // 입력 완료
+                                    Toast.makeText(getApplicationContext(), "입력 완료", Toast.LENGTH_SHORT).show();
                                     // 데이터가 추가된 위치(리스트뷰의 마지막)으로 포커스를 이동시킨다.
-                    mLvList.setSelection(mAlData.size() - 1);
+                                    mLvList.setSelection(mAlData.size() - 1);
                                     dialog.cancel();
                                 }
                             }
                         })
-                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("취소", new OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Toast.makeText(MainActivity.this, "취소", Toast.LENGTH_SHORT).show();
@@ -211,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 AlertDialog.Builder dialog_app = new AlertDialog.Builder(this);
                 dialog_app.setTitle(getResources().getString(R.string.dialog_app_title))
                         .setMessage(getResources().getString(R.string.dialog_app_content))
-                        .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                        .setPositiveButton(getResources().getString(R.string.ok), new OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
                             }
@@ -224,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 AlertDialog.Builder dialog_info = new AlertDialog.Builder(this);
                 dialog_info.setTitle(getResources().getString(R.string.dialog_my_title))
                         .setMessage(getResources().getString(R.string.dialog_my_content))
-                        .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
+                        .setPositiveButton(getResources().getString(R.string.ok), new OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
                             }

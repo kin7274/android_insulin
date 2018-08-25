@@ -75,12 +75,10 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(MainActivity.this, items[selectedItem[0]], Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(SettingActivity.this, MainActivity.class);
-//                                String AA = a1 + ", " + a2 + ", " + a3;
-//                                intent.putExtra("settingData",AA);
-//                                startActivity(intent);
+//                                Toast.makeText(MainActivity.this, items[selectedItem[0]], Toast.LENGTH_SHORT).show();
+                                String BB = items[selectedItem[0]];
                                 dialog.cancel();
+                                Toast.makeText(MainActivity.this, "선택된 값은 " + BB +"입니다.", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {

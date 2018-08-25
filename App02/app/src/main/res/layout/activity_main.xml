@@ -20,13 +20,10 @@
             android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
 
-    <ListView
-        android:id="@+id/mList"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="484dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="27dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize" />
 
     <LinearLayout

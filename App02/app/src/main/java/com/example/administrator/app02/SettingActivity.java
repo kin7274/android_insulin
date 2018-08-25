@@ -19,8 +19,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Set;
-
 public class SettingActivity extends AppCompatActivity implements OnClickListener, OnItemSelectedListener {
     // TODO 양식 통일
     // TODO 데이터 꺼내기
@@ -168,7 +166,6 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                         });
                 AlertDialog dialog = builder.create();
                 dialog.show();
-                // 데이터 전송
                 break;
         }
     }

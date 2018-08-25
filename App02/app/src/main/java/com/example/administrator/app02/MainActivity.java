@@ -1,38 +1,26 @@
 package com.example.administrator.app02;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
     // TODO 타임라인형식
+
+    final int[] selectedItem = {0};
 
     // 메인
     @SuppressLint("ResourceType")
@@ -66,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // 툴바 탭 클릭 이벤트
@@ -73,14 +63,36 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_auto:
                 // 수동버튼 클릭 시
                 // 식사상태 선택 팝업창 열림
-                CustomDialog2 dialog_auto = new CustomDialog2(this, getResources().getString(R.string.custom_dialog_title));
-                dialog_auto.setCanceledOnTouchOutside(true);
-                dialog_auto.setDialogListener(new MyDialogListener() {
+                final String [] items = {"아침식전", "점심식전", "저녁식전", "취침전"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("식사상태를 선택해주세요.")
+                .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener(){
                     @Override
-                    public void onPositiveClicked() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        selectedItem[0] = which;
                     }
-                });
-                dialog_auto.show();
+                })
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(MainActivity.this, items[selectedItem[0]], Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(SettingActivity.this, MainActivity.class);
+//                                String AA = a1 + ", " + a2 + ", " + a3;
+//                                intent.putExtra("settingData",AA);
+//                                startActivity(intent);
+                                dialog.cancel();
+                            }
+                        })
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(MainActivity.this, "취소", Toast.LENGTH_SHORT).show();
+
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
                 break;
             case R.id.action_ble:
                 // 블루투스 연결

@@ -146,7 +146,9 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                 // 최종 확인
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("최종 확인")
-                        .setMessage("인슐린 : " + a1 + "\n하위품목 : " + a2 + "\n단위 : " + a3)
+                        .setMessage("인슐린 : " + a1 + "<br />" +
+                                "하위품목 : " + a2 + "<br />" +
+                                "단위 : " + a3)
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

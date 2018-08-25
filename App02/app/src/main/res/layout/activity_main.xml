@@ -20,27 +20,45 @@
             android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize" />
+    <LinearLayout
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal" >
+        <EditText
+            android:id="@+id/main_et_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+        <Button
+            android:id="@+id/main_b_input_to_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="리스트에 추가" />
+    </LinearLayout>
+
+
+    <ListView
+        android:layout_marginTop="120dp"
+        android:id="@+id/main_lv_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:weightSum="3">
+        android:weightSum="3"
+        android:layout_alignParentLeft="true">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
             android:layout_weight="1"
             android:textSize="20sp"
-            android:text="현재 저장값 : " />
+            android:text="현재 저장값 : "
+            android:layout_alignParentLeft="true" />
 
         <TextView
             android:id="@+id/data_view"
@@ -48,8 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_alignParentLeft="true" />
     </LinearLayout>
 
 

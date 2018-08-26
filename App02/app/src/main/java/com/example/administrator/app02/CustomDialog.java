@@ -32,8 +32,6 @@ public class CustomDialog extends Dialog {
     private MyDialogListener dialogListener;
     private Context context;
 
-
-
     public CustomDialog(Context context){
         super(context);
         this.context = context;

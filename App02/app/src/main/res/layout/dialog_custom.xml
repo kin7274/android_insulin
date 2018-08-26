@@ -17,24 +17,6 @@
         android:textColor="#000"
         android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/btnONOFF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ble1" />
-
-    <Button
-        android:id="@+id/btnDiscoverable_on_off"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ble2" />
-
-    <Button
-        android:id="@+id/btnFindUnpairedDevices"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ble3" />
-
     <ListView
         android:id="@+id/lvNewDevices"
         android:layout_width="match_parent"

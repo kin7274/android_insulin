@@ -150,6 +150,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                finish();
                                 Toast.makeText(SettingActivity.this,"저장된 값 : " + a1 + ", " + a2 + ", " + a3, Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(SettingActivity.this, MainActivity.class);
                                 String AA = a1 + ", " + a2 + ", " + a3;
@@ -160,7 +161,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
+                                finish();
                             }
                         });
                 AlertDialog dialog = builder.create();

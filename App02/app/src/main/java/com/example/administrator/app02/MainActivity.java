@@ -17,6 +17,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -31,13 +34,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener {
     // TODO 타임라인형식
 
-    ListView mLvList;
-    ArrayList<String> mAlData;
-    ArrayAdapter<String> mAaString;
+    private MyRecyclerAdapter mAdapter;
+
+    List<CardItem> mDataList;
 
     // 다이얼로그 선택된 값
     final int[] selectedItem = {0};
@@ -69,32 +73,52 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         data_view = ( TextView ) findViewById(R.id.data_view);
         data_view.setText(AA);
 
-        mLvList = ( ListView ) findViewById(R.id.main_lv_list);
-        mLvList.setOnItemClickListener(this);
-        mAlData = new ArrayList<String>();
-        mAaString = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mAlData);
-        mLvList.setAdapter(mAaString);
+        RecyclerView recyclerView = ( RecyclerView ) findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(false);
+
+        // 레이아웃 매니저로 LinearLayoutManager를 설정
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        List<CardItem> dataList = new ArrayList<>();
+
+        // 어댑터 설정
+        mAdapter = new MyRecyclerAdapter(dataList);
+        mAdapter.setOnClickListener(( MyRecyclerAdapter.MyRecyclerViewClickListener ) this);
+        recyclerView.setAdapter(mAdapter);
+
+        // 구분선
+        // 이쁘면 메뉴얼쪽에도 추가하자
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+//        mLvList = ( ListView ) findViewById(R.id.main_lv_list);
+//        mLvList.setOnItemClickListener(this);
+//        mAlData = new ArrayList<String>();
+//        mAaString = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mAlData);
+//        mLvList.setAdapter(mAaString);
     }
 
     public void onItemClick(AdapterView<?> parent, View v, final int position, long id) {
-        String data = mAlData.get(position);
-        // 삭제 설정
-        OnClickListener deleteListener = new OnClickListener() {
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-                // 선택된 아이템을 리스트에서 삭제
-                mAlData.remove(position);
-                // 리스트 갱신
-                mAaString.notifyDataSetChanged();
-            }
-        };
+//        String data = mAlData.get(position);
+//        String data = dataList.get(position);
+//        // 삭제 설정
+//        OnClickListener deleteListener = new OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface arg0, int arg1) {
+//                // 선택된 아이템을 리스트에서 삭제
+//                dataList.remove(position);
+//                // 리스트 갱신
+////                dataList.notifyDataSetChanged();
+//            }
+//        };
 
         // 삭제
-        new AlertDialog.Builder(this)
-                .setTitle("진짜지울건가욥")
-                .setMessage("해당 데이터를 삭제하시겠습니까?" + "\ndata : " + data)
-                .setPositiveButton("삭제", deleteListener)
-                .show();
+//        new AlertDialog.Builder(this)
+//                .setTitle("진짜지울건가욥")
+//                .setMessage("해당 데이터를 삭제하시겠습니까?" + "\ndata : " + data)
+//                .setPositiveButton("삭제", deleteListener)
+//                .show();
     }
 
     // 메뉴.xml
@@ -131,16 +155,14 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                                     Toast.makeText(getApplicationContext(), "설정부터하세요.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), data_view.getText().toString() + ", " + items[selectedItem[0]], Toast.LENGTH_SHORT).show();
-                                    // 현재시간 미구현
+//                                    // 현재시간 미구현
                                     String data = "현재시간, " + data_view.getText().toString() + ", " + items[selectedItem[0]];
-                                    // 리스트에 데이터를 입력
-                                    mAlData.add(data);
-                                    mAaString.notifyDataSetChanged();
-
-                                    // 입력 완료
+//                                    // 리스트에 데이터를 입력
+//                                    mAdapter.notifyItemInserted(mDataList.size() - 1);
+//                                    // 입력 완료
                                     Toast.makeText(getApplicationContext(), "입력 완료", Toast.LENGTH_SHORT).show();
                                     // 데이터가 추가된 위치(리스트뷰의 마지막)으로 포커스를 이동시킨다.
-                                    mLvList.setSelection(mAlData.size() - 1);
+//                                    recyclerView.setSelection(dataList.size() - 1);
                                     dialog.cancel();
                                 }
                             }

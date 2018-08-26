@@ -138,6 +138,7 @@ public class BluetoothSetting extends AppCompatActivity implements AdapterView.O
         home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
                 Intent intent = new Intent(BluetoothSetting.this, MainActivity.class);
                 startActivity(intent);
             }

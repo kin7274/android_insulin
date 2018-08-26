@@ -36,12 +36,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnItemClickListener {
+import static com.example.administrator.app02.MyRecyclerAdapter.*;
+
+public class MainActivity extends AppCompatActivity implements MyRecyclerViewClickListener {
     // TODO 타임라인형식
 
     private MyRecyclerAdapter mAdapter;
-
-    List<CardItem> mDataList;
+    RecyclerView recyclerView;
+    List<CardItem> dataList;
 
     // 다이얼로그 선택된 값
     final int[] selectedItem = {0};
@@ -80,11 +82,13 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        // 표시할 임시 데이터
         List<CardItem> dataList = new ArrayList<>();
+//        dataList.add(new CardItem("하죶나","빡치네"));
 
         // 어댑터 설정
         mAdapter = new MyRecyclerAdapter(dataList);
-        mAdapter.setOnClickListener(( MyRecyclerAdapter.MyRecyclerViewClickListener ) this);
+        mAdapter.setOnClickListener(( MyRecyclerViewClickListener ) this);
         recyclerView.setAdapter(mAdapter);
 
         // 구분선
@@ -99,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 //        mLvList.setAdapter(mAaString);
     }
 
-    public void onItemClick(AdapterView<?> parent, View v, final int position, long id) {
+//    public void onItemClick(AdapterView<?> parent, View v, final int position, long id) {
 //        String data = mAlData.get(position);
 //        String data = dataList.get(position);
 //        // 삭제 설정
@@ -119,7 +123,19 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 //                .setMessage("해당 데이터를 삭제하시겠습니까?" + "\ndata : " + data)
 //                .setPositiveButton("삭제", deleteListener)
 //                .show();
+//    }
+
+    // 클릭 이벤트
+    @Override
+    public void onItemClicked(int position) {
+        Toast.makeText(getApplicationContext(), "띠용", Toast.LENGTH_LONG).show();
     }
+
+    private View.OnClickListener leftListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            //
+        }
+    };
 
     // 메뉴.xml
     @Override
@@ -154,11 +170,14 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                                     // 설정을 안한 경우
                                     Toast.makeText(getApplicationContext(), "설정부터하세요.", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(getApplicationContext(), data_view.getText().toString() + ", " + items[selectedItem[0]], Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), items[selectedItem[0]]+ ", " + data_view.getText().toString(), Toast.LENGTH_SHORT).show();
 //                                    // 현재시간 미구현
-                                    String data = "현재시간, " + data_view.getText().toString() + ", " + items[selectedItem[0]];
+//                                    String data = "현재시간, " + data_view.getText().toString() + ", " + items[selectedItem[0]];
 //                                    // 리스트에 데이터를 입력
-//                                    mAdapter.notifyItemInserted(mDataList.size() - 1);
+//                                    mAdapter.notifyItemInserted(dataList.size() - 1);
+                                    mAdapter.notifyItemInserted(which, items[selectedItem[0]]);
+//                                    dataList.add(new CardItem(items[selectedItem[0]], data_view.getText().toString()));
+//                                    mAdapter.notifyDataSetChanged();
 //                                    // 입력 완료
                                     Toast.makeText(getApplicationContext(), "입력 완료", Toast.LENGTH_SHORT).show();
                                     // 데이터가 추가된 위치(리스트뷰의 마지막)으로 포커스를 이동시킨다.

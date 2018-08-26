@@ -1,7 +1,5 @@
 package com.example.administrator.app02;
 
-
-
 import android.bluetooth.BluetoothDevice;
 
 import android.content.Context;

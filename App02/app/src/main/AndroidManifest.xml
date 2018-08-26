@@ -14,9 +14,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingActivity"></activity>
-        <activity android:name=".EducationActivity"></activity>
-        <activity android:name=".CustomDialog"></activity>
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".BluetoothSetting" />
+        <activity android:name=".EducationActivity" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-feature android:name="android.hardware.bluetooth" />

@@ -20,11 +20,47 @@
             android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
 
+    <LinearLayout
+        android:layout_marginTop="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="4">
+        <Button
+            android:text="ON/OFF"
+            android:id="@+id/btnONOFF"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <Button
+            android:text="Enable Discoverable"
+            android:id="@+id/btnDiscoverable_on_off"
+            android:onClick="btnEnableDisable_Discoverable"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/btnFindUnpairedDevices"
+            android:text="Discover"
+            android:onClick="btnDiscover"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <ListView
+
+            android:layout_below="@+id/btnFindUnpairedDevices"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+
+            android:layout_height="150dp"
+
+            android:id="@+id/lvNewDevices"/>
+    </LinearLayout>
     <ListView
         android:id="@+id/main_lv_list"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="?attr/actionBarSize" />
+        android:layout_marginTop="110dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

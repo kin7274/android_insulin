@@ -156,6 +156,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                                 String AA = a1 + ", " + a2 + ", " + a3;
                                 intent.putExtra("settingData",AA);
                                 startActivity(intent);
+
                             }
                         })
                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {

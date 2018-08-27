@@ -104,18 +104,9 @@ public class BluetoothSetting extends AppCompatActivity implements AdapterView.O
         }
     };
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(mBroadcastReceiver1);
-        unregisterReceiver(mBroadcastReceiver2);
-        unregisterReceiver(mBroadcastReceiver3);
-        unregisterReceiver(mBroadcastReceiver4);
-        //mBluetoothAdapter.cancelDiscovery();
-    }
-
-    /////////////////////////////////////////////
-    // 메인
+    ////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////
+    ///////////////////     메인     ///////////////////
     @SuppressLint("ResourceType")
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -134,15 +125,6 @@ public class BluetoothSetting extends AppCompatActivity implements AdapterView.O
         view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(Color.parseColor(getResources().getString(R.color.colorPrimaryPurle)));
 
-        home_btn = (Button) findViewById(R.id.home_btn);
-        home_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                Intent intent = new Intent(BluetoothSetting.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
         Button btnONOFF = ( Button ) findViewById(R.id.btnONOFF);
         lvNewDevices = ( ListView ) findViewById(R.id.lvNewDevices);
         mBTDevices = new ArrayList<>();

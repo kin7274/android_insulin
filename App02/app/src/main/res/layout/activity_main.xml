@@ -27,13 +27,23 @@
         android:layout_marginBottom="100dp"/>
 
     <TextView
-        android:id="@+id/data_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="57dp"
-        android:text="TextView"
+        android:text="사용자 기본 설정값 : "
         android:textSize="20sp"
         android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:id="@+id/data_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="122dp"
+        android:text="TextView"
+        android:textSize="20sp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="122dp" />
 </RelativeLayout>

@@ -85,14 +85,14 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 
         // 표시할 임시 데이터
         List<CardItem> dataList = new ArrayList<>();
-        dataList.add(new CardItem("하죶나","빡치네"));
-        dataList.add(new CardItem("하죶나","빡치네"));
-        dataList.add(new CardItem("하죶나","빡치네"));
+//        dataList.add(new CardItem("하죶나","빡치네"));
+
+        dataList.add(new CardItem("하", "제발"));
 
         // 어댑터 설정
         mAdapter = new MyRecyclerAdapter(dataList);
-        mAdapter.setOnClickListener(( MyRecyclerViewClickListener ) this);
-        recyclerView.setAdapter(mAdapter);
+        mAdapter.setOnClickListener(this);
+//        recyclerView.setAdapter(mAdapter);
 
         // 구분선
         // 이쁘면 메뉴얼쪽에도 추가하자
@@ -151,11 +151,16 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 //                            dataList.add(new CardItem(items[selectedItem[0]], data_view.getText().toString()));
                             // listview 갱신
 //                            mAdapter.notifyItemInserted(which, new CardItem("제발", "제발요"));
+//                            dataList.add(new CardItem("제발", "제발요"));
+                            
+//                            recyclerView.setAdapter(mAdapter);
 
 //                            dataList.clear();
 //                            dataList.add(new CardItem("제발", "제발요"));
-                            mAdapter.notifyDataSetChanged();
+//                            mAdapter.notifyDataSetChanged();
 
+//                            dataList.add(new CardItem("하죶나","빡치네"));
+//                            mAdapter.notifyDataSetChanged();
 //                            dataList.add(new CardItem("하죶나","빡치네"));
 //                            mAdapter.notifyItemInserted(which);
 //                            mAdapter.notifyDataSetChanged();
@@ -168,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 
                             // 데이터가 추가된 위치(리스트뷰의 마지막)으로 포커스를 이동시킨다.
 //                                    recyclerView.setSelection(dataList.size() - 1);
+//                            finish();
                             dialog.cancel();
                         }
                     }

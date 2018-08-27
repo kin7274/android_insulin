@@ -3,9 +3,11 @@ package com.example.administrator.app02;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,10 +21,12 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     private final List<CardItem> mDataList;
     private MyRecyclerViewClickListener mListener;
 
+    // Adapter 초기화 및 생성자로 받은 데이터기반으로 Adapter 내 데이터 세팅
     public MyRecyclerAdapter(List<CardItem> dataList) {
         mDataList = dataList;
     }
 
+    // ViewHolder가 초기화 될 때 혹은 ViewHolder를 초기화 할 때 실행되는 메서드
     // 뷰 홀더를 생성하는 부분. 레이아웃을 만드는 부분
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -30,10 +34,14 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         return new ViewHolder(view);
     }
 
+    // RecyclerView의 Row 하나하나를 구현하기위해 Bind(묶이다) 될 때
     // 뷰 홀더에 데이터를 설정하는 부분
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         CardItem item = mDataList.get(position);
+
+        TextView state = holder.state;
+        TextView setting = holder.setting;
 
         holder.state.setText(item.getState());
         holder.setting.setText(item.getSetting());
@@ -50,6 +58,13 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
                 }
             });
         }
+//        Button btnToast = holder.btnToast;
+//        btnToast.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d("aaaa", "버튼을 누른 아이템의 위치는 " + position);
+//            }
+//        });
     }
 
     // 아이템의 수

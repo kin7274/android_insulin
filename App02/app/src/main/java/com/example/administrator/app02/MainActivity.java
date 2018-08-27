@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 //     클릭 이벤트
     @Override
     public void onItemClicked(int position) {
-        Toast.makeText(getApplicationContext(), position + "번째 클릭", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), position + "번째 삭제", Toast.LENGTH_LONG).show();
     }
 
     private View.OnClickListener leftListener = new View.OnClickListener() {
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 //                            mAdapter.notifyItemInserted(which, new CardItem("제발", "제발요"));
 
 //                            dataList.clear();
-                            dataList.add(new CardItem("제발", "제발요"));
+//                            dataList.add(new CardItem("제발", "제발요"));
                             mAdapter.notifyDataSetChanged();
 
 //                            dataList.add(new CardItem("하죶나","빡치네"));
@@ -161,7 +161,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 //                            mAdapter.notifyDataSetChanged();
 //                            mAdapter.notifyItemInserted(which);
 //                            recyclerView.setAdapter(mAdapter);
-
 
 //                            Toast.makeText(getApplicationContext(), items[selectedItem[0]] + ", " + data_view.getText().toString(), Toast.LENGTH_SHORT).show();
 

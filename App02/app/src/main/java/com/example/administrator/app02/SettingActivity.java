@@ -1,6 +1,7 @@
 package com.example.administrator.app02;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -150,13 +151,17 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                                Toast.makeText(SettingActivity.this,"저장된 값 : " + a1 + ", " + a2 + ", " + a3, Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(SettingActivity.this, MainActivity.class);
+//                                finish();
+//                                Toast.makeText(SettingActivity.this,"저장된 값 : " + a1 + ", " + a2 + ", " + a3, Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(SettingActivity.this, MainActivity.class);
                                 String AA = a1 + ", " + a2 + ", " + a3;
-                                intent.putExtra("settingData",AA);
-                                startActivity(intent);
+//                                intent.putExtra("settingData",AA);
+//                                startActivity(intent);
 
+                                Intent returnIntent = new Intent();
+                                returnIntent.putExtra("AA",AA);
+                                setResult(Activity.RESULT_OK,returnIntent);
+                                finish();
                             }
                         })
                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {

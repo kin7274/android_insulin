@@ -68,12 +68,12 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // 설정페이지로부터 저장되있는 값 받음 AA = 설정페이지에서 설정한 값
-        Intent intent = getIntent();
-        String AA = intent.getStringExtra("settingData");
+//        Intent intent = getIntent();
+//        String AA = intent.getStringExtra("settingData");
         data_view = ( TextView ) findViewById(R.id.data_view);
-        data_view.setText(AA);
+//        data_view.setText(AA);
 
         if(Init == 1) {
             Toast.makeText(getApplicationContext(), Init +" =1 뻔하죠?", Toast.LENGTH_LONG).show();
@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
             Toast.makeText(getApplicationContext(), Init + "1이 아니죠?", Toast.LENGTH_LONG).show();
         }
 
-
         // 툴바
         Toolbar mytoolbar = ( Toolbar ) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
@@ -106,8 +105,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         View view = getWindow().getDecorView();
         view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(Color.parseColor(getResources().getString(R.color.colorPrimaryPurle)));
-
-
 
         RecyclerView recyclerView = ( RecyclerView ) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(false);
@@ -119,13 +116,13 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         // 표시할 임시 데이터
         List<CardItem> dataList = new ArrayList<>();
 //        dataList.add(new CardItem("제발","제발요"));
-
         dataList.add(new CardItem("제발", "제발요"));
+        dataList.add(new CardItem("제발2", "제발2요"));
 
         // 어댑터 설정
         mAdapter = new MyRecyclerAdapter(dataList);
         mAdapter.setOnClickListener(this);
-//        recyclerView.setAdapter(mAdapter);
+        recyclerView.setAdapter(mAdapter);
 
         // 구분선
         // 이쁘면 메뉴얼쪽에도 추가하자
@@ -133,7 +130,18 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         recyclerView.addItemDecoration(dividerItemDecoration);
     }
 
-    ////////////////////////////////////
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                String result = data.getStringExtra("AA");
+            data_view.setText(result);
+            }
+        }
+//        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+        ////////////////////////////////////
     ////////////////////////////////////
     ////////////////////////////////////
 //    @Override
@@ -242,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
             case R.id.action_setting:
                 // 설정 페이지로 이동
                 Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);
-                startActivity(intent_setting);
+                startActivityForResult(intent_setting, 1);
                 break;
             case R.id.action_education:
                 // 영상 페이지로 이동

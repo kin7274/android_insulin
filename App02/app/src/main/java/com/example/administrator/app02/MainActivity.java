@@ -85,9 +85,9 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 
         // 표시할 임시 데이터
         List<CardItem> dataList = new ArrayList<>();
-//        dataList.add(new CardItem("하죶나","빡치네"));
+//        dataList.add(new CardItem("제발","제발요"));
 
-        dataList.add(new CardItem("하", "제발"));
+        dataList.add(new CardItem("제발", "제발요"));
 
         // 어댑터 설정
         mAdapter = new MyRecyclerAdapter(dataList);
@@ -152,16 +152,16 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                             // listview 갱신
 //                            mAdapter.notifyItemInserted(which, new CardItem("제발", "제발요"));
 //                            dataList.add(new CardItem("제발", "제발요"));
-                            
+
 //                            recyclerView.setAdapter(mAdapter);
 
 //                            dataList.clear();
 //                            dataList.add(new CardItem("제발", "제발요"));
 //                            mAdapter.notifyDataSetChanged();
 
-//                            dataList.add(new CardItem("하죶나","빡치네"));
+//                            dataList.add(new CardItem("제발","제발요"));
 //                            mAdapter.notifyDataSetChanged();
-//                            dataList.add(new CardItem("하죶나","빡치네"));
+//                            dataList.add(new CardItem("제발","제발요"));
 //                            mAdapter.notifyItemInserted(which);
 //                            mAdapter.notifyDataSetChanged();
 //                            mAdapter.notifyItemInserted(which);

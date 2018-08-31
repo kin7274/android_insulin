@@ -82,9 +82,6 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         notifyItemRangeChanged(position, mDataList.size());
     }
 
-    public void notifyItemInserted(int which, CardItem cardItem) {
-    }
-
     // 각각의 아이템의 레퍼런스를 저장할 뷰 홀더 클래스
     // 반드시 RecyclerView.ViewHolder를 상속해야 함
     public class ViewHolder extends RecyclerView.ViewHolder {

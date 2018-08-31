@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 //        dataList.add(new CardItem("제발","제발요"));
         dataList.add(new CardItem("제발", "제발요"));
         dataList.add(new CardItem("제발2", "제발2요"));
+        dataList.add(new CardItem("제발3", "제발3요"));
 
         // 어댑터 설정
         mAdapter = new MyRecyclerAdapter(dataList);
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
+        // 저장데이터 불러오기
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String str = pref.getString("PREF_STRNAME", "");
         data_view.setText(str);
@@ -177,9 +179,17 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                             String data = "현재시간, " + items[selectedItem[0]] + ", " + data_view.getText().toString();
 
                             // 리스트에 데이터를 입력
-                            dataList.add(new CardItem("d", "d"));
-                            // listview 갱신
-                            mAdapter.notifyDataSetChanged();
+//                            dataList.add(new CardItem("d", "d"));
+//                            // listview 갱신
+//                            mAdapter.notifyDataSetChanged();
+
+
+//                            Toast.makeText(getApplicationContext(), "눌러진다고요.", Toast.LENGTH_LONG).show();
+
+
+
+
+
 //                            dataList.add(new CardItem("제발", "제발요"));
 //                            Toast.makeText(getApplicationContext(), items[selectedItem[0]] + ", " + data_view.getText().toString(), Toast.LENGTH_SHORT).show();
 

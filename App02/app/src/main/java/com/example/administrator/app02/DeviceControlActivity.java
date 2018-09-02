@@ -113,7 +113,10 @@ public class DeviceControlActivity extends Activity {
                 String receive_data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
                 displayData(receive_data);
                 Toast.makeText(getApplicationContext(), receive_data, Toast.LENGTH_LONG).show();
-
+                // TODO 띠용
+                Global.setData(receive_data);
+                Toast.makeText(getApplicationContext(), "저ㅡ장", Toast.LENGTH_LONG).show();
+                ((MainActivity)MainActivity.mContext).cocococo();
             }
         }
     };

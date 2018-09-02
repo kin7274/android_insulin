@@ -19,7 +19,6 @@ public class CardItem {
     }
 
     public String getSetting() {
-
         return setting;
     }
 

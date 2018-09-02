@@ -45,8 +45,12 @@ import static com.example.administrator.app02.MyRecyclerAdapter.*;
 public class MainActivity extends AppCompatActivity implements MyRecyclerViewClickListener {
     // TODO 타임라인형식
 
+    public static Context mContext;
+
     // 쉐어드
     EditText et;
+
+    String receive_data_real;
 
     SharedPreferences sharedPreferences;
     private MyRecyclerAdapter mAdapter;
@@ -61,16 +65,21 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
     // 설정 페이지에서 저장된 값 표시
     TextView data_view;
 
+    TextView data_receive;
+
     // 메인
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        data_view = ( TextView ) findViewById(R.id.data_view);
+        mContext = this;
+
+        data_view = (TextView) findViewById(R.id.data_view);
+        data_receive = (TextView) findViewById(R.id.data_receive);
 
         // 툴바
-        Toolbar mytoolbar = ( Toolbar ) findViewById(R.id.my_toolbar);
+        Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
         getSupportActionBar().setTitle("");
 
@@ -79,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 //        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 //        getWindow().setStatusBarColor(Color.parseColor(getResources().getString(R.color.colorPrimaryPurle)));
 
-        RecyclerView recyclerView = ( RecyclerView ) findViewById(R.id.recycler_view);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(false);
 
         // 레이아웃 매니저로 LinearLayoutManager를 설정
@@ -107,6 +116,12 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String str = pref.getString("PREF_STRNAME", "");
         data_view.setText(str);
+    }
+
+    public void cocococo(){
+        receive_data_real = Global.getData();
+        Toast.makeText(getApplicationContext(), receive_data_real, Toast.LENGTH_LONG).show();
+        data_receive.setText(receive_data_real);
     }
 
     @Override

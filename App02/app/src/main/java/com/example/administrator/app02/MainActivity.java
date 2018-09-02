@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 break;
             case R.id.action_ble:
                 // 블루투스 연결
-                Intent intent_ble = new Intent(MainActivity.this, BluetoothSetting.class);
+                Intent intent_ble = new Intent(MainActivity.this, DeviceScanActivity.class);
                 Toast.makeText(getApplicationContext(), "띠용", Toast.LENGTH_LONG).show();
                 startActivity(intent_ble);
                 break;

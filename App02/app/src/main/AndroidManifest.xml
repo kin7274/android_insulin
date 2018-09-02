@@ -17,12 +17,14 @@
         </activity>
         <activity android:name=".SettingActivity" />
         <activity android:name=".EducationActivity" />
+        <service android:name=".BluetoothLeService" android:enabled="true"/>
+        <service android:name="MyService"/>
         <activity
             android:name=".DeviceControlActivity"
-            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
+            android:theme="@android:style/Theme.Holo.Light" />
         <activity
             android:name=".DeviceScanActivity"
-            android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
+            android:theme="@android:style/Theme.Holo.Light" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 

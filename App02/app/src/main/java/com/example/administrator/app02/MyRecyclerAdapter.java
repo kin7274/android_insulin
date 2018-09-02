@@ -58,13 +58,6 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
                 }
             });
         }
-//        Button btnToast = holder.btnToast;
-//        btnToast.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d("aaaa", "버튼을 누른 아이템의 위치는 " + position);
-//            }
-//        });
     }
 
     // 아이템의 수
@@ -93,10 +86,10 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             state = (TextView) itemView.findViewById(R.id.text_eat_state);
             setting = (TextView) itemView.findViewById(R.id.text_init_setting);
 
-            itemView.setOnClickListener(new View.OnClickListener(){
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext, "click" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, "click", Toast.LENGTH_LONG).show();
                 }
             });
         }

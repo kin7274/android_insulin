@@ -177,23 +177,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                             dialog.cancel();
                             // 현재시간 미구현
                             String data = "현재시간, " + items[selectedItem[0]] + ", " + data_view.getText().toString();
-
-                            // 리스트에 데이터를 입력
-//                            dataList.add(new CardItem("d", "d"));
-//                            // listview 갱신
-//                            mAdapter.notifyDataSetChanged();
-
-
-//                            Toast.makeText(getApplicationContext(), "눌러진다고요.", Toast.LENGTH_LONG).show();
-
-
-
-
-
-//                            dataList.add(new CardItem("제발", "제발요"));
-//                            Toast.makeText(getApplicationContext(), items[selectedItem[0]] + ", " + data_view.getText().toString(), Toast.LENGTH_SHORT).show();
-
-//                            Toast.makeText(getApplicationContext(), "입력 완료", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "입력값 : " + items[selectedItem[0]] + ", " + data_view.getText().toString(), Toast.LENGTH_SHORT).show();
                             // 데이터가 추가된 위치(리스트뷰의 마지막)으로 포커스를 이동시킨다.
 //                                    recyclerView.setSelection(dataList.size() - 1);
 //                            finish();

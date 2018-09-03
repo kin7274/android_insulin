@@ -25,6 +25,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,10 +46,17 @@ import static com.example.administrator.app02.MyRecyclerAdapter.*;
 public class MainActivity extends AppCompatActivity implements MyRecyclerViewClickListener {
     // TODO 타임라인형식
 
+
+    Boolean aBoolean = false;
+    private CustomDialog dialog;
+
     public static Context mContext;
 
     // 쉐어드
     EditText et;
+
+    // 임시로 만듦
+   Button clickclick;
 
     String receive_data_real;
 
@@ -59,8 +67,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 
     // 다이얼로그 선택된 값
     final int[] selectedItem = {0};
-
-    int Init = 1;
 
     // 설정 페이지에서 저장된 값 표시
     TextView data_view;
@@ -96,11 +102,10 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         recyclerView.setLayoutManager(layoutManager);
 
         // 표시할 임시 데이터
-        List<CardItem> dataList = new ArrayList<>();
+        final List<CardItem> dataList = new ArrayList<>();
 //        dataList.add(new CardItem("제발","제발요"));
-        dataList.add(new CardItem("제발", "제발요"));
-        dataList.add(new CardItem("제발2", "제발2요"));
-        dataList.add(new CardItem("제발3", "제발3요"));
+//        dataList.add(new CardItem("제발2", "제발2요"));
+//        dataList.add(new CardItem("제발3", "제발3요"));
 
         // 어댑터 설정
         mAdapter = new MyRecyclerAdapter(dataList);
@@ -116,11 +121,46 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String str = pref.getString("PREF_STRNAME", "");
         data_view.setText(str);
+
+
+        clickclick = (Button) findViewById(R.id.clickclick);
+        clickclick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(data_view.getText().toString() == ""){
+                    Toast.makeText(getApplicationContext(), "설정하고와!", Toast.LENGTH_LONG).show();
+                } else {
+//                    Toast.makeText(getApplicationContext(), "ㄱㄱ", Toast.LENGTH_LONG).show();
+                    // 저장을 해보자
+                    // 리사이클러뷰 추가!
+
+//                    dataList.add(new CardItem("제발4", "제발요4"));
+//                    mAdapter.notifyDataSetChanged();
+                    final CustomDialog dialog = new CustomDialog(MainActivity.this);
+                    dialog.setDialogListener(new MyDialogListener() {
+                        @Override
+                        public void onPositiveClicked(String email) {
+                            Toast.makeText(getApplicationContext(), "받은 값은 : " + email, Toast.LENGTH_LONG).show();
+
+                        dataList.add(new CardItem(email, data_view.getText().toString()));
+                        mAdapter.notifyDataSetChanged();
+                        }
+                        @Override
+                        public void onNegativeClicked() { }
+                    });
+                    dialog.show();
+
+
+
+                }
+            }
+        });
+
     }
 
     public void cocococo(){
         receive_data_real = Global.getData();
-        Toast.makeText(getApplicationContext(), receive_data_real, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), receive_data_real, Toast.LENGTH_LONG).show();
         data_receive.setText(receive_data_real);
     }
 
@@ -142,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         SharedPreferences.Editor editor = pref.edit();
         String strrr = data_view.getText().toString();
         editor.putString("PREF_STRNAME", strrr);
-        editor.commit();
+        editor.apply();
     }
 
     //  클릭 이벤트
@@ -169,46 +209,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
     public boolean onOptionsItemSelected(MenuItem item) {
         // 툴바 탭 클릭 이벤트
         switch (item.getItemId()) {
-            case R.id.action_auto:
-                // 수동버튼 클릭 시
-                // 식사상태 선택 팝업창 열림
-                final String[] items = {"아침식전", "점심식전", "저녁식전", "취침전"};
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("식사상태를 선택해주세요.");
-                builder.setSingleChoiceItems(items, 0, new OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        selectedItem[0] = which;
-                    }
-                });
-                builder.setPositiveButton("확인", new OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-//                                Toast.makeText(MainActivity.this, items[selectedItem[0]], Toast.LENGTH_SHORT).show();
-                        if (data_view.getText().toString() == "") {
-                            // 설정을 안한 경우
-                            Toast.makeText(getApplicationContext(), "설정부터하세요.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            dialog.cancel();
-                            // 현재시간 미구현
-                            String data = "현재시간, " + items[selectedItem[0]] + ", " + data_view.getText().toString();
-                            Toast.makeText(getApplicationContext(), "입력값 : " + items[selectedItem[0]] + ", " + data_view.getText().toString(), Toast.LENGTH_SHORT).show();
-                            // 데이터가 추가된 위치(리스트뷰의 마지막)으로 포커스를 이동시킨다.
-//                                    recyclerView.setSelection(dataList.size() - 1);
-//                            finish();
-                        }
-                    }
-                });
-                builder.setNegativeButton("취소", new OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MainActivity.this, "취소", Toast.LENGTH_SHORT).show();
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-                break;
             case R.id.action_ble:
                 // 블루투스 연결
                 Intent intent_ble = new Intent(MainActivity.this, DeviceScanActivity.class);
@@ -252,6 +252,70 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 dialog_info.create();
                 dialog_info.show();
                 break;
+//                case R.id.action_auto:
+//                // 수동버튼 클릭 시
+//                // 식사상태 선택 팝업창 열림
+//
+//                ///////////////////////////////////////////////////////////////////////////////////////////////
+//                // 커스텀 다이얼로그로 구성
+//                final CustomDialog dialog = new CustomDialog(this);
+//                dialog.setDialogListener(new MyDialogListener() {
+//                    @Override
+//                    public void onPositiveClicked(String email) {
+//                    Toast.makeText(getApplicationContext(), "받은 값은 : " + email, Toast.LENGTH_LONG).show();
+//
+////                        dataList.add(new CardItem("제발4", "제발요4"));
+////                        mAdapter.notifyDataSetChanged();
+//                    }
+//                    @Override
+//                    public void onNegativeClicked() { }
+//                });
+//                dialog.show();
+//                break;
+//                ///////////////////////////////////////////////////////////////////////////////////////////////
+//                // 일반 다이얼로그로 구성
+//                final String[] items = {"아침식전", "점심식전", "저녁식전", "취침전"};
+//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//                builder.setTitle("식사상태를 선택해주세요.");
+//                builder.setSingleChoiceItems(items, 0, new OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        selectedItem[0] = which;
+//                    }
+//                });
+//                builder.setPositiveButton("확인", new OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+////                                Toast.makeText(MainActivity.this, items[selectedItem[0]], Toast.LENGTH_SHORT).show();
+//                        if (data_view.getText().toString() == "") {
+//                            // 설정을 안한 경우
+//                            Toast.makeText(getApplicationContext(), "설정부터하세요.", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            // 현재시간 미구현
+//                            String data = "현재시간, " + items[selectedItem[0]] + ", " + data_view.getText().toString();
+//                            Toast.makeText(getApplicationContext(), "입력값 : " + items[selectedItem[0]] + ", " + data_view.getText().toString(), Toast.LENGTH_SHORT).show();
+//
+////                            dataList.add(new CardItem("제발4", "제발요4"));
+////                            mAdapter.notifyDataSetChanged();
+//
+//
+////                            데이터가 추가된 위치(리스트뷰의 마지막)으로 포커스를 이동시킨다.
+////                            recyclerView.setSelection(dataList.size() - 1);
+////                            finish();
+//                            dialog.cancel();
+//                        }
+//                    }
+//                });
+//                builder.setNegativeButton("취소", new OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Toast.makeText(MainActivity.this, "취소", Toast.LENGTH_SHORT).show();
+//                        dialog.cancel();
+//                    }
+//                });
+//                AlertDialog dialog = builder.create();
+//                dialog.show();
+//                break;
         }
         return super.onOptionsItemSelected(item);
     }

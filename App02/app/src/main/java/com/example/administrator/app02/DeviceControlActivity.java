@@ -92,6 +92,8 @@ public class DeviceControlActivity extends Activity {
     // ACTION_GATT_SERVICES_DISCOVERED: discovered GATT services.
     // ACTION_DATA_AVAILABLE: received data from the device.  This can be a result of read
     //                        or notification operations.
+
+    ////////////////////////////////////////////////////////////////////////////////////// 데이터가져온곳!!!!!/////////////////////////////////////////////////////////////////////////
     private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -104,6 +106,7 @@ public class DeviceControlActivity extends Activity {
                 mConnected = false;
                 updateConnectionState(R.string.disconnected);
                 invalidateOptionsMenu();
+                // UI관련된 함수 확인
                 clearUI();
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
                 // Show all the supported services and characteristics on the user interface.
@@ -115,7 +118,7 @@ public class DeviceControlActivity extends Activity {
                 Toast.makeText(getApplicationContext(), receive_data, Toast.LENGTH_LONG).show();
                 // TODO 띠용
                 Global.setData(receive_data);
-                Toast.makeText(getApplicationContext(), "저ㅡ장", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "저ㅡ장", Toast.LENGTH_LONG).show();
                 ((MainActivity)MainActivity.mContext).cocococo();
             }
         }
@@ -125,6 +128,7 @@ public class DeviceControlActivity extends Activity {
     // demonstrates 'Read' and 'Notify' features.  See
     // http://d.android.com/reference/android/bluetooth/BluetoothGatt.html for the complete
     // list of supported characteristic features.
+
     private final ExpandableListView.OnChildClickListener servicesListClickListner =
             new ExpandableListView.OnChildClickListener() {
                 @Override
@@ -137,11 +141,11 @@ public class DeviceControlActivity extends Activity {
                         if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
                             // If there is an active notification on a characteristic, clear
                             // it first so it doesn't update the data field on the user interface.
-                            if (mNotifyCharacteristic != null) {
-                                mBluetoothLeService.setCharacteristicNotification(
-                                        mNotifyCharacteristic, false);
-                                mNotifyCharacteristic = null;
-                            }
+//                            if (mNotifyCharacteristic != null) {
+//                                mBluetoothLeService.setCharacteristicNotification(
+//                                        mNotifyCharacteristic, false);
+//                                mNotifyCharacteristic = null;
+//                            }
                             mBluetoothLeService.readCharacteristic(characteristic);
                         }
                         if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
@@ -234,6 +238,7 @@ public class DeviceControlActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    // UI Thread
     private void updateConnectionState(final int resourceId) {
         runOnUiThread(new Runnable() {
             @Override
@@ -243,6 +248,7 @@ public class DeviceControlActivity extends Activity {
         });
     }
 
+    // data필드에 넣는다!
     private void displayData(String data) {
         if (data != null) {
             mDataField.setText(data);

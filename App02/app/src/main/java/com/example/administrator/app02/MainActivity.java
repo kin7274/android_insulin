@@ -36,6 +36,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -96,11 +97,11 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 //        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 //        getWindow().setStatusBarColor(Color.parseColor(getResources().getString(R.color.colorPrimaryPurle)));
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(false);
 
         // 레이아웃 매니저로 LinearLayoutManager를 설정
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         // 표시할 임시 데이터
@@ -122,6 +123,11 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String str = pref.getString("PREF_STRNAME", "");
         data_view.setText(str);
+
+        String numbers = str;
+        String[] arr = numbers.split(",");
+//        Toast.makeText(getApplicationContext(), arr[0], Toast.LENGTH_LONG).show();
+        result3 = arr[0];
 
         clickclick = (Button) findViewById(R.id.clickclick);
         clickclick.setOnClickListener(new View.OnClickListener() {
@@ -145,6 +151,10 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                             dataList.add(new CardItem(searchImage(), email, data_view.getText().toString()));
 //                            dataList.add(new CardItem(searchImage(), email, data_view.getText().toString()));
                             mAdapter.notifyDataSetChanged();
+
+                            // 아래에서 시작
+                            // 그 위로 리사이클러뷰 추가, 쌓임
+//                            layoutManager.setStackFromEnd(true);
                         }
 
                         @Override
@@ -190,6 +200,10 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 // 인슐린 종합 데이터
                 String result = data.getStringExtra("AA");
                 data_view.setText(result);
+                String numbers = result;
+                String[] arr = numbers.split(",");
+                Toast.makeText(getApplicationContext(), arr[0], Toast.LENGTH_LONG).show();
+                result3 = arr[0];
             }
         }
     }

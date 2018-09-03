@@ -2,12 +2,14 @@ package com.example.administrator.app02;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,9 +42,11 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, final int position) {
         CardItem item = mDataList.get(position);
 
+        ImageView image = holder.image;
         TextView state = holder.state;
         TextView setting = holder.setting;
 
+        holder.image.setImageResource(item.getImage());
         holder.state.setText(item.getState());
         holder.setting.setText(item.getSetting());
 
@@ -79,10 +83,12 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     // 반드시 RecyclerView.ViewHolder를 상속해야 함
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        ImageView image;
         TextView state, setting;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            image = (ImageView) itemView.findViewById(R.id.image);
             state = (TextView) itemView.findViewById(R.id.text_eat_state);
             setting = (TextView) itemView.findViewById(R.id.text_init_setting);
 

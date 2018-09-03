@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -34,6 +35,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,8 +48,6 @@ import static com.example.administrator.app02.MyRecyclerAdapter.*;
 public class MainActivity extends AppCompatActivity implements MyRecyclerViewClickListener {
     // TODO 타임라인형식
 
-
-    Boolean aBoolean = false;
     private CustomDialog dialog;
 
     public static Context mContext;
@@ -55,8 +55,10 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
     // 쉐어드
     EditText et;
 
+    String result3 = "";
+
     // 임시로 만듦
-   Button clickclick;
+    Button clickclick;
 
     String receive_data_real;
 
@@ -105,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         final List<CardItem> dataList = new ArrayList<>();
 //        dataList.add(new CardItem("제발","제발요"));
 //        dataList.add(new CardItem("제발2", "제발2요"));
-//        dataList.add(new CardItem("제발3", "제발3요"));
 
         // 어댑터 설정
         mAdapter = new MyRecyclerAdapter(dataList);
@@ -122,12 +123,11 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         String str = pref.getString("PREF_STRNAME", "");
         data_view.setText(str);
 
-
         clickclick = (Button) findViewById(R.id.clickclick);
         clickclick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(data_view.getText().toString() == ""){
+                if (data_view.getText().toString() == "") {
                     Toast.makeText(getApplicationContext(), "설정하고와!", Toast.LENGTH_LONG).show();
                 } else {
 //                    Toast.makeText(getApplicationContext(), "ㄱㄱ", Toast.LENGTH_LONG).show();
@@ -142,23 +142,42 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                         public void onPositiveClicked(String email) {
                             Toast.makeText(getApplicationContext(), "받은 값은 : " + email, Toast.LENGTH_LONG).show();
 
-                        dataList.add(new CardItem(email, data_view.getText().toString()));
-                        mAdapter.notifyDataSetChanged();
+                            dataList.add(new CardItem(searchImage(), email, data_view.getText().toString()));
+//                            dataList.add(new CardItem(searchImage(), email, data_view.getText().toString()));
+                            mAdapter.notifyDataSetChanged();
                         }
+
                         @Override
-                        public void onNegativeClicked() { }
+                        public void onNegativeClicked() {
+                        }
                     });
                     dialog.show();
-
-
-
                 }
             }
         });
-
     }
 
-    public void cocococo(){
+
+    // 투약 종류마다 리스트 맨 앞 색 구별!!!!!!
+    // 범례도 꼭 넣자!!
+    public int searchImage() {
+        int a = 0;
+        switch (result3) {
+            case "초속효성":
+                return R.drawable.a1;
+            case "속효성":
+                return R.drawable.a2;
+            case "중간형":
+                return R.drawable.a3;
+            case "혼합형":
+                return R.drawable.a4;
+            case "지속형":
+                return R.drawable.a5;
+        }
+        return a;
+    }
+
+    public void cocococo() {
         receive_data_real = Global.getData();
 //        Toast.makeText(getApplicationContext(), receive_data_real, Toast.LENGTH_LONG).show();
         data_receive.setText(receive_data_real);
@@ -168,6 +187,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
+                // 인슐린 종합 데이터
                 String result = data.getStringExtra("AA");
                 data_view.setText(result);
             }

@@ -33,17 +33,15 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
     String a2 = "";
     String a3 = "";
 
-    @SuppressLint("ResourceType")
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
         // 상태바 색 변경
-        View view = getWindow().getDecorView();
-        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        getWindow().setStatusBarColor(Color.parseColor(getResources().getString(R.color.colorPrimaryPurle)));
+//        View view = getWindow().getDecorView();
+//        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//        getWindow().setStatusBarColor(Color.parseColor(getResources().getString(R.color.colorPrimaryPurle)));
 
         abc_num = (TextView) findViewById(R.id.abc_num);
         abc_inc = (Button) findViewById(R.id.abc_inc);
@@ -109,6 +107,8 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                     spinner02.setAdapter(adapter6);
                     spinner02.setSelection(0);
                 }
+//                a1 = (String) spinner01.getItemAtPosition(position);
+                a1 = (String) spinner01.getSelectedItem();
                 a2 = (String) spinner02.getSelectedItem();
             }
 
@@ -151,15 +151,10 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-//                                finish();
-//                                Toast.makeText(SettingActivity.this,"저장된 값 : " + a1 + ", " + a2 + ", " + a3, Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(SettingActivity.this, MainActivity.class);
                                 String AA = a1 + ", " + a2 + ", " + a3;
-//                                intent.putExtra("settingData",AA);
-//                                startActivity(intent);
-
                                 Intent returnIntent = new Intent();
                                 returnIntent.putExtra("AA",AA);
+                                returnIntent.putExtra("a1",a1);
                                 setResult(Activity.RESULT_OK,returnIntent);
                                 finish();
                             }

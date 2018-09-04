@@ -107,11 +107,11 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                     spinner02.setAdapter(adapter6);
                     spinner02.setSelection(0);
                 }
-//                a1 = (String) spinner01.getItemAtPosition(position);
-                a1 = (String) spinner01.getSelectedItem();
+                a1 = (String) spinner01.getItemAtPosition(position);
+//                a2 = (String) spinner02.getItemAtPosition(position);
+//                a1 = (String) spinner01.getSelectedItem();
                 a2 = (String) spinner02.getSelectedItem();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -154,7 +154,6 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                                 String AA = a1 + ", " + a2 + ", " + a3;
                                 Intent returnIntent = new Intent();
                                 returnIntent.putExtra("AA",AA);
-                                returnIntent.putExtra("a1",a1);
                                 setResult(Activity.RESULT_OK,returnIntent);
                                 finish();
                             }

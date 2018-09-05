@@ -66,20 +66,57 @@ public class DeviceControlActivity extends Activity {
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
 
-    // Code to manage Service lifecycle.
-    private final ServiceConnection mServiceConnection = new ServiceConnection() {
 
+    // 가장먼저!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.gatt_services_characteristics);
+
+        // 인텐트로 장치와 주소 데이터를 받는다
+        final Intent intent = getIntent();
+        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
+        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+
+        //
+        ((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
+        mGattServicesList = (ExpandableListView) findViewById(R.id.gatt_services_list);
+        mGattServicesList.setOnChildClickListener(servicesListClickListner);
+        mConnectionState = (TextView) findViewById(R.id.connection_state);
+        mDataField = (TextView) findViewById(R.id.data_value);
+
+        // 액션바 제목
+        getActionBar().setTitle(mDeviceName);
+        // 액션바 뒤로가기버튼 생성햇구
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //
+        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+        //
+        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+        // DeviceControlActivity에서 gattServiceIntent를 기반으로
+        // Service를 실행시키고 요청을 하게되면
+        // 요청에 대한 결과를 mServiceConnection함수에서 받아와 활용할 수 있다.
+        // 3. BIND_AUTO_CREATE : 바인딩의 옵션을 설정하는 플래그
+    }
+
+    // 서비스가 연결됐을 때, 안됐을 때 관리
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
+        // 서비스가 연결됐다면?
+        // onServiceConnected
         public void onServiceConnected(ComponentName componentName, IBinder service) {
+            // BluetoothLeService클래스로 만들어진 변수에 BluetoothLeService객체를 받아오게 하는 getService()로 초기화
             mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
             if (!mBluetoothLeService.initialize()) {
                 Log.e(TAG, "Unable to initialize Bluetooth");
                 finish();
             }
-            // Automatically connects to the device upon successful start-up initialization.
             mBluetoothLeService.connect(mDeviceAddress);
         }
 
+        // 반대로 서비스가 연결 안됐다면?
+        // onServiceDisconnected
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             mBluetoothLeService = null;
@@ -164,27 +201,7 @@ public class DeviceControlActivity extends Activity {
         mDataField.setText(R.string.no_data);
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.gatt_services_characteristics);
 
-        final Intent intent = getIntent();
-        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
-        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
-
-        // Sets up UI references.
-        ((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
-        mGattServicesList = (ExpandableListView) findViewById(R.id.gatt_services_list);
-        mGattServicesList.setOnChildClickListener(servicesListClickListner);
-        mConnectionState = (TextView) findViewById(R.id.connection_state);
-        mDataField = (TextView) findViewById(R.id.data_value);
-
-        getActionBar().setTitle(mDeviceName);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
-        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-    }
 
     @Override
     protected void onResume() {

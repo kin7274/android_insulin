@@ -65,7 +65,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="사용자 기본 설정값 : "
+        android:text="사용자 설정값 : "
         android:textSize="20sp" />
 
     <TextView
@@ -74,8 +74,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="122dp"
-        android:layout_marginRight="122dp"
+        android:layout_marginEnd="53dp"
         android:textSize="20sp" />
 </RelativeLayout>

@@ -11,6 +11,8 @@
         android:orientation="vertical">
 
         <TextView
+            android:textSize="30sp"
+            android:textColor="#000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="질병관리본부" />
@@ -23,9 +25,11 @@
             android:text="[심뇌혈관질환예방관리]_인포그래픽 동영상_'13년_당뇨병편(1:55)" />
 
         <TextView
+            android:textSize="30sp"
+            android:textColor="#000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="삼성서울병원" />
+            android:text="한화 다이렉트" />
 
         <TextView
             android:id="@+id/txtLink2_1"
@@ -35,9 +39,11 @@
             android:text="해피 핑거 캠페인(1:58)" />
 
         <TextView
+            android:textSize="30sp"
+            android:textColor="#000000"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="한화 다이렉트" />
+            android:text="삼성서울병원" />
 
         <TextView
             android:id="@+id/txtLink3_1"

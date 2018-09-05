@@ -189,6 +189,7 @@ public class DeviceControlActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+//        Toast.makeText(getApplicationContext(), "스캔화면이 켜진답@@", Toast.LENGTH_LONG).show();
         registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
         if (mBluetoothLeService != null) {
             final boolean result = mBluetoothLeService.connect(mDeviceAddress);
@@ -199,6 +200,7 @@ public class DeviceControlActivity extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+//        Toast.makeText(getApplicationContext(), "꺼져@@", Toast.LENGTH_LONG).show();
         unregisterReceiver(mGattUpdateReceiver);
     }
 

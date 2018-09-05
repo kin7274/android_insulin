@@ -48,15 +48,16 @@
 
     <TextView
         android:id="@+id/data_receive"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="194dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="39dp"
-        android:layout_marginEnd="165dp"
-        android:layout_marginRight="165dp"
-        android:textSize="20sp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginRight="14dp"
+        android:maxLines="10"
+        android:textSize="5sp"
         tools:ignore="UnknownId" />
 
     <TextView

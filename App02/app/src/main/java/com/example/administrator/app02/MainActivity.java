@@ -191,6 +191,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         receive_data_real = Global.getData();
 //        Toast.makeText(getApplicationContext(), receive_data_real, Toast.LENGTH_LONG).show();
         data_receive.setText(receive_data_real);
+        Toast.makeText(getApplicationContext(), data_receive.getText().toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -49,7 +49,11 @@ import static com.example.administrator.app02.MyRecyclerAdapter.*;
 public class MainActivity extends AppCompatActivity implements MyRecyclerViewClickListener {
     // TODO 타임라인형식
 
+    private final static String TAG = MainActivity.class.getSimpleName();
+
     private CustomDialog dialog;
+
+    int i = 0;
 
     public static Context mContext;
 
@@ -151,10 +155,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                             dataList.add(new CardItem(searchImage(), email, data_view.getText().toString()));
 //                            dataList.add(new CardItem(searchImage(), email, data_view.getText().toString()));
                             mAdapter.notifyDataSetChanged();
-
-                            // 아래에서 시작
-                            // 그 위로 리사이클러뷰 추가, 쌓임
-//                            layoutManager.setStackFromEnd(true);
                         }
 
                         @Override
@@ -166,7 +166,69 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
             }
         });
     }
+//        receive_data_real = Global.getData();
+//        Toast.makeText(getApplicationContext(), receive_data_real, Toast.LENGTH_LONG).show();
+//        data_receive.setText(receive_data_real);
 
+//        DeviceControlActivity receive_data = ((DeviceControlActivity)DeviceControlActivity.context);
+//        Intent intent33 = getIntent();
+//        String receive_data = intent33.getStringExtra("receive_data");
+//        Toast.makeText(getApplicationContext(), receive_data, Toast.LENGTH_LONG).show();
+
+
+//        if(receive_data == "") {
+//            data_receive.setText("값이 없어용");
+//        } else {
+//            data_receive.setText(receive_data);
+//        }
+//    }
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    @SuppressLint("SetTextI18n")
+    public void cocococo() {
+        Log.d(TAG, "메인 시작");
+
+
+//        TextView data_receive = (TextView) findViewById(R.id.data_receive);
+//                            ((MainActivity)MainActivity.mContext).cocococo();
+        String ABDCBD = Global.getData();
+        Toast.makeText(MainActivity.this, ABDCBD + i, Toast.LENGTH_LONG).show();
+        data_receive.setText(ABDCBD + i);
+        i++;
+        Log.d(TAG, "메인 끝");
+
+//        String ABCDEFG = Global.getData();
+
+
+//        TextView data_receive = (TextView) findViewById(R.id.data_receive);
+
+
+//        Toast.makeText(getApplicationContext(), ABCDEFG, Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(), ABCDEFG + i + i + i + i, Toast.LENGTH_LONG).show();
+//        Toast.makeText(MainActivity.this, "AAAAAAAA", Toast.LENGTH_LONG).show();
+//        data_receive.setText(ABCDEFG + i + i + i + i);
+
+
+//        data_receive.setText(""+ i);
+
+
+//        Toast.makeText(MainActivity.mContext, "" + i, Toast.LENGTH_LONG).show();
+//        ((MainActivity)MainActivity.mContext).cocococo();
+
+
+//        i++;
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//        receive_data_real = Global.getData();
+////        Toast.makeText(getApplicationContext(), receive_data_real, Toast.LENGTH_LONG).show();
+//        data_receive.setText(receive_data_real);
+//        Toast.makeText(getApplicationContext(), data_receive.getText().toString(), Toast.LENGTH_LONG).show();
+//    }
 
     // 투약 종류마다 리스트 맨 앞 색 구별!!!!!!
     // 범례도 꼭 넣자!!
@@ -185,13 +247,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 return R.drawable.a5;
         }
         return a;
-    }
-
-    public void cocococo() {
-        receive_data_real = Global.getData();
-//        Toast.makeText(getApplicationContext(), receive_data_real, Toast.LENGTH_LONG).show();
-        data_receive.setText(receive_data_real);
-        Toast.makeText(getApplicationContext(), data_receive.getText().toString(), Toast.LENGTH_LONG).show();
     }
 
     @Override

@@ -67,6 +67,8 @@ public class DeviceScanActivity extends ListActivity {
             Toast.makeText(this, R.string.ble_not_supported, Toast.LENGTH_SHORT).show();
             // 그러고 끝내
             finish();
+        } else {
+            Toast.makeText(this, "가능1", Toast.LENGTH_SHORT).show();
         }
 
         // 블루투스 어댑터를 생성(초기화)해
@@ -81,6 +83,8 @@ public class DeviceScanActivity extends ListActivity {
             // 그러고 끝 싹
             finish();
             return;
+        } else {
+            Toast.makeText(this, "가능2", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -90,6 +94,8 @@ public class DeviceScanActivity extends ListActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        // 일단
+        Toast.makeText(getApplicationContext(), "종료 후 다시 시작", Toast.LENGTH_LONG).show();
         // 블루투스 꺼져있네?
         if (!mBluetoothAdapter.isEnabled()) {
             // 그럼 요청창 띄운다
@@ -106,7 +112,8 @@ public class DeviceScanActivity extends ListActivity {
         mLeDeviceListAdapter = new LeDeviceListAdapter();
         setListAdapter(mLeDeviceListAdapter);
         // 스캔 활성화ㄱ
-        scanLeDevice(true);
+//        scanLeDevice(true);
+        scanLeDevice(false);
     }
 
 
@@ -130,6 +137,7 @@ public class DeviceScanActivity extends ListActivity {
         // 이 경우가 아니라면 계속 onResume 진행할거야
         super.onActivityResult(requestCode, resultCode, data);
     }
+    ///////////// 블루투스 연결한거지 여까지가
 
     // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 스캔 시작 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     private void scanLeDevice(final boolean enable) {
@@ -157,10 +165,9 @@ public class DeviceScanActivity extends ListActivity {
         }
         invalidateOptionsMenu();
         // onCreateOptionsMenu 메소드를 다시 호출해ㅔ
-
     }
 
-    // 이건 스캔을 통해 찾은 디바이스를 담을 어댑터야\
+    // 이건 스캔을 통해 찾은 디바이스를 담을 어댑터야
     // 일반 어댑터랑 같아유
     private class LeDeviceListAdapter extends BaseAdapter {
         private ArrayList<BluetoothDevice> mLeDevices;
@@ -173,7 +180,7 @@ public class DeviceScanActivity extends ListActivity {
         }
 
         public void addDevice(BluetoothDevice device) {
-            if(!mLeDevices.contains(device)) {
+            if (!mLeDevices.contains(device)) {
                 mLeDevices.add(device);
             }
         }
@@ -230,23 +237,24 @@ public class DeviceScanActivity extends ListActivity {
     // 콜백함수
     // 새로운 장치가 발견될 때마다 onLeScan을 호출한다
     private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
+        @Override
+        public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
+            // 1. final BluetoothDevice device
+            // 이 첫 번째 인자에 검색된 장치의 정보가 들어온다.
+            // 정보가 들어오면?
+            runOnUiThread(new Runnable() {
                 @Override
-                public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
-                    // 1. final BluetoothDevice device
-                    // 이 첫 번째 인자에 검색된 장치의 정보가 들어온다.
-                    // 정보가 들어오면?
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            // 리스트에 장치 추가
-                            mLeDeviceListAdapter.addDevice(device);
-                            // 리스트 갱신
-                            mLeDeviceListAdapter.notifyDataSetChanged();
-                        }
-                    });
+                public void run() {
+                    // 리스트에 장치 추가
+                    mLeDeviceListAdapter.addDevice(device);
+                    // 리스트 갱신
+                    mLeDeviceListAdapter.notifyDataSetChanged();
                 }
-            };
+            });
+        }
+    };
 
+    // 리스트 클릭
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         // 1. ListView : 리스트뷰 객체
@@ -314,13 +322,13 @@ public class DeviceScanActivity extends ListActivity {
         return true;
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        scanLeDevice(false);
-        mLeDeviceListAdapter.clear();
-    }
-
+    // 앱이 중지될 경우
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        scanLeDevice(false);
+//        mLeDeviceListAdapter.clear();
+//    }
 
 
     static class ViewHolder {

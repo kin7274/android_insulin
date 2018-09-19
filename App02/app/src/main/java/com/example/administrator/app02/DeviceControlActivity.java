@@ -25,8 +25,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,6 +55,10 @@ public class DeviceControlActivity extends Activity {
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
 
+    int i = 0;
+
+    Handler mHandler = new Handler(Looper.getMainLooper());
+
     private TextView mConnectionState;
     private TextView mDataField;
     private String mDeviceName;
@@ -66,12 +73,14 @@ public class DeviceControlActivity extends Activity {
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
 
+    public static Context context;
 
     // 가장먼저!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gatt_services_characteristics);
+        context = this;
 
         // 인텐트로 장치와 주소 데이터를 받는다
         final Intent intent = getIntent();
@@ -144,20 +153,21 @@ public class DeviceControlActivity extends Activity {
     }
 
     // 퍼즈에서는 onResume의 리시버를 해제하고
-    @Override
-    protected void onPause() {
-        super.onPause();
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
 //        Toast.makeText(getApplicationContext(), "꺼져@@", Toast.LENGTH_LONG).show();
-        unregisterReceiver(mGattUpdateReceiver);
-    }
+//        unregisterReceiver(mGattUpdateReceiver);
+//    }
 
     // 서비스를 해제한다.
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unbindService(mServiceConnection);
-        mBluetoothLeService = null;
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        Toast.makeText(getApplicationContext(), "종료댄다잉", Toast.LENGTH_LONG).show();
+//        unbindService(mServiceConnection);
+//        mBluetoothLeService = null;
+//    }
 
     // Handles various events fired by the Service.
     // ACTION_GATT_CONNECTED: connected to a GATT server.
@@ -173,7 +183,7 @@ public class DeviceControlActivity extends Activity {
         // DeviceControlActivity에서는 받은 내용을 mGattUpdataReceiver의 onReceive로 다룰 수 있다
 
         // 블루투스서비스에서 send브로드캐스트를 했을 때 호출
-        public void onReceive(Context context, Intent intent) {
+        public void onReceive(Context context, final Intent intent) {
             final String action = intent.getAction();
             if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
                 mConnected = true;
@@ -189,20 +199,18 @@ public class DeviceControlActivity extends Activity {
                 // Show all the supported services and characteristics on the user interface.
                 displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-//                displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
-                String receive_data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
-                displayData(receive_data);
-                Toast.makeText(getApplicationContext(), receive_data, Toast.LENGTH_LONG).show();
-                // TODO 띠용
-                Global.setData(receive_data);
-//                Toast.makeText(getApplicationContext(), "저ㅡ장", Toast.LENGTH_LONG).show();
-                ((MainActivity)MainActivity.mContext).cocococo();
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    public void run() {
+                        // UI code goes here
+                        displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+                    }
+                });
             }
         }
     };
 
     // 블루투스서비스에서 처리된 후 보내준 상태에 따라 UI를 고쳐주는 함수들(3)
-
     // 1. 업데이트
     private void updateConnectionState(final int resourceId) {
         runOnUiThread(new Runnable() {
@@ -264,12 +272,12 @@ public class DeviceControlActivity extends Activity {
                 this,
                 gattServiceData,
                 android.R.layout.simple_expandable_list_item_2,
-                new String[] {LIST_NAME, LIST_UUID},
-                new int[] { android.R.id.text1, android.R.id.text2 },
+                new String[]{LIST_NAME, LIST_UUID},
+                new int[]{android.R.id.text1, android.R.id.text2},
                 gattCharacteristicData,
                 android.R.layout.simple_expandable_list_item_2,
-                new String[] {LIST_NAME, LIST_UUID},
-                new int[] { android.R.id.text1, android.R.id.text2 }
+                new String[]{LIST_NAME, LIST_UUID},
+                new int[]{android.R.id.text1, android.R.id.text2}
         );
         mGattServicesList.setAdapter(gattServiceAdapter);
     }
@@ -307,7 +315,7 @@ public class DeviceControlActivity extends Activity {
                     }
                     return false;
                 }
-    };
+            };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -324,15 +332,15 @@ public class DeviceControlActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.menu_connect:
                 mBluetoothLeService.connect(mDeviceAddress);
                 return true;
             case R.id.menu_disconnect:
-                mBluetoothLeService.disconnect();
+//                mBluetoothLeService.disconnect();
                 return true;
             case android.R.id.home:
-                onBackPressed();
+//                onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);

@@ -42,11 +42,6 @@ import java.util.UUID;
  * Service for managing connection and data communication with a GATT server hosted on a
  * given Bluetooth LE device.
  */
-
-
-// DeviceControlActivity에서 연결시켜 동작하는 서비스!!!!!
-
-
 public class BluetoothLeService extends Service {
     private final static String TAG = BluetoothLeService.class.getSimpleName();
 
@@ -74,93 +69,20 @@ public class BluetoothLeService extends Service {
     public final static UUID UUID_HEART_RATE_MEASUREMENT =
             UUID.fromString(SampleGattAttributes.HEART_RATE_MEASUREMENT);
 
-
-    // BluetoothLeService의 Binder가 DeviceControlActvity의 콜백함수에 전달되어 service의 메소들을 사용할 수 있도록 한다.
-    public class LocalBinder extends Binder {
-        BluetoothLeService getService() {
-            return BluetoothLeService.this;
-        }
-    }
-
-    // DeviceControlActivity에서 BindService로 서비스 연결하면 onBlind함수가 호출
-    @Override
-    public IBinder onBind(Intent intent) {
-        return mBinder;
-    }
-
-    @Override
-    public boolean onUnbind(Intent intent) {
-        // After using a given device, you should make sure that BluetoothGatt.close() is called
-        // such that resources are cleaned up properly.  In this particular example, close() is
-        // invoked when the UI is disconnected from the Service.
-        close();
-        return super.onUnbind(intent);
-    }
-
-    private final IBinder mBinder = new LocalBinder();
-
-
-
-
-
-    // BluetoothLeSerivce의 메소드들
-
-    // 블루투스어댑터 형성, 초기화
-    public boolean initialize() {
-        // For API level 18 and above, get a reference to BluetoothAdapter through
-        // BluetoothManager.
-        // 값이 비어있는지 확인
-        // 초기화할거니깐 있으면 ㄴㄴ
-        if (mBluetoothManager == null) {
-            mBluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
-            if (mBluetoothManager == null) {
-                Log.e(TAG, "Unable to initialize BluetoothManager.");
-                return false;
-            }
-        }
-
-        mBluetoothAdapter = mBluetoothManager.getAdapter();aaaaㅁ
-        if (mBluetoothAdapter == null) {
-            Log.e(TAG, "Unable to obtain a BluetoothAdapter.");
-            return false;
-        }
-
-        return true;
-    }
-
-    final BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
-    // 디바이스와 연결 시도
-        if (device == null) {
-        Log.w(TAG, "Device not found.  Unable to connect.");
-        return false;
-    }
-    // We want to directly connect to the device, so we are setting the autoConnect
-    // parameter to false.
-    mBluetoothGatt = device.connectGatt(this, false, mGattCallback);
-        Log.d(TAG, "Trying to create a new connection.");
-    mBluetoothDeviceAddress = address;
-    mConnectionState = STATE_CONNECTING;
-        return true;
-}
-
-
     // Implements callback methods for GATT events that the app cares about.  For example,
     // connection change and services discovered.
     private final BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
         @Override
-        // 연결 상태가 바뀌면 호출
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             String intentAction;
             if (newState == BluetoothProfile.STATE_CONNECTED) {
                 intentAction = ACTION_GATT_CONNECTED;
                 mConnectionState = STATE_CONNECTED;
                 broadcastUpdate(intentAction);
-                // 4개 상태 중 하나 선택
                 Log.i(TAG, "Connected to GATT server.");
                 // Attempts to discover services after successful connection.
                 Log.i(TAG, "Attempting to start service discovery:" +
                         mBluetoothGatt.discoverServices());
-                // 이를 상태로 DeviceControlActivity
 
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 intentAction = ACTION_GATT_DISCONNECTED;
@@ -170,31 +92,24 @@ public class BluetoothLeService extends Service {
             }
         }
 
-        // 서비스들이 발견되면 호출됨
-        // 연결된 BLE장치에서 GATT서비스들이 발견되면 호출된다.
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
-            // 스테이터스로 상태값이 넘어와 GATT 서비스들을 이용가능한지 확인
             if (status == BluetoothGatt.GATT_SUCCESS) {
-                // DeviceControlActivity로 Service가 발견되었다고 알린다
                 broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);
             } else {
                 Log.w(TAG, "onServicesDiscovered received: " + status);
             }
         }
 
-        // 서비스안의 특성을 읽었을 때 호출
         @Override
         public void onCharacteristicRead(BluetoothGatt gatt,
                                          BluetoothGattCharacteristic characteristic,
                                          int status) {
-            // 특성의 결과를 읽어옴
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
             }
         }
 
-        // 서비스안의 특성이 바뀔 때
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
@@ -202,42 +117,37 @@ public class BluetoothLeService extends Service {
         }
     };
 
-    // 브로드캐스트를 통해 DeviceControlActivity에 방송하여 알린다.
-    // 인자가 action 하나인 경우
     private void broadcastUpdate(final String action) {
         final Intent intent = new Intent(action);
-        // 그 액션으로 인텐트를 만들어 방송
         sendBroadcast(intent);
     }
 
-    // 인자가 두개, 액션 + 특성
-    // BLE장치로부터 받아온 데이터를 DeviceControlActivity로 넘겨주기 위해 사용
     private void broadcastUpdate(final String action,
                                  final BluetoothGattCharacteristic characteristic) {
         final Intent intent = new Intent(action);
 
-        // 이 예제는 Heart rate measurement라는 GATT를 사용하는 장치와 연결되었을 때 심박수를 받아오도록 구현
+        // This is special handling for the Heart Rate Measurement profile.  Data parsing is
+        // carried out as per profile specifications:
+        // http://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.heart_rate_measurement.xml
         if (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) {
             int flag = characteristic.getProperties();
             int format = -1;
             if ((flag & 0x01) != 0) {
                 format = BluetoothGattCharacteristic.FORMAT_UINT16;
-                // 특성의 UUID가 UUID_HEART_RATE_MEASUREMENT랑 같은지 비교하고 값을 저장 - 16진수
                 Log.d(TAG, "Heart rate format UINT16.");
             } else {
                 format = BluetoothGattCharacteristic.FORMAT_UINT8;
-                // 특성의 UUID가 UUID_HEART_RATE_MEASUREMENT랑 같은지 비교하고 값을 저장 - 8진수
                 Log.d(TAG, "Heart rate format UINT8.");
             }
             final int heartRate = characteristic.getIntValue(format, 1);
             Log.d(TAG, String.format("Received heart rate: %d", heartRate));
             intent.putExtra(EXTRA_DATA, String.valueOf(heartRate));
-            // 이 값을 인텐트에 넣어 방송
         } else {
+            // For all other profiles, writes the data formatted in HEX.
             final byte[] data = characteristic.getValue();
             if (data != null && data.length > 0) {
                 final StringBuilder stringBuilder = new StringBuilder(data.length);
-                for (byte byteChar : data)
+                for(byte byteChar : data)
                     stringBuilder.append(String.format("%02X ", byteChar));
                 intent.putExtra(EXTRA_DATA, new String(data) + "\n" + stringBuilder.toString());
             }
@@ -245,48 +155,63 @@ public class BluetoothLeService extends Service {
         sendBroadcast(intent);
     }
 
-    // 이제 DeviceControlActivity에서 받아 처리할 수 있다
-    // 연결된 BLE장치의 특성을 읽어오라는 함수
-    // 읽기 성공 시 onCharacteristicRead 메소드가 호출
-    public void readCharacteristic(BluetoothGattCharacteristic characteristic) {
-        if (mBluetoothAdapter == null || mBluetoothGatt == null) {
-            Log.w(TAG, "BluetoothAdapter not initialized");
-            return;
+    public class LocalBinder extends Binder {
+        BluetoothLeService getService() {
+            return BluetoothLeService.this;
         }
-        mBluetoothGatt.readCharacteristic(characteristic);
     }
 
-    // BLE장치가 데이터를 보낼 때를 기다려, 보내면 받아오도록 리스너 설정
-    // BLE장치가 값을 보내면 onCharacteristicChanged가 호출
-    public void setCharacteristicNotification(BluetoothGattCharacteristic characteristic,
-                                              boolean enabled) {
-        if (mBluetoothAdapter == null || mBluetoothGatt == null) {
-            Log.w(TAG, "BluetoothAdapter not initialized");
-            return;
-        }
-        mBluetoothGatt.setCharacteristicNotification(characteristic, enabled);
-
-        // This is specific to Heart Rate Measurement.
-        if (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) {
-            // UUID = HEART_RATE_MEASUREMENT라면??
-            BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
-                    UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
-            descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-            // descriptor(특성에 대한 설명)를 설정
-        }
-        mBluetoothGatt.writeDescriptor(descriptor);
+    @Override
+    public IBinder onBind(Intent intent) {
+        return mBinder;
     }
 
-    // 이 메소드는 BLE장치에서 제공되는 서비스들을 받아올수 있도록 한다
-    public List<BluetoothGattService> getSupportedGattServices() {
-        if (mBluetoothGatt == null) return null;
-        return mBluetoothGatt.getServices();
+//    @Override
+//    public boolean onUnbind(Intent intent) {
+//        // After using a given device, you should make sure that BluetoothGatt.close() is called
+//        // such that resources are cleaned up properly.  In this particular example, close() is
+//        // invoked when the UI is disconnected from the Service.
+//        close();
+//        return super.onUnbind(intent);
+//    }
+
+    private final IBinder mBinder = new LocalBinder();
+
+    /**
+     * Initializes a reference to the local Bluetooth adapter.
+     *
+     * @return Return true if the initialization is successful.
+     */
+    public boolean initialize() {
+        // For API level 18 and above, get a reference to BluetoothAdapter through
+        // BluetoothManager.
+        if (mBluetoothManager == null) {
+            mBluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+            if (mBluetoothManager == null) {
+                Log.e(TAG, "Unable to initialize BluetoothManager.");
+                return false;
+            }
+        }
+
+        mBluetoothAdapter = mBluetoothManager.getAdapter();
+        if (mBluetoothAdapter == null) {
+            Log.e(TAG, "Unable to obtain a BluetoothAdapter.");
+            return false;
+        }
+
+        return true;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Connects to the GATT server hosted on the Bluetooth LE device.
+     *
+     * @param address The device address of the destination device.
+     *
+     * @return Return true if the connection is initiated successfully. The connection result
+     *         is reported asynchronously through the
+     *         {@code BluetoothGattCallback#onConnectionStateChange(android.bluetooth.BluetoothGatt, int, int)}
+     *         callback.
+     */
     public boolean connect(final String address) {
         if (mBluetoothAdapter == null || address == null) {
             Log.w(TAG, "BluetoothAdapter not initialized or unspecified address.");
@@ -305,19 +230,75 @@ public class BluetoothLeService extends Service {
             }
         }
 
-    public void disconnect() {
+        final BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+        if (device == null) {
+            Log.w(TAG, "Device not found.  Unable to connect.");
+            return false;
+        }
+        // We want to directly connect to the device, so we are setting the autoConnect
+        // parameter to false.
+        mBluetoothGatt = device.connectGatt(this, false, mGattCallback);
+        Log.d(TAG, "Trying to create a new connection.");
+        mBluetoothDeviceAddress = address;
+        mConnectionState = STATE_CONNECTING;
+        return true;
+    }
+
+    /**
+     * Disconnects an existing connection or cancel a pending connection. The disconnection result
+     * is reported asynchronously through the
+     * {@code BluetoothGattCallback#onConnectionStateChange(android.bluetooth.BluetoothGatt, int, int)}
+     * callback.
+     */
+//    public void disconnect() {
+//        if (mBluetoothAdapter == null || mBluetoothGatt == null) {
+//            Log.w(TAG, "BluetoothAdapter not initialized");
+//            return;
+//        }
+//        mBluetoothGatt.disconnect();
+//    }
+
+    /**
+     * After using a given BLE device, the app must call this method to ensure resources are
+     * released properly.
+     */
+//    public void close() {
+//        if (mBluetoothGatt == null) {
+//            return;
+//        }
+//        mBluetoothGatt.close();
+//        mBluetoothGatt = null;
+//    }
+
+    public void readCharacteristic(BluetoothGattCharacteristic characteristic) {
         if (mBluetoothAdapter == null || mBluetoothGatt == null) {
             Log.w(TAG, "BluetoothAdapter not initialized");
             return;
         }
-        mBluetoothGatt.disconnect();
+        mBluetoothGatt.readCharacteristic(characteristic);
     }
 
-    public void close() {
-        if (mBluetoothGatt == null) {
+    public void setCharacteristicNotification(BluetoothGattCharacteristic characteristic,
+                                              boolean enabled) {
+        if (mBluetoothAdapter == null || mBluetoothGatt == null) {
+            Log.w(TAG, "BluetoothAdapter not initialized");
             return;
         }
-        mBluetoothGatt.close();
-        mBluetoothGatt = null;
+        mBluetoothGatt.setCharacteristicNotification(characteristic, enabled);
+
+        // This is specific to Heart Rate Measurement.
+        if (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) {
+            BluetoothGattDescriptor descriptor = characteristic.getDescriptor(
+                    UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));
+            descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+            mBluetoothGatt.writeDescriptor(descriptor);
+        }
+    }
+
+    public List<BluetoothGattService> getSupportedGattServices() {
+        if (mBluetoothGatt == null) return null;
+
+        return mBluetoothGatt.getServices();
     }
 }
+

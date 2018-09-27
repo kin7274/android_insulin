@@ -41,13 +41,21 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.app02.CardItem;
+import com.example.administrator.app02.CustomDialog;
+import com.example.administrator.app02.DeviceScanActivity;
+import com.example.administrator.app02.EducationActivity;
+import com.example.administrator.app02.MyDialogListener;
+import com.example.administrator.app02.MyRecyclerAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.administrator.app02.MyRecyclerAdapter.*;
 
 public class MainActivity extends AppCompatActivity implements MyRecyclerViewClickListener {
-    // TODO 타임라인형식
+    Button btn1, btn2, btn3;
+    TextView textview1;
 
     private final static String TAG = MainActivity.class.getSimpleName();
 
@@ -77,7 +85,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 
     // 설정 페이지에서 저장된 값 표시
     TextView data_view;
-
     TextView data_receive;
 
     // 메인
@@ -88,18 +95,10 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 
         mContext = this;
 
-        data_view = (TextView) findViewById(R.id.data_view);
-        data_receive = (TextView) findViewById(R.id.data_receive);
-
         // 툴바
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
         getSupportActionBar().setTitle("");
-
-        // 상태바 색 변경
-//        View view = getWindow().getDecorView();
-//        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-//        getWindow().setStatusBarColor(Color.parseColor(getResources().getString(R.color.colorPrimaryPurle)));
 
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(false);
@@ -110,8 +109,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 
         // 표시할 임시 데이터
         final List<CardItem> dataList = new ArrayList<>();
-//        dataList.add(new CardItem("제발","제발요"));
-//        dataList.add(new CardItem("제발2", "제발2요"));
 
         // 어댑터 설정
         mAdapter = new MyRecyclerAdapter(dataList);
@@ -126,109 +123,46 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         // 저장데이터 불러오기
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String str = pref.getString("PREF_STRNAME", "");
-        data_view.setText(str);
+//        data_view.setText(str);
 
         String numbers = str;
         String[] arr = numbers.split(",");
 //        Toast.makeText(getApplicationContext(), arr[0], Toast.LENGTH_LONG).show();
         result3 = arr[0];
 
-        clickclick = (Button) findViewById(R.id.clickclick);
-        clickclick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (data_view.getText().toString() == "") {
-                    Toast.makeText(getApplicationContext(), "설정하고와!", Toast.LENGTH_LONG).show();
-                } else {
-//                    Toast.makeText(getApplicationContext(), "ㄱㄱ", Toast.LENGTH_LONG).show();
-                    // 저장을 해보자
-                    // 리사이클러뷰 추가!
-
-//                    dataList.add(new CardItem("제발4", "제발요4"));
-//                    mAdapter.notifyDataSetChanged();
-                    final CustomDialog dialog = new CustomDialog(MainActivity.this);
-                    dialog.setDialogListener(new MyDialogListener() {
-                        @Override
-                        public void onPositiveClicked(String email) {
-                            Toast.makeText(getApplicationContext(), "받은 값은 : " + email, Toast.LENGTH_LONG).show();
-
-                            dataList.add(new CardItem(searchImage(), email, data_view.getText().toString()));
+//        clickclick = (Button) findViewById(R.id.clickclick);
+//        clickclick.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (data_view.getText().toString() == "") {
+//                    Toast.makeText(getApplicationContext(), "설정하고와!", Toast.LENGTH_LONG).show();
+//                } else {
+////                    Toast.makeText(getApplicationContext(), "ㄱㄱ", Toast.LENGTH_LONG).show();
+//                    // 저장을 해보자
+//                    // 리사이클러뷰 추가!
+//
+////                    dataList.add(new CardItem("제발4", "제발요4"));
+////                    mAdapter.notifyDataSetChanged();
+//                    final CustomDialog dialog = new CustomDialog(MainActivity.this);
+//                    dialog.setDialogListener(new MyDialogListener() {
+//                        @Override
+//                        public void onPositiveClicked(String email) {
+//                            Toast.makeText(getApplicationContext(), "받은 값은 : " + email, Toast.LENGTH_LONG).show();
+//
 //                            dataList.add(new CardItem(searchImage(), email, data_view.getText().toString()));
-                            mAdapter.notifyDataSetChanged();
-                        }
-
-                        @Override
-                        public void onNegativeClicked() {
-                        }
-                    });
-                    dialog.show();
-                }
-            }
-        });
+////                            dataList.add(new CardItem(searchImage(), email, data_view.getText().toString()));
+//                            mAdapter.notifyDataSetChanged();
+//                        }
+//
+//                        @Override
+//                        public void onNegativeClicked() {
+//                        }
+//                    });
+//                    dialog.show();
+//                }
+//            }
+//        });
     }
-//        receive_data_real = Global.getData();
-//        Toast.makeText(getApplicationContext(), receive_data_real, Toast.LENGTH_LONG).show();
-//        data_receive.setText(receive_data_real);
-
-//        DeviceControlActivity receive_data = ((DeviceControlActivity)DeviceControlActivity.context);
-//        Intent intent33 = getIntent();
-//        String receive_data = intent33.getStringExtra("receive_data");
-//        Toast.makeText(getApplicationContext(), receive_data, Toast.LENGTH_LONG).show();
-
-
-//        if(receive_data == "") {
-//            data_receive.setText("값이 없어용");
-//        } else {
-//            data_receive.setText(receive_data);
-//        }
-//    }
-
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    @SuppressLint("SetTextI18n")
-    public void cocococo() {
-        Log.d(TAG, "메인 시작");
-
-
-//        TextView data_receive = (TextView) findViewById(R.id.data_receive);
-//                            ((MainActivity)MainActivity.mContext).cocococo();
-        String ABDCBD = Global.getData();
-        Toast.makeText(MainActivity.this, ABDCBD + i, Toast.LENGTH_LONG).show();
-        data_receive.setText(ABDCBD + i);
-        i++;
-        Log.d(TAG, "메인 끝");
-
-//        String ABCDEFG = Global.getData();
-
-
-//        TextView data_receive = (TextView) findViewById(R.id.data_receive);
-
-
-//        Toast.makeText(getApplicationContext(), ABCDEFG, Toast.LENGTH_LONG).show();
-//        Toast.makeText(getApplicationContext(), ABCDEFG + i + i + i + i, Toast.LENGTH_LONG).show();
-//        Toast.makeText(MainActivity.this, "AAAAAAAA", Toast.LENGTH_LONG).show();
-//        data_receive.setText(ABCDEFG + i + i + i + i);
-
-
-//        data_receive.setText(""+ i);
-
-
-//        Toast.makeText(MainActivity.mContext, "" + i, Toast.LENGTH_LONG).show();
-//        ((MainActivity)MainActivity.mContext).cocococo();
-
-
-//        i++;
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//        receive_data_real = Global.getData();
-////        Toast.makeText(getApplicationContext(), receive_data_real, Toast.LENGTH_LONG).show();
-//        data_receive.setText(receive_data_real);
-//        Toast.makeText(getApplicationContext(), data_receive.getText().toString(), Toast.LENGTH_LONG).show();
-//    }
 
     // 투약 종류마다 리스트 맨 앞 색 구별!!!!!!
     // 범례도 꼭 넣자!!
@@ -308,8 +242,8 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
             // 오버플로우 메뉴
             case R.id.action_setting:
                 // 설정 페이지로 이동
-                Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);
-                startActivityForResult(intent_setting, 1);
+//                Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);
+//                startActivityForResult(intent_setting, 1);
                 break;
             case R.id.action_education:
                 // 영상 페이지로 이동
@@ -342,70 +276,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 dialog_info.create();
                 dialog_info.show();
                 break;
-//                case R.id.action_auto:
-//                // 수동버튼 클릭 시
-//                // 식사상태 선택 팝업창 열림
-//
-//                ///////////////////////////////////////////////////////////////////////////////////////////////
-//                // 커스텀 다이얼로그로 구성
-//                final CustomDialog dialog = new CustomDialog(this);
-//                dialog.setDialogListener(new MyDialogListener() {
-//                    @Override
-//                    public void onPositiveClicked(String email) {
-//                    Toast.makeText(getApplicationContext(), "받은 값은 : " + email, Toast.LENGTH_LONG).show();
-//
-////                        dataList.add(new CardItem("제발4", "제발요4"));
-////                        mAdapter.notifyDataSetChanged();
-//                    }
-//                    @Override
-//                    public void onNegativeClicked() { }
-//                });
-//                dialog.show();
-//                break;
-//                ///////////////////////////////////////////////////////////////////////////////////////////////
-//                // 일반 다이얼로그로 구성
-//                final String[] items = {"아침식전", "점심식전", "저녁식전", "취침전"};
-//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//                builder.setTitle("식사상태를 선택해주세요.");
-//                builder.setSingleChoiceItems(items, 0, new OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        selectedItem[0] = which;
-//                    }
-//                });
-//                builder.setPositiveButton("확인", new OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-////                                Toast.makeText(MainActivity.this, items[selectedItem[0]], Toast.LENGTH_SHORT).show();
-//                        if (data_view.getText().toString() == "") {
-//                            // 설정을 안한 경우
-//                            Toast.makeText(getApplicationContext(), "설정부터하세요.", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            // 현재시간 미구현
-//                            String data = "현재시간, " + items[selectedItem[0]] + ", " + data_view.getText().toString();
-//                            Toast.makeText(getApplicationContext(), "입력값 : " + items[selectedItem[0]] + ", " + data_view.getText().toString(), Toast.LENGTH_SHORT).show();
-//
-////                            dataList.add(new CardItem("제발4", "제발요4"));
-////                            mAdapter.notifyDataSetChanged();
-//
-//
-////                            데이터가 추가된 위치(리스트뷰의 마지막)으로 포커스를 이동시킨다.
-////                            recyclerView.setSelection(dataList.size() - 1);
-////                            finish();
-//                            dialog.cancel();
-//                        }
-//                    }
-//                });
-//                builder.setNegativeButton("취소", new OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        Toast.makeText(MainActivity.this, "취소", Toast.LENGTH_SHORT).show();
-//                        dialog.cancel();
-//                    }
-//                });
-//                AlertDialog dialog = builder.create();
-//                dialog.show();
-//                break;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -53,9 +53,10 @@ import java.util.List;
 
 import static com.example.administrator.app02.MyRecyclerAdapter.*;
 
-public class MainActivity extends AppCompatActivity implements MyRecyclerViewClickListener {
-    Button btn1, btn2, btn3;
+public class MainActivity extends AppCompatActivity implements MyRecyclerViewClickListener, View.OnClickListener {
+
     TextView textview1;
+    TextView textview2;
 
     private final static String TAG = MainActivity.class.getSimpleName();
 
@@ -99,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
         getSupportActionBar().setTitle("");
+
+        set();
 
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(false);
@@ -164,6 +167,17 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 //        });
     }
 
+    public void set(){
+        Button btn1 = (Button) findViewById(R.id.btn1);
+        Button btn2 = (Button) findViewById(R.id.btn2);
+        Button btn3 = (Button) findViewById(R.id.btn3);
+        btn1.setOnClickListener(this);
+        btn2.setOnClickListener(this);
+        btn3.setOnClickListener(this);
+
+        final TextView textview1 = (TextView) findViewById(R.id.textview1);
+        textview2 = (TextView) findViewById(R.id.textview2);
+    }
     // 투약 종류마다 리스트 맨 앞 색 구별!!!!!!
     // 범례도 꼭 넣자!!
     public int searchImage() {
@@ -278,5 +292,28 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            // 블루투스
+            case R.id.btn1:
+                Intent intent1 = new Intent(MainActivity.this, DeviceScanActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.btn2:
+                final Intent intent2 = new Intent(MainActivity.this, DeviceControlActivity.class);
+                intent2.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, textview1.getText());
+                intent2.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, textview2.getText());
+                startActivity(intent2);
+                break;
+            case R.id.btn3:
+                Intent intent3 = new Intent(MainActivity.this, AddNeedleActivity.class);
+                intent3.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, textview1.getText());
+                intent3.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, textview2.getText());
+                startActivity(intent3);
+                break;
+        }
     }
 }

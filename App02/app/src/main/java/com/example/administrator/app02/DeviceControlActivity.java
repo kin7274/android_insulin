@@ -25,11 +25,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,9 +53,7 @@ public class DeviceControlActivity extends Activity {
     public static final String EXTRAS_DEVICE_NAME = "DEVICE_NAME";
     public static final String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
 
-    int i = 0;
-
-    Handler mHandler = new Handler(Looper.getMainLooper());
+    public static Context mContext;
 
     private TextView mConnectionState;
     private TextView mDataField;
@@ -73,101 +69,29 @@ public class DeviceControlActivity extends Activity {
     private final String LIST_NAME = "NAME";
     private final String LIST_UUID = "UUID";
 
-    public static Context context;
+    Handler handler;
 
-    // 가장먼저!!!!!!!!@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.gatt_services_characteristics);
-        context = this;
-
-        // 인텐트로 장치와 주소 데이터를 받는다
-        final Intent intent = getIntent();
-        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
-        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
-
-        //
-        ((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
-        mGattServicesList = (ExpandableListView) findViewById(R.id.gatt_services_list);
-        mGattServicesList.setOnChildClickListener(servicesListClickListner);
-        mConnectionState = (TextView) findViewById(R.id.connection_state);
-        mDataField = (TextView) findViewById(R.id.data_value);
-
-        // 액션바 제목
-        getActionBar().setTitle(mDeviceName);
-        // 액션바 뒤로가기버튼 생성햇구
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
-        //
-        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
-        //
-        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-        // DeviceControlActivity에서 gattServiceIntent를 기반으로
-        // Service를 실행시키고 요청을 하게되면
-        // 요청에 대한 결과를 mServiceConnection함수에서 받아와 활용할 수 있다.
-        // 3. BIND_AUTO_CREATE : 바인딩의 옵션을 설정하는 플래그
-    }
-
-    // 서비스가 연결됐을 때, 안됐을 때 관리
+    // Code to manage Service lifecycle.
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
-        // 서비스가 연결됐다면?
-        // onServiceConnected
         public void onServiceConnected(ComponentName componentName, IBinder service) {
-            // BluetoothLService클래스로 만들어진 변수에 BluetoothLeService객체를 받아오게 하는 getService()로 초기화e
             mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
             if (!mBluetoothLeService.initialize()) {
                 Log.e(TAG, "Unable to initialize Bluetooth");
                 finish();
             }
-            // 장치 연결
+            // Automatically connects to the device upon successful start-up initialization.
             mBluetoothLeService.connect(mDeviceAddress);
+            //
+            Log.d(TAG, "서비스가 연결되었습니다!");
+            Toast.makeText(getApplicationContext(), "서비스가 연결되었습니다!", Toast.LENGTH_LONG).show();
         }
 
-        // 반대로 서비스가 연결 안됐다면?
-        // onServiceDisconnected
-        // 끊겼을 때를 초기화
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             mBluetoothLeService = null;
         }
     };
-
-    ////////////////////////////////////////////////////////////////////////////////////////
-    // 생명주기 onCreate()다음순서
-    // 여기서 브로드캐스트 리시버를 등록!!!!!
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        Toast.makeText(getApplicationContext(), "스캔화면이 켜진답@@", Toast.LENGTH_LONG).show();
-        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
-        // 여기서 브로드캐스트 리시버는!! 블루투스서비스로부터 연결 상태와 데이터를 받아오는 역할
-        if (mBluetoothLeService != null) {
-            // 등록 후에 블루투스서비스에 정의되어 있는 커넥트함수를 불러 장치와 연결
-            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
-            // 커넥트함수는 장치와 연결이 됐나 안됐나  서비스가 발견됐나, 장치에서 특성의 데이터를 받았나에 따라
-            // 브로드캐리시버로 액션이 온다
-            Log.d(TAG, "Connect request result=" + result);
-        }
-    }
-
-    // 퍼즈에서는 onResume의 리시버를 해제하고
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        Toast.makeText(getApplicationContext(), "꺼져@@", Toast.LENGTH_LONG).show();
-//        unregisterReceiver(mGattUpdateReceiver);
-//    }
-
-    // 서비스를 해제한다.
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        Toast.makeText(getApplicationContext(), "종료댄다잉", Toast.LENGTH_LONG).show();
-//        unbindService(mServiceConnection);
-//        mBluetoothLeService = null;
-//    }
 
     // Handles various events fired by the Service.
     // ACTION_GATT_CONNECTED: connected to a GATT server.
@@ -175,15 +99,9 @@ public class DeviceControlActivity extends Activity {
     // ACTION_GATT_SERVICES_DISCOVERED: discovered GATT services.
     // ACTION_DATA_AVAILABLE: received data from the device.  This can be a result of read
     //                        or notification operations.
-
-    ////////////////////////////////////////////////////////////////////////////////////// 데이터가져온곳!!!!!/////////////////////////////////////////////////////////////////////////
-
     private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver() {
         @Override
-        // DeviceControlActivity에서는 받은 내용을 mGattUpdataReceiver의 onReceive로 다룰 수 있다
-
-        // 블루투스서비스에서 send브로드캐스트를 했을 때 호출
-        public void onReceive(Context context, final Intent intent) {
+        public void onReceive(final Context context, final Intent intent) {
             final String action = intent.getAction();
             if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) {
                 mConnected = true;
@@ -193,25 +111,156 @@ public class DeviceControlActivity extends Activity {
                 mConnected = false;
                 updateConnectionState(R.string.disconnected);
                 invalidateOptionsMenu();
-                // UI관련된 함수 확인
                 clearUI();
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
                 // Show all the supported services and characteristics on the user interface.
                 displayGattServices(mBluetoothLeService.getSupportedGattServices());
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-                Handler handler = new Handler(Looper.getMainLooper());
-                handler.post(new Runnable() {
-                    public void run() {
-                        // UI code goes here
-                        displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
-                    }
-                });
+                final String abc = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
+//                displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+                Log.d(TAG, "띠용...");
+                displayData(abc);
+                Log.d(TAG, "2페이지 종료");
+
+
+                finish();
             }
         }
     };
 
-    // 블루투스서비스에서 처리된 후 보내준 상태에 따라 UI를 고쳐주는 함수들(3)
-    // 1. 업데이트
+    // If a given GATT characteristic is selected, check for supported features.  This sample
+    // demonstrates 'Read' and 'Notify' features.  See
+    // http://d.android.com/reference/android/bluetooth/BluetoothGatt.html for the complete
+    // list of supported characteristic features.
+    private final ExpandableListView.OnChildClickListener servicesListClickListner =
+            new ExpandableListView.OnChildClickListener() {
+                @Override
+                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
+                                            int childPosition, long id) {
+                    if (mGattCharacteristics != null) {
+                        final BluetoothGattCharacteristic characteristic = mGattCharacteristics.get(groupPosition).get(childPosition);
+                        final int charaProp = characteristic.getProperties();
+                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
+                            // If there is an active notification on a characteristic, clear
+                            // it first so it doesn't update the data field on the user interface.
+                            if (mNotifyCharacteristic != null) {
+                                mBluetoothLeService.setCharacteristicNotification(mNotifyCharacteristic, false);
+                                mNotifyCharacteristic = null;
+                            }
+                            mBluetoothLeService.readCharacteristic(characteristic);
+                        }
+                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                            mNotifyCharacteristic = characteristic;
+                            mBluetoothLeService.setCharacteristicNotification(characteristic, true);
+                        }
+
+                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_WRITE) == 10) {
+                            if (mNotifyCharacteristic != null) {
+                                mBluetoothLeService.setCharacteristicNotification(mNotifyCharacteristic, false);
+                                mNotifyCharacteristic = null;
+                            }
+                            mBluetoothLeService.readCharacteristic(characteristic);
+                        }
+                        return true;
+                    }
+                    return false;
+                }
+            };
+
+    private void clearUI() {
+        mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
+        mDataField.setText(R.string.no_data);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.gatt_services_characteristics);
+
+        mContext = this;
+
+        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+
+        if (mBluetoothLeService != null) {
+            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
+            Log.d(TAG, "Connect request result=" + result);
+        }
+
+        final Intent intent = getIntent();
+        mDeviceName = intent.getStringExtra(EXTRAS_DEVICE_NAME);
+        mDeviceAddress = intent.getStringExtra(EXTRAS_DEVICE_ADDRESS);
+
+        // Sets up UI references.
+        ((TextView) findViewById(R.id.device_address)).setText(mDeviceAddress);
+        mGattServicesList = (ExpandableListView) findViewById(R.id.gatt_services_list);
+        mGattServicesList.setOnChildClickListener(servicesListClickListner);
+        mConnectionState = (TextView) findViewById(R.id.connection_state);
+        mDataField = (TextView) findViewById(R.id.data_value);
+
+        getActionBar().setTitle(mDeviceName);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+        // 너가 첫번째 로그야
+        Log.d(TAG, "서비스 연결");
+        // 서비스 시작
+    }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+//        if (mBluetoothLeService != null) {
+//            final boolean result = mBluetoothLeService.connect(mDeviceAddress);
+//            Log.d(TAG, "Connect request result=" + result);
+//        }
+//    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+//        unregisterReceiver(mGattUpdateReceiver);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e(TAG, "onDestroy: " + "서비스 특성후 엑티비티 파괴");
+        unregisterReceiver(mGattUpdateReceiver);
+        unbindService(mServiceConnection);
+        mBluetoothLeService = null;
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.gatt_services, menu);
+        if (mConnected) {
+            menu.findItem(R.id.menu_connect).setVisible(false);
+            menu.findItem(R.id.menu_disconnect).setVisible(true);
+        } else {
+            menu.findItem(R.id.menu_connect).setVisible(true);
+            menu.findItem(R.id.menu_disconnect).setVisible(false);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_connect:
+                mBluetoothLeService.connect(mDeviceAddress);
+                return true;
+            case R.id.menu_disconnect:
+                mBluetoothLeService.disconnect();
+                return true;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void updateConnectionState(final int resourceId) {
         runOnUiThread(new Runnable() {
             @Override
@@ -221,13 +270,15 @@ public class DeviceControlActivity extends Activity {
         });
     }
 
-    // 2. 노데이터
-    private void clearUI() {
-        mGattServicesList.setAdapter((SimpleExpandableListAdapter) null);
-        mDataField.setText(R.string.no_data);
+    private void displayData(String data) {
+        if (data != null) {
+            mDataField.setText(data);
+        }
     }
 
-    // 3. 리스트뷰
+    // Demonstrates how to iterate through the supported GATT Services/Characteristics.
+    // In this sample, we populate the data structure that is bound to the ExpandableListView
+    // on the UI.
     private void displayGattServices(List<BluetoothGattService> gattServices) {
         if (gattServices == null) return;
         String uuid = null;
@@ -280,77 +331,6 @@ public class DeviceControlActivity extends Activity {
                 new int[]{android.R.id.text1, android.R.id.text2}
         );
         mGattServicesList.setAdapter(gattServiceAdapter);
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private final ExpandableListView.OnChildClickListener servicesListClickListner =
-            new ExpandableListView.OnChildClickListener() {
-                @Override
-                public boolean onChildClick(ExpandableListView parent, View v, int groupPosition,
-                                            int childPosition, long id) {
-                    if (mGattCharacteristics != null) {
-                        final BluetoothGattCharacteristic characteristic =
-                                mGattCharacteristics.get(groupPosition).get(childPosition);
-                        final int charaProp = characteristic.getProperties();
-                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
-                            // If there is an active notification on a characteristic, clear
-                            // it first so it doesn't update the data field on the user interface.
-//                            if (mNotifyCharacteristic != null) {
-//                                mBluetoothLeService.setCharacteristicNotification(
-//                                        mNotifyCharacteristic, false);
-//                                mNotifyCharacteristic = null;
-//                            }
-                            mBluetoothLeService.readCharacteristic(characteristic);
-                        }
-                        if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
-                            mNotifyCharacteristic = characteristic;
-                            mBluetoothLeService.setCharacteristicNotification(
-                                    characteristic, true);
-                        }
-                        return true;
-                    }
-                    return false;
-                }
-            };
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.gatt_services, menu);
-        if (mConnected) {
-            menu.findItem(R.id.menu_connect).setVisible(false);
-            menu.findItem(R.id.menu_disconnect).setVisible(true);
-        } else {
-            menu.findItem(R.id.menu_connect).setVisible(true);
-            menu.findItem(R.id.menu_disconnect).setVisible(false);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_connect:
-                mBluetoothLeService.connect(mDeviceAddress);
-                return true;
-            case R.id.menu_disconnect:
-//                mBluetoothLeService.disconnect();
-                return true;
-            case android.R.id.home:
-//                onBackPressed();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    // data필드에 넣는다!
-    private void displayData(String data) {
-        if (data != null) {
-            mDataField.setText(data);
-        }
     }
 
     private static IntentFilter makeGattUpdateIntentFilter() {

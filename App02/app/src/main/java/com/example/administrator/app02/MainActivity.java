@@ -216,11 +216,11 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
     @Override
     protected void onStop() {
         super.onStop();
-        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        String strrr = data_view.getText().toString();
-        editor.putString("PREF_STRNAME", strrr);
-        editor.apply();
+//        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = pref.edit();
+//        String strrr = data_view.getText().toString();
+//        editor.putString("PREF_STRNAME", strrr);
+//        editor.apply();
     }
 
     //  클릭 이벤트
@@ -315,5 +315,14 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 startActivity(intent3);
                 break;
         }
+    }
+
+    // 설정 후 돌아오면!
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "11111 설정 후 내가 돌아왔어");
+        textview1.setText(BluetoothLog.getName());
+        textview2.setText(BluetoothLog.getAddress());
     }
 }

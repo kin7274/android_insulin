@@ -1,57 +1,34 @@
 package com.example.administrator.app02;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.administrator.app02.CardItem;
-import com.example.administrator.app02.CustomDialog;
-import com.example.administrator.app02.DeviceScanActivity;
-import com.example.administrator.app02.EducationActivity;
-import com.example.administrator.app02.MyDialogListener;
-import com.example.administrator.app02.MyRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.administrator.app02.MyRecyclerAdapter.*;
+import static com.example.administrator.app02.MyRecyclerAdapter.MyRecyclerViewClickListener;
 
 public class MainActivity extends AppCompatActivity implements MyRecyclerViewClickListener, View.OnClickListener {
 
@@ -61,31 +38,26 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 
     private CustomDialog dialog;
 
-    int i = 0;
-
     public static Context mContext;
 
     // 쉐어드
     EditText et;
 
-    String insulin_kinds = "";
-
-    // 임시로 만듦
-    Button clickclick;
+    String setting_insulin_kinds = "";
+    String setting_insulin_names = "";
+    String setting_insulin_unit = "";
 
     String receive_data_real;
 
     SharedPreferences sharedPreferences;
+
     private MyRecyclerAdapter mAdapter;
+
     RecyclerView recyclerView;
     List<CardItem> dataList;
 
     // 다이얼로그 선택된 값
     final int[] selectedItem = {0};
-
-    // 설정 페이지에서 저장된 값 표시
-    TextView data_view;
-    TextView data_receive;
 
     // 메인
     @Override
@@ -125,12 +97,17 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         // 저장데이터 불러오기
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String str = pref.getString("PREF_STRNAME", "");
-//        data_view.setText(str);
 
         String numbers = str;
         String[] arr = numbers.split(",");
-//        Toast.makeText(getApplicationContext(), arr[0], Toast.LENGTH_LONG).show();
-        insulin_kinds = arr[0];
+//        // insulin_kinds = "초속효성"
+//        setting_insulin_kinds = arr[0];
+//        // insulin_kinds = "휴머로그"
+//        setting_insulin_names = arr[1];
+//        // insulin_unit = "5"
+//        setting_insulin_unit = arr[2];
+
+        Log.d(TAG, "종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit);
     }
 
     public void set(){
@@ -150,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
     // 범례도 꼭 넣자!!
     public int searchImage() {
         int a = 0;
-        switch (insulin_kinds) {
+        switch (setting_insulin_kinds) {
             case "초속효성":
                 return R.drawable.a1;
             case "속효성":
@@ -165,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         return a;
     }
 
+    // 설정페이지 인텐트로부터 리시브
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
@@ -175,20 +153,15 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 String numbers = result;
                 String[] arr = numbers.split(",");
                 Toast.makeText(getApplicationContext(), arr[0], Toast.LENGTH_LONG).show();
-                insulin_kinds = arr[0];
+                // insulin_kinds = "초속효성"
+                setting_insulin_kinds = arr[0];
+                // insulin_kinds = "휴머로그"
+                setting_insulin_names = arr[1];
+                // insulin_unit = "5"
+                setting_insulin_unit = arr[2];
+                Log.d(TAG, "내가 설정한 값은@@@@ 종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit);
             }
         }
-    }
-
-    // 액티비티 종료 전에 저장!
-    @Override
-    protected void onStop() {
-        super.onStop();
-//        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = pref.edit();
-//        String strrr = data_view.getText().toString();
-//        editor.putString("PREF_STRNAME", strrr);
-//        editor.apply();
     }
 
     //  클릭 이벤트
@@ -288,5 +261,16 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         Log.d(TAG, "11111 설정 후 내가 돌아왔어");
         textview1.setText(BluetoothLog.getName());
         textview2.setText(BluetoothLog.getAddress());
+    }
+
+    // 액티비티 종료 전에 저장!
+    @Override
+    protected void onStop() {
+        super.onStop();
+//        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = pref.edit();
+//        String strrr = data_view.getText().toString();
+//        editor.putString("PREF_STRNAME", strrr);
+//        editor.apply();
     }
 }

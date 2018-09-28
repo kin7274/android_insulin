@@ -198,8 +198,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         return true;
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // 툴바 탭 클릭 이벤트
@@ -291,18 +289,5 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
     @Override
     protected void onStop() {
         super.onStop();
-//        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = pref.edit();
-//        String strrr = data_view.getText().toString();
-//        editor.putString("PREF_STRNAME", strrr);
-//        editor.apply();
     }
-
-//    @Override
-//    protected void onDestroy() {
-//        unbindService(mServiceConnection);
-//        mBluetoothLeService = null;
-//        unregisterReceiver(mMessageReceiver);
-//        super.onDestroy();
-//    }
 }

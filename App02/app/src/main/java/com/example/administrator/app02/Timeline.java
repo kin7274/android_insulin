@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import static com.example.administrator.app02.BluetoothLeService.ACTION_DATA_AVAILABLE;
@@ -31,6 +33,7 @@ public class Timeline extends AppCompatActivity {
     String deviceAddress;
 
     public Button btn1;
+    TextView textview1;
 
     BluetoothLeService mBluetoothLeService = new BluetoothLeService();
 
@@ -64,6 +67,7 @@ public class Timeline extends AppCompatActivity {
     };
 
     public void setData(String item) {
+        textview1.setText(item);
         Log.d(TAG, "띠용...므엇이죠 이게...");
     }
 
@@ -102,6 +106,7 @@ public class Timeline extends AppCompatActivity {
         registerReceiver(mMessageReceiver, intentfilter);
 
         btn1 = (Button) findViewById(R.id.btn1);
+        textview1 = (TextView) findViewById(R.id.textview1);
 
         // sd카드의 데이터를 가져온다!
         btn1.setOnClickListener(new View.OnClickListener() {

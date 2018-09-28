@@ -3,13 +3,18 @@ package com.example.administrator.app02;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -28,6 +33,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.administrator.app02.BluetoothLeService.ACTION_DATA_AVAILABLE;
+import static com.example.administrator.app02.BluetoothLeService.ACTION_DATA_AVAILABLE_CHANGE;
+import static com.example.administrator.app02.BluetoothLeService.EXTRA_DATA;
+import static com.example.administrator.app02.DeviceControlActivity.EXTRAS_DEVICE_ADDRESS;
 import static com.example.administrator.app02.MyRecyclerAdapter.MyRecyclerViewClickListener;
 
 public class MainActivity extends AppCompatActivity implements MyRecyclerViewClickListener, View.OnClickListener {
@@ -38,6 +47,9 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 
     private CustomDialog dialog;
 
+    BluetoothLeService mBluetoothLeService = new BluetoothLeService();
+
+    String deviceAddress;
 
     public static Context mContext;
 
@@ -118,10 +130,12 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         Button btn1 = (Button) findViewById(R.id.btn1);
         Button btn2 = (Button) findViewById(R.id.btn2);
         Button btn3 = (Button) findViewById(R.id.btn3);
+        Button btn4 = (Button) findViewById(R.id.btn4);
         Button action_setting = (Button) findViewById(R.id.action_setting);
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
+        btn4.setOnClickListener(this);
         action_setting.setOnClickListener(this);
 
         textview1 = (TextView) findViewById(R.id.textview1);
@@ -178,11 +192,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         Toast.makeText(getApplicationContext(), position + "번째 삭제", Toast.LENGTH_LONG).show();
     }
 
-    private View.OnClickListener leftListener = new View.OnClickListener() {
-        public void onClick(View v) {
-        }
-    };
-
     // 메뉴.xml
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -202,7 +211,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 Intent intent_edu = new Intent(MainActivity.this, EducationActivity.class);
                 startActivity(intent_edu);
                 break;
-
             // 어플에 대한 사용법 간단하게
             case R.id.action_guide:
                 AlertDialog.Builder dialog_app = new AlertDialog.Builder(this);
@@ -246,15 +254,19 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
             case R.id.btn2:
                 final Intent intent2 = new Intent(MainActivity.this, DeviceControlActivity.class);
                 intent2.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, textview1.getText());
-                intent2.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, textview2.getText());
+                intent2.putExtra(EXTRAS_DEVICE_ADDRESS, textview2.getText());
                 startActivity(intent2);
                 break;
                 // DB
             case R.id.btn3:
                 Intent intent3 = new Intent(MainActivity.this, AddNeedleActivity.class);
                 intent3.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, textview1.getText());
-                intent3.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, textview2.getText());
+                intent3.putExtra(EXTRAS_DEVICE_ADDRESS, textview2.getText());
                 startActivity(intent3);
+                break;
+                // 데이터를 받을거야
+            case R.id.btn4:
+                startgogostartgogo();
                 break;
                 // 설정 페이지로 이동
             case R.id.action_setting:
@@ -262,6 +274,60 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 startActivityForResult(intent_setting, 1);
                 break;
         }
+    }
+
+    public void startgogostartgogo(){
+        deviceAddress = getIntent().getStringExtra(EXTRAS_DEVICE_ADDRESS);
+        if (deviceAddress != null) {
+            Log.d(TAG, "onCreate: " + deviceAddress);
+        }
+
+        IntentFilter intentfilter = new IntentFilter();
+        intentfilter.addAction(ACTION_DATA_AVAILABLE);
+        intentfilter.addAction(ACTION_DATA_AVAILABLE_CHANGE);
+        registerReceiver(mMessageReceiver, intentfilter);
+
+        mBluetoothLeService.writeCharacteristic("a");
+    }
+
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            final String action = intent.getAction();
+
+            if (BluetoothLeService.ACTION_DATA_AVAILABLE_CHANGE.equals(action)) {
+                final String message = intent.getStringExtra(EXTRA_DATA);
+                Log.d(TAG, "겟 메세지" + message);
+                // 받은 값읊 표시
+                setData(message);
+            }
+        }
+    };
+
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder service) {
+            mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
+            if (!mBluetoothLeService.initialize()) {
+                Log.e(TAG, "Unable to initialize Bluetooth");
+                finish();
+            }
+            // Automatically connects to the device upon successful start-up initialization.
+            mBluetoothLeService.connect(deviceAddress);
+            //
+            Log.d(TAG, "서비스가 연결되었습니다!");
+//            Toast.makeText(getApplicationContext(), "서비스가 연결되었습니다!", Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            mBluetoothLeService = null;
+        }
+    };
+
+    public void setData(String item){
+        
     }
 
     // 설정 후 돌아오면!
@@ -283,4 +349,12 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 //        editor.putString("PREF_STRNAME", strrr);
 //        editor.apply();
     }
+
+//    @Override
+//    protected void onDestroy() {
+//        unbindService(mServiceConnection);
+//        mBluetoothLeService = null;
+//        unregisterReceiver(mMessageReceiver);
+//        super.onDestroy();
+//    }
 }

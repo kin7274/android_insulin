@@ -82,10 +82,18 @@
         android:layout_below="@+id/action_setting"
         android:hint="설정한 값이야" />
 
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/setting_data"
+        android:text="값을 리드" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="383dp"
+        android:layout_height="338dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 

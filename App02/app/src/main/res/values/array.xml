@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="main_spinner01">
+        <item>전체지역</item>
+        <item>서울특별시</item>
+        <item>경기도</item>
+    </string-array>
+    <string-array name="sub_spinner_korea">
+        <item>서울 금천구</item>
+        <item>서울 도봉구</item>
+        <item>부산 남구</item>
+        <item>광주 서구</item>
+    </string-array>
+    <string-array name="sub_spinner_seoul">
+        <item>강남구</item>
+        <item>강동구</item>
+        <item>강북구</item>
+        <item>강서구</item>
+        <item>관악구</item>
+        <item>광진구</item>
+    </string-array>
+    <string-array name="sub_spinner_gwangju">
+        <item>남구</item>
+        <item>서구</item>
+        <item>북구</item>
+    </string-array>
+</resources>

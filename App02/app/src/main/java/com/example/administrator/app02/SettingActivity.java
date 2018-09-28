@@ -20,9 +20,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class SettingActivity extends AppCompatActivity implements OnClickListener, OnItemSelectedListener {
-    // TODO 양식 통일
-    // TODO 데이터 꺼내기
 
     Spinner spinner01, spinner02;  // 상위 스피너, 인슐린 종류(5).  하위 스피너, 하위 품목
     TextView abc_num;  // 단위 표시
@@ -37,11 +37,6 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-
-        // 상태바 색 변경
-//        View view = getWindow().getDecorView();
-//        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-//        getWindow().setStatusBarColor(Color.parseColor(getResources().getString(R.color.colorPrimaryPurle)));
 
         abc_num = (TextView) findViewById(R.id.abc_num);
         abc_inc = (Button) findViewById(R.id.abc_inc);
@@ -68,9 +63,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         final String[] items5 = {getResources().getString(R.string.insulin_name4_0), getResources().getString(R.string.insulin_name4_1)};
 
         final Spinner spinner01 = (Spinner) findViewById(R.id.spinner01);
-        spinner01.setOnItemSelectedListener((OnItemSelectedListener) this);
         final Spinner spinner02 = (Spinner) findViewById(R.id.spinner02);
-        spinner02.setOnItemSelectedListener((OnItemSelectedListener) this);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -81,36 +74,77 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (spinner01.getItemAtPosition(position) == getResources().getString(R.string.insulin_name)) {
-                    // 스피너 칸, 폰트, 크기 바꾸자!
                     ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(SettingActivity.this, android.R.layout.simple_spinner_item, items1);
                     adapter2.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
                     spinner02.setAdapter(adapter2);
-                    spinner02.setSelection(0);
+                    spinner02.setOnItemSelectedListener(new OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            a2 = (String) spinner02.getItemAtPosition(position);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                        }
+                    });
                 } else if (spinner01.getItemAtPosition(position) == getResources().getString(R.string.insulin_name1)) {
                     ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(SettingActivity.this, android.R.layout.simple_spinner_item, items2);
                     adapter3.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
                     spinner02.setAdapter(adapter3);
-                    spinner02.setSelection(0);
+                    spinner02.setOnItemSelectedListener(new OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            a2 = (String) spinner02.getItemAtPosition(position);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                        }
+                    });
                 } else if (spinner01.getItemAtPosition(position) == getResources().getString(R.string.insulin_name2)) {
                     ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(SettingActivity.this, android.R.layout.simple_spinner_item, items3);
                     adapter4.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
                     spinner02.setAdapter(adapter4);
-                    spinner02.setSelection(0);
+                    spinner02.setOnItemSelectedListener(new OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            a2 = (String) spinner02.getItemAtPosition(position);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                        }
+                    });
                 } else if (spinner01.getItemAtPosition(position) == getResources().getString(R.string.insulin_name3)) {
                     ArrayAdapter<String> adapter5 = new ArrayAdapter<String>(SettingActivity.this, android.R.layout.simple_spinner_item, items4);
                     adapter5.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
                     spinner02.setAdapter(adapter5);
-                    spinner02.setSelection(0);
+                    spinner02.setOnItemSelectedListener(new OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            a2 = (String) spinner02.getItemAtPosition(position);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                        }
+                    });
                 } else if (spinner01.getItemAtPosition(position) == getResources().getString(R.string.insulin_name4)) {
                     ArrayAdapter<String> adapter6 = new ArrayAdapter<String>(SettingActivity.this, android.R.layout.simple_spinner_item, items5);
                     adapter6.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
                     spinner02.setAdapter(adapter6);
-                    spinner02.setSelection(0);
+                    spinner02.setOnItemSelectedListener(new OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            a2 = (String) spinner02.getItemAtPosition(position);
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                        }
+                    });
                 }
                 a1 = (String) spinner01.getItemAtPosition(position);
-//                a2 = (String) spinner02.getItemAtPosition(position);
-//                a1 = (String) spinner01.getSelectedItem();
-                a2 = (String) spinner02.getSelectedItem();
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {

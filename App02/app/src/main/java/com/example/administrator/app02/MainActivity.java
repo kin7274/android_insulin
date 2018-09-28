@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
     // 쉐어드
     EditText et;
 
-    String result3 = "";
+    String insulin_kinds = "";
 
     // 임시로 만듦
     Button clickclick;
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         String numbers = str;
         String[] arr = numbers.split(",");
 //        Toast.makeText(getApplicationContext(), arr[0], Toast.LENGTH_LONG).show();
-        result3 = arr[0];
+        insulin_kinds = arr[0];
     }
 
     public void set(){
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
     // 범례도 꼭 넣자!!
     public int searchImage() {
         int a = 0;
-        switch (result3) {
+        switch (insulin_kinds) {
             case "초속효성":
                 return R.drawable.a1;
             case "속효성":
@@ -171,11 +171,11 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
             if (resultCode == Activity.RESULT_OK) {
                 // 인슐린 종합 데이터
                 String result = data.getStringExtra("AA");
-                data_view.setText(result);
+                Log.d(TAG, "result = " + result);
                 String numbers = result;
                 String[] arr = numbers.split(",");
                 Toast.makeText(getApplicationContext(), arr[0], Toast.LENGTH_LONG).show();
-                result3 = arr[0];
+                insulin_kinds = arr[0];
             }
         }
     }

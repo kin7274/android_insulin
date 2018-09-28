@@ -76,7 +76,7 @@ public class AddNeedleActivity extends AppCompatActivity {
                 Log.d(TAG, "MSG[10] = " + MSG[10]);
                 Log.d(TAG, "MSG[11] = " + MSG[11]);
                 Log.d(TAG, "MSG[12] = " + MSG[12]);
-                String REALREALREAL = MSG[1] + MSG[2] + MSG[3] + MSG[4] + "년 " + MSG[5] + MSG[6] + "월 " + MSG[7] + MSG[8] + "일 " + MSG[9] + MSG[10] + "시 " + MSG[11] + MSG[12] + "분입니다. ";
+                String REALREALREAL = MSG[1] + MSG[2] + MSG[3] + MSG[4] + "년 " + MSG[5] + MSG[6] + "월 " + MSG[7] + MSG[8] + "일 " + MSG[9] + MSG[10] + "시 " + MSG[11] + MSG[12] + "분";
                 setDB(REALREALREAL);
                 Log.d(TAG, "리얼리얼리어리리 : " + REALREALREAL);
             }
@@ -87,12 +87,10 @@ public class AddNeedleActivity extends AppCompatActivity {
     //
     public void setDB(String item) {
         sql = my.getWritableDatabase();
-//        sql.execSQL("INSERT INTO tb_needle VALUES(null, '" + item + "')");
         sql.execSQL("INSERT INTO tb_needle VALUES(null, '" + item + "')");
         Log.d(TAG, "ITEM값은 : " + item);
         sql.close();
         check();
-//        Toast.makeText(getApplicationContext(), "저장", Toast.LENGTH_SHORT).show();
     }
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {

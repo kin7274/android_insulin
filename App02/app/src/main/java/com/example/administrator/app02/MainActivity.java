@@ -55,8 +55,7 @@ import static com.example.administrator.app02.MyRecyclerAdapter.*;
 
 public class MainActivity extends AppCompatActivity implements MyRecyclerViewClickListener, View.OnClickListener {
 
-    TextView textview1;
-    TextView textview2;
+    TextView textview1, textview2;
 
     private final static String TAG = MainActivity.class.getSimpleName();
 
@@ -132,50 +131,19 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         String[] arr = numbers.split(",");
 //        Toast.makeText(getApplicationContext(), arr[0], Toast.LENGTH_LONG).show();
         result3 = arr[0];
-
-//        clickclick = (Button) findViewById(R.id.clickclick);
-//        clickclick.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (data_view.getText().toString() == "") {
-//                    Toast.makeText(getApplicationContext(), "설정하고와!", Toast.LENGTH_LONG).show();
-//                } else {
-////                    Toast.makeText(getApplicationContext(), "ㄱㄱ", Toast.LENGTH_LONG).show();
-//                    // 저장을 해보자
-//                    // 리사이클러뷰 추가!
-//
-////                    dataList.add(new CardItem("제발4", "제발요4"));
-////                    mAdapter.notifyDataSetChanged();
-//                    final CustomDialog dialog = new CustomDialog(MainActivity.this);
-//                    dialog.setDialogListener(new MyDialogListener() {
-//                        @Override
-//                        public void onPositiveClicked(String email) {
-//                            Toast.makeText(getApplicationContext(), "받은 값은 : " + email, Toast.LENGTH_LONG).show();
-//
-//                            dataList.add(new CardItem(searchImage(), email, data_view.getText().toString()));
-////                            dataList.add(new CardItem(searchImage(), email, data_view.getText().toString()));
-//                            mAdapter.notifyDataSetChanged();
-//                        }
-//
-//                        @Override
-//                        public void onNegativeClicked() {
-//                        }
-//                    });
-//                    dialog.show();
-//                }
-//            }
-//        });
     }
 
     public void set(){
         Button btn1 = (Button) findViewById(R.id.btn1);
         Button btn2 = (Button) findViewById(R.id.btn2);
         Button btn3 = (Button) findViewById(R.id.btn3);
+        Button action_setting = (Button) findViewById(R.id.action_setting);
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
+        action_setting.setOnClickListener(this);
 
-        final TextView textview1 = (TextView) findViewById(R.id.textview1);
+        textview1 = (TextView) findViewById(R.id.textview1);
         textview2 = (TextView) findViewById(R.id.textview2);
     }
     // 투약 종류마다 리스트 맨 앞 색 구별!!!!!!
@@ -247,25 +215,15 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
     public boolean onOptionsItemSelected(MenuItem item) {
         // 툴바 탭 클릭 이벤트
         switch (item.getItemId()) {
-            case R.id.action_ble:
-                // 블루투스 연결
-                Intent intent_ble = new Intent(MainActivity.this, DeviceScanActivity.class);
-                Toast.makeText(getApplicationContext(), "띠용", Toast.LENGTH_LONG).show();
-                startActivity(intent_ble);
-                break;
             // 오버플로우 메뉴
-            case R.id.action_setting:
-                // 설정 페이지로 이동
-//                Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);
-//                startActivityForResult(intent_setting, 1);
-                break;
+            // 영상 페이지로 이동
             case R.id.action_education:
-                // 영상 페이지로 이동
                 Intent intent_edu = new Intent(MainActivity.this, EducationActivity.class);
                 startActivity(intent_edu);
                 break;
+
+            // 어플에 대한 사용법 간단하게
             case R.id.action_guide:
-                // 어플에 대한 사용법 간단하게
                 AlertDialog.Builder dialog_app = new AlertDialog.Builder(this);
                 dialog_app.setTitle(getResources().getString(R.string.dialog_app_title))
                         .setMessage(getResources().getString(R.string.dialog_app_content))
@@ -277,8 +235,9 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 dialog_app.create();
                 dialog_app.show();
                 break;
+
+            // 개발자에 대한 사용법 간단하게
             case R.id.action_myinfo:
-                // 개발자에 대한 사용법 간단하게
                 AlertDialog.Builder dialog_info = new AlertDialog.Builder(this);
                 dialog_info.setTitle(getResources().getString(R.string.dialog_my_title))
                         .setMessage(getResources().getString(R.string.dialog_my_content))
@@ -313,6 +272,11 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 intent3.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, textview1.getText());
                 intent3.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, textview2.getText());
                 startActivity(intent3);
+                break;
+            // 설정 페이지로 이동
+            case R.id.action_setting:
+                Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);
+                startActivityForResult(intent_setting, 1);
                 break;
         }
     }

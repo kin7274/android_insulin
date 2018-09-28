@@ -40,8 +40,8 @@ public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyR
     RecyclerView recyclerView;
     List<CardItem> dataList;
 
-    String deviceAddress;
-    String settingdata22;
+    String deviceAddress = "";
+    String settingdata22 = "";
     String setting_insulin_kinds2 = "";
     String setting_insulin_names2 = "";
     String setting_insulin_unit2 = "";
@@ -58,22 +58,29 @@ public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyR
             if (BluetoothLeService.ACTION_DATA_AVAILABLE_CHANGE.equals(action)) {
                 final String message = intent.getStringExtra(EXTRA_DATA);
                 Log.d(TAG, "겟 메세지" + message);
-                String[] MSG = message.split("");
-                Log.d(TAG, "MSG[1] = " + MSG[1]);
-                Log.d(TAG, "MSG[2] = " + MSG[2]);
-                Log.d(TAG, "MSG[3] = " + MSG[3]);
-                Log.d(TAG, "MSG[4] = " + MSG[4]);
-                Log.d(TAG, "MSG[5] = " + MSG[5]);
-                Log.d(TAG, "MSG[6] = " + MSG[6]);
-                Log.d(TAG, "MSG[7] = " + MSG[7]);
-                Log.d(TAG, "MSG[8] = " + MSG[8]);
-                Log.d(TAG, "MSG[9] = " + MSG[9]);
-                Log.d(TAG, "MSG[10] = " + MSG[10]);
-                Log.d(TAG, "MSG[11] = " + MSG[11]);
-                Log.d(TAG, "MSG[12] = " + MSG[12]);
-                String REALREALREAL = MSG[1] + MSG[2] + MSG[3] + MSG[4] + "년 " + MSG[5] + MSG[6] + "월 " + MSG[7] + MSG[8] + "일 " + MSG[9] + MSG[10] + "시 " + MSG[11] + MSG[12] + "분";
-                setData(REALREALREAL);
-                Log.d(TAG, "리얼리얼리어리리 : " + REALREALREAL);
+                if (message.equals("")) {
+                    Log.d(TAG, "message = 쮓 똥값");
+
+                } else {
+
+                    Log.d(TAG, "message = 값 조쿠요");
+                    String[] MSG = message.split("");
+                    Log.d(TAG, "MSG[1] = " + MSG[1]);
+                    Log.d(TAG, "MSG[2] = " + MSG[2]);
+                    Log.d(TAG, "MSG[3] = " + MSG[3]);
+                    Log.d(TAG, "MSG[4] = " + MSG[4]);
+                    Log.d(TAG, "MSG[5] = " + MSG[5]);
+                    Log.d(TAG, "MSG[6] = " + MSG[6]);
+                    Log.d(TAG, "MSG[7] = " + MSG[7]);
+                    Log.d(TAG, "MSG[8] = " + MSG[8]);
+                    Log.d(TAG, "MSG[9] = " + MSG[9]);
+                    Log.d(TAG, "MSG[10] = " + MSG[10]);
+                    Log.d(TAG, "MSG[11] = " + MSG[11]);
+                    Log.d(TAG, "MSG[12] = " + MSG[12]);
+                    String REALREALREAL = MSG[1] + MSG[2] + MSG[3] + MSG[4] + "년 " + MSG[5] + MSG[6] + "월 " + MSG[7] + MSG[8] + "일 " + MSG[9] + MSG[10] + "시 " + MSG[11] + MSG[12] + "분";
+                    setData(REALREALREAL);
+                    Log.d(TAG, "리얼리얼리어리리 : " + REALREALREAL);
+                }
             }
         }
     };
@@ -81,7 +88,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyR
     public void setData(String item) {
         textview1.setText(item);
         Log.d(TAG, "111111띠용...므엇이죠 이게...");
-        dataList.add(new CardItem(R.drawable.a1,"제발4", "제발요4"));
+        dataList.add(new CardItem(R.drawable.a1, "제발4", "제발요4"));
         mAdapter.notifyDataSetChanged();
         Log.d(TAG, "222222띠용...므엇이죠 이게...");
     }
@@ -121,8 +128,8 @@ public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyR
 
         // 표시할 임시 데이터
         final List<CardItem> dataList = new ArrayList<>();
-        dataList.add(new CardItem(R.drawable.a1,"제발", "제발요"));
-        dataList.add(new CardItem(R.drawable.a1,"제발2", "제발2요"));
+        dataList.add(new CardItem(R.drawable.a1, "제발", "제발요"));
+        dataList.add(new CardItem(R.drawable.a1, "제발2", "제발2요"));
 
         // 어댑터 설정
         mAdapter = new MyRecyclerAdapter(dataList);

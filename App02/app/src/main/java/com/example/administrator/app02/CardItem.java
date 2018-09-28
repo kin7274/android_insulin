@@ -36,6 +36,5 @@ public class CardItem {
 
     public String getState() {
         return state;
-
     }
 }

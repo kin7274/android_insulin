@@ -53,15 +53,12 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 
     public static Context mContext;
 
-    // 쉐어드
-    EditText et;
-
     String setting_insulin_kinds;
     String setting_insulin_names;
     String setting_insulin_unit;
 
-    String receive_data_real;
-
+    // 쉐어드
+    EditText et;
     SharedPreferences sharedPreferences;
 
     private MyRecyclerAdapter mAdapter;
@@ -96,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         // 표시할 임시 데이터
         final List<CardItem> dataList = new ArrayList<>();
 
+
+        // 초기 1회
         if(setting_data.getText().toString().equals("") ){
             setting_data.setText("설정부터하고와");
         }
@@ -112,16 +111,15 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         // 저장데이터 불러오기
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String str = pref.getString("PREF_STRNAME", "");
-
+        setting_data.setText(str);
         String numbers = str;
         String[] arr = numbers.split(",");
 //        // insulin_kinds = "초속효성"
-//        setting_insulin_kinds = arr[0];
+        setting_insulin_kinds = arr[0];
 //        // insulin_kinds = "휴머로그"
-//        setting_insulin_names = arr[1];
+        setting_insulin_names = arr[1];
 //        // insulin_unit = "5"
-//        setting_insulin_unit = arr[2];
-
+        setting_insulin_unit = arr[2];
         Log.d(TAG, "종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit);
     }
 
@@ -266,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 // 설정 끝, 다음으로 이동
             case R.id.btn4:
                 Intent intent4 = new Intent(MainActivity.this, Timeline.class);
-                intent4.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, setting_data.getText());
+                intent4.putExtra("AYO", setting_data.getText());
                 intent4.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, textview2.getText());
                 startActivity(intent4);
                 break;
@@ -291,5 +289,10 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
     @Override
     protected void onStop() {
         super.onStop();
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        String strrr = setting_data.getText().toString();
+        editor.putString("PREF_STRNAME", strrr);
+        editor.apply();
     }
 }

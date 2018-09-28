@@ -32,7 +32,7 @@ import static com.example.administrator.app02.BluetoothLeService.EXTRA_DATA;
 import static com.example.administrator.app02.DeviceControlActivity.EXTRAS_DEVICE_ADDRESS;
 
 // 실질적으로 블루투스값 리시브 액티비티입니다.
-public class Timeline extends AppCompatActivity implements View.OnClickListener, MyRecyclerViewClickListener {
+public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyRecyclerViewClickListener, View.OnClickListener {
     private final static String TAG = Timeline.class.getSimpleName();
     public static Context mContext;
 
@@ -41,6 +41,10 @@ public class Timeline extends AppCompatActivity implements View.OnClickListener,
     List<CardItem> dataList;
 
     String deviceAddress;
+    String settingdata22;
+    String setting_insulin_kinds2 = "";
+    String setting_insulin_names2 = "";
+    String setting_insulin_unit2 = "";
 
     public Button btn1;
     TextView textview1;
@@ -50,9 +54,7 @@ public class Timeline extends AppCompatActivity implements View.OnClickListener,
     private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-
             final String action = intent.getAction();
-
             if (BluetoothLeService.ACTION_DATA_AVAILABLE_CHANGE.equals(action)) {
                 final String message = intent.getStringExtra(EXTRA_DATA);
                 Log.d(TAG, "겟 메세지" + message);
@@ -78,7 +80,10 @@ public class Timeline extends AppCompatActivity implements View.OnClickListener,
 
     public void setData(String item) {
         textview1.setText(item);
-        Log.d(TAG, "띠용...므엇이죠 이게...");
+        Log.d(TAG, "111111띠용...므엇이죠 이게...");
+        dataList.add(new CardItem(R.drawable.a1,"제발4", "제발요4"));
+        mAdapter.notifyDataSetChanged();
+        Log.d(TAG, "222222띠용...므엇이죠 이게...");
     }
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -105,10 +110,6 @@ public class Timeline extends AppCompatActivity implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
-
-
-
-
         mContext = this;
 
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -120,6 +121,8 @@ public class Timeline extends AppCompatActivity implements View.OnClickListener,
 
         // 표시할 임시 데이터
         final List<CardItem> dataList = new ArrayList<>();
+        dataList.add(new CardItem(R.drawable.a1,"제발", "제발요"));
+        dataList.add(new CardItem(R.drawable.a1,"제발2", "제발2요"));
 
         // 어댑터 설정
         mAdapter = new MyRecyclerAdapter(dataList);
@@ -131,6 +134,21 @@ public class Timeline extends AppCompatActivity implements View.OnClickListener,
         recyclerView.addItemDecoration(dividerItemDecoration);
 
 
+        settingdata22 = getIntent().getStringExtra("AYO");
+        Log.d(TAG, "settingdata22 = " + settingdata22);
+        String numbers = settingdata22;
+        String[] arr = numbers.split(",");
+        // setting_insulin_kinds = "초속효성"
+        setting_insulin_kinds2 = arr[0];
+        Log.d(TAG, "setting_insulin_kinds2 = " + setting_insulin_kinds2);
+
+        // setting_insulin_names = "휴머로그"
+        setting_insulin_names2 = arr[1];
+        Log.d(TAG, "setting_insulin_names2 = " + setting_insulin_names2);
+
+        // setting_insulin_unit = "5"
+        setting_insulin_unit2 = arr[2];
+        Log.d(TAG, "setting_insulin_unit2 = " + setting_insulin_unit2);
 
 
         deviceAddress = getIntent().getStringExtra(EXTRAS_DEVICE_ADDRESS);

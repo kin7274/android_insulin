@@ -12,6 +12,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.administrator.app02.BluetoothLeService.ACTION_DATA_AVAILABLE;
 import static com.example.administrator.app02.BluetoothLeService.ACTION_DATA_AVAILABLE_CHANGE;
@@ -28,8 +32,14 @@ import static com.example.administrator.app02.BluetoothLeService.EXTRA_DATA;
 import static com.example.administrator.app02.DeviceControlActivity.EXTRAS_DEVICE_ADDRESS;
 
 // 실질적으로 블루투스값 리시브 액티비티입니다.
-public class Timeline extends AppCompatActivity {
+public class Timeline extends AppCompatActivity implements View.OnClickListener, MyRecyclerViewClickListener {
     private final static String TAG = Timeline.class.getSimpleName();
+    public static Context mContext;
+
+    private MyRecyclerAdapter mAdapter;
+    RecyclerView recyclerView;
+    List<CardItem> dataList;
+
     String deviceAddress;
 
     public Button btn1;
@@ -95,6 +105,34 @@ public class Timeline extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
+
+
+
+
+        mContext = this;
+
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(false);
+
+        // 레이아웃 매니저로 LinearLayoutManager를 설정
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // 표시할 임시 데이터
+        final List<CardItem> dataList = new ArrayList<>();
+
+        // 어댑터 설정
+        mAdapter = new MyRecyclerAdapter(dataList);
+        mAdapter.setOnClickListener(this);
+        recyclerView.setAdapter(mAdapter);
+
+        // 구분선
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+
+
+
+
         deviceAddress = getIntent().getStringExtra(EXTRAS_DEVICE_ADDRESS);
         if (deviceAddress != null) {
             Log.d(TAG, "onCreate: " + deviceAddress);
@@ -138,5 +176,15 @@ public class Timeline extends AppCompatActivity {
         mBluetoothLeService = null;
         unregisterReceiver(mMessageReceiver);
         super.onDestroy();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onItemClicked(int position) {
+
     }
 }

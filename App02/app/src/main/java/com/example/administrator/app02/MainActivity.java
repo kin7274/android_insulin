@@ -180,6 +180,8 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 setting_insulin_names = arr[1];
                 // setting_insulin_unit = "5"
                 setting_insulin_unit = arr[2];
+
+
                 Log.d(TAG, "내가 설정한 값은@@@@ 종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit);
             }
         }
@@ -264,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 // 설정 끝, 다음으로 이동
             case R.id.btn4:
                 Intent intent4 = new Intent(MainActivity.this, Timeline.class);
-                intent4.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, textview1.getText());
+                intent4.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, setting_data.getText());
                 intent4.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, textview2.getText());
                 startActivity(intent4);
                 break;

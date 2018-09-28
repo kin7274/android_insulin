@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
     // 쉐어드
     EditText et;
 
-    String setting_insulin_kinds = "";
-    String setting_insulin_names = "";
-    String setting_insulin_unit = "";
+    String setting_insulin_kinds;
+    String setting_insulin_names;
+    String setting_insulin_unit;
 
     String receive_data_real;
 

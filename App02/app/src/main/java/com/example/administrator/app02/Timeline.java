@@ -108,7 +108,7 @@ public class Timeline extends AppCompatActivity {
         btn1 = (Button) findViewById(R.id.btn1);
         textview1 = (TextView) findViewById(R.id.textview1);
 
-        // sd카드의 데이터를 가져온다!
+        // 블루투스 값 리시브!
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +117,6 @@ public class Timeline extends AppCompatActivity {
                 mBluetoothLeService.writeCharacteristic("a");
             }
         });
-
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
     }

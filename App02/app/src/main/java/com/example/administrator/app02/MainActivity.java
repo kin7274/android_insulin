@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
     SharedPreferences sharedPreferences;
 
     private MyRecyclerAdapter mAdapter;
-
     RecyclerView recyclerView;
     List<CardItem> dataList;
 
@@ -264,9 +263,12 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 intent3.putExtra(EXTRAS_DEVICE_ADDRESS, textview2.getText());
                 startActivity(intent3);
                 break;
-                // 데이터를 받을거야
+                // 설정 끝, 다음으로 이동
             case R.id.btn4:
-                startgogostartgogo();
+                Intent intent4 = new Intent(MainActivity.this, Timeline.class);
+                intent4.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, textview1.getText());
+                intent4.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, textview2.getText());
+                startActivity(intent4);
                 break;
                 // 설정 페이지로 이동
             case R.id.action_setting:
@@ -274,60 +276,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 startActivityForResult(intent_setting, 1);
                 break;
         }
-    }
-
-    public void startgogostartgogo(){
-        deviceAddress = getIntent().getStringExtra(EXTRAS_DEVICE_ADDRESS);
-        if (deviceAddress != null) {
-            Log.d(TAG, "onCreate: " + deviceAddress);
-        }
-
-        IntentFilter intentfilter = new IntentFilter();
-        intentfilter.addAction(ACTION_DATA_AVAILABLE);
-        intentfilter.addAction(ACTION_DATA_AVAILABLE_CHANGE);
-        registerReceiver(mMessageReceiver, intentfilter);
-
-        mBluetoothLeService.writeCharacteristic("a");
-    }
-
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            final String action = intent.getAction();
-
-            if (BluetoothLeService.ACTION_DATA_AVAILABLE_CHANGE.equals(action)) {
-                final String message = intent.getStringExtra(EXTRA_DATA);
-                Log.d(TAG, "겟 메세지" + message);
-                // 받은 값읊 표시
-                setData(message);
-            }
-        }
-    };
-
-    private final ServiceConnection mServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder service) {
-            mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
-            if (!mBluetoothLeService.initialize()) {
-                Log.e(TAG, "Unable to initialize Bluetooth");
-                finish();
-            }
-            // Automatically connects to the device upon successful start-up initialization.
-            mBluetoothLeService.connect(deviceAddress);
-            //
-            Log.d(TAG, "서비스가 연결되었습니다!");
-//            Toast.makeText(getApplicationContext(), "서비스가 연결되었습니다!", Toast.LENGTH_LONG).show();
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-            mBluetoothLeService = null;
-        }
-    };
-
-    public void setData(String item){
-        
     }
 
     // 설정 후 돌아오면!

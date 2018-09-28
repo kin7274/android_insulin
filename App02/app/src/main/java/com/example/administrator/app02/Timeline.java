@@ -78,6 +78,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyR
                     Log.d(TAG, "MSG[11] = " + MSG[11]);
                     Log.d(TAG, "MSG[12] = " + MSG[12]);
                     String REALREALREAL = MSG[1] + MSG[2] + MSG[3] + MSG[4] + "년 " + MSG[5] + MSG[6] + "월 " + MSG[7] + MSG[8] + "일 " + MSG[9] + MSG[10] + "시 " + MSG[11] + MSG[12] + "분";
+                    // TODO 여기 오류뜸..
                     setData(REALREALREAL);
                     Log.d(TAG, "리얼리얼리어리리 : " + REALREALREAL);
                 }
@@ -88,6 +89,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyR
     public void setData(String item) {
         textview1.setText(item);
         Log.d(TAG, "111111띠용...므엇이죠 이게...");
+        // TODO 여기 오류뜸..
         dataList.add(new CardItem(R.drawable.a1, "제발4", "제발요4"));
         mAdapter.notifyDataSetChanged();
         Log.d(TAG, "222222띠용...므엇이죠 이게...");

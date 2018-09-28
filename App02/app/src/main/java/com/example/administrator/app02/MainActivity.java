@@ -32,11 +32,12 @@ import static com.example.administrator.app02.MyRecyclerAdapter.MyRecyclerViewCl
 
 public class MainActivity extends AppCompatActivity implements MyRecyclerViewClickListener, View.OnClickListener {
 
-    TextView textview1, textview2;
+    TextView textview1, textview2, setting_data;
 
     private final static String TAG = MainActivity.class.getSimpleName();
 
     private CustomDialog dialog;
+
 
     public static Context mContext;
 
@@ -84,13 +85,16 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         // 표시할 임시 데이터
         final List<CardItem> dataList = new ArrayList<>();
 
+        if(setting_data.getText().toString().equals("") ){
+            setting_data.setText("설정부터하고와");
+        }
+
         // 어댑터 설정
         mAdapter = new MyRecyclerAdapter(dataList);
         mAdapter.setOnClickListener(this);
         recyclerView.setAdapter(mAdapter);
 
         // 구분선
-        // 이쁘면 메뉴얼쪽에도 추가하자
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
@@ -122,7 +126,9 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
 
         textview1 = (TextView) findViewById(R.id.textview1);
         textview2 = (TextView) findViewById(R.id.textview2);
+        setting_data = (TextView) findViewById(R.id.setting_data);
     }
+
     // 투약 종류마다 리스트 맨 앞 색 구별!!!!!!
     // 범례도 꼭 넣자!!
     public int searchImage() {
@@ -150,14 +156,16 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 // 인슐린 종합 데이터
                 String result = data.getStringExtra("AA");
                 Log.d(TAG, "result = " + result);
+                // 메인 텍스트에 추가
+                setting_data.setText(result);
+                // 데이터 구분
                 String numbers = result;
                 String[] arr = numbers.split(",");
-                Toast.makeText(getApplicationContext(), arr[0], Toast.LENGTH_LONG).show();
-                // insulin_kinds = "초속효성"
+                // setting_insulin_kinds = "초속효성"
                 setting_insulin_kinds = arr[0];
-                // insulin_kinds = "휴머로그"
+                // setting_insulin_names = "휴머로그"
                 setting_insulin_names = arr[1];
-                // insulin_unit = "5"
+                // setting_insulin_unit = "5"
                 setting_insulin_unit = arr[2];
                 Log.d(TAG, "내가 설정한 값은@@@@ 종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit);
             }
@@ -234,19 +242,21 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 Intent intent1 = new Intent(MainActivity.this, DeviceScanActivity.class);
                 startActivity(intent1);
                 break;
+                // 페어링
             case R.id.btn2:
                 final Intent intent2 = new Intent(MainActivity.this, DeviceControlActivity.class);
                 intent2.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, textview1.getText());
                 intent2.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, textview2.getText());
                 startActivity(intent2);
                 break;
+                // DB
             case R.id.btn3:
                 Intent intent3 = new Intent(MainActivity.this, AddNeedleActivity.class);
                 intent3.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, textview1.getText());
                 intent3.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, textview2.getText());
                 startActivity(intent3);
                 break;
-            // 설정 페이지로 이동
+                // 설정 페이지로 이동
             case R.id.action_setting:
                 Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);
                 startActivityForResult(intent_setting, 1);

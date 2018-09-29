@@ -31,14 +31,15 @@ import static com.example.administrator.app02.BluetoothLeService.ACTION_DATA_AVA
 import static com.example.administrator.app02.BluetoothLeService.EXTRA_DATA;
 import static com.example.administrator.app02.DeviceControlActivity.EXTRAS_DEVICE_ADDRESS;
 
-// 실질적으로 블루투스값 리시브 액티비티입니다.
-public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyRecyclerViewClickListener, View.OnClickListener {
-    private final static String TAG = Timeline.class.getSimpleName();
-    public static Context mContext;
+import static com.example.administrator.app02.MyRecyclerAdapter.*;
 
+// 실질적으로 블루투스값 리시브 액티비티입니다.
+public class Timeline extends AppCompatActivity implements MyRecyclerViewClickListener, View.OnClickListener {
+    private final static String TAG = Timeline.class.getSimpleName();
+    Context mContext;
+    List<CardItem> lists;
     private MyRecyclerAdapter mAdapter;
     RecyclerView recyclerView;
-    List<CardItem> dataList;
 
     String deviceAddress = "";
     String settingdata22 = "";
@@ -51,7 +52,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyR
 
     BluetoothLeService mBluetoothLeService = new BluetoothLeService();
 
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
@@ -74,24 +75,18 @@ public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyR
                 Log.d(TAG, "MSG[11] = " + MSG[11]);
                 Log.d(TAG, "MSG[12] = " + MSG[12]);
                 String REALREALREAL = MSG[1] + MSG[2] + MSG[3] + MSG[4] + "년 " + MSG[5] + MSG[6] + "월 " + MSG[7] + MSG[8] + "일 " + MSG[9] + MSG[10] + "시 " + MSG[11] + MSG[12] + "분";
-//                    setData(REALREALREAL);
-                    setData();
+                Log.d(TAG, "111111띠용...므엇이죠 이게...");
+                textview1.setText(REALREALREAL);
+
+                lists.add(new CardItem("제발4", "제발요4"));
+                mAdapter.notifyDataSetChanged();
+                Log.d(TAG, "222222띠용...므엇이죠 이게...");
                 Log.d(TAG, "리얼리얼리어리리 : " + REALREALREAL);
             }
         }
     };
 
-    public void setData() {
-//    public void setData(String item) {
-        textview1.setText("1");
-        Log.d(TAG, "111111띠용...므엇이죠 이게...");
-        // TODO 여기 오류뜸..
-//        dataList.add(new CardItem(R.drawable.a1, "제발4", "제발요4"));
-
-//        dataList.add(new CardItem("제발4", "제발요4"));
-//        mAdapter.notifyDataSetChanged();
-        Log.d(TAG, "222222띠용...므엇이죠 이게...");
-    }
+//    dataList.add(new CardItem(R.drawable.a1, "제발4", "제발요4"));
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
@@ -118,22 +113,22 @@ public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyR
         setContentView(R.layout.activity_timeline);
         mContext = this;
 
-        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(false);
-
-        // 레이아웃 매니저로 LinearLayoutManager를 설정
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         // 표시할 임시 데이터
-        final ArrayList<CardItem> dataList = new ArrayList<>();
-        dataList.add(new CardItem("제발", "제발요"));
-        dataList.add(new CardItem("제발2", "제발2요"));
+        List<CardItem> lists;
+                lists = new ArrayList<>();
+
+//        lists.add(new CardItem("제발", "제발요"));
+//        lists.add(new CardItem("제발2", "제발2요"));
 //        dataList.add(new CardItem(R.drawable.a1, "제발", "제발요"));
 //        dataList.add(new CardItem(R.drawable.a1, "제발2", "제발2요"));
 
         // 어댑터 설정
-        mAdapter = new MyRecyclerAdapter(dataList);
+        mAdapter = new MyRecyclerAdapter(lists);
         mAdapter.setOnClickListener(this);
         recyclerView.setAdapter(mAdapter);
 

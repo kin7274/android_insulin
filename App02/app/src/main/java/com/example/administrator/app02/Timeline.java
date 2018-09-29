@@ -1,8 +1,10 @@
 package com.example.administrator.app02;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -19,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,9 +90,9 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
 
     // 투약 종류마다 리스트 맨 앞 색 구별!!!!!!
     // 범례도 꼭 넣자!!
-    int searchImage(){
+    int searchImage() {
         int a = 0;
-        switch (setting_insulin_kinds2){
+        switch (setting_insulin_kinds2) {
             case "초속효성":
                 return R.drawable.a1;
             case "속효성":
@@ -127,6 +130,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         // 툴바
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -227,3 +231,20 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
 
     }
 }
+
+
+    // 뒤로 가기 버튼 : 팝업창을 띄움
+//    @Override
+//    public void onBackPressed() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("알림")
+//                .setMessage("앱을 종료하실껀가유")
+//                .setNegativeButton("취소", null)
+//                .setPositiveButton("종료", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        android.os.Process.killProcess(android.os.Process.myPid());
+//                    }
+//                })
+//                .show();
+//    }

@@ -17,6 +17,7 @@ import com.example.administrator.app02.CardItem;
 
 import java.util.List;
 
+// TODO 헤더 http://puzzleleaf.tistory.com/141
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.ViewHolder> {
     public static Context mContext;
 
@@ -95,7 +96,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext, "click", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(mContext, "click", Toast.LENGTH_LONG).show();
                 }
             });
         }

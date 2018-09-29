@@ -16,6 +16,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -132,6 +133,9 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
         recycler_view.setHasFixedSize(false);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        // 반대로 쌓기
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
         recycler_view.setLayoutManager(layoutManager);
 
         try {
@@ -139,9 +143,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-//        dataList.add(new CardItem(R.drawable.a1, "제발", "제발요"));
-//        dataList.add(new CardItem(R.drawable.a1, "제발2", "제발2요"));
 
         // 어댑터 설정
         mAdapter = new MyRecyclerAdapter(lists);
@@ -168,7 +169,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         setting_insulin_unit2 = arr[2];
         Log.d(TAG, "setting_insulin_unit2 = " + setting_insulin_unit2);
 
-
         deviceAddress = getIntent().getStringExtra(EXTRAS_DEVICE_ADDRESS);
         if (deviceAddress != null) {
             Log.d(TAG, "onCreate: " + deviceAddress);
@@ -191,8 +191,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 // sd카드 다 리드
                 // "a" 값 전송 / 0x61
                 mBluetoothLeService.writeCharacteristic("a");
-//                dataList.add(new CardItem("제발4", "제발요4"));
-//                mAdapter.notifyDataSetChanged();
             }
         });
     }

@@ -40,7 +40,7 @@
 
             <TextView
                 android:id="@+id/text_eat_state"
-                android:layout_width="0dp"
+                android:layout_width="81dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1" />
 

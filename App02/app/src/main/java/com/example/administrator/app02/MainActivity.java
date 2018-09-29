@@ -111,16 +111,17 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         // 저장데이터 불러오기
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String str = pref.getString("PREF_STRNAME", "");
+        Log.d(TAG, "str = " + str);
         setting_data.setText(str);
-        String numbers = str;
-        String[] arr = numbers.split(",");
-//        // insulin_kinds = "초속효성"
-        setting_insulin_kinds = arr[0];
-//        // insulin_kinds = "휴머로그"
-        setting_insulin_names = arr[1];
-//        // insulin_unit = "5"
-        setting_insulin_unit = arr[2];
-        Log.d(TAG, "종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit);
+//        String numbers = str;
+//        String[] arr = numbers.split(",");
+////        // insulin_kinds = "초속효성"
+//        setting_insulin_kinds = arr[0];
+////        // insulin_kinds = "휴머로그"
+//        setting_insulin_names = arr[1];
+////        // insulin_unit = "5"
+//        setting_insulin_unit = arr[2];
+//        Log.d(TAG, "종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit);
     }
 
     public void set(){

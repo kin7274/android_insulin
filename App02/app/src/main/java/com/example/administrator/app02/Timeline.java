@@ -77,13 +77,32 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 String REALREALREAL = MSG[1] + MSG[2] + MSG[3] + MSG[4] + "년 " + MSG[5] + MSG[6] + "월 " + MSG[7] + MSG[8] + "일 " + MSG[9] + MSG[10] + "시 " + MSG[11] + MSG[12] + "분";
                 Log.d(TAG, "111111띠용...므엇이죠 이게...");
 //                textview1.setText(REALREALREAL);
-                lists.add(new CardItem(REALREALREAL, settingdata22));
+                lists.add(new CardItem(searchImage(), REALREALREAL, settingdata22));
                 mAdapter.notifyDataSetChanged();
                 Log.d(TAG, "222222띠용...므엇이죠 이게...");
                 Log.d(TAG, "리얼리얼리어리리 : " + REALREALREAL);
             }
         }
     };
+
+    // 투약 종류마다 리스트 맨 앞 색 구별!!!!!!
+    // 범례도 꼭 넣자!!
+    int searchImage(){
+        int a = 0;
+        switch (setting_insulin_kinds2){
+            case "초속효성":
+                return R.drawable.a1;
+            case "속효성":
+                return R.drawable.a2;
+            case "중간형":
+                return R.drawable.a3;
+            case "혼합형":
+                return R.drawable.a4;
+            case "지속형":
+                return R.drawable.a5;
+        }
+        return a;
+    }
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override

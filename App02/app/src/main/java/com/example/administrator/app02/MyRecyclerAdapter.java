@@ -42,11 +42,11 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, final int position) {
         CardItem item = mDataList.get(position);
 
-//        ImageView image = holder.image;
+        ImageView image = holder.image;
         TextView state = holder.state;
         TextView setting = holder.setting;
 
-//        holder.image.setImageResource(item.getImage());
+        holder.image.setImageResource(item.getImage());
         holder.state.setText(item.getState());
         holder.setting.setText(item.getSetting());
 
@@ -83,12 +83,12 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     // 반드시 RecyclerView.ViewHolder를 상속해야 함
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-//        ImageView image;
+        ImageView image;
         TextView state, setting;
 
         public ViewHolder(View itemView) {
             super(itemView);
-//            image = (ImageView) itemView.findViewById(R.id.image);
+            image = (ImageView) itemView.findViewById(R.id.image);
             state = (TextView) itemView.findViewById(R.id.text_eat_state);
             setting = (TextView) itemView.findViewById(R.id.text_init_setting);
 

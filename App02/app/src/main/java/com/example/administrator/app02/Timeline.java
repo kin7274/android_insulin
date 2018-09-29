@@ -76,19 +76,14 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 Log.d(TAG, "MSG[12] = " + MSG[12]);
                 String REALREALREAL = MSG[1] + MSG[2] + MSG[3] + MSG[4] + "년 " + MSG[5] + MSG[6] + "월 " + MSG[7] + MSG[8] + "일 " + MSG[9] + MSG[10] + "시 " + MSG[11] + MSG[12] + "분";
                 Log.d(TAG, "111111띠용...므엇이죠 이게...");
-                textview1.setText(REALREALREAL);
-
-
-
-                lists.add(new CardItem("제발4", "제발요4"));
+//                textview1.setText(REALREALREAL);
+                lists.add(new CardItem(REALREALREAL, settingdata22));
                 mAdapter.notifyDataSetChanged();
                 Log.d(TAG, "222222띠용...므엇이죠 이게...");
                 Log.d(TAG, "리얼리얼리어리리 : " + REALREALREAL);
             }
         }
     };
-
-//    dataList.add(new CardItem(R.drawable.a1, "제발4", "제발요4"));
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
@@ -119,15 +114,13 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         recycler_view.setHasFixedSize(false);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recycler_view.setLayoutManager(layoutManager);
-        
+
         try {
             lists = new ArrayList<>();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        lists.add(new CardItem("제발", "제발요"));
-        lists.add(new CardItem("제발2", "제발2요"));
 //        dataList.add(new CardItem(R.drawable.a1, "제발", "제발요"));
 //        dataList.add(new CardItem(R.drawable.a1, "제발2", "제발2요"));
 

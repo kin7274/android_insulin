@@ -39,7 +39,7 @@ import static com.example.administrator.app02.BluetoothLeService.EXTRA_DATA;
 import static com.example.administrator.app02.DeviceControlActivity.EXTRAS_DEVICE_ADDRESS;
 import static com.example.administrator.app02.MyRecyclerAdapter.MyRecyclerViewClickListener;
 
-public class MainActivity extends AppCompatActivity implements MyRecyclerViewClickListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView textview1, textview2, setting_data;
 
@@ -61,10 +61,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
     EditText et;
     SharedPreferences sharedPreferences;
 
-    private MyRecyclerAdapter mAdapter;
-    RecyclerView recyclerView;
-    List<CardItem> dataList;
-
     // 다이얼로그 선택된 값
     final int[] selectedItem = {0};
 
@@ -82,25 +78,6 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
         getSupportActionBar().setTitle("");
 
         set();
-
-        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(false);
-
-        // 레이아웃 매니저로 LinearLayoutManager를 설정
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        // 표시할 임시 데이터
-        final List<CardItem> dataList = new ArrayList<>();
-
-        // 어댑터 설정
-        mAdapter = new MyRecyclerAdapter(dataList);
-        mAdapter.setOnClickListener(this);
-        recyclerView.setAdapter(mAdapter);
-
-        // 구분선
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
 
         // 저장데이터 불러오기
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
@@ -179,16 +156,9 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerViewCli
                 // setting_insulin_unit = "5"
                 setting_insulin_unit = arr[2];
 
-
                 Log.d(TAG, "내가 설정한 값은@@@@ 종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit);
             }
         }
-    }
-
-    //  클릭 이벤트
-    @Override
-    public void onItemClicked(int position) {
-        Toast.makeText(getApplicationContext(), position + "번째 삭제", Toast.LENGTH_LONG).show();
     }
 
     // 메뉴.xml

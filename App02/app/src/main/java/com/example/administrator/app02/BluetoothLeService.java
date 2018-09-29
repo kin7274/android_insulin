@@ -111,7 +111,6 @@ public class BluetoothLeService extends Service {
 
             broadcastUpdate(ACTION_DATA_AVAILABLE_CHANGE, characteristic);
             Log.d(TAG, "온캐릭터리스틱 체!인!지!");
-
 //            onCharacteristicRead(gatt, characteristic, BluetoothGatt.GATT_SUCCESS);
         }
     };
@@ -333,22 +332,22 @@ public class BluetoothLeService extends Service {
     }
 
     public void writeCharacteristic(String value) {
-        Log.e(TAG, "writeCharacteristic: " + "called ");
+        Log.d(TAG, "writeCharacteristic: called ");
         if (mBluetoothAdapter == null || mBluetoothGatt == null) {
-            Log.w(TAG, "BluetoothAdapter not initialized");
+            Log.d(TAG, "BluetoothAdapter not initialized");
             return;
         }
         /*check if the service is available on the device*/
         BluetoothGattService mCustomService = mBluetoothGatt.getService(UUID.fromString("00001234-0000-1000-8000-00805f9b34fb"));
         if (mCustomService == null) {
-            Log.w(TAG, "Custom BLE Service not found");
+            Log.d(TAG, "Custom BLE Service not found");
             return;
         }
         /*get the read characteristic from the service*/
         BluetoothGattCharacteristic mWriteCharacteristic = mCustomService.getCharacteristic(UUID.fromString("0000ffe1-0000-1000-8000-00805f9b34fb"));
         mWriteCharacteristic.setValue(value);
         if (!mBluetoothGatt.writeCharacteristic(mWriteCharacteristic)) {
-            Log.w(TAG, "Failed to write characteristic");
+            Log.d(TAG, "Failed to write characteristic");
         }
     }
 

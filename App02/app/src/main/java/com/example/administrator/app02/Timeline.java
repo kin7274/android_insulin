@@ -49,78 +49,73 @@ public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyR
     public Button btn1;
     TextView textview1;
 
-//    BluetoothLeService mBluetoothLeService = new BluetoothLeService();
-//
-//    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            final String action = intent.getAction();
-//            if (BluetoothLeService.ACTION_DATA_AVAILABLE_CHANGE.equals(action)) {
-//                final String message = intent.getStringExtra(EXTRA_DATA);
-//                Log.d(TAG, "겟 메세지" + message);
-//                if (message.equals("")) {
-//                    Log.d(TAG, "message = 쮓 똥값");
-//
-//                } else {
-//
-//                    Log.d(TAG, "message = 값 조쿠요");
-//                    String[] MSG = message.split("");
-//                    Log.d(TAG, "MSG[1] = " + MSG[1]);
-//                    Log.d(TAG, "MSG[2] = " + MSG[2]);
-//                    Log.d(TAG, "MSG[3] = " + MSG[3]);
-//                    Log.d(TAG, "MSG[4] = " + MSG[4]);
-//                    Log.d(TAG, "MSG[5] = " + MSG[5]);
-//                    Log.d(TAG, "MSG[6] = " + MSG[6]);
-//                    Log.d(TAG, "MSG[7] = " + MSG[7]);
-//                    Log.d(TAG, "MSG[8] = " + MSG[8]);
-//                    Log.d(TAG, "MSG[9] = " + MSG[9]);
-//                    Log.d(TAG, "MSG[10] = " + MSG[10]);
-//                    Log.d(TAG, "MSG[11] = " + MSG[11]);
-//                    Log.d(TAG, "MSG[12] = " + MSG[12]);
-//                    String REALREALREAL = MSG[1] + MSG[2] + MSG[3] + MSG[4] + "년 " + MSG[5] + MSG[6] + "월 " + MSG[7] + MSG[8] + "일 " + MSG[9] + MSG[10] + "시 " + MSG[11] + MSG[12] + "분";
-////                    setData(REALREALREAL);
-//                    setData();
-//                    Log.d(TAG, "리얼리얼리어리리 : " + REALREALREAL);
-//                }
-//            }
-//        }
-//    };
-//
-//    public void setData() {
-////    public void setData(String item) {
-////        textview1.setText(item);
-//        Log.d(TAG, "111111띠용...므엇이죠 이게...");
-//        // TODO 여기 오류뜸..
-////        dataList.add(new CardItem(R.drawable.a1, "제발4", "제발요4"));
+    BluetoothLeService mBluetoothLeService = new BluetoothLeService();
+
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (BluetoothLeService.ACTION_DATA_AVAILABLE_CHANGE.equals(action)) {
+                final String message = intent.getStringExtra(EXTRA_DATA);
+                Log.d(TAG, "겟 메세지" + message);
+                Log.d(TAG, "message = 값 조쿠요");
+                // TODO 자릿수로 끊어서 하자
+                String[] MSG = message.split("");
+                Log.d(TAG, "MSG[1] = " + MSG[1]);
+                Log.d(TAG, "MSG[2] = " + MSG[2]);
+                Log.d(TAG, "MSG[3] = " + MSG[3]);
+                Log.d(TAG, "MSG[4] = " + MSG[4]);
+                Log.d(TAG, "MSG[5] = " + MSG[5]);
+                Log.d(TAG, "MSG[6] = " + MSG[6]);
+                Log.d(TAG, "MSG[7] = " + MSG[7]);
+                Log.d(TAG, "MSG[8] = " + MSG[8]);
+                Log.d(TAG, "MSG[9] = " + MSG[9]);
+                Log.d(TAG, "MSG[10] = " + MSG[10]);
+                Log.d(TAG, "MSG[11] = " + MSG[11]);
+                Log.d(TAG, "MSG[12] = " + MSG[12]);
+                String REALREALREAL = MSG[1] + MSG[2] + MSG[3] + MSG[4] + "년 " + MSG[5] + MSG[6] + "월 " + MSG[7] + MSG[8] + "일 " + MSG[9] + MSG[10] + "시 " + MSG[11] + MSG[12] + "분";
+//                    setData(REALREALREAL);
+                    setData();
+                Log.d(TAG, "리얼리얼리어리리 : " + REALREALREAL);
+            }
+        }
+    };
+
+    public void setData() {
+//    public void setData(String item) {
+        textview1.setText("1");
+        Log.d(TAG, "111111띠용...므엇이죠 이게...");
+        // TODO 여기 오류뜸..
+//        dataList.add(new CardItem(R.drawable.a1, "제발4", "제발요4"));
+
 //        dataList.add(new CardItem("제발4", "제발요4"));
 //        mAdapter.notifyDataSetChanged();
-//        Log.d(TAG, "222222띠용...므엇이죠 이게...");
-//    }
-//
-//    private final ServiceConnection mServiceConnection = new ServiceConnection() {
-//        @Override
-//        public void onServiceConnected(ComponentName componentName, IBinder service) {
-//            mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
-//            if (!mBluetoothLeService.initialize()) {
-//                Log.e(TAG, "Unable to initialize Bluetooth");
-//                finish();
-//            }
-//            mBluetoothLeService.connect(deviceAddress);
-//            //
-//            Log.d(TAG, "서비스가 연결되었습니다!");
-//        }
-//
-//        @Override
-//        public void onServiceDisconnected(ComponentName componentName) {
-//            mBluetoothLeService = null;
-//        }
-//    };
+        Log.d(TAG, "222222띠용...므엇이죠 이게...");
+    }
+
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder service) {
+            mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
+            if (!mBluetoothLeService.initialize()) {
+                Log.e(TAG, "Unable to initialize Bluetooth");
+                finish();
+            }
+            mBluetoothLeService.connect(deviceAddress);
+            //
+            Log.d(TAG, "서비스가 연결되었습니다!");
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            mBluetoothLeService = null;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
-
         mContext = this;
 
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -131,11 +126,11 @@ public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyR
         recyclerView.setLayoutManager(layoutManager);
 
         // 표시할 임시 데이터
-        final List<CardItem> dataList = new ArrayList<>();
+        final ArrayList<CardItem> dataList = new ArrayList<>();
         dataList.add(new CardItem("제발", "제발요"));
+        dataList.add(new CardItem("제발2", "제발2요"));
 //        dataList.add(new CardItem(R.drawable.a1, "제발", "제발요"));
 //        dataList.add(new CardItem(R.drawable.a1, "제발2", "제발2요"));
-        dataList.add(new CardItem("제발2", "제발2요"));
 
         // 어댑터 설정
         mAdapter = new MyRecyclerAdapter(dataList);
@@ -146,36 +141,35 @@ public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyR
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
 
+        settingdata22 = getIntent().getStringExtra("AYO");
+        Log.d(TAG, "settingdata22 = " + settingdata22);
+        String numbers = settingdata22;
+        String[] arr = numbers.split(",");
+        // setting_insulin_kinds = "초속효성"
+        setting_insulin_kinds2 = arr[0];
+        Log.d(TAG, "setting_insulin_kinds2 = " + setting_insulin_kinds2);
 
-//        settingdata22 = getIntent().getStringExtra("AYO");
-//        Log.d(TAG, "settingdata22 = " + settingdata22);
-//        String numbers = settingdata22;
-//        String[] arr = numbers.split(",");
-//        // setting_insulin_kinds = "초속효성"
-//        setting_insulin_kinds2 = arr[0];
-//        Log.d(TAG, "setting_insulin_kinds2 = " + setting_insulin_kinds2);
-//
-//        // setting_insulin_names = "휴머로그"
-//        setting_insulin_names2 = arr[1];
-//        Log.d(TAG, "setting_insulin_names2 = " + setting_insulin_names2);
-//
-//        // setting_insulin_unit = "5"
-//        setting_insulin_unit2 = arr[2];
-//        Log.d(TAG, "setting_insulin_unit2 = " + setting_insulin_unit2);
-//
-//
-//        deviceAddress = getIntent().getStringExtra(EXTRAS_DEVICE_ADDRESS);
-//        if (deviceAddress != null) {
-//            Log.d(TAG, "onCreate: " + deviceAddress);
-//        }
-//
-//        IntentFilter intentfilter = new IntentFilter();
-//        intentfilter.addAction(ACTION_DATA_AVAILABLE);
-//        intentfilter.addAction(ACTION_DATA_AVAILABLE_CHANGE);
-//        registerReceiver(mMessageReceiver, intentfilter);
+        // setting_insulin_names = "휴머로그"
+        setting_insulin_names2 = arr[1];
+        Log.d(TAG, "setting_insulin_names2 = " + setting_insulin_names2);
 
-//        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
-//        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+        // setting_insulin_unit = "5"
+        setting_insulin_unit2 = arr[2];
+        Log.d(TAG, "setting_insulin_unit2 = " + setting_insulin_unit2);
+
+
+        deviceAddress = getIntent().getStringExtra(EXTRAS_DEVICE_ADDRESS);
+        if (deviceAddress != null) {
+            Log.d(TAG, "onCreate: " + deviceAddress);
+        }
+
+        IntentFilter intentfilter = new IntentFilter();
+        intentfilter.addAction(ACTION_DATA_AVAILABLE);
+        intentfilter.addAction(ACTION_DATA_AVAILABLE_CHANGE);
+        registerReceiver(mMessageReceiver, intentfilter);
+
+        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
         btn1 = (Button) findViewById(R.id.btn1);
         textview1 = (TextView) findViewById(R.id.textview1);
 
@@ -185,9 +179,9 @@ public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyR
             public void onClick(View v) {
                 // sd카드 다 리드
                 // "a" 값 전송 / 0x61
-//                mBluetoothLeService.writeCharacteristic("a");
-                dataList.add(new CardItem("제발4", "제발요4"));
-                mAdapter.notifyDataSetChanged();
+                mBluetoothLeService.writeCharacteristic("a");
+//                dataList.add(new CardItem("제발4", "제발요4"));
+//                mAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -205,9 +199,9 @@ public class Timeline extends AppCompatActivity implements MyRecyclerAdapter.MyR
 
     @Override
     protected void onDestroy() {
-//        unbindService(mServiceConnection);
-//        mBluetoothLeService = null;
-//        unregisterReceiver(mMessageReceiver);
+        unbindService(mServiceConnection);
+        mBluetoothLeService = null;
+        unregisterReceiver(mMessageReceiver);
         super.onDestroy();
     }
 

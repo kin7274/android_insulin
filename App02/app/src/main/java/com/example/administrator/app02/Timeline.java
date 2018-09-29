@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +50,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     String setting_insulin_unit2 = "";
 
     public Button btn1;
-    TextView textview1;
 
     BluetoothLeService mBluetoothLeService = new BluetoothLeService();
 
@@ -77,7 +77,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 Log.d(TAG, "MSG[12] = " + MSG[12]);
                 String REALREALREAL = MSG[1] + MSG[2] + MSG[3] + MSG[4] + "년 " + MSG[5] + MSG[6] + "월 " + MSG[7] + MSG[8] + "일 " + MSG[9] + MSG[10] + "시 " + MSG[11] + MSG[12] + "분";
                 Log.d(TAG, "111111띠용...므엇이죠 이게...");
-//                textview1.setText(REALREALREAL);
                 lists.add(new CardItem(searchImage(), REALREALREAL, settingdata22));
                 mAdapter.notifyDataSetChanged();
                 Log.d(TAG, "222222띠용...므엇이죠 이게...");
@@ -128,6 +127,12 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+
+        // 툴바
+        Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setTitle("");
+
         mContext = this;
 
         recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
@@ -182,8 +187,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
         btn1 = (Button) findViewById(R.id.btn1);
-        textview1 = (TextView) findViewById(R.id.textview1);
-
         // 블루투스 값 리시브!
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override

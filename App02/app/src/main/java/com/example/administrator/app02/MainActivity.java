@@ -57,10 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String setting_insulin_names;
     String setting_insulin_unit;
 
-    // 쉐어드
-    EditText et;
-    SharedPreferences sharedPreferences;
-
     // 다이얼로그 선택된 값
     final int[] selectedItem = {0};
 
@@ -115,25 +111,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textview1 = (TextView) findViewById(R.id.textview1);
         textview2 = (TextView) findViewById(R.id.textview2);
         setting_data = (TextView) findViewById(R.id.setting_data);
-    }
-
-    // 투약 종류마다 리스트 맨 앞 색 구별!!!!!!
-    // 범례도 꼭 넣자!!
-    public int searchImage() {
-        int a = 0;
-        switch (setting_insulin_kinds) {
-            case "초속효성":
-                return R.drawable.a1;
-            case "속효성":
-                return R.drawable.a2;
-            case "중간형":
-                return R.drawable.a3;
-            case "혼합형":
-                return R.drawable.a4;
-            case "지속형":
-                return R.drawable.a5;
-        }
-        return a;
     }
 
     // 설정페이지 인텐트로부터 리시브

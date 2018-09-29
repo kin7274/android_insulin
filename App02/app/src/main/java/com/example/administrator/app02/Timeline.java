@@ -39,7 +39,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     Context mContext;
     List<CardItem> lists;
     private MyRecyclerAdapter mAdapter;
-    RecyclerView recyclerView;
+    RecyclerView recycler_view;
 
     String deviceAddress = "";
     String settingdata22 = "";
@@ -78,6 +78,8 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 Log.d(TAG, "111111띠용...므엇이죠 이게...");
                 textview1.setText(REALREALREAL);
 
+
+
                 lists.add(new CardItem("제발4", "제발요4"));
                 mAdapter.notifyDataSetChanged();
                 Log.d(TAG, "222222띠용...므엇이죠 이게...");
@@ -113,28 +115,30 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         setContentView(R.layout.activity_timeline);
         mContext = this;
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(false);
+        recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
+        recycler_view.setHasFixedSize(false);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        recycler_view.setLayoutManager(layoutManager);
+        
+        try {
+            lists = new ArrayList<>();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        // 표시할 임시 데이터
-        List<CardItem> lists;
-                lists = new ArrayList<>();
-
-//        lists.add(new CardItem("제발", "제발요"));
-//        lists.add(new CardItem("제발2", "제발2요"));
+        lists.add(new CardItem("제발", "제발요"));
+        lists.add(new CardItem("제발2", "제발2요"));
 //        dataList.add(new CardItem(R.drawable.a1, "제발", "제발요"));
 //        dataList.add(new CardItem(R.drawable.a1, "제발2", "제발2요"));
 
         // 어댑터 설정
         mAdapter = new MyRecyclerAdapter(lists);
         mAdapter.setOnClickListener(this);
-        recyclerView.setAdapter(mAdapter);
+        recycler_view.setAdapter(mAdapter);
 
         // 구분선
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
-        recyclerView.addItemDecoration(dividerItemDecoration);
+        recycler_view.addItemDecoration(dividerItemDecoration);
 
         settingdata22 = getIntent().getStringExtra("AYO");
         Log.d(TAG, "settingdata22 = " + settingdata22);

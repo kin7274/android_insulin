@@ -18,7 +18,9 @@ import android.widget.Toast;
 
 public class SettingActivity extends AppCompatActivity implements OnClickListener, OnItemSelectedListener {
 
-    Spinner spinner01, spinner02;  // 상위 스피너, 인슐린 종류(5).  하위 스피너, 하위 품목
+    Spinner spinner01, spinner02, spinner03;  // 상위 스피너, 인슐린 종류(5)
+                                              // 하위 스피너, 하위 품목
+                                              // 초하위 스피너, 투약 시간
     TextView abc_num;  // 단위 표시
     Button abc_inc, abc_dec;  // 단위 증가, 감소
     Button set_btn, exit_btn;  // 저장버튼
@@ -36,10 +38,12 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         abc_inc = (Button) findViewById(R.id.abc_inc);
         abc_dec = (Button) findViewById(R.id.abc_dec);
         set_btn = (Button) findViewById(R.id.set_btn);
+        exit_btn = (Button) findViewById(R.id.exit_btn);
 
         abc_inc.setOnClickListener(this);
         abc_dec.setOnClickListener(this);
         set_btn.setOnClickListener(this);
+        exit_btn.setOnClickListener(this);
 
         // 상위 스피너, 인슐린 종류(5)
         final String[] items = {getResources().getString(R.string.insulin_name), getResources().getString(R.string.insulin_name1), getResources().getString(R.string.insulin_name2), getResources().getString(R.string.insulin_name3), getResources().getString(R.string.insulin_name4)};
@@ -58,6 +62,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
 
         final Spinner spinner01 = (Spinner) findViewById(R.id.spinner01);
         final Spinner spinner02 = (Spinner) findViewById(R.id.spinner02);
+        final Spinner spinner03 = (Spinner) findViewById(R.id.spinner03);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -195,6 +200,13 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                 AlertDialog dialog = builder.create();
                 dialog.show();
                 // 데이터 전송
+                break;
+            case R.id.exit_btn:
+                // 닫기 버튼
+//                Intent returnIntent = new Intent();
+//                returnIntent.putExtra("AA",AA);
+//                setResult(Activity.RESULT_OK,returnIntent);
+                finish();
                 break;
         }
     }

@@ -28,6 +28,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
     String a1 = "";
     String a2 = "";
     String a3 = "";
+    String a4 = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +46,10 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         set_btn.setOnClickListener(this);
         exit_btn.setOnClickListener(this);
 
-        // 상위 스피너, 인슐린 종류(5)
+        // 상위 스피너 : 인슐린 종류(5)
         final String[] items = {getResources().getString(R.string.insulin_name), getResources().getString(R.string.insulin_name1), getResources().getString(R.string.insulin_name2), getResources().getString(R.string.insulin_name3), getResources().getString(R.string.insulin_name4)};
 
-        // 하위 스피너, 하위 품목
+        // 하위 스피너 : 하위 품목
         // 초속효성
         final String[] items1 = {getResources().getString(R.string.insulin_name0_0), getResources().getString(R.string.insulin_name0_1), getResources().getString(R.string.insulin_name0_2)};
         // 속효성
@@ -59,6 +60,9 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         final String[] items4 = {getResources().getString(R.string.insulin_name3_0), getResources().getString(R.string.insulin_name3_1), getResources().getString(R.string.insulin_name3_2), getResources().getString(R.string.insulin_name3_3)};
         // 지속형
         final String[] items5 = {getResources().getString(R.string.insulin_name4_0), getResources().getString(R.string.insulin_name4_1)};
+
+        // 초하위 스피너 : 투약 시간(4)
+        final String[] items6 = {"아침식전", "점심식전", "저녁식전", "취침전"};
 
         final Spinner spinner01 = (Spinner) findViewById(R.id.spinner01);
         final Spinner spinner02 = (Spinner) findViewById(R.id.spinner02);
@@ -147,6 +151,17 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
+        ArrayAdapter<String> adapter7 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+        adapter7.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner03.setAdapter(adapter7);
+        spinner03.setSelection(0);
+        spinner03.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                a4 = (String) spinner03.getItemAtPosition(position);
             }
         });
     }

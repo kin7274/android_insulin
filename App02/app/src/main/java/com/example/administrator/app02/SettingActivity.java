@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -16,11 +19,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SettingActivity extends AppCompatActivity implements OnClickListener, OnItemSelectedListener {
+import java.util.ArrayList;
+import java.util.List;
+
+public class SettingActivity extends AppCompatActivity implements OnClickListener, OnItemSelectedListener, SettingRecyclerAdapter.SettingRecyclerViewClickListener {
+
+    List<CardItem_Setting> settinglists;
+    private SettingRecyclerAdapter mAdapter;
+    RecyclerView recycler_view;
 
     Spinner spinner01, spinner02, spinner03;  // 상위 스피너, 인슐린 종류(5)
-                                              // 하위 스피너, 하위 품목
-                                              // 초하위 스피너, 투약 시간
+    // 하위 스피너, 하위 품목
+    // 초하위 스피너, 투약 시간
     TextView abc_num;  // 단위 표시
     Button abc_inc, abc_dec;  // 단위 증가, 감소
     Button set_btn, exit_btn;  // 저장버튼
@@ -45,6 +55,29 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         abc_dec.setOnClickListener(this);
         set_btn.setOnClickListener(this);
         exit_btn.setOnClickListener(this);
+
+        recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
+        recycler_view.setHasFixedSize(false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        // 반대로 쌓기
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        recycler_view.setLayoutManager(layoutManager);
+
+        try {
+            settinglists = new ArrayList<>();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // 어댑터 설정
+        mAdapter = new SettingRecyclerAdapter(settinglists);
+        mAdapter.setOnClickListener(this);
+        recycler_view.setAdapter(mAdapter);
+
+        // 구분선
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
+        recycler_view.addItemDecoration(dividerItemDecoration);
 
         // 상위 스피너 : 인슐린 종류(5)
         final String[] items = {getResources().getString(R.string.insulin_name), getResources().getString(R.string.insulin_name1), getResources().getString(R.string.insulin_name2), getResources().getString(R.string.insulin_name3), getResources().getString(R.string.insulin_name4)};
@@ -171,6 +204,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
         });
     }
 
+
     @Override
     public void onClick(View view) {
         // 버튼 이벤트
@@ -205,10 +239,12 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String AA = a1 + ", " + a2 + ", " + a3 + ", " + a4;
-                                Intent returnIntent = new Intent();
-                                returnIntent.putExtra("AA",AA);
-                                setResult(Activity.RESULT_OK,returnIntent);
-                                finish();
+                                settinglists.add(new CardItem_Setting(AA));
+                                mAdapter.notifyDataSetChanged();
+//                                Intent returnIntent = new Intent();
+//                                returnIntent.putExtra("AA",AA);
+//                                setResult(Activity.RESULT_OK,returnIntent);
+//                                finish();
                             }
                         })
                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -223,6 +259,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                 break;
             case R.id.exit_btn:
                 // 닫기 버튼
+//                String AA = a1 + ", " + a2 + ", " + a3 + ", " + a4;
 //                Intent returnIntent = new Intent();
 //                returnIntent.putExtra("AA",AA);
 //                setResult(Activity.RESULT_OK,returnIntent);
@@ -238,4 +275,11 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
+
+    @Override
+    public void onItemClicked(int position) {
+    }
 }
+
+
+

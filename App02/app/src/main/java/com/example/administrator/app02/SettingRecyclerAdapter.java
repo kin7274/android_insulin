@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -59,10 +60,13 @@ public class SettingRecyclerAdapter extends RecyclerView.Adapter<SettingRecycler
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         TextView tex;
+
         public ViewHolder(View itemView) {
             super(itemView);
             tex = (TextView) itemView.findViewById(R.id.tex);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -71,7 +75,7 @@ public class SettingRecyclerAdapter extends RecyclerView.Adapter<SettingRecycler
         }
     }
 
-    public void setOnClickListener(SettingRecyclerAdapter.SettingRecyclerViewClickListener listener) {
+    public void setOnClickListener(SettingRecyclerViewClickListener listener) {
         mListener = listener;
     }
 

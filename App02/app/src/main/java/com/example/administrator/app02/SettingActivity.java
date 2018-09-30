@@ -149,19 +149,24 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                 }
                 a1 = (String) spinner01.getItemAtPosition(position);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
 
-        ArrayAdapter<String> adapter7 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+        ArrayAdapter<String> adapter7 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items6);
         adapter7.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner03.setAdapter(adapter7);
         spinner03.setSelection(0);
-        spinner03.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spinner03.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 a4 = (String) spinner03.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
@@ -209,7 +214,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                finish();
+//                                finish();
                             }
                         });
                 AlertDialog dialog = builder.create();

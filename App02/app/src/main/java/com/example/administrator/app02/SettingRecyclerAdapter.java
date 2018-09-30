@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class SettingRecyclerAdapter extends RecyclerView.Adapter<SettingRecycler
 
         TextView tex;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             tex = (TextView) itemView.findViewById(R.id.tex);
 

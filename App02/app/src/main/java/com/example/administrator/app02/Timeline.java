@@ -232,7 +232,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     }
 }
 
-
     // 뒤로 가기 버튼 : 팝업창을 띄움
 //    @Override
 //    public void onBackPressed() {

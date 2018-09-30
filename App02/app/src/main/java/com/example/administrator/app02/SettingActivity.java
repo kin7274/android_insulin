@@ -21,7 +21,7 @@ public class SettingActivity extends AppCompatActivity implements OnClickListene
     Spinner spinner01, spinner02;  // 상위 스피너, 인슐린 종류(5).  하위 스피너, 하위 품목
     TextView abc_num;  // 단위 표시
     Button abc_inc, abc_dec;  // 단위 증가, 감소
-    Button set_btn;  // 저장버튼
+    Button set_btn, exit_btn;  // 저장버튼
 
     String a1 = "";
     String a2 = "";

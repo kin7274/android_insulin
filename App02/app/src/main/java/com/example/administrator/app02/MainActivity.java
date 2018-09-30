@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private final static String TAG = MainActivity.class.getSimpleName();
 
-    private CustomDialog dialog;
-
     BluetoothLeService mBluetoothLeService = new BluetoothLeService();
 
     String deviceAddress;

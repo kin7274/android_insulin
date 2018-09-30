@@ -30,8 +30,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.example.administrator.app02.BluetoothLeService.ACTION_DATA_AVAILABLE;
 import static com.example.administrator.app02.BluetoothLeService.ACTION_DATA_AVAILABLE_CHANGE;
@@ -40,6 +44,9 @@ import static com.example.administrator.app02.DeviceControlActivity.EXTRAS_DEVIC
 import static com.example.administrator.app02.MyRecyclerAdapter.MyRecyclerViewClickListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, SettingRecyclerAdapter.SettingRecyclerViewClickListener {
+
+    // GSON
+    private Gson gson;
 
     List<CardItem_Setting> settinglists;
     private SettingRecyclerAdapter mAdapter;
@@ -104,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 저장데이터 불러오기
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String str = pref.getString("PREF_STRNAME", "");
-        if(str.equals("")){
+        if (str.equals("")) {
             // 초기 1회
             Log.d(TAG, "setting_data = " + setting_data.getText().toString());
             setting_data.setText("설정부터하고와");
@@ -124,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void set(){
+    public void set() {
         Button btn1 = (Button) findViewById(R.id.btn1);
         Button btn2 = (Button) findViewById(R.id.btn2);
         Button btn3 = (Button) findViewById(R.id.btn3);
@@ -228,28 +235,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent1 = new Intent(MainActivity.this, DeviceScanActivity.class);
                 startActivity(intent1);
                 break;
-                // 페어링
+            // 페어링
             case R.id.btn2:
                 final Intent intent2 = new Intent(MainActivity.this, DeviceControlActivity.class);
                 intent2.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, textview1.getText());
                 intent2.putExtra(EXTRAS_DEVICE_ADDRESS, textview2.getText());
                 startActivity(intent2);
                 break;
-                // DB
+            // DB
             case R.id.btn3:
                 Intent intent3 = new Intent(MainActivity.this, AddNeedleActivity.class);
                 intent3.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, textview1.getText());
                 intent3.putExtra(EXTRAS_DEVICE_ADDRESS, textview2.getText());
                 startActivity(intent3);
                 break;
-                // 설정 끝, 다음으로 이동
+            // 설정 끝, 다음으로 이동
             case R.id.btn4:
                 Intent intent4 = new Intent(MainActivity.this, Timeline.class);
                 intent4.putExtra("AYO", setting_data.getText());
                 intent4.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, textview2.getText());
                 startActivity(intent4);
                 break;
-                // 설정 페이지로 이동
+            // 설정 페이지로 이동
             case R.id.action_setting:
                 Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);
                 startActivityForResult(intent_setting, 1);
@@ -270,11 +277,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStop() {
         super.onStop();
-        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        String strrr = setting_data.getText().toString();
-        editor.putString("PREF_STRNAME", strrr);
-        editor.apply();
+//        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = pref.edit();
+//        String strrr = setting_data.getText().toString();
+//        editor.putString("PREF_STRNAME", strrr);
+//        editor.apply();
+
+        onSaveData();
+    }
+
+    // 설정 배열값을 저장한다!!
+    protected void onSaveData(){
+        Contact contact = new Contact();
+
     }
 
     @Override

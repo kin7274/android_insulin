@@ -162,21 +162,21 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
         recycler_view.addItemDecoration(dividerItemDecoration);
 
-        settingdata22 = getIntent().getStringExtra("AYO");
-        Log.d(TAG, "settingdata22 = " + settingdata22);
-        String numbers = settingdata22;
-        String[] arr = numbers.split(",");
-        // setting_insulin_kinds = "초속효성"
-        setting_insulin_kinds2 = arr[0];
-        Log.d(TAG, "setting_insulin_kinds2 = " + setting_insulin_kinds2);
-
-        // setting_insulin_names = "휴머로그"
-        setting_insulin_names2 = arr[1];
-        Log.d(TAG, "setting_insulin_names2 = " + setting_insulin_names2);
-
-        // setting_insulin_unit = "5"
-        setting_insulin_unit2 = arr[2];
-        Log.d(TAG, "setting_insulin_unit2 = " + setting_insulin_unit2);
+//        settingdata22 = getIntent().getStringExtra("AYO");
+//        Log.d(TAG, "settingdata22 = " + settingdata22);
+//        String numbers = settingdata22;
+//        String[] arr = numbers.split(",");
+//        // setting_insulin_kinds = "초속효성"
+//        setting_insulin_kinds2 = arr[0];
+//        Log.d(TAG, "setting_insulin_kinds2 = " + setting_insulin_kinds2);
+//
+//        // setting_insulin_names = "휴머로그"
+//        setting_insulin_names2 = arr[1];
+//        Log.d(TAG, "setting_insulin_names2 = " + setting_insulin_names2);
+//
+//        // setting_insulin_unit = "5"
+//        setting_insulin_unit2 = arr[2];
+//        Log.d(TAG, "setting_insulin_unit2 = " + setting_insulin_unit2);
 
         deviceAddress = getIntent().getStringExtra(EXTRAS_DEVICE_ADDRESS);
         if (deviceAddress != null) {

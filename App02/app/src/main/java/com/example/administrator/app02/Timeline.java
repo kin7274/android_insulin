@@ -194,6 +194,9 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         text_data2 = (TextView) findViewById(R.id.text_data2);
         text_data1.setOnClickListener(this);
         text_data2.setOnClickListener(this);
+
+        text_data1.setText(Global.getData1());
+        text_data2.setText(Global.getData2());
     }
 
     @Override

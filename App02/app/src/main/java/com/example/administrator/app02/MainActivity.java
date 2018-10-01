@@ -88,20 +88,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 저장데이터 불러오기
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String str = pref.getString("PREF_STRNAME", "");
+        Log.d(TAG, "str = " + str);
         if (str.equals("")) {
             // 초기 1회
-            Log.d(TAG, "setting_data = " + setting_data.getText().toString());
+            Log.d(TAG, "설정부터하세욥..");
             setting_data.setText("설정부터하고와");
-        } else {
-            if (str.equals(null)) {
-                // 약이 2개일 경우
+        } else{
+            if (str.contains("&&")) {
+                String numbers = str;
+                String[] arr = numbers.split("&&");
+                String strradv1 = arr[0];
+                Log.d(TAG, "strradv1 =" + strradv1);
 
-                settinglists.add(new CardItem_Setting(str));
-//                mAdapter.notifyDataSetChanged();
+                settinglists.add(new CardItem_Setting(strradv1));
+                String strradv2 = arr[1];
+                Log.d(TAG, "strradv2 = " + strradv2);
 
-                settinglists.add(new CardItem_Setting(str));
+                settinglists.add(new CardItem_Setting(strradv2));
                 mAdapter.notifyDataSetChanged();
-//
+
 //                setting_data.setText(str);
 //                String numbers = str;
 //                String[] arr = numbers.split(",");
@@ -117,11 +122,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 // 약이 1개야
                 // null값 삭제
-                String strr = str.replace(null, "");
+//                String strr = str.replace(null, "");
 //                setting_data.setText(str);
 //                String numbers = str;
-                settinglists.add(new CardItem_Setting(strr));
+
+                String numbers = str;
+                String[] arr = numbers.split("//");
+                String sttr = arr[0];
+                Log.d(TAG, "sttr = " + sttr);
+                settinglists.add(new CardItem_Setting(sttr));
                 mAdapter.notifyDataSetChanged();
+
+                // 약이 2개일 경우
+
 //                String[] arr = numbers.split(",");
 //                // insulin_kinds = "초속효성"
 //                setting_insulin_kinds = arr[0];
@@ -170,9 +183,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     settinglists.add(new CardItem_Setting(setting_insulin1));
                     mAdapter.notifyDataSetChanged();
                 }
-//                Log.d(TAG, "setting_insulin1 = " + setting_insulin1);
-//                Log.d(TAG, "setting_insulin2 = " + setting_insulin2);
-                setting_insulin_total = setting_insulin1 + setting_insulin2;
+                Log.d(TAG, "setting_insulin1 = " + setting_insulin1);
+                Log.d(TAG, "setting_insulin2 = " + setting_insulin2);
+                if(setting_insulin2 != null){
+                    setting_insulin_total = setting_insulin1 + "&&" + setting_insulin2;
+                } else {
+                    setting_insulin_total = setting_insulin1 + "//";
+                }
+
                 Log.d(TAG, "setting_insulin_total = " + setting_insulin_total);
 
 //                // 메인 텍스트에 추가

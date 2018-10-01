@@ -29,6 +29,7 @@ import static com.example.administrator.app02.DeviceControlActivity.EXTRAS_DEVIC
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, SettingRecyclerAdapter.SettingRecyclerViewClickListener {
 
+    String rrrrr;
     List<CardItem_Setting> settinglists;
     private SettingRecyclerAdapter mAdapter;
     RecyclerView recycler_view;
@@ -93,19 +94,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // 초기 1회
             Log.d(TAG, "설정부터하세욥..");
             setting_data.setText("설정부터하고와");
-        } else{
+        }
+        // 설정값이 존재할 경우
+        else {
             if (str.contains("&&")) {
+                // 사용하는 약이 두개인 경우
                 String numbers = str;
                 String[] arr = numbers.split("&&");
                 String strradv1 = arr[0];
                 Log.d(TAG, "strradv1 =" + strradv1);
-
                 settinglists.add(new CardItem_Setting(strradv1));
                 String strradv2 = arr[1];
                 Log.d(TAG, "strradv2 = " + strradv2);
-
                 settinglists.add(new CardItem_Setting(strradv2));
                 mAdapter.notifyDataSetChanged();
+            } else {
+                settinglists.add(new CardItem_Setting(str));
+                mAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+//            if (str.contains("&&")) {
+//                String numbers = str;
+//                String[] arr = numbers.split("&&");
+//                String strradv1 = arr[0];
+//                Log.d(TAG, "strradv1 =" + strradv1);
+//
+//                settinglists.add(new CardItem_Setting(strradv1));
+//                String strradv2 = arr[1];
+//                Log.d(TAG, "strradv2 = " + strradv2);
+//
+//                settinglists.add(new CardItem_Setting(strradv2));
+//                mAdapter.notifyDataSetChanged();
 
 //                setting_data.setText(str);
 //                String numbers = str;
@@ -119,21 +139,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                // setting_insulin_time = "아침식전"
 //                setting_insulin_time = arr[3];
 //                Log.d(TAG, "종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit + ", 투약시간 = " + setting_insulin_time);
-            } else {
-                // 약이 1개야
-                // null값 삭제
+//            } else {
+    // 약이 1개야
+    // null값 삭제
 //                String strr = str.replace(null, "");
 //                setting_data.setText(str);
 //                String numbers = str;
 
-                String numbers = str;
-                String[] arr = numbers.split("//");
-                String sttr = arr[0];
-                Log.d(TAG, "sttr = " + sttr);
-                settinglists.add(new CardItem_Setting(sttr));
-                mAdapter.notifyDataSetChanged();
+//                String numbers = str;
+//                String[] arr = numbers.split("//");
+//                String sttr = arr[0];
+//                Log.d(TAG, "sttr = " + sttr);
+//                settinglists.add(new CardItem_Setting(sttr));
+//                mAdapter.notifyDataSetChanged();
 
-                // 약이 2개일 경우
+    // 약이 2개일 경우
 
 //                String[] arr = numbers.split(",");
 //                // insulin_kinds = "초속효성"
@@ -145,9 +165,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                // setting_insulin_time = "아침식전"
 //                setting_insulin_time = arr[3];
 //                Log.d(TAG, "종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit + ", 투약시간 = " + setting_insulin_time);
-            }
-        }
-    }
 
     public void set() {
         Button btn1 = (Button) findViewById(R.id.btn1);
@@ -155,11 +172,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btn3 = (Button) findViewById(R.id.btn3);
         Button btn4 = (Button) findViewById(R.id.btn4);
         Button action_setting = (Button) findViewById(R.id.action_setting);
+        Button action_setting2 = (Button) findViewById(R.id.action_setting2);
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
         btn4.setOnClickListener(this);
         action_setting.setOnClickListener(this);
+        action_setting2.setOnClickListener(this);
 
         textview1 = (TextView) findViewById(R.id.textview1);
         textview2 = (TextView) findViewById(R.id.textview2);
@@ -171,27 +190,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
-                // 인슐린 종합 데이터
-                if (settinglists.size() > 0) {
-                    // 2번
-                    setting_insulin2 = data.getStringExtra("AA");
-                    settinglists.add(new CardItem_Setting(setting_insulin2));
-                    mAdapter.notifyDataSetChanged();
-                } else {
-                    // 1번
-                    setting_insulin1 = data.getStringExtra("AA");
-                    settinglists.add(new CardItem_Setting(setting_insulin1));
-                    mAdapter.notifyDataSetChanged();
-                }
-                Log.d(TAG, "setting_insulin1 = " + setting_insulin1);
-                Log.d(TAG, "setting_insulin2 = " + setting_insulin2);
-                if(setting_insulin2 != null){
-                    setting_insulin_total = setting_insulin1 + "&&" + setting_insulin2;
-                } else {
-                    setting_insulin_total = setting_insulin1 + "//";
-                }
-
-                Log.d(TAG, "setting_insulin_total = " + setting_insulin_total);
+                setting_insulin1 = data.getStringExtra("AA");
+                settinglists.add(new CardItem_Setting(setting_insulin1));
+                mAdapter.notifyDataSetChanged();
+            }
+        }
+        if (requestCode == 2) {
+            setting_insulin2 = data.getStringExtra("BB");
+            settinglists.add(new CardItem_Setting(setting_insulin2));
+            mAdapter.notifyDataSetChanged();
+        }
+        // 인슐린 종합 데이터
+//                if (settinglists.size() > 0) {
+//                    // 2번
+//                    setting_insulin2 = data.getStringExtra("AA");
+//                    settinglists.add(new CardItem_Setting(setting_insulin2));
+//                    mAdapter.notifyDataSetChanged();
+//                } else {
+//                    // 1번
+//                    setting_insulin1 = data.getStringExtra("AA");
+//                    settinglists.add(new CardItem_Setting(setting_insulin1));
+//                    mAdapter.notifyDataSetChanged();
+//                }
+//                Log.d(TAG, "setting_insulin1 = " + setting_insulin1);
+//                Log.d(TAG, "setting_insulin2 = " + setting_insulin2);
+//                if(setting_insulin2 != null){
+//                    setting_insulin_total = setting_insulin1 + "&&" + setting_insulin2;
+//                } else {
+//                    setting_insulin_total = setting_insulin1 + "//";
+//                }
+//
+//                Log.d(TAG, "setting_insulin_total = " + setting_insulin_total);
 
 //                // 메인 텍스트에 추가
 //                setting_data.setText(result);
@@ -208,8 +237,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                setting_insulin_time = arr[3];
 //
 //                Log.d(TAG, "내가 설정한 값은@@@@ 종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit + ", 투약 시간 = " + setting_insulin_time);
-            }
-        }
+//            }
     }
 
     // 메뉴.xml
@@ -294,6 +322,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);
                 startActivityForResult(intent_setting, 1);
                 break;
+            case R.id.action_setting2:
+                Intent intent_setting2 = new Intent(MainActivity.this, SettingActivity2.class);
+                startActivityForResult(intent_setting2, 2);
+                break;
         }
     }
 
@@ -310,13 +342,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStop() {
         super.onStop();
+        if (setting_insulin1 != null) {
+            // 설정안햇네 저장할거없다이
+            Log.d(TAG, "setting_insulin1 X NULL");
+            // 약1은 설정햇네
+            // 그럼 약2는?
+            if (setting_insulin2 != null) {
+                // 2번도 햇네?
+                rrrrr = setting_insulin1 + "&&" + setting_insulin2;
+            } else {
+                Log.d(TAG, "setting_insulin2 = NULL");
+                // 2번은 안햇네?
+                // 그럼 1번만 저장할게
+                rrrrr = setting_insulin1;
+
+            }
+        } else {
+            Log.d(TAG, "setting_insulin1 = NULL");
+        }
+
+        Log.d(TAG, "rrrrr = " + rrrrr);
+
         // getSharedPreferences(String name, int mode)
         // : 특정 이름을 가진 SharedPreferences를 생성. 애플리케이션 전체에서 사용
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
+        editor.putString("PREF_STRNAME", rrrrr);
 //        String strrr = setting_data.getText().toString();
 //        editor.putString("PREF_STRNAME", strrr);
-        editor.putString("PREF_STRNAME", setting_insulin_total);
+//        editor.putString("PREF_STRNAME", setting_insulin_total);
         editor.apply();
     }
 

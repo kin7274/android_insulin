@@ -51,6 +51,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     String eat_status = "";
     String deviceAddress = "";
     String settingdata22 = "";
+
     String setting_insulin_kinds2 = "";
     String setting_insulin_names2 = "";
     String setting_insulin_unit2 = "";
@@ -88,31 +89,16 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 String str_hh = MSG[9] + MSG[10];
                 int hh = Integer.parseInt(str_hh);
                 Log.d(TAG, "현재 시간은 " + hh + "시입니다");
-                Log.d(TAG, "음 지금 시간이면 ..." + hh_kinds(hh););
-                /////////////////////////////////////////////////////////////////////////////////////////////////
-                //
-                // 식사상태를 구분하자!
-                //
-                // MSG[9] + MSG[10] = 현재 시간
-                // 형식 : 00 ~ 24시
-                // 21-05(8h) : 취침전;
-                // 05-11(6h) : 아침식전;
-                // 11-16(5h) : 점심식전;
-                // 16-21(5h) : 저녁식전;
-
-                // 지금 시간이 18시니까
-                // 저녁식전이야
-
-
-                //
-                /////////////////////////////////////////////////////////////////////////////////////////////////
+                Log.d(TAG, "음 지금 시간이면 ..." + hh_kinds(hh) + "상태구나!!!");
 
                 // searchImage() : 인슐린 종류에 따른 이미지 선택
                 // REALREALREAL : 현재 시간
                 // settingdata22 :
-
-                // 설정한 약값이 하나면 고민할 필요가 없다!
                 String dsdfnkvlndsklcndslk = text_data2.getText().toString();
+
+                /////////////////////////////////////////////
+                // 설정한 약값이 하나면 고민할 필요가 없다!//
+                /////////////////////////////////////////////
                 if (dsdfnkvlndsklcndslk.equals("없습니다")) {
                     // searchImage() : 인슐린 종류에 따른 이미지 선택
                     // REALREALREAL : 현재 시간
@@ -122,7 +108,9 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                     Log.d(TAG, "222222띠용...므엇이죠 이게...");
                     Log.d(TAG, "리얼리얼리어리리 : " + REALREALREAL);
                 } else {
-
+                    /////////////////////////////////////////////
+                    // 설정한 약값이 두개야
+                    /////////////////////////////////////////////
                     lists.add(new CardItem(searchImage(), REALREALREAL, settingdata22));
                     mAdapter.notifyDataSetChanged();
                     Log.d(TAG, "333333띠용...무요!!");
@@ -239,13 +227,36 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         text_data2.setOnClickListener(this);
 
         // 설정한 1번 약
-        text_data1.setText(Global.getData1());
+        String insulin_data1 = Global.getData1();
+        text_data1.setText(insulin_data1);
+        String[] INSULIN1 = insulin_data1.split("");
+
+
         // 설정한 2번 약
         // 없으면 없다고 떠!!
-        text_data2.setText(Global.getData2());
+        String insulin_data2 = Global.getData2();
+        text_data2.setText(insulin_data2);
+        if(insulin_data2.equals("없습니다")){
+            Log.d(TAG, "또잉..");
+        } else {
+            String[] INSULIN2 = insulin_data2.split("");
+            
+
+        }
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////
     // 시간에 따른 식사상태 구분;
+    //
+    // MSG[9] + MSG[10] = 현재 시간
+    // 형식 : 00 ~ 24시
+    // 21-05(8h) : 취침전;
+    // 05-11(6h) : 아침식전;
+    // 11-16(5h) : 점심식전;
+    // 16-21(5h) : 저녁식전;
+
+    // 지금 시간이 18시니까
+    // 저녁식전이야
     public String hh_kinds(int hh){
         if ((hh >= 05) && (hh < 11)) {
             eat_status = "아침식전";

@@ -115,9 +115,15 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                     Log.d(TAG, "음 지금 시간이면 ..." + hh_kinds(hh) + "상태구나!!!");
                     // 현재 시간에 따라 상태 설정
                     if(hh_kinds(hh).equals(INSULIN1[3])){
+                        // 그럼 나는 1번 약을 투여한거야.
 
                     } else if(hh_kinds(hh).equals(INSULIN2[3])){
+                        // 그럼 나는 2번 약을 투여한거야.
 
+                    } else {
+                        // 난 1, 2번에 설정해논거에 없네?
+                        // 그럼 머야
+                        
                     }
                     lists.add(new CardItem(searchImage(), REALREALREAL, settingdata22));
                     mAdapter.notifyDataSetChanged();

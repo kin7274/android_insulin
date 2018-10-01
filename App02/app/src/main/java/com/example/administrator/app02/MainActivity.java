@@ -29,9 +29,6 @@ import static com.example.administrator.app02.DeviceControlActivity.EXTRAS_DEVIC
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, SettingRecyclerAdapter.SettingRecyclerViewClickListener {
 
-    // GSON
-    private Gson gson;
-
     List<CardItem_Setting> settinglists;
     private SettingRecyclerAdapter mAdapter;
     RecyclerView recycler_view;
@@ -39,8 +36,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView textview1, textview2, setting_data;
 
     private final static String TAG = MainActivity.class.getSimpleName();
-
-    BluetoothLeService mBluetoothLeService = new BluetoothLeService();
 
     String deviceAddress;
 
@@ -98,18 +93,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d(TAG, "setting_data = " + setting_data.getText().toString());
             setting_data.setText("설정부터하고와");
         } else {
-            setting_data.setText(str);
-            String numbers = str;
-            String[] arr = numbers.split(",");
-            // insulin_kinds = "초속효성"
-            setting_insulin_kinds = arr[0];
-            // insulin_kinds = "휴머로그"
-            setting_insulin_names = arr[1];
-            // insulin_unit = "5"
-            setting_insulin_unit = arr[2];
-            // setting_insulin_time = "아침식전"
-            setting_insulin_time = arr[3];
-            Log.d(TAG, "종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit + ", 투약시간 = " + setting_insulin_time);
+            if (str.equals(null)) {
+                // 약이 2개일 경우
+
+                settinglists.add(new CardItem_Setting(str));
+//                mAdapter.notifyDataSetChanged();
+
+                settinglists.add(new CardItem_Setting(str));
+                mAdapter.notifyDataSetChanged();
+//
+//                setting_data.setText(str);
+//                String numbers = str;
+//                String[] arr = numbers.split(",");
+//                // insulin_kinds = "초속효성"
+//                setting_insulin_kinds = arr[0];
+//                // insulin_kinds = "휴머로그"
+//                setting_insulin_names = arr[1];
+//                // insulin_unit = "5"
+//                setting_insulin_unit = arr[2];
+//                // setting_insulin_time = "아침식전"
+//                setting_insulin_time = arr[3];
+//                Log.d(TAG, "종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit + ", 투약시간 = " + setting_insulin_time);
+            } else {
+                // 약이 1개야
+                // null값 삭제
+                String strr = str.replace(null, "");
+//                setting_data.setText(str);
+//                String numbers = str;
+                settinglists.add(new CardItem_Setting(strr));
+                mAdapter.notifyDataSetChanged();
+//                String[] arr = numbers.split(",");
+//                // insulin_kinds = "초속효성"
+//                setting_insulin_kinds = arr[0];
+//                // insulin_kinds = "휴머로그"
+//                setting_insulin_names = arr[1];
+//                // insulin_unit = "5"
+//                setting_insulin_unit = arr[2];
+//                // setting_insulin_time = "아침식전"
+//                setting_insulin_time = arr[3];
+//                Log.d(TAG, "종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit + ", 투약시간 = " + setting_insulin_time);
+            }
         }
     }
 
@@ -136,8 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
                 // 인슐린 종합 데이터
-
-                if(settinglists.size() > 0) {
+                if (settinglists.size() > 0) {
                     // 2번
                     setting_insulin2 = data.getStringExtra("AA");
                     settinglists.add(new CardItem_Setting(setting_insulin2));
@@ -152,8 +174,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                Log.d(TAG, "setting_insulin2 = " + setting_insulin2);
                 setting_insulin_total = setting_insulin1 + setting_insulin2;
                 Log.d(TAG, "setting_insulin_total = " + setting_insulin_total);
-
-
 
 //                // 메인 텍스트에 추가
 //                setting_data.setText(result);
@@ -272,20 +292,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStop() {
         super.onStop();
-
         // getSharedPreferences(String name, int mode)
         // : 특정 이름을 가진 SharedPreferences를 생성. 애플리케이션 전체에서 사용
-//        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = pref.edit();
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
 //        String strrr = setting_data.getText().toString();
 //        editor.putString("PREF_STRNAME", strrr);
-//        editor.apply();
-        }
-
-    // 설정 배열값을 저장한다!!
-    protected void onSaveData(){
-
-
+        editor.putString("PREF_STRNAME", setting_insulin_total);
+        editor.apply();
     }
 
     @Override

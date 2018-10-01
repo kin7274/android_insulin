@@ -50,6 +50,10 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     String[] INSULIN1;
     String[] INSULIN2;
 
+    // Global변수
+    String insulin_data1;
+    String insulin_data2;
+
     String dododo;
     String eat_status = "";
     String deviceAddress = "";
@@ -116,16 +120,16 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                     // 현재 시간에 따라 상태 설정
                     if(hh_kinds(hh).equals(INSULIN1[3])){
                         // 그럼 나는 1번 약을 투여한거야.
-
+                        lists.add(new CardItem(searchImage(INSULIN1[0]), REALREALREAL, insulin_data1));
                     } else if(hh_kinds(hh).equals(INSULIN2[3])){
                         // 그럼 나는 2번 약을 투여한거야.
-
+                        lists.add(new CardItem(searchImage(INSULIN2[0]), REALREALREAL, insulin_data2));
                     } else {
                         // 난 1, 2번에 설정해논거에 없네?
                         // 그럼 머야
-                        
+                        // ??로 표시하자
+                        lists.add(new CardItem(R.drawable.ic_priority_high_black_24dp, REALREALREAL, "다시 설정해줘.. 시간이 맞는게 없어.. 무야.."));
                     }
-                    lists.add(new CardItem(searchImage(), REALREALREAL, settingdata22));
                     mAdapter.notifyDataSetChanged();
                     Log.d(TAG, "333333띠용...무요!!");
                     Log.d(TAG, "리얼리얼리어리리 : " + REALREALREAL);
@@ -241,7 +245,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         text_data2.setOnClickListener(this);
 
         // 설정한 1번 약
-        String insulin_data1 = Global.getData1();
+        insulin_data1 = Global.getData1();
         text_data1.setText(insulin_data1);
         INSULIN1 = insulin_data1.split(",");
         Log.d(TAG, "1번. 종류 = " + INSULIN1[0]);
@@ -251,7 +255,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
 
         // 설정한 2번 약
         // 없으면 없다고 떠!!
-        String insulin_data2 = Global.getData2();
+        insulin_data2 = Global.getData2();
         text_data2.setText(insulin_data2);
         if(insulin_data2.equals("없습니다")){
             Log.d(TAG, "또잉..");

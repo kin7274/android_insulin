@@ -51,9 +51,9 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     String[] INSULIN2;
 
     // Global변수
-    String insulin_data1;
-    String insulin_data2;
+    String insulin_data1, insulin_data2;
 
+    String aaa, bbb;
     String dododo;
     String eat_status = "";
     String deviceAddress = "";
@@ -118,12 +118,21 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                     Log.d(TAG, "현재 시간은 " + hh + "시입니다");
                     Log.d(TAG, "음 지금 시간이면 ..." + hh_kinds(hh) + "상태구나!!!");
                     // 현재 시간에 따라 상태 설정
-                    if(hh_kinds(hh).equals(INSULIN1[3])){
-                        // 그럼 나는 1번 약을 투여한거야.
+
+//                    if(hh_kinds(hh).equals(INSULIN2[4])) {
+//                        // 그럼 나는 2번 약을 투여한거야
+//                        Log.d(TAG, "그럼 나는 2번 약을 투여한거야");
+//                    } else {
+//                        Log.d(TAG, "읭 이거뜨면 조진거야");
+//                    }
+
+
+                    if(hh_kinds(hh).equals(aaa)) {
+                        // 그럼 나는 1번 약을 투여한거야
                         Log.d(TAG, "그럼 나는 1번 약을 투여한거야");
                         lists.add(new CardItem(searchImage(INSULIN1[0]), REALREALREAL, insulin_data1));
-                    } else if(hh_kinds(hh).equals(INSULIN2[3])){
-                        // 그럼 나는 2번 약을 투여한거야.
+                    } else if(hh_kinds(hh).equals(bbb)){
+                        // 그럼 나는 2번 약을 투여한거야
                         Log.d(TAG, "그럼 나는 2번 약을 투여한거야");
                         lists.add(new CardItem(searchImage(INSULIN2[0]), REALREALREAL, insulin_data2));
                     } else {
@@ -254,7 +263,9 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         Log.d(TAG, "1번. 종류 = " + INSULIN1[0]);
         Log.d(TAG, "1번. 품명 = " + INSULIN1[1]);
         Log.d(TAG, "1번. 단위 = " + INSULIN1[2]);
-        Log.d(TAG, "1번. 식사상태 = " + INSULIN1[3]);
+        // 식사상태에 공백제거...
+        aaa = INSULIN1[3].replace(" ", "");
+        Log.d(TAG, "1번. 식사상태 = " + aaa);
 
         // 설정한 2번 약
         // 없으면 없다고 떠!!
@@ -267,7 +278,8 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
             Log.d(TAG, "2번. 종류 = " + INSULIN2[0]);
             Log.d(TAG, "2번. 품명 = " + INSULIN2[1]);
             Log.d(TAG, "2번. 단위 = " + INSULIN2[2]);
-            Log.d(TAG, "2번. 식사상태 = " + INSULIN2[3]);
+            bbb = INSULIN2[3].replace(" ", "");
+            Log.d(TAG, "2번. 식사상태 = " + bbb);
         }
     }
 
@@ -286,17 +298,14 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     public String hh_kinds(int hh){
         if ((hh >= 05) && (hh < 11)) {
             eat_status = "아침식전";
-            Log.d(TAG, "@@@@@@@@ 아침식전입니다.");
         } else if ((hh >= 11) && (hh < 16)) {
             eat_status = "점심식전";
-            Log.d(TAG, "@@@@@@@@ 점심식전입니다.");
         } else if ((hh >= 16) && (hh < 21)) {
             eat_status = "저녁식전";
-            Log.d(TAG, "@@@@@@@@ 저녁식전입니다.");
         } else {
             eat_status = "취침전";
-            Log.d(TAG, "@@@@@@@@ 취침전입니다.");
         }
+        Log.d(TAG, "eat_status = " + eat_status);
         return eat_status;
     }
 

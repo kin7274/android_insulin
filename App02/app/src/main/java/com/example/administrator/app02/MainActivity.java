@@ -46,10 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static Context mContext;
 
-    String setting_insulin_kinds;
-    String setting_insulin_names;
-    String setting_insulin_unit;
-    String setting_insulin_time;
+    String setting_insulin_kinds, setting_insulin_names, setting_insulin_unit, setting_insulin_time;
+    String setting_insulin1, setting_insulin2, setting_insulin_total;
 
     // 다이얼로그 선택된 값
     final int[] selectedItem = {0};
@@ -138,11 +136,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
                 // 인슐린 종합 데이터
-                String result = data.getStringExtra("AA");
-                Log.d(TAG, "result = " + result);
 
-                settinglists.add(new CardItem_Setting(result));
-                mAdapter.notifyDataSetChanged();
+                if(settinglists.size() > 0) {
+                    // 2번
+                    setting_insulin2 = data.getStringExtra("AA");
+                    settinglists.add(new CardItem_Setting(setting_insulin2));
+                    mAdapter.notifyDataSetChanged();
+                } else {
+                    // 1번
+                    setting_insulin1 = data.getStringExtra("AA");
+                    settinglists.add(new CardItem_Setting(setting_insulin1));
+                    mAdapter.notifyDataSetChanged();
+                }
+//                Log.d(TAG, "setting_insulin1 = " + setting_insulin1);
+//                Log.d(TAG, "setting_insulin2 = " + setting_insulin2);
+                setting_insulin_total = setting_insulin1 + setting_insulin2;
+                Log.d(TAG, "setting_insulin_total = " + setting_insulin_total);
+
+
 
 //                // 메인 텍스트에 추가
 //                setting_data.setText(result);

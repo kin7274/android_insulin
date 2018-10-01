@@ -47,6 +47,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     private MyRecyclerAdapter mAdapter;
     RecyclerView recycler_view;
 
+    String dododo;
     String deviceAddress = "";
     String settingdata22 = "";
     String setting_insulin_kinds2 = "";
@@ -82,7 +83,35 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 Log.d(TAG, "MSG[12] = " + MSG[12]);
                 String REALREALREAL = MSG[1] + MSG[2] + MSG[3] + MSG[4] + "년 " + MSG[5] + MSG[6] + "월 " + MSG[7] + MSG[8] + "일 " + MSG[9] + MSG[10] + "시 " + MSG[11] + MSG[12] + "분";
                 Log.d(TAG, "111111띠용...므엇이죠 이게...");
+
+                String str_hh = MSG[9] + MSG[10];
+                int hh = Integer.parseInt(str_hh);
+                Log.d(TAG, "현재 시간은 " + hh + "시입니다");
+
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+                //
+                // 식사상태를 구분하자!
+                //
                 // MSG[9] + MSG[10] = 현재 시간
+                // 형식 : 00 ~ 24시
+                // 21-05(8h) : 취침전;
+                // 05-11(6h) : 아침식전;
+                // 11-16(5h) : 점심식전;
+                // 16-21(5h) : 저녁식전;
+
+                // 지금 시간이 18시니까
+                // 저녁식전이야
+                if((hh >= 05) && (hh < 11)){
+                    Log.d(TAG, "@@@@@@@@ 아침식전입니다.");
+                } else if((hh >= 11) && (hh < 16)){
+                    Log.d(TAG, "@@@@@@@@ 점심식전입니다.");
+                } else if((hh >= 16) && (hh < 21)){
+                    Log.d(TAG, "@@@@@@@@ 저녁식전입니다.");
+                } else {
+                    Log.d(TAG, "@@@@@@@@ 취침전입니다.");
+                }
+                //
+                /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
                 // searchImage() : 인슐린 종류에 따른 이미지 선택

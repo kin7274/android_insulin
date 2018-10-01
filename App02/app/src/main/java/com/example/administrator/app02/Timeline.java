@@ -47,6 +47,9 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     private MyRecyclerAdapter mAdapter;
     RecyclerView recycler_view;
 
+    String[] INSULIN1;
+    String[] INSULIN2;
+
     String dododo;
     String eat_status = "";
     String deviceAddress = "";
@@ -86,11 +89,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 String REALREALREAL = MSG[1] + MSG[2] + MSG[3] + MSG[4] + "년 " + MSG[5] + MSG[6] + "월 " + MSG[7] + MSG[8] + "일 " + MSG[9] + MSG[10] + "시 " + MSG[11] + MSG[12] + "분";
                 Log.d(TAG, "111111띠용...므엇이죠 이게...");
 
-                String str_hh = MSG[9] + MSG[10];
-                int hh = Integer.parseInt(str_hh);
-                Log.d(TAG, "현재 시간은 " + hh + "시입니다");
-                Log.d(TAG, "음 지금 시간이면 ..." + hh_kinds(hh) + "상태구나!!!");
-
                 // searchImage() : 인슐린 종류에 따른 이미지 선택
                 // REALREALREAL : 현재 시간
                 // settingdata22 :
@@ -103,7 +101,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                     // searchImage() : 인슐린 종류에 따른 이미지 선택
                     // REALREALREAL : 현재 시간
                     // settingdata22 : 설정값
-                    lists.add(new CardItem(searchImage(), REALREALREAL, dsdfnkvlndsklcndslk));
+                    lists.add(new CardItem(searchImage(INSULIN1[0]), REALREALREAL, dsdfnkvlndsklcndslk));
                     mAdapter.notifyDataSetChanged();
                     Log.d(TAG, "222222띠용...므엇이죠 이게...");
                     Log.d(TAG, "리얼리얼리어리리 : " + REALREALREAL);
@@ -111,6 +109,16 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                     /////////////////////////////////////////////
                     // 설정한 약값이 두개야
                     /////////////////////////////////////////////
+                    String str_hh = MSG[9] + MSG[10];
+                    int hh = Integer.parseInt(str_hh);
+                    Log.d(TAG, "현재 시간은 " + hh + "시입니다");
+                    Log.d(TAG, "음 지금 시간이면 ..." + hh_kinds(hh) + "상태구나!!!");
+                    // 현재 시간에 따라 상태 설정
+                    if(hh_kinds(hh).equals(INSULIN1[3])){
+
+                    } else if(hh_kinds(hh).equals(INSULIN2[3])){
+
+                    }
                     lists.add(new CardItem(searchImage(), REALREALREAL, settingdata22));
                     mAdapter.notifyDataSetChanged();
                     Log.d(TAG, "333333띠용...무요!!");
@@ -122,9 +130,9 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
 
     // 투약 종류마다 리스트 맨 앞 색 구별!!!!!!
     // 범례도 꼭 넣자!!
-    int searchImage() {
+    int searchImage(String aa) {
         int a = 0;
-        switch (setting_insulin_kinds2) {
+        switch (aa) {
             case "초속효성":
                 return R.drawable.a1;
             case "속효성":
@@ -229,8 +237,11 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         // 설정한 1번 약
         String insulin_data1 = Global.getData1();
         text_data1.setText(insulin_data1);
-        String[] INSULIN1 = insulin_data1.split("");
-
+        INSULIN1 = insulin_data1.split(",");
+        Log.d(TAG, "1번. 종류 = " + INSULIN1[0]);
+        Log.d(TAG, "1번. 품명 = " + INSULIN1[1]);
+        Log.d(TAG, "1번. 단위 = " + INSULIN1[2]);
+        Log.d(TAG, "1번. 식사상태 = " + INSULIN1[3]);
 
         // 설정한 2번 약
         // 없으면 없다고 떠!!
@@ -239,9 +250,11 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         if(insulin_data2.equals("없습니다")){
             Log.d(TAG, "또잉..");
         } else {
-            String[] INSULIN2 = insulin_data2.split("");
-            
-
+            INSULIN2 = insulin_data2.split(",");
+            Log.d(TAG, "2번. 종류 = " + INSULIN2[0]);
+            Log.d(TAG, "2번. 품명 = " + INSULIN2[1]);
+            Log.d(TAG, "2번. 단위 = " + INSULIN2[2]);
+            Log.d(TAG, "2번. 식사상태 = " + INSULIN2[3]);
         }
     }
 

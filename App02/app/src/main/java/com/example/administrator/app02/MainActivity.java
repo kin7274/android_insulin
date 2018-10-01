@@ -108,63 +108,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(TAG, "strradv2 = " + strradv2);
                 settinglists.add(new CardItem_Setting(strradv2));
                 mAdapter.notifyDataSetChanged();
+
+                // strradv1 설정한 1번 약
+                // strradv2 설정한 2번 약
+                Global.setData1(strradv1);
+                Global.setData2(strradv2);
             } else {
                 settinglists.add(new CardItem_Setting(str));
                 mAdapter.notifyDataSetChanged();
+
+                // strradv1 설정한 1번 약
+                Global.setData1(str);
+                Global.setData2("없습니다");
             }
         }
     }
-//            if (str.contains("&&")) {
-//                String numbers = str;
-//                String[] arr = numbers.split("&&");
-//                String strradv1 = arr[0];
-//                Log.d(TAG, "strradv1 =" + strradv1);
-//
-//                settinglists.add(new CardItem_Setting(strradv1));
-//                String strradv2 = arr[1];
-//                Log.d(TAG, "strradv2 = " + strradv2);
-//
-//                settinglists.add(new CardItem_Setting(strradv2));
-//                mAdapter.notifyDataSetChanged();
-
-//                setting_data.setText(str);
-//                String numbers = str;
-//                String[] arr = numbers.split(",");
-//                // insulin_kinds = "초속효성"
-//                setting_insulin_kinds = arr[0];
-//                // insulin_kinds = "휴머로그"
-//                setting_insulin_names = arr[1];
-//                // insulin_unit = "5"
-//                setting_insulin_unit = arr[2];
-//                // setting_insulin_time = "아침식전"
-//                setting_insulin_time = arr[3];
-//                Log.d(TAG, "종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit + ", 투약시간 = " + setting_insulin_time);
-//            } else {
-    // 약이 1개야
-    // null값 삭제
-//                String strr = str.replace(null, "");
-//                setting_data.setText(str);
-//                String numbers = str;
-
-//                String numbers = str;
-//                String[] arr = numbers.split("//");
-//                String sttr = arr[0];
-//                Log.d(TAG, "sttr = " + sttr);
-//                settinglists.add(new CardItem_Setting(sttr));
-//                mAdapter.notifyDataSetChanged();
-
-    // 약이 2개일 경우
-
-//                String[] arr = numbers.split(",");
-//                // insulin_kinds = "초속효성"
-//                setting_insulin_kinds = arr[0];
-//                // insulin_kinds = "휴머로그"
-//                setting_insulin_names = arr[1];
-//                // insulin_unit = "5"
-//                setting_insulin_unit = arr[2];
-//                // setting_insulin_time = "아침식전"
-//                setting_insulin_time = arr[3];
-//                Log.d(TAG, "종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit + ", 투약시간 = " + setting_insulin_time);
 
     public void set() {
         Button btn1 = (Button) findViewById(R.id.btn1);
@@ -200,44 +158,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             settinglists.add(new CardItem_Setting(setting_insulin2));
             mAdapter.notifyDataSetChanged();
         }
-        // 인슐린 종합 데이터
-//                if (settinglists.size() > 0) {
-//                    // 2번
-//                    setting_insulin2 = data.getStringExtra("AA");
-//                    settinglists.add(new CardItem_Setting(setting_insulin2));
-//                    mAdapter.notifyDataSetChanged();
-//                } else {
-//                    // 1번
-//                    setting_insulin1 = data.getStringExtra("AA");
-//                    settinglists.add(new CardItem_Setting(setting_insulin1));
-//                    mAdapter.notifyDataSetChanged();
-//                }
-//                Log.d(TAG, "setting_insulin1 = " + setting_insulin1);
-//                Log.d(TAG, "setting_insulin2 = " + setting_insulin2);
-//                if(setting_insulin2 != null){
-//                    setting_insulin_total = setting_insulin1 + "&&" + setting_insulin2;
-//                } else {
-//                    setting_insulin_total = setting_insulin1 + "//";
-//                }
-//
-//                Log.d(TAG, "setting_insulin_total = " + setting_insulin_total);
-
-//                // 메인 텍스트에 추가
-//                setting_data.setText(result);
-//                // 데이터 구분
-//                String numbers = result;
-//                String[] arr = numbers.split(",");
-//                // setting_insulin_kinds = "초속효성"
-//                setting_insulin_kinds = arr[0];
-//                // setting_insulin_names = "휴머로그"
-//                setting_insulin_names = arr[1];
-//                // setting_insulin_unit = "5"
-//                setting_insulin_unit = arr[2];
-//                // setting_insulin_time = "아침식전"
-//                setting_insulin_time = arr[3];
-//
-//                Log.d(TAG, "내가 설정한 값은@@@@ 종류 = " + setting_insulin_kinds + ", 이름 = " + setting_insulin_names + ", 단위 = " + setting_insulin_unit + ", 투약 시간 = " + setting_insulin_time);
-//            }
     }
 
     // 메뉴.xml

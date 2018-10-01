@@ -54,6 +54,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
 
     public Button btn1;
 
+    TextView text_data1, text_data2;
     BluetoothLeService mBluetoothLeService = new BluetoothLeService();
 
     private final BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
@@ -116,7 +117,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 finish();
             }
             mBluetoothLeService.connect(deviceAddress);
-            //
             Log.d(TAG, "서비스가 연결되었습니다!");
         }
 
@@ -130,7 +130,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         // 툴바
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -138,6 +137,8 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         getSupportActionBar().setTitle("");
 
         mContext = this;
+
+        set();
 
         recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
         recycler_view.setHasFixedSize(false);
@@ -147,6 +148,8 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         layoutManager.setStackFromEnd(true);
         recycler_view.setLayoutManager(layoutManager);
 
+        // 배열에 자꾸 null값이 떠.. 예외처리로 해결!
+        // try catch 단축키 : CTRL + ALT + T 자꾸까먹어..
         try {
             lists = new ArrayList<>();
         } catch (Exception e) {
@@ -161,22 +164,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         // 구분선
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
         recycler_view.addItemDecoration(dividerItemDecoration);
-
-//        settingdata22 = getIntent().getStringExtra("AYO");
-//        Log.d(TAG, "settingdata22 = " + settingdata22);
-//        String numbers = settingdata22;
-//        String[] arr = numbers.split(",");
-//        // setting_insulin_kinds = "초속효성"
-//        setting_insulin_kinds2 = arr[0];
-//        Log.d(TAG, "setting_insulin_kinds2 = " + setting_insulin_kinds2);
-//
-//        // setting_insulin_names = "휴머로그"
-//        setting_insulin_names2 = arr[1];
-//        Log.d(TAG, "setting_insulin_names2 = " + setting_insulin_names2);
-//
-//        // setting_insulin_unit = "5"
-//        setting_insulin_unit2 = arr[2];
-//        Log.d(TAG, "setting_insulin_unit2 = " + setting_insulin_unit2);
 
         deviceAddress = getIntent().getStringExtra(EXTRAS_DEVICE_ADDRESS);
         if (deviceAddress != null) {
@@ -200,6 +187,13 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 mBluetoothLeService.writeCharacteristic("a");
             }
         });
+    }
+
+    public void set(){
+        text_data1 = (TextView) findViewById(R.id.text_data1);
+        text_data2 = (TextView) findViewById(R.id.text_data2);
+        text_data1.setOnClickListener(this);
+        text_data2.setOnClickListener(this);
     }
 
     @Override
@@ -231,19 +225,3 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
 
     }
 }
-
-    // 뒤로 가기 버튼 : 팝업창을 띄움
-//    @Override
-//    public void onBackPressed() {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("알림")
-//                .setMessage("앱을 종료하실껀가유")
-//                .setNegativeButton("취소", null)
-//                .setPositiveButton("종료", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        android.os.Process.killProcess(android.os.Process.myPid());
-//                    }
-//                })
-//                .show();
-//    }

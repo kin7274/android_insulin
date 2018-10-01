@@ -151,12 +151,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setting_insulin1 = data.getStringExtra("AA");
                 settinglists.add(new CardItem_Setting(setting_insulin1));
                 mAdapter.notifyDataSetChanged();
+                Global.setData1(setting_insulin1);
             }
         }
         if (requestCode == 2) {
             setting_insulin2 = data.getStringExtra("BB");
             settinglists.add(new CardItem_Setting(setting_insulin2));
             mAdapter.notifyDataSetChanged();
+            Global.setData2(setting_insulin2);
         }
     }
 

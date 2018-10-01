@@ -20,6 +20,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -81,6 +82,12 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 Log.d(TAG, "MSG[12] = " + MSG[12]);
                 String REALREALREAL = MSG[1] + MSG[2] + MSG[3] + MSG[4] + "년 " + MSG[5] + MSG[6] + "월 " + MSG[7] + MSG[8] + "일 " + MSG[9] + MSG[10] + "시 " + MSG[11] + MSG[12] + "분";
                 Log.d(TAG, "111111띠용...므엇이죠 이게...");
+                // MSG[9] + MSG[10] = 현재 시간
+
+
+                // searchImage() : 인슐린 종류에 따른 이미지 선택
+                // REALREALREAL : 현재 시간
+                // settingdata22 :
                 lists.add(new CardItem(searchImage(), REALREALREAL, settingdata22));
                 mAdapter.notifyDataSetChanged();
                 Log.d(TAG, "222222띠용...므엇이죠 이게...");
@@ -195,7 +202,10 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         text_data1.setOnClickListener(this);
         text_data2.setOnClickListener(this);
 
+        // 설정한 1번 약
         text_data1.setText(Global.getData1());
+        // 설정한 2번 약
+        // 없으면 없다고 떠!!
         text_data2.setText(Global.getData2());
     }
 

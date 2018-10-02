@@ -20,8 +20,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,13 +125,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void set() {
         Button btn1 = (Button) findViewById(R.id.btn1);
         Button btn2 = (Button) findViewById(R.id.btn2);
-        Button btn3 = (Button) findViewById(R.id.btn3);
         Button btn4 = (Button) findViewById(R.id.btn4);
         Button action_setting = (Button) findViewById(R.id.action_setting);
         Button action_setting2 = (Button) findViewById(R.id.action_setting2);
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
-        btn3.setOnClickListener(this);
         btn4.setOnClickListener(this);
         action_setting.setOnClickListener(this);
         action_setting2.setOnClickListener(this);
@@ -226,12 +222,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent2);
                 break;
             // DB
-            case R.id.btn3:
-                Intent intent3 = new Intent(MainActivity.this, AddNeedleActivity.class);
-                intent3.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, textview1.getText());
-                intent3.putExtra(EXTRAS_DEVICE_ADDRESS, textview2.getText());
-                startActivity(intent3);
-                break;
+//            case R.id.btn3:
+//                Intent intent3 = new Intent(MainActivity.this, AddNeedleActivity.class);
+//                intent3.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, textview1.getText());
+//                intent3.putExtra(EXTRAS_DEVICE_ADDRESS, textview2.getText());
+//                startActivity(intent3);
+//                break;
             // 설정 끝, 다음으로 이동
             case R.id.btn4:
                 Intent intent4 = new Intent(MainActivity.this, Timeline.class);
@@ -282,7 +278,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             Log.d(TAG, "setting_insulin1 = NULL");
         }
-
         Log.d(TAG, "rrrrr = " + rrrrr);
 
         // getSharedPreferences(String name, int mode)

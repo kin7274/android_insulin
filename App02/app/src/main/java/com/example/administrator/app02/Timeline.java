@@ -119,14 +119,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                     Log.d(TAG, "음 지금 시간이면 ..." + hh_kinds(hh) + "상태구나!!!");
                     // 현재 시간에 따라 상태 설정
 
-//                    if(hh_kinds(hh).equals(INSULIN2[4])) {
-//                        // 그럼 나는 2번 약을 투여한거야
-//                        Log.d(TAG, "그럼 나는 2번 약을 투여한거야");
-//                    } else {
-//                        Log.d(TAG, "읭 이거뜨면 조진거야");
-//                    }
-
-
                     if(hh_kinds(hh).equals(aaa)) {
                         // 그럼 나는 1번 약을 투여한거야
                         Log.d(TAG, "그럼 나는 1번 약을 투여한거야");

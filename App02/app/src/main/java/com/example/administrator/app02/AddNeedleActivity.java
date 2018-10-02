@@ -84,7 +84,6 @@ public class AddNeedleActivity extends AppCompatActivity {
         }
     };
 
-    //
     public void setDB(String item) {
         sql = my.getWritableDatabase();
         sql.execSQL("INSERT INTO tb_needle VALUES(null, '" + item + "')");

@@ -45,10 +45,10 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     private final static String TAG = Timeline.class.getSimpleName();
     Context mContext;
 
-    myDB my;
+    myDBDB my;
     SQLiteDatabase sql;
     public ArrayList<String> mUserNameArrayList = new ArrayList<String>();
-
+    String user_name2;
 
     Button insert_db, load_db, delete_db;
 
@@ -130,11 +130,11 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                     Log.d(TAG, "음 지금 시간이면 ..." + hh_kinds(hh) + "상태구나!!!");
                     // 현재 시간에 따라 상태 설정
 
-                    if(hh_kinds(hh).equals(aaa)) {
+                    if (hh_kinds(hh).equals(aaa)) {
                         // 그럼 나는 1번 약을 투여한거야
                         Log.d(TAG, "그럼 나는 1번 약을 투여한거야");
                         lists.add(new CardItem(searchImage(INSULIN1[0]), REALREALREAL, insulin_data1));
-                    } else if(hh_kinds(hh).equals(bbb)){
+                    } else if (hh_kinds(hh).equals(bbb)) {
                         // 그럼 나는 2번 약을 투여한거야
                         Log.d(TAG, "그럼 나는 2번 약을 투여한거야");
                         lists.add(new CardItem(searchImage(INSULIN2[0]), REALREALREAL, insulin_data2));
@@ -255,11 +255,13 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
 
     public void set() {
         // 값 리시브
-        textview = (TextView) findViewById(R.id.textview);
         text_data1 = (TextView) findViewById(R.id.text_data1);
         text_data2 = (TextView) findViewById(R.id.text_data2);
 
         // DB관련
+        my = new myDBDB(this);
+
+        textview = (TextView) findViewById(R.id.textview);
         insert_db = (Button) findViewById(R.id.insert_db);
         load_db = (Button) findViewById(R.id.load_db);
         delete_db = (Button) findViewById(R.id.delete_db);
@@ -282,7 +284,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         // 없으면 없다고 떠!!
         insulin_data2 = Global.getData2();
         text_data2.setText(insulin_data2);
-        if(insulin_data2.equals("없습니다")){
+        if (insulin_data2.equals("없습니다")) {
             Log.d(TAG, "또잉..");
         } else {
             INSULIN2 = insulin_data2.split(",");
@@ -306,7 +308,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
 
     // 지금 시간이 18시니까
     // 저녁식전이야
-    public String hh_kinds(int hh){
+    public String hh_kinds(int hh) {
         if ((hh >= 05) && (hh < 11)) {
             eat_status = "아침식전";
         } else if ((hh >= 11) && (hh < 16)) {
@@ -318,6 +320,35 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         }
         Log.d(TAG, "eat_status = " + eat_status);
         return eat_status;
+    }
+
+    // DB에 저장하는 메서드
+    public void setDB(String time, String setting) {
+        sql = my.getWritableDatabase();
+        sql.execSQL("INSERT INTO tb_needle VALUES(null, '" + time + setting + "')");
+        Toast.makeText(getApplicationContext(), "저장하였습니다", Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "TIME값은 " + time);
+        Log.d(TAG, "SETTING값은 " + setting);
+        sql.close();
+//        check();
+    }
+
+    // 조회 메서드
+    public void check() {
+        sql = my.getReadableDatabase();
+        // 화면 clear
+        user_name2 = "";
+        Cursor cursor;
+        cursor = sql.rawQuery("select*from tb_NEEDLE", null);
+        while (cursor.moveToNext()) {
+            user_name2 += cursor.getString(0) + " : "
+                    + cursor.getString(1) + ","
+                    + cursor.getString(2) + "\n";
+        }
+        textview.setText(user_name2);
+        cursor.close();
+        sql.close();
+        Toast.makeText(getApplicationContext(), "조회하였습니다.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -341,7 +372,31 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            // DB에 추가한다
+            case R.id.insert_db:
 
+//                setDB();
+                break;
+
+            // DB를 가져온다
+            case R.id.load_db:
+
+//                check();
+
+                break;
+            // DB를 삭제한다
+            case R.id.delete_db:
+/*
+                sql = my.getWritableDatabase();
+                // 화면 clear
+                user_name2 = "";
+                my.onUpgrade(sql, 1, 2);
+                sql.close();
+                check();
+*/
+                break;
+        }
     }
 
     @Override

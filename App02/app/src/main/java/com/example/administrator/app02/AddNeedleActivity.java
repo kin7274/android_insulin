@@ -58,7 +58,6 @@ public class AddNeedleActivity extends AppCompatActivity {
                 // DB의 행의 갯수 +1 만큼 값을 받아
                 // while문
 
-//                i++
                 final String message = intent.getStringExtra(EXTRA_DATA);
 //                Toast.makeText(getApplicationContext(), "" + message, Toast.LENGTH_SHORT).sh;ow();
                 Log.d(TAG, "겟 메세지" + message);
@@ -80,7 +79,6 @@ public class AddNeedleActivity extends AppCompatActivity {
                 setDB(REALREALREAL);
                 Log.d(TAG, "리얼리얼리어리리 : " + REALREALREAL);
             }
-//            i++;
         }
     };
 

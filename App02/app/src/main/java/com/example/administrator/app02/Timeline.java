@@ -375,11 +375,17 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         switch (v.getId()) {
             // DB에 추가한다
             case R.id.insert_db:
+                int cnt = lists.size();
                 Log.d(TAG, "저장할 리스트 갯수 : " + lists.size());
-                Log.d(TAG, "1번 시간값 : " + lists.get(0).getState());
-                Log.d(TAG, "1번 설정값 : " + lists.get(0).getSetting());
-                Log.d(TAG, "2번 시간값 : " + lists.get(1).getState());
-                Log.d(TAG, "2번 설정값 : " + lists.get(1).getSetting());
+                for(int i=0; i<cnt; i++){
+                    Log.d(TAG, (i+1) + "번 시간값 : " + lists.get(i).getState());
+                    Log.d(TAG, (i+1) + "번 시간값 : " + lists.get(i).getSetting());
+//                    Log.d(TAG, "1번 시간값 : " + lists.get(0).getState());
+//                    Log.d(TAG, "1번 설정값 : " + lists.get(0).getSetting());
+//                    Log.d(TAG, "2번 시간값 : " + lists.get(1).getState());
+//                    Log.d(TAG, "2번 설정값 : " + lists.get(1).getSetting());
+                }
+
 //                setDB();
                 break;
 

@@ -40,9 +40,20 @@ import static com.example.administrator.app02.DeviceControlActivity.EXTRAS_DEVIC
 import static com.example.administrator.app02.MyRecyclerAdapter.*;
 
 // 실질적으로 블루투스값 리시브 액티비티입니다.
+// 여기서 DB에도 저장합시다!
 public class Timeline extends AppCompatActivity implements MyRecyclerViewClickListener, View.OnClickListener {
     private final static String TAG = Timeline.class.getSimpleName();
     Context mContext;
+
+    myDB my;
+    SQLiteDatabase sql;
+    public ArrayList<String> mUserNameArrayList = new ArrayList<String>();
+
+
+    Button insert_db, load_db, delete_db;
+
+    TextView textview;
+
     List<CardItem> lists;
     private MyRecyclerAdapter mAdapter;
     RecyclerView recycler_view;
@@ -243,10 +254,18 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     }
 
     public void set() {
+        // 값 리시브
+        textview = (TextView) findViewById(R.id.textview);
         text_data1 = (TextView) findViewById(R.id.text_data1);
         text_data2 = (TextView) findViewById(R.id.text_data2);
-        text_data1.setOnClickListener(this);
-        text_data2.setOnClickListener(this);
+
+        // DB관련
+        insert_db = (Button) findViewById(R.id.insert_db);
+        load_db = (Button) findViewById(R.id.load_db);
+        delete_db = (Button) findViewById(R.id.delete_db);
+        insert_db.setOnClickListener(this);
+        load_db.setOnClickListener(this);
+        delete_db.setOnClickListener(this);
 
         // 설정한 1번 약
         insulin_data1 = Global.getData1();

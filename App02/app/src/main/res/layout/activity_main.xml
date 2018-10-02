@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="?attr/actionBarSize"
         android:orientation="horizontal"
-        android:weightSum="5">
+        android:weightSum="4">
 
         <Button
             android:id="@+id/btn1"

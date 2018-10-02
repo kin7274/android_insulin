@@ -375,7 +375,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         switch (v.getId()) {
             // DB에 추가한다
             case R.id.insert_db:
-
+                Log.d(TAG, "저장할 리스트 갯수 : " + lists.size());
 //                setDB();
                 break;
 

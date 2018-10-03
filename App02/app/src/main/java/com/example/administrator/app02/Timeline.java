@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -350,6 +351,16 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         Toast.makeText(getApplicationContext(), "조회하였습니다.", Toast.LENGTH_SHORT).show();
     }
 
+    // 행 갯수 확인 메서드
+    public long rows_count() {
+        sql = my.getReadableDatabase();
+        long count = DatabaseUtils.queryNumEntries(sql, "tb_NEEDLE");
+        long rows_count = (long) count;
+        sql.close();
+        Toast.makeText(getApplicationContext(), "행의 갯수 : " + rows_count, Toast.LENGTH_SHORT).show();
+        return rows_count;
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -374,9 +385,10 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         switch (v.getId()) {
             // DB에 추가한다
             case R.id.insert_db:
+                int rows_cnt = (int)(long) rows_count();
                 int cnt = lists.size();
                 Log.d(TAG, "저장할 리스트 갯수 : " + lists.size());
-                for(int i=0; i<cnt; i++){
+                for(int i=rows_cnt; i<cnt; i++){
                     Log.d(TAG, (i+1) + "번 시간값 : " + lists.get(i).getState());
                     Log.d(TAG, (i+1) + "번 설정값 : " + lists.get(i).getSetting());
 //                    Log.d(TAG, "1번 시간값 : " + lists.get(0).getState());

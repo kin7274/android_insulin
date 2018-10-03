@@ -322,7 +322,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
 //        Log.d(TAG, "SETTING값은 " + setting);
         Log.d(TAG, "저장했어유");
         sql.close();
-//        check();
+        check();
     }
 
     // 조회 메서드
@@ -334,7 +334,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         cursor = sql.rawQuery("select*from tb_NEEDLE", null);
         while (cursor.moveToNext()) {
             user_name2 += cursor.getString(0) + " : "
-                    + cursor.getString(1) + ","
+                    + cursor.getString(1) + "/"
                     + cursor.getString(2) + "\n";
         }
         textview.setText(user_name2);
@@ -378,25 +378,18 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
 //                    Log.d(TAG, "2번 설정값 : " + lists.get(1).getSetting());
                     setDB(lists.get(i).getState(), lists.get(i).getSetting());
                 }
-//                setDB();
                 break;
-
             // DB를 가져온다
             case R.id.load_db:
-
                 check();
-
                 break;
-            // DB를 삭제한다
+            // DB 완전 삭제
             case R.id.delete_db:
-
                 sql = my.getWritableDatabase();
-                // 화면 clear
                 user_name2 = "";
                 my.onUpgrade(sql, 1, 2);
                 sql.close();
                 check();
-
                 break;
         }
     }

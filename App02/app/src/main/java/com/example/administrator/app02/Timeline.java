@@ -1,33 +1,25 @@
 package com.example.administrator.app02;
 
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +28,7 @@ import static com.example.administrator.app02.BluetoothLeService.ACTION_DATA_AVA
 import static com.example.administrator.app02.BluetoothLeService.ACTION_DATA_AVAILABLE_CHANGE;
 import static com.example.administrator.app02.BluetoothLeService.EXTRA_DATA;
 import static com.example.administrator.app02.DeviceControlActivity.EXTRAS_DEVICE_ADDRESS;
-
-import static com.example.administrator.app02.MyRecyclerAdapter.*;
+import static com.example.administrator.app02.MyRecyclerAdapter.MyRecyclerViewClickListener;
 
 // 실질적으로 블루투스값 리시브 액티비티입니다.
 // 여기서 DB에도 저장합시다!
@@ -325,10 +316,11 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     // DB에 저장하는 메서드
     public void setDB(String time, String setting) {
         sql = my.getWritableDatabase();
-        sql.execSQL("INSERT INTO tb_needle VALUES(null, '" + time + setting + "')");
-        Toast.makeText(getApplicationContext(), "저장하였습니다", Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "TIME값은 " + time);
-        Log.d(TAG, "SETTING값은 " + setting);
+        sql.execSQL("INSERT INTO tb_needle VALUES(null, '" + time + "', '" + setting + "')");
+//        Toast.makeText(getApplicationContext(), "저장하였습니다", Toast.LENGTH_SHORT).show();
+//        Log.d(TAG, "TIME값은 " + time);
+//        Log.d(TAG, "SETTING값은 " + setting);
+        Log.d(TAG, "저장했어유");
         sql.close();
 //        check();
     }
@@ -377,9 +369,9 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
             case R.id.insert_db:
                 int cnt = lists.size();
                 Log.d(TAG, "저장할 리스트 갯수 : " + lists.size());
-                for(int i=0; i<cnt; i++){
+                for(int i=0; i<cnt-1; i++){
                     Log.d(TAG, (i+1) + "번 시간값 : " + lists.get(i).getState());
-                    Log.d(TAG, (i+1) + "번 시간값 : " + lists.get(i).getSetting());
+                    Log.d(TAG, (i+1) + "번 설정값 : " + lists.get(i).getSetting());
 //                    Log.d(TAG, "1번 시간값 : " + lists.get(0).getState());
 //                    Log.d(TAG, "1번 설정값 : " + lists.get(0).getSetting());
 //                    Log.d(TAG, "2번 시간값 : " + lists.get(1).getState());

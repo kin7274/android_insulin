@@ -369,7 +369,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
             case R.id.insert_db:
                 int cnt = lists.size();
                 Log.d(TAG, "저장할 리스트 갯수 : " + lists.size());
-                for(int i=0; i<cnt-1; i++){
+                for(int i=0; i<cnt; i++){
                     Log.d(TAG, (i+1) + "번 시간값 : " + lists.get(i).getState());
                     Log.d(TAG, (i+1) + "번 설정값 : " + lists.get(i).getSetting());
 //                    Log.d(TAG, "1번 시간값 : " + lists.get(0).getState());
@@ -384,19 +384,19 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
             // DB를 가져온다
             case R.id.load_db:
 
-//                check();
+                check();
 
                 break;
             // DB를 삭제한다
             case R.id.delete_db:
-/*
+
                 sql = my.getWritableDatabase();
                 // 화면 clear
                 user_name2 = "";
                 my.onUpgrade(sql, 1, 2);
                 sql.close();
                 check();
-*/
+
                 break;
         }
     }

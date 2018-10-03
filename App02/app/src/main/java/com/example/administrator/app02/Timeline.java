@@ -337,6 +337,8 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                     + cursor.getString(1) + "/"
                     + cursor.getString(2) + "\n";
         }
+        // 텍스트뷰에 말고
+        // 카드뷰로 저장을 해
         textview.setText(user_name2);
         cursor.close();
         sql.close();

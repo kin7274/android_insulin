@@ -384,8 +384,8 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
 //                    Log.d(TAG, "1번 설정값 : " + lists.get(0).getSetting());
 //                    Log.d(TAG, "2번 시간값 : " + lists.get(1).getState());
 //                    Log.d(TAG, "2번 설정값 : " + lists.get(1).getSetting());
+                    setDB(lists.get(i).getState(), lists.get(i).getSetting());
                 }
-
 //                setDB();
                 break;
 

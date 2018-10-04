@@ -220,13 +220,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent2.putExtra(EXTRAS_DEVICE_ADDRESS, textview2.getText());
                 startActivity(intent2);
                 break;
-            // DB
-//            case R.id.btn3:
-//                Intent intent3 = new Intent(MainActivity.this, AddNeedleActivity.class);
-//                intent3.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, textview1.getText());
-//                intent3.putExtra(EXTRAS_DEVICE_ADDRESS, textview2.getText());
-//                startActivity(intent3);
-//                break;
             // 설정 끝, 다음으로 이동
             case R.id.btn4:
                 Intent intent4 = new Intent(MainActivity.this, Timeline.class);

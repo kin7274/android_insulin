@@ -63,38 +63,38 @@
         android:id="@+id/action_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/linearlayout"
+        android:layout_alignParentStart="true"
         android:text="설정1" />
 
     <Button
         android:id="@+id/action_setting2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/action_setting"
+        android:layout_alignParentStart="true"
         android:text="설정2" />
 
     <TextView
         android:id="@+id/setting_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/action_setting" />
+        android:layout_below="@+id/action_setting"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/btn4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/action_setting2"
+        android:layout_alignParentStart="true"
         android:text="설정 끝! 다음페이지로 이동" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="307dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

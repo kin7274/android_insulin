@@ -187,7 +187,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dialog_app.create();
                 dialog_app.show();
                 break;
-
             // 개발자에 대한 사용법 간단하게
             case R.id.action_myinfo:
                 AlertDialog.Builder dialog_info = new AlertDialog.Builder(this);
@@ -277,9 +276,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("PREF_STRNAME", rrrrr);
-//        String strrr = setting_data.getText().toString();
-//        editor.putString("PREF_STRNAME", strrr);
-//        editor.putString("PREF_STRNAME", setting_insulin_total);
         editor.apply();
     }
 

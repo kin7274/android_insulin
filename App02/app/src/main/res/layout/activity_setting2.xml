@@ -88,8 +88,8 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="121dp"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginBottom="91dp">
 
         </android.support.v7.widget.RecyclerView>
@@ -99,16 +99,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/exit_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
             android:layout_weight="1"
             android:text="나가기"
             android:textSize="20sp" />

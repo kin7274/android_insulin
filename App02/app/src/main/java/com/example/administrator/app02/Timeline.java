@@ -50,8 +50,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     private MyRecyclerAdapter mAdapter;
     RecyclerView recycler_view;
 
-    String[] INSULIN1;
-    String[] INSULIN2;
+    String[] INSULIN1, INSULIN2;
 
     // Global변수
     String insulin_data1, insulin_data2;

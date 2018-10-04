@@ -51,16 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mContext = this;
-
-        // 툴바
-        Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(mytoolbar);
-        getSupportActionBar().setTitle("");
-
+        setToolbar();
         set();
-
         recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
         recycler_view.setHasFixedSize(false);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -122,7 +115,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void setToolbar(){
+        // 툴바
+        Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setTitle("");
+    }
+
     public void set() {
+        textview1 = (TextView) findViewById(R.id.textview1);
+        textview2 = (TextView) findViewById(R.id.textview2);
+        setting_data = (TextView) findViewById(R.id.setting_data);
         Button btn1 = (Button) findViewById(R.id.btn1);
         Button btn2 = (Button) findViewById(R.id.btn2);
         Button btn4 = (Button) findViewById(R.id.btn4);
@@ -133,10 +136,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn4.setOnClickListener(this);
         action_setting.setOnClickListener(this);
         action_setting2.setOnClickListener(this);
-
-        textview1 = (TextView) findViewById(R.id.textview1);
-        textview2 = (TextView) findViewById(R.id.textview2);
-        setting_data = (TextView) findViewById(R.id.setting_data);
     }
 
     // 설정페이지 인텐트로부터 리시브

@@ -189,8 +189,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // 앱 평가하기
             case R.id.action_evaluate:
                 AlertDialog.Builder dialog_app = new AlertDialog.Builder(this);
-                dialog_app.setTitle(getResources().getString(R.string.dialog_app_title))
-                        .setMessage(getResources().getString(R.string.dialog_app_content))
+                dialog_app.setTitle("앱 평가하기")
+                        .setMessage("불편한 점 말씀해주셍..")
                         .setPositiveButton(getResources().getString(R.string.ok), new OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
@@ -201,16 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             // 앱 소개하기
             case R.id.app_introduce:
-                AlertDialog.Builder dialog_info = new AlertDialog.Builder(this);
-                dialog_info.setTitle(getResources().getString(R.string.dialog_my_title))
-                        .setMessage(getResources().getString(R.string.dialog_my_content))
-                        .setPositiveButton(getResources().getString(R.string.ok), new OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int which) {
-                            }
-                        });
-                dialog_info.create();
-                dialog_info.show();
+                // 소개앱으로 넘어감
                 break;
         }
         return super.onOptionsItemSelected(item);

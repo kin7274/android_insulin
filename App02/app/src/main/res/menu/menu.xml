@@ -2,12 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
-    <!--수동입력-->
-    <item
-        android:id="@+id/action_auto"
-        android:icon="@drawable/ic_add_white_24dp"
-        app:showAsAction="ifRoom"/>
-
     <!--오버플로우메뉴-->
     <!--영상링크, 유튜브-->
     <item

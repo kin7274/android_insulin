@@ -19,13 +19,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".SettingActivity2" />
         <activity android:name=".EducationActivity" />
@@ -34,7 +35,6 @@
             android:name=".BluetoothLeService"
             android:enabled="true" />
 
-        <activity android:name=".AddNeedleActivity" />
         <activity
             android:name=".DeviceControlActivity"
             android:theme="@android:style/Theme.Holo.Light" />

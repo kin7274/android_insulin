@@ -22,97 +22,122 @@
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
-        android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
+
         <TextView
-            android:text="사용자 설정"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="사용자 설정" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="9">
-        <TextView
-            android:text="1."
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1." />
+
             <TextView
                 android:id="@+id/setting_kind_1"
-                android:hint="종류"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"/>
+                android:layout_weight="2"
+                android:background="@drawable/xml_border"
+                android:hint="종류" />
+
             <TextView
                 android:id="@+id/setting_name_1"
-                android:hint="품명"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@drawable/xml_border"
+                android:hint="품명" />
+
             <TextView
                 android:id="@+id/setting_unit_1"
-                android:hint="단위"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:background="@drawable/xml_border"
+                android:hint="단위" />
+
             <TextView
                 android:id="@+id/setting_status_1"
-                android:hint="식사상태"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"/>
+                android:layout_weight="2"
+                android:background="@drawable/xml_border"
+                android:hint="식사상태" />
+
             <Button
+
                 android:id="@+id/setting_set_1"
-                android:text="SET"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:text="SET" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="9">
+
             <TextView
-                android:text="2."
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:text="2." />
+
             <TextView
                 android:id="@+id/setting_kind_2"
-                android:hint="종류"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"/>
+                android:layout_weight="2"
+                android:background="@drawable/xml_border"
+                android:hint="종류" />
+
             <TextView
                 android:id="@+id/setting_name_2"
-                android:hint="품명"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"/>
+                android:layout_weight="2"
+                android:background="@drawable/xml_border"
+                android:hint="품명" />
+
             <TextView
                 android:id="@+id/setting_unit_2"
-                android:hint="단위"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:background="@drawable/xml_border"
+                android:hint="단위" />
+
             <TextView
                 android:id="@+id/setting_status_2"
-                android:hint="식사상태"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"/>
+                android:layout_weight="2"
+                android:background="@drawable/xml_border"
+                android:hint="식사상태" />
+
             <Button
                 android:id="@+id/setting_set_2"
-                android:text="SET"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:text="SET" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearlayout"
         android:layout_width="match_parent"
@@ -155,38 +180,38 @@
         android:id="@+id/action_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearlayout"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearlayout"
         android:text="설정1" />
 
     <Button
         android:id="@+id/action_setting2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/action_setting"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/action_setting"
         android:text="설정2" />
 
     <TextView
         android:id="@+id/setting_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/action_setting"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/action_setting" />
 
     <Button
         android:id="@+id/btn4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/action_setting2"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/action_setting2"
         android:text="설정 끝! 다음페이지로 이동" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="307dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

@@ -54,28 +54,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mContext = this;
         setToolbar();
         set();
-        recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
-        recycler_view.setHasFixedSize(false);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        // 반대로 쌓기
-        layoutManager.setReverseLayout(true);
-        layoutManager.setStackFromEnd(true);
-        recycler_view.setLayoutManager(layoutManager);
-
-        try {
-            settinglists = new ArrayList<>();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // 어댑터 설정
-        mAdapter = new SettingRecyclerAdapter(settinglists);
-        mAdapter.setOnClickListener(this);
-        recycler_view.setAdapter(mAdapter);
-
-        // 구분선
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
-        recycler_view.addItemDecoration(dividerItemDecoration);
+//        recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
+//        recycler_view.setHasFixedSize(false);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        // 반대로 쌓기
+//        layoutManager.setReverseLayout(true);
+//        layoutManager.setStackFromEnd(true);
+//        recycler_view.setLayoutManager(layoutManager);
+//
+//        try {
+//            settinglists = new ArrayList<>();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        // 어댑터 설정
+//        mAdapter = new SettingRecyclerAdapter(settinglists);
+//        mAdapter.setOnClickListener(this);
+//        recycler_view.setAdapter(mAdapter);
+//
+//        // 구분선
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
+//        recycler_view.addItemDecoration(dividerItemDecoration);
 
         // 저장데이터 불러오기
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (str.equals("")) {
             // 초기 1회
             Log.d(TAG, "설정부터하세욥..");
-            setting_data.setText("설정부터하고와");
+//            setting_data.setText("설정부터하고와");
         }
         // 설정값이 존재할 경우
         else {
@@ -125,18 +125,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void set() {
         textview1 = (TextView) findViewById(R.id.textview1);
         textview2 = (TextView) findViewById(R.id.textview2);
-        setting_data = (TextView) findViewById(R.id.setting_data);
+//        setting_data = (TextView) findViewById(R.id.setting_data);
         Button btn1 = (Button) findViewById(R.id.btn1);
         Button btn2 = (Button) findViewById(R.id.btn2);
         // 설정 끝, 다음 페이지로 이동
         Button next_btn = (Button) findViewById(R.id.next_btn);
-        Button action_setting = (Button) findViewById(R.id.action_setting);
-        Button action_setting2 = (Button) findViewById(R.id.action_setting2);
+//        Button action_setting = (Button) findViewById(R.id.action_setting);
+//        Button action_setting2 = (Button) findViewById(R.id.action_setting2);
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
         next_btn.setOnClickListener(this);
-        action_setting.setOnClickListener(this);
-        action_setting2.setOnClickListener(this);
+//        action_setting.setOnClickListener(this);
+//        action_setting2.setOnClickListener(this);
         //
         TextView setting_kind_1 = (TextView) findViewById(R.id.setting_kind_1);
         TextView setting_name_1 = (TextView) findViewById(R.id.setting_name_1);
@@ -240,21 +240,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent2);
                 break;
             // 설정 끝, 다음으로 이동
-            case R.id.btn4:
-                Intent intent4 = new Intent(MainActivity.this, Timeline.class);
-                intent4.putExtra("AYO", setting_data.getText());
-                intent4.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, textview2.getText());
-                startActivity(intent4);
-                break;
+//            case R.id.btn4:
+//                Intent intent4 = new Intent(MainActivity.this, Timeline.class);
+//                intent4.putExtra("AYO", setting_data.getText());
+//                intent4.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, textview2.getText());
+//                startActivity(intent4);
+//                break;
             // 설정 페이지로 이동
-            case R.id.action_setting:
-                Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);
-                startActivityForResult(intent_setting, 1);
-                break;
-            case R.id.action_setting2:
-                Intent intent_setting2 = new Intent(MainActivity.this, SettingActivity2.class);
-                startActivityForResult(intent_setting2, 2);
-                break;
+//            case R.id.action_setting:
+//                Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);
+//                startActivityForResult(intent_setting, 1);
+//                break;
+//            case R.id.action_setting2:
+//                Intent intent_setting2 = new Intent(MainActivity.this, SettingActivity2.class);
+//                startActivityForResult(intent_setting2, 2);
+//                break;
         }
     }
 

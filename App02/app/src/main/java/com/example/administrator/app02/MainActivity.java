@@ -186,8 +186,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent_edu = new Intent(MainActivity.this, EducationActivity.class);
                 startActivity(intent_edu);
                 break;
-            // 어플에 대한 사용법 간단하게
-            case R.id.action_guide:
+            // 앱 평가하기
+            case R.id.action_evaluate:
                 AlertDialog.Builder dialog_app = new AlertDialog.Builder(this);
                 dialog_app.setTitle(getResources().getString(R.string.dialog_app_title))
                         .setMessage(getResources().getString(R.string.dialog_app_content))
@@ -199,8 +199,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dialog_app.create();
                 dialog_app.show();
                 break;
-            // 개발자에 대한 사용법 간단하게
-            case R.id.action_myinfo:
+            // 앱 소개하기
+            case R.id.app_introduce:
                 AlertDialog.Builder dialog_info = new AlertDialog.Builder(this);
                 dialog_info.setTitle(getResources().getString(R.string.dialog_my_title))
                         .setMessage(getResources().getString(R.string.dialog_my_content))

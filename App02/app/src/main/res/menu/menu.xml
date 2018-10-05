@@ -8,14 +8,14 @@
         android:id="@+id/action_education"
         android:title="@string/TapBar_youtube"
         app:showAsAction="withText"/>
-    <!--앱정보-->
+    <!--앱평가하기-->
     <item
-        android:id="@+id/action_guide"
-        android:title="@string/dialog_app_title"
+        android:id="@+id/action_evaluate"
+        android:title="앱 평가하기"
         app:showAsAction="withText"/>
-    <!--개발자정보-->
+    <!--앱소개하기-->
     <item
-        android:id="@+id/action_myinfo"
-        android:title="@string/dialog_my_title"
+        android:id="@+id/app_introduce"
+        android:title="앱 소개"
         app:showAsAction="withText"/>
 </menu>

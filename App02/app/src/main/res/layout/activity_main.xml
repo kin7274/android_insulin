@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="9">
+            android:weightSum="8">
 
             <TextView
                 android:layout_width="0dp"
@@ -76,20 +76,13 @@
                 android:background="@drawable/xml_border"
                 android:hint="식사상태" />
 
-            <Button
-
-                android:id="@+id/setting_set_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="SET" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="9">
+            android:weightSum="8">
 
             <TextView
                 android:layout_width="0dp"
@@ -128,14 +121,12 @@
                 android:layout_weight="2"
                 android:background="@drawable/xml_border"
                 android:hint="식사상태" />
-
-            <Button
-                android:id="@+id/setting_set_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="SET" />
         </LinearLayout>
+        <Button
+            android:id="@+id/setting_set"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SET" />
     </LinearLayout>
 
     <LinearLayout

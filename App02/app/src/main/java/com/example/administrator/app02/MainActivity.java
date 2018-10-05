@@ -128,12 +128,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setting_data = (TextView) findViewById(R.id.setting_data);
         Button btn1 = (Button) findViewById(R.id.btn1);
         Button btn2 = (Button) findViewById(R.id.btn2);
-        Button btn4 = (Button) findViewById(R.id.btn4);
+        // 설정 끝, 다음 페이지로 이동
+        Button next_btn = (Button) findViewById(R.id.next_btn);
         Button action_setting = (Button) findViewById(R.id.action_setting);
         Button action_setting2 = (Button) findViewById(R.id.action_setting2);
         btn1.setOnClickListener(this);
         btn2.setOnClickListener(this);
-        btn4.setOnClickListener(this);
+        next_btn.setOnClickListener(this);
         action_setting.setOnClickListener(this);
         action_setting2.setOnClickListener(this);
         //

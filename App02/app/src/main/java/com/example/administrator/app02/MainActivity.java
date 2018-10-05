@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView setting_kind_1, setting_name_1, setting_unit_1, setting_status_1;
     TextView setting_kind_2, setting_name_2, setting_unit_2, setting_status_2;
     // 1번 설정 종류
-    String[] settingdata1 = {"", "", ""};
-    String[] settingdata2 = {"", "", ""};
+    String[] settingdata1 = {"", "", "", ""};
+    String[] settingdata2 = {"", "", "", ""};
 
     // 메인
     @Override
@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 지속형
         final String[] items5 = {getResources().getString(R.string.insulin_name4_0), getResources().getString(R.string.insulin_name4_1)};
         // spinner03 : 식사상태
-        final String[] items6 = {"아침식전", "점심식전", "저녁식전", "취침전"};
+        final String[] items6 = {getResources().getString(R.string.state_0_0),getResources().getString(R.string.state_0_1), getResources().getString(R.string.state_0_2), getResources().getString(R.string.state_0_3)};
         // 임시사용
         final String[] items99;
 
@@ -249,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             // 리스트 목록 클릭 이벤트
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
-                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items[position], Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items[position], Toast.LENGTH_SHORT).show();
                                 // 세팅데이터1[0]에 저장
                                 settingdata1[0] = items[position];
                                 // 메인 텍스트에 값 넣음
@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             // 리스트 목록 클릭 이벤트
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
-                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items99[position], Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items99[position], Toast.LENGTH_SHORT).show();
                                 settingdata1[1] = items99[position];
                                 setting_name_1.setText(items99[position]);
                             }
@@ -317,7 +317,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setItems(items, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
-                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items6[position], Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items6[position], Toast.LENGTH_SHORT).show();
                                 settingdata1[3] = items6[position];
                                 setting_status_1.setText(items6[position]);
                             }
@@ -336,7 +336,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setItems(items, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
-                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items[position], Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items[position], Toast.LENGTH_SHORT).show();
                                 settingdata2[0] = items[position];
                                 setting_kind_2.setText(items[position]);
                             }
@@ -366,7 +366,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setItems(items99, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
-                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items99[position], Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items99[position], Toast.LENGTH_SHORT).show();
                                 settingdata2[1] = items99[position];
                                 setting_name_2.setText(items99[position]);
                             }
@@ -400,7 +400,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setItems(items, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
-                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items6[position], Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items[position], Toast.LENGTH_SHORT).show();
                                 settingdata2[3] = items6[position];
                                 setting_status_2.setText(items6[position]);
                             }
@@ -411,9 +411,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 설정값 저장
             case R.id.setting_set:
 
-
                 break;
-
             //// 블루투스
             // 블루투스 장치 검색
             case R.id.scan_device:

@@ -314,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 AlertDialog.Builder builder14 = new AlertDialog.Builder(MainActivity.this)
                         .setTitle("1-4. 식사상태")
                         .setNegativeButton("NO", null)
-                        .setItems(items, new DialogInterface.OnClickListener() {
+                        .setItems(items6, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
 //                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items6[position], Toast.LENGTH_SHORT).show();
@@ -397,7 +397,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 AlertDialog.Builder builder24 = new AlertDialog.Builder(MainActivity.this)
                         .setTitle("2-4. 식사상태")
                         .setNegativeButton("NO", null)
-                        .setItems(items, new DialogInterface.OnClickListener() {
+                        .setItems(items6, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
 //                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items[position], Toast.LENGTH_SHORT).show();
@@ -410,7 +410,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
                 // 설정값 저장
             case R.id.setting_set:
-
+                Toast.makeText(getApplicationContext(), "저장하겠습니다.",Toast.LENGTH_SHORT).show();
+                // 1번
+                Log.d(TAG, "settingdata1[0] = " + settingdata1[0]);
+                Log.d(TAG, "settingdata1[1] = " + settingdata1[1]);
+                Log.d(TAG, "settingdata1[2] = " + settingdata1[2]);
+                Log.d(TAG, "settingdata1[3] = " + settingdata1[3]);
+                // 2번
+                Log.d(TAG, "settingdata2[0] = " + settingdata2[0]);
+                Log.d(TAG, "settingdata2[1] = " + settingdata2[1]);
+                Log.d(TAG, "settingdata2[2] = " + settingdata2[2]);
+                Log.d(TAG, "settingdata2[3] = " + settingdata2[3]);
                 break;
             //// 블루투스
             // 블루투스 장치 검색

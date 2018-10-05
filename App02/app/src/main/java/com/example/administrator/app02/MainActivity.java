@@ -421,6 +421,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(TAG, "settingdata2[1] = " + settingdata2[1]);
                 Log.d(TAG, "settingdata2[2] = " + settingdata2[2]);
                 Log.d(TAG, "settingdata2[3] = " + settingdata2[3]);
+
+                settinglists.add(new CardItem_Setting(settingdata1[0] + ", " + settingdata1[1] + ", " + settingdata1[2] + ", " + settingdata1[3]));
+                settinglists.add(new CardItem_Setting(settingdata2[0] + ", " + settingdata2[1] + ", " + settingdata2[2] + ", " + settingdata2[3]));
+                mAdapter.notifyDataSetChanged();
                 break;
             //// 블루투스
             // 블루투스 장치 검색

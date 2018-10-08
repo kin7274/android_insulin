@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.airbnb.lottie.LottieAnimationView;
 
@@ -24,11 +26,20 @@ public class Intro extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.intro);
+        setStatusbar();
         LottieAnimationView animationView = (LottieAnimationView) findViewById(R.id.animation_view);
         // 반복 설정
         animationView.loop(true);
         // 실행
         animationView.playAnimation();
+    }
+
+    // 상태바 색 변경
+    public void setStatusbar() {
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryPurle));
     }
 
     @Override

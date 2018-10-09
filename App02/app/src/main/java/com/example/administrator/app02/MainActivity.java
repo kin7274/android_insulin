@@ -37,8 +37,6 @@ import static com.example.administrator.app02.DeviceControlActivity.EXTRAS_DEVIC
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, SettingRecyclerAdapter.SettingRecyclerViewClickListener {
     private final static String TAG = MainActivity.class.getSimpleName();
 
-    String rrrrr;
-    List<CardItem_Setting> settinglists;
     private SettingRecyclerAdapter mAdapter;
     RecyclerView recycler_view;
 
@@ -51,15 +49,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String setting_insulin_kinds, setting_insulin_names, setting_insulin_unit, setting_insulin_time;
     String setting_insulin1, setting_insulin2, setting_insulin_total;
 
-    // 다이얼로그 선택된 값
-    final int[] selectedItem = {0};
 ////////////////////////////////////
-
+    // 사용자 설정 해당 칸
     TextView setting_kind_1, setting_name_1, setting_unit_1, setting_status_1;
     TextView setting_kind_2, setting_name_2, setting_unit_2, setting_status_2;
+
     // 1번 설정 종류
     String[] settingdata1 = {"", "", "", ""};
     String[] settingdata2 = {"", "", "", ""};
+
+    // 저장데이터
+    List<CardItem_Setting> settinglists;
+    String set1, set2;
+    String rrrrr;
+    String insulin_1of2, insulin_2of2;
 
     // 메인
     @Override
@@ -101,7 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (str.equals("")) {
             // 초기 1회
             Log.d(TAG, "설정부터하세욥..");
-//            setting_data.setText("설정부터하고와");
+            // 사용자에게 알림띄우자
+            Toast.makeText(getApplicationContext(), "설정부터하세요@@", Toast.LENGTH_SHORT).show();
         }
         // 설정값이 존재할 경우
         else {
@@ -109,23 +113,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 사용하는 약이 두개인 경우
                 String numbers = str;
                 String[] arr = numbers.split("&&");
-                String strradv1 = arr[0];
-                Log.d(TAG, "strradv1 =" + strradv1);
-                settinglists.add(new CardItem_Setting(strradv1));
-                String strradv2 = arr[1];
-                Log.d(TAG, "strradv2 = " + strradv2);
-                settinglists.add(new CardItem_Setting(strradv2));
+                // 1of2
+                insulin_1of2 = arr[0];
+                Log.d(TAG, "insulin_1of2 =" + insulin_1of2);
+                // 1번 카드뷰 추가
+                settinglists.add(new CardItem_Setting(insulin_1of2));
+                // 2of2
+                insulin_2of2 = arr[1];
+                Log.d(TAG, "strradv2 = " + insulin_2of2);
+                settinglists.add(new CardItem_Setting(insulin_2of2));
                 mAdapter.notifyDataSetChanged();
-
-                // strradv1 설정한 1번 약
-                // strradv2 설정한 2번 약
-                Global.setData1(strradv1);
-                Global.setData2(strradv2);
+                // 전역변수로 저장
+                Global.setData1(insulin_1of2);
+                Global.setData2(insulin_2of2);
             } else {
+                // 사용하는 약이 한개인 경우
                 settinglists.add(new CardItem_Setting(str));
                 mAdapter.notifyDataSetChanged();
-
-                // strradv1 설정한 1번 약
+                // 전역변수로 저장
                 Global.setData1(str);
                 Global.setData2("없습니다");
             }
@@ -432,8 +437,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(TAG, "settingdata2[2] = " + settingdata2[2]);
                 Log.d(TAG, "settingdata2[3] = " + settingdata2[3]);
 
-                settinglists.add(new CardItem_Setting(settingdata1[0] + ", " + settingdata1[1] + ", " + settingdata1[2] + ", " + settingdata1[3]));
-                settinglists.add(new CardItem_Setting(settingdata2[0] + ", " + settingdata2[1] + ", " + settingdata2[2] + ", " + settingdata2[3]));
+                // 저장데이터
+                set1 = settingdata1[0] + ", " + settingdata1[1] + ", " + settingdata1[2] + ", " + settingdata1[3];
+                set2 = settingdata2[0] + ", " + settingdata2[1] + ", " + settingdata2[2] + ", " + settingdata2[3];
+                // 카드뷰로 표시
+                settinglists.add(new CardItem_Setting(set1));
+                settinglists.add(new CardItem_Setting(set2));
                 mAdapter.notifyDataSetChanged();
                 break;
             //// 블루투스
@@ -472,20 +481,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStop() {
         super.onStop();
-        if (setting_insulin1 != null) {
+        if (set1 != null) {
             // 설정안햇네 저장할거없다이
             Log.d(TAG, "setting_insulin1 X NULL");
             // 약1은 설정햇네
             // 그럼 약2는?
-            if (setting_insulin2 != null) {
+            if (set2 != null) {
                 // 2번도 햇네?
-                rrrrr = setting_insulin1 + "&&" + setting_insulin2;
+                rrrrr = set1 + "&&" + set2;
             } else {
                 Log.d(TAG, "setting_insulin2 = NULL");
                 // 2번은 안햇네?
                 // 그럼 1번만 저장할게
-                rrrrr = setting_insulin1;
-
+                rrrrr = set1;
             }
         } else {
             Log.d(TAG, "setting_insulin1 = NULL");

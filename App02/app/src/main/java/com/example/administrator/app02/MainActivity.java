@@ -49,19 +49,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String setting_insulin_kinds, setting_insulin_names, setting_insulin_unit, setting_insulin_time;
     String setting_insulin1, setting_insulin2, setting_insulin_total;
 
-////////////////////////////////////
+    ////////////////////////////////////
     // 사용자 설정 해당 칸
     TextView setting_kind_1, setting_name_1, setting_unit_1, setting_status_1;
     TextView setting_kind_2, setting_name_2, setting_unit_2, setting_status_2;
 
     // 1번 설정 종류
-    String[] settingdata1 = {"", "", "", ""};
-    String[] settingdata2 = {"", "", "", ""};
+    String[] settingdata1 = {"","","",""};
+    String[] settingdata2 = {"","","",""};
 
     // 저장데이터
     List<CardItem_Setting> settinglists;
     String set1, set2;
-    String rrrrr;
+    String total_setting_data;
     String insulin_1of2, insulin_2of2;
 
     // 메인
@@ -74,62 +74,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setStatusbar();
         set();
 
-        recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
-        recycler_view.setHasFixedSize(false);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        // 반대로 쌓기
-        layoutManager.setReverseLayout(true);
-        layoutManager.setStackFromEnd(true);
-        recycler_view.setLayoutManager(layoutManager);
-
-        try {
-            settinglists = new ArrayList<>();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // 어댑터 설정
-        mAdapter = new SettingRecyclerAdapter(settinglists);
-        mAdapter.setOnClickListener(this);
-        recycler_view.setAdapter(mAdapter);
-
-        // 구분선
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
-        recycler_view.addItemDecoration(dividerItemDecoration);
-
         // 저장데이터 불러오기
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String str = pref.getString("PREF_STRNAME", "");
         Log.d(TAG, "str = " + str);
         if (str.equals("")) {
             // 초기 1회
+            // 설정값이 없다
             Log.d(TAG, "설정부터하세욥..");
             // 사용자에게 알림띄우자
-            Toast.makeText(getApplicationContext(), "설정부터하세요@@", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "@@설정부터하세욥@@", Toast.LENGTH_SHORT).show();
         }
         // 설정값이 존재할 경우
         else {
-            if (str.contains("&&")) {
+            if (str.contains("&")) {
                 // 사용하는 약이 두개인 경우
-                String numbers = str;
-                String[] arr = numbers.split("&&");
+                String[] arr = str.split("&");
                 // 1of2
                 insulin_1of2 = arr[0];
-                Log.d(TAG, "insulin_1of2 =" + insulin_1of2);
-                // 1번 카드뷰 추가
-                settinglists.add(new CardItem_Setting(insulin_1of2));
+//                Log.d(TAG, "insulin_1of2 =" + insulin_1of2);
+                String[] insulin_1of2_setdata = insulin_1of2.split(",");
+                setting_kind_1.setText(insulin_1of2_setdata[0]);
+                setting_name_1.setText(insulin_1of2_setdata[1]);
+                setting_unit_1.setText(insulin_1of2_setdata[2]);
+                setting_status_1.setText(insulin_1of2_setdata[3]);
                 // 2of2
                 insulin_2of2 = arr[1];
-                Log.d(TAG, "strradv2 = " + insulin_2of2);
-                settinglists.add(new CardItem_Setting(insulin_2of2));
-                mAdapter.notifyDataSetChanged();
+//                Log.d(TAG, "insulin_2of2 = " + insulin_2of2);
+                String[] insulin_2of2_setdata = insulin_2of2.split(",");
+                setting_kind_2.setText(insulin_2of2_setdata[0]);
+                setting_name_2.setText(insulin_2of2_setdata[1]);
+                setting_unit_2.setText(insulin_2of2_setdata[2]);
+                setting_status_2.setText(insulin_2of2_setdata[3]);
                 // 전역변수로 저장
                 Global.setData1(insulin_1of2);
                 Global.setData2(insulin_2of2);
             } else {
                 // 사용하는 약이 한개인 경우
-                settinglists.add(new CardItem_Setting(str));
-                mAdapter.notifyDataSetChanged();
+                String[] arr = str.split(",");
+                setting_kind_1.setText(arr[0]);
+                setting_name_1.setText(arr[1]);
+                setting_unit_1.setText(arr[2]);
+                setting_status_1.setText(arr[3]);
                 // 전역변수로 저장
                 Global.setData1(str);
                 Global.setData2("없습니다");
@@ -249,7 +235,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 지속형
         final String[] items5 = {getResources().getString(R.string.insulin_name4_0), getResources().getString(R.string.insulin_name4_1)};
         // spinner03 : 식사상태
-        final String[] items6 = {getResources().getString(R.string.state_0_0),getResources().getString(R.string.state_0_1), getResources().getString(R.string.state_0_2), getResources().getString(R.string.state_0_3)};
+        final String[] items6 = {getResources().getString(R.string.state_0_0), getResources().getString(R.string.state_0_1), getResources().getString(R.string.state_0_2), getResources().getString(R.string.state_0_3)};
         // 임시사용
         final String[] items99;
 
@@ -277,15 +263,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // 1번 이름
             case R.id.setting_name_1:
                 String mykinds = settingdata1[0];
-                if(mykinds.equals("초속효성")){
+                if (mykinds.equals("초속효성")) {
                     items99 = items1;
-                } else if(mykinds.equals("속효성")){
+                } else if (mykinds.equals("속효성")) {
                     items99 = items2;
-                } else if(mykinds.equals("중간형")){
+                } else if (mykinds.equals("중간형")) {
                     items99 = items3;
-                } else if(mykinds.equals("혼합형")){
+                } else if (mykinds.equals("혼합형")) {
                     items99 = items4;
-                } else {items99 = items5;
+                } else {
+                    items99 = items5;
                 }
                 ArrayAdapter<String> adapter12 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items99);
                 adapter12.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
@@ -362,13 +349,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // 2번 이름
             case R.id.setting_name_2:
                 String mykinds2 = settingdata2[0];
-                if(mykinds2.equals("초속효성")){
+                if (mykinds2.equals("초속효성")) {
                     items99 = items1;
-                } else if(mykinds2.equals("속효성")){
+                } else if (mykinds2.equals("속효성")) {
                     items99 = items2;
-                } else if(mykinds2.equals("중간형")){
+                } else if (mykinds2.equals("중간형")) {
                     items99 = items3;
-                } else if(mykinds2.equals("혼합형")){
+                } else if (mykinds2.equals("혼합형")) {
                     items99 = items4;
                 } else {
                     items99 = items5;
@@ -423,9 +410,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 builder24.create();
                 builder24.show();
                 break;
-                // 설정값 저장
+            // 설정값 저장
             case R.id.setting_set:
-                Toast.makeText(getApplicationContext(), "저장하겠습니다.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "저장하겠습니다.", Toast.LENGTH_SHORT).show();
                 // 1번
                 Log.d(TAG, "settingdata1[0] = " + settingdata1[0]);
                 Log.d(TAG, "settingdata1[1] = " + settingdata1[1]);
@@ -438,12 +425,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(TAG, "settingdata2[3] = " + settingdata2[3]);
 
                 // 저장데이터
-                set1 = settingdata1[0] + ", " + settingdata1[1] + ", " + settingdata1[2] + ", " + settingdata1[3];
-                set2 = settingdata2[0] + ", " + settingdata2[1] + ", " + settingdata2[2] + ", " + settingdata2[3];
-                // 카드뷰로 표시
-                settinglists.add(new CardItem_Setting(set1));
-                settinglists.add(new CardItem_Setting(set2));
-                mAdapter.notifyDataSetChanged();
+                set1 = settingdata1[0] + "," + settingdata1[1] + "," + settingdata1[2] + "," + settingdata1[3];
+                set2 = settingdata2[0] + "," + settingdata2[1] + "," + settingdata2[2] + "," + settingdata2[3];
+
+                // 전역변수로 저장
+                Global.setData1(set1);
+                Global.setData2(set2);
                 break;
             //// 블루투스
             // 블루투스 장치 검색
@@ -468,44 +455,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    // 설정 후 돌아오면!
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "11111 설정 후 내가 돌아왔어");
-//        textview1.setText(BluetoothLog.getName());
-//        textview2.setText(BluetoothLog.getAddress());
-    }
-
     // 액티비티 종료 전에 저장!
     @Override
     protected void onStop() {
         super.onStop();
-        if (set1 != null) {
-            // 설정안햇네 저장할거없다이
-            Log.d(TAG, "setting_insulin1 X NULL");
-            // 약1은 설정햇네
-            // 그럼 약2는?
-            if (set2 != null) {
-                // 2번도 햇네?
-                rrrrr = set1 + "&&" + set2;
-            } else {
-                Log.d(TAG, "setting_insulin2 = NULL");
-                // 2번은 안햇네?
-                // 그럼 1번만 저장할게
-                rrrrr = set1;
-            }
+        String a = Global.getData1();
+        String b = Global.getData2();
+        if(b != null){
+            // 2번까지 함
+            Log.d(TAG, "set1 = " + a + ", set2 = " + b);
+            total_setting_data = a + "&" + b;
         } else {
-            Log.d(TAG, "setting_insulin1 = NULL");
+            // 1번만 있음
+            Log.d(TAG, "set1 = " + a + ", set2 = null이겠지?" + b);
+            total_setting_data = a;
         }
-        Log.d(TAG, "rrrrr = " + rrrrr);
-
-        // getSharedPreferences(String name, int mode)
-        // : 특정 이름을 가진 SharedPreferences를 생성. 애플리케이션 전체에서 사용
+        Log.d(TAG, "쉐어드프레퍼런스값  = " + total_setting_data);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("PREF_STRNAME", rrrrr);
+        editor.putString("PREF_STRNAME", total_setting_data);
         editor.apply();
+        Log.d(TAG, "저장완료");
     }
 
     @Override

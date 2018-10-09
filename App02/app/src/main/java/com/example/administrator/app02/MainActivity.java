@@ -34,10 +34,9 @@ import java.util.List;
 
 import static com.example.administrator.app02.DeviceControlActivity.EXTRAS_DEVICE_ADDRESS;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, SettingRecyclerAdapter.SettingRecyclerViewClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private final static String TAG = MainActivity.class.getSimpleName();
 
-    private SettingRecyclerAdapter mAdapter;
     RecyclerView recycler_view;
 
     TextView textview1, textview2, setting_data;
@@ -475,10 +474,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString("PREF_STRNAME", total_setting_data);
         editor.apply();
         Log.d(TAG, "저장완료");
-    }
-
-    @Override
-    public void onItemClicked(int position) {
-
     }
 }

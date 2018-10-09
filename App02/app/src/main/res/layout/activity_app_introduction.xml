@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="6dp"
+    android:orientation="vertical"
+    android:weightSum="4"
+    tools:context=".AppIntroductionActivity">
+
+    <TextView
+        android:id="@+id/menu1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/my_font_family"
+        android:gravity="center_vertical"
+        android:text="01. 당뇨그루에 대해"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/menu2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/my_font_family"
+        android:gravity="center_vertical"
+        android:text="02. 버전정보"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/menu3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/my_font_family"
+        android:gravity="center_vertical"
+        android:text="03. 개발자정보"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/menu4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/my_font_family"
+        android:gravity="center_vertical"
+        android:text="04. Change log"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        android:textStyle="normal" />
+
+</LinearLayout>

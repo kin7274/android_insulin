@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String[] settingdata2 = {"","","",""};
 
     // 저장데이터
-    List<CardItem_Setting> settinglists;
     String set1, set2;
     String total_setting_data;
     String insulin_1of2, insulin_2of2;

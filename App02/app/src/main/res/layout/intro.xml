@@ -1,12 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    tools:context=".Intro">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/my_font_family"
+        android:gravity="center"
+        android:text="두-둥!"
+        android:textColor="#ffffff"
+        android:textSize="40sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/my_font_family"
+        android:gravity="center"
+        android:text="편ㅡ안한 투약"
+        android:textColor="#ffffff"
+        android:textSize="40sp" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_view"
+        android:layout_width="fill_parent"
+        android:layout_height="350dp"
+        app:lottie_fileName="animation-w512-h512.json" />
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:lottie_fileName="dino_dance.json" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/my_font_family"
+        android:gravity="center"
+        android:text="KNU.ELEC"
+        android:textColor="#ffffff"
+        android:textSize="30sp" />
+</LinearLayout>

@@ -216,6 +216,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dialog.create();
         dialog.show();
     }
+    // 블루투스 설정 후 Device Name, Address 가져옴
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                String device_name_address = data.getStringExtra("result");
+
+            }
+        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -238,7 +248,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final String[] items6 = {getResources().getString(R.string.state_0_0), getResources().getString(R.string.state_0_1), getResources().getString(R.string.state_0_2), getResources().getString(R.string.state_0_3)};
         // 임시사용
         final String[] items99;
-
+        //////////////
+        // 스위치문
         switch (v.getId()) {
             case R.id.setting_kind_1:
                 ArrayAdapter<String> adapter11 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items);
@@ -251,7 +262,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
 //                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items[position], Toast.LENGTH_SHORT).show();
-                                // 세팅데이터1[0]에 저장
                                 settingdata1[0] = items[position];
                                 // 메인 텍스트에 값 넣음
                                 setting_kind_1.setText(items[position]);
@@ -295,13 +305,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.setting_unit_1:
                 final EditText et = new EditText(MainActivity.this);
                 AlertDialog.Builder builder13 = new AlertDialog.Builder(MainActivity.this)
-                        // 숫자만 입력가능하도록
-                        // 키패드를 띄울까?
+                        // 숫자만 입력가능하도록, 키패드를 띄울까?
                         .setTitle("1-3. 단위")
                         .setPositiveButton("저장", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
                                 settingdata1[2] = et.getText().toString();
+                                // 입력한 값이 숫자인지 확인
                                 if(Pattern.matches("^[0-9]+$",  settingdata1[2])){
                                     // 숫자인경우
                                     setting_unit_1.setText(et.getText().toString());
@@ -426,15 +436,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.setting_set:
                 Toast.makeText(getApplicationContext(), "저장하겠습니다.", Toast.LENGTH_SHORT).show();
                 // 1번
-                Log.d(TAG, "settingdata1[0] = " + settingdata1[0]);
-                Log.d(TAG, "settingdata1[1] = " + settingdata1[1]);
-                Log.d(TAG, "settingdata1[2] = " + settingdata1[2]);
-                Log.d(TAG, "settingdata1[3] = " + settingdata1[3]);
+//                Log.d(TAG, "settingdata1[0] = " + settingdata1[0]);
+//                Log.d(TAG, "settingdata1[1] = " + settingdata1[1]);
+//                Log.d(TAG, "settingdata1[2] = " + settingdata1[2]);
+//                Log.d(TAG, "settingdata1[3] = " + settingdata1[3]);
                 // 2번
-                Log.d(TAG, "settingdata2[0] = " + settingdata2[0]);
-                Log.d(TAG, "settingdata2[1] = " + settingdata2[1]);
-                Log.d(TAG, "settingdata2[2] = " + settingdata2[2]);
-                Log.d(TAG, "settingdata2[3] = " + settingdata2[3]);
+//                Log.d(TAG, "settingdata2[0] = " + settingdata2[0]);
+//                Log.d(TAG, "settingdata2[1] = " + settingdata2[1]);
+//                Log.d(TAG, "settingdata2[2] = " + settingdata2[2]);
+//                Log.d(TAG, "settingdata2[3] = " + settingdata2[3]);
 
                 // 저장데이터
                 set1 = settingdata1[0] + "," + settingdata1[1] + "," + settingdata1[2] + "," + settingdata1[3];
@@ -448,7 +458,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // 블루투스 장치 검색
             case R.id.scan_device:
                 Intent intent1 = new Intent(MainActivity.this, DeviceScanActivity.class);
-                startActivity(intent1);
+                startActivityForResult(intent1, 1);
                 break;
             // 페어링
             case R.id.pairing_btn:

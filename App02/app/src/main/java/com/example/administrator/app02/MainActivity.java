@@ -38,19 +38,7 @@ import static com.example.administrator.app02.DeviceControlActivity.EXTRAS_DEVIC
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private final static String TAG = MainActivity.class.getSimpleName();
-
-    RecyclerView recycler_view;
-
-    TextView textview1, textview2, setting_data;
-
     public static Context mContext;
-
-    String setting_insulin_kinds, setting_insulin_names, setting_insulin_unit, setting_insulin_time;
-    String setting_insulin1, setting_insulin2, setting_insulin_total;
-
-    ////////////////////////////////////
-    ////////////////////////////////////
-    ////////////////////////////////////
     // 사용자 설정 해당 칸
     TextView setting_kind_1, setting_name_1, setting_unit_1, setting_status_1;
     TextView setting_kind_2, setting_name_2, setting_unit_2, setting_status_2;
@@ -64,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String total_setting_data;
     String insulin_1of2, insulin_2of2;
 
-    // 메인
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

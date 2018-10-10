@@ -43,21 +43,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView textview1, textview2, setting_data;
 
-    String deviceAddress;
-
     public static Context mContext;
 
     String setting_insulin_kinds, setting_insulin_names, setting_insulin_unit, setting_insulin_time;
     String setting_insulin1, setting_insulin2, setting_insulin_total;
 
     ////////////////////////////////////
+    ////////////////////////////////////
+    ////////////////////////////////////
     // 사용자 설정 해당 칸
     TextView setting_kind_1, setting_name_1, setting_unit_1, setting_status_1;
     TextView setting_kind_2, setting_name_2, setting_unit_2, setting_status_2;
 
-    // 1번 설정 종류
-    String[] settingdata1 = {"","","",""};
-    String[] settingdata2 = {"","","",""};
+    String[] settingdata1 = {"","","",""};  // 1번 설정
+    String[] settingdata2 = {"","","",""};  // 2번 설정
+    String deviceName, deviceAddress;  // 장치 정보
 
     // 저장데이터
     String set1, set2;
@@ -167,6 +167,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 페어링 버튼
         Button pairing_btn = (Button) findViewById(R.id.pairing_btn);
         pairing_btn.setOnClickListener(this);
+        // 선택한 장치 이름과 주소 보여주기
+        deviceName = (TextView) findViewById(R.id.deviceName);
+        deviceAddress = (TextView) findViewById(R.id.deviceAddress);
         // 설정 끝, 다음 페이지로 이동
         Button next_btn = (Button) findViewById(R.id.next_btn);
         next_btn.setOnClickListener(this);

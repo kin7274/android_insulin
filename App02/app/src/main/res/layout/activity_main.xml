@@ -241,6 +241,26 @@
                         android:textColor="#000000"
                         android:textSize="20sp" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/deviceName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/my_font_family"
+                    android:text="장치 이름"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/deviceAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/my_font_family"
+                    android:text="장치 주소"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>

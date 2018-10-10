@@ -442,6 +442,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             // 설정값 저장
             case R.id.setting_set:
+                // TODO NULL값이 있으면 저장X, 단 2번 다 비어있으면 1번만 된걸로
                 Toast.makeText(getApplicationContext(), "저장하겠습니다.", Toast.LENGTH_SHORT).show();
                 // 1번
 //                Log.d(TAG, "settingdata1[0] = " + settingdata1[0]);
@@ -478,8 +479,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // 설정 끝, 다음으로 이동
             case R.id.next_btn:
                 Intent intent4 = new Intent(MainActivity.this, Timeline.class);
-                intent4.putExtra("AYO", setting_data.getText());
-                intent4.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, textview2.getText());
+                // 설정값 전달
+                intent4.putExtra("AYO", " ");
+                // 장치 주소값 전달
+                intent4.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, deviceAddress.getText());
                 startActivity(intent4);
                 break;
         }

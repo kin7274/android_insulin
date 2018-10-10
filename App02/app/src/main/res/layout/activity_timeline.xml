@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Timeline">
 
+    <!--툴바-->
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
@@ -14,12 +15,15 @@
         android:elevation="4dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="인슐린"
+            android:layout_marginLeft="16dp"
+            android:fontFamily="@font/my_font_family"
+            android:text="INSULIN"
             android:textColor="#ffffff"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="normal" />
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout

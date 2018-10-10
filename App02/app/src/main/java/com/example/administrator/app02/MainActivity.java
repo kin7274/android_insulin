@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView setting_kind_1, setting_name_1, setting_unit_1, setting_status_1;
     TextView setting_kind_2, setting_name_2, setting_unit_2, setting_status_2;
 
-    String[] settingdata1 = {"","","",""};  // 1번 설정
-    String[] settingdata2 = {"","","",""};  // 2번 설정
+    String[] settingdata1 = {"", "", "", ""};  // 1번 설정
+    String[] settingdata2 = {"", "", "", ""};  // 2번 설정
     TextView deviceName, deviceAddress;  // 장치 정보 텍스트뷰
 
     // 저장데이터
@@ -306,7 +306,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void onClick(DialogInterface dialog, int position) {
                                 settingdata1[2] = et.getText().toString();
                                 // 입력한 값이 숫자인지 확인
-                                if(Pattern.matches("^[0-9]+$",  settingdata1[2])){
+                                if (Pattern.matches("^[0-9]+$", settingdata1[2])) {
                                     // 숫자인 경우
                                     setting_unit_1.setText(et.getText().toString());
                                 } else {
@@ -396,7 +396,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void onClick(DialogInterface dialog, int position) {
                                 settingdata2[2] = et2.getText().toString();
                                 // 입력값이 숫자인지 확인
-                                if(Pattern.matches("^[0-9]+$",  settingdata2[2])){
+                                if (Pattern.matches("^[0-9]+$", settingdata2[2])) {
                                     // 숫자인경우
                                     setting_unit_2.setText(et2.getText().toString());
                                 } else {
@@ -481,7 +481,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStop();
         String a = Global.getData1();
         String b = Global.getData2();
-        if(b != null){
+        if (b != null) {
             // 2번까지 함
             Log.d(TAG, "set1 = " + a + ", set2 = " + b);
             total_setting_data = a + "&" + b;

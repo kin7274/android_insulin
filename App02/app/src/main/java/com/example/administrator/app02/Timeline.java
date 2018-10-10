@@ -181,11 +181,18 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         }
     };
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
-        
+
         // 툴바
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
@@ -338,7 +345,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                     + cursor.getString(2) + "\n";
             String oioi = cursor.getString(2).substring(0, cursor.getString(2).indexOf(","));
 //            Log.d(TAG, "oioi = " + oioi);
-            lists.add(new CardItem(searchImage(oioi),cursor.getString(1), cursor.getString(2)));
+            lists.add(new CardItem(searchImage(oioi), cursor.getString(1), cursor.getString(2)));
         }
         // 텍스트뷰에 말고
         // 카드뷰로 저장을 해
@@ -384,12 +391,12 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         switch (v.getId()) {
             // DB에 추가한다
             case R.id.insert_db:
-                int rows_cnt = (int)(long) rows_count();
+                int rows_cnt = (int) (long) rows_count();
                 int cnt = lists.size();
                 Log.d(TAG, "저장할 리스트 갯수 : " + lists.size());
-                for(int i=rows_cnt; i<cnt; i++){
-                    Log.d(TAG, (i+1) + "번 시간값 : " + lists.get(i).getState());
-                    Log.d(TAG, (i+1) + "번 설정값 : " + lists.get(i).getSetting());
+                for (int i = rows_cnt; i < cnt; i++) {
+                    Log.d(TAG, (i + 1) + "번 시간값 : " + lists.get(i).getState());
+                    Log.d(TAG, (i + 1) + "번 설정값 : " + lists.get(i).getSetting());
 //                    Log.d(TAG, "1번 시간값 : " + lists.get(0).getState());
 //                    Log.d(TAG, "1번 설정값 : " + lists.get(0).getSetting());
 //                    Log.d(TAG, "2번 시간값 : " + lists.get(1).getState());

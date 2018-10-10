@@ -219,13 +219,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dialog.create();
         dialog.show();
     }
+
     // 블루투스 설정 후 Device Name, Address 가져옴
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
                 String device_name_address = data.getStringExtra("result");
-
+                String[] device = device_name_address.split(",");
+                // 디바이스 이름과 주소 표시
+                deviceName.setText(device[0]);
+                deviceAddress.setText(device[1]);
             }
         }
     }

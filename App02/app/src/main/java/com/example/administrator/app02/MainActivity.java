@@ -401,6 +401,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
                                 settingdata2[2] = et2.getText().toString();
+                                // 입력값이 숫자인지 확인
                                 if(Pattern.matches("^[0-9]+$",  settingdata2[2])){
                                     // 숫자인경우
                                     setting_unit_2.setText(et2.getText().toString());

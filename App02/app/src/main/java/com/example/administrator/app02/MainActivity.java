@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     String[] settingdata1 = {"","","",""};  // 1번 설정
     String[] settingdata2 = {"","","",""};  // 2번 설정
-    String deviceName, deviceAddress;  // 장치 정보
+    TextView deviceName, deviceAddress;  // 장치 정보 텍스트뷰
 
     // 저장데이터
     String set1, set2;

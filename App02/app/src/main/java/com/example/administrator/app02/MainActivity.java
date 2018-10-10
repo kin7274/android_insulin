@@ -320,7 +320,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 settingdata1[2] = et.getText().toString();
                                 // 입력한 값이 숫자인지 확인
                                 if(Pattern.matches("^[0-9]+$",  settingdata1[2])){
-                                    // 숫자인경우
+                                    // 숫자인 경우
                                     setting_unit_1.setText(et.getText().toString());
                                 } else {
                                     // 숫자가 아니네?
@@ -471,8 +471,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // 페어링
             case R.id.pairing_btn:
                 final Intent intent2 = new Intent(MainActivity.this, DeviceControlActivity.class);
-                intent2.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, textview1.getText());
-                intent2.putExtra(EXTRAS_DEVICE_ADDRESS, textview2.getText());
+                intent2.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, deviceName.getText());
+                intent2.putExtra(EXTRAS_DEVICE_ADDRESS, deviceAddress.getText());
                 startActivity(intent2);
                 break;
             // 설정 끝, 다음으로 이동

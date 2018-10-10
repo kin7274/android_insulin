@@ -65,8 +65,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     String setting_insulin_names2 = "";
     String setting_insulin_unit2 = "";
 
-    public Button btn1;
-
     TextView text_data1, text_data2;
     BluetoothLeService mBluetoothLeService = new BluetoothLeService();
 
@@ -192,55 +190,24 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
-
-        // 툴바
-        Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(mytoolbar);
-        getSupportActionBar().setTitle("");
-
         mContext = this;
-
+        setToolbar();
         set();
-
-        recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
-        recycler_view.setHasFixedSize(false);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        // 반대로 쌓기
-        layoutManager.setReverseLayout(true);
-        layoutManager.setStackFromEnd(true);
-        recycler_view.setLayoutManager(layoutManager);
-
-        // 배열에 자꾸 null값이 떠.. 예외처리로 해결!
-        // try catch 단축키 : CTRL + ALT + T 자꾸까먹어..
-        try {
-            lists = new ArrayList<>();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // 어댑터 설정
-        mAdapter = new MyRecyclerAdapter(lists);
-        mAdapter.setOnClickListener(this);
-        recycler_view.setAdapter(mAdapter);
-
-        // 구분선
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), new LinearLayoutManager(this).getOrientation());
-        recycler_view.addItemDecoration(dividerItemDecoration);
-
+        setRecyclerview();
+        // BLE
         deviceAddress = getIntent().getStringExtra(EXTRAS_DEVICE_ADDRESS);
         if (deviceAddress != null) {
             Log.d(TAG, "onCreate: " + deviceAddress);
         }
-
         IntentFilter intentfilter = new IntentFilter();
         intentfilter.addAction(ACTION_DATA_AVAILABLE);
         intentfilter.addAction(ACTION_DATA_AVAILABLE_CHANGE);
         registerReceiver(mMessageReceiver, intentfilter);
-
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-        btn1 = (Button) findViewById(R.id.btn1);
+
         // 블루투스 값 리시브!
+        Button btn1 = (Button) findViewById(R.id.btn1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -249,6 +216,34 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 mBluetoothLeService.writeCharacteristic("a");
             }
         });
+    }
+
+    // 툴바
+    public void setToolbar(){
+        Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(mytoolbar);
+        getSupportActionBar().setTitle("");
+    }
+
+    // 리사이클러뷰 + 어댑터
+    public void setRecyclerview(){
+        // 객체 생성
+        recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
+        recycler_view.setHasFixedSize(false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        // 반대로 쌓기
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        recycler_view.setLayoutManager(layoutManager);
+        // 배열 null 예외처리
+        try {
+            lists = new ArrayList<>();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mAdapter = new MyRecyclerAdapter(lists);
+        mAdapter.setOnClickListener(this);
+        recycler_view.setAdapter(mAdapter);
     }
 
     public void set() {

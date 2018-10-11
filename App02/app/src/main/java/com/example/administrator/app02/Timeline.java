@@ -313,7 +313,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
 //        Log.d(TAG, "SETTING값은 " + setting);
         Log.d(TAG, "저장했어유");
         sql.close();
-        check();
+//        check();
     }
 
     // 조회 메서드

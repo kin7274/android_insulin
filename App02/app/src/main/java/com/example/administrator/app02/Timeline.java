@@ -42,7 +42,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     public ArrayList<String> mUserNameArrayList = new ArrayList<String>();
     String user_name2;
 
-    Button insert_db, load_db, delete_db;
+    Button donggihwa, insert_db, load_db, delete_db;
 
     TextView textview;
 
@@ -205,17 +205,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         registerReceiver(mMessageReceiver, intentfilter);
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-
-        // 블루투스 값 리시브!
-        Button btn1 = (Button) findViewById(R.id.btn1);
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // sd카드 다 리드
-                // "a" 값 전송 / 0x61
-                mBluetoothLeService.writeCharacteristic("a");
-            }
-        });
     }
 
     // 툴바
@@ -247,21 +236,21 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     }
 
     public void set() {
+        // DB관련
+        my = new myDBDB(this);
         // 값 리시브
         text_data1 = (TextView) findViewById(R.id.text_data1);
         text_data2 = (TextView) findViewById(R.id.text_data2);
-
-        // DB관련
-        my = new myDBDB(this);
-
         textview = (TextView) findViewById(R.id.textview);
+        // 버튼 객체
+        donggihwa = (Button) findViewById(R.id.donggihwa);
         insert_db = (Button) findViewById(R.id.insert_db);
         load_db = (Button) findViewById(R.id.load_db);
         delete_db = (Button) findViewById(R.id.delete_db);
+        donggihwa.setOnClickListener(this);
         insert_db.setOnClickListener(this);
         load_db.setOnClickListener(this);
         delete_db.setOnClickListener(this);
-
         // 설정한 1번 약
         insulin_data1 = Global.getData1();
         text_data1.setText(insulin_data1);
@@ -384,6 +373,11 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.donggihwa:
+                // sd카드 다 리드
+                // "a" 값 전송 / 0x61
+                mBluetoothLeService.writeCharacteristic("a");
+                break;
             // DB에 추가한다
             case R.id.insert_db:
                 int rows_cnt = (int) (long) rows_count();

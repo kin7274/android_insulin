@@ -466,8 +466,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // 설정 끝, 다음으로 이동
             case R.id.next_btn:
                 Intent intent4 = new Intent(MainActivity.this, Timeline.class);
-                // 설정값 전달
-                intent4.putExtra("AYO", " ");
                 // 장치 주소값 전달
                 intent4.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, deviceAddress.getText());
                 startActivity(intent4);

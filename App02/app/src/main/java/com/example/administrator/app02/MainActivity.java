@@ -311,13 +311,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             public void onClick(DialogInterface dialog, int position) {
                                 settingdata1[2] = et.getText().toString();
                                 // 입력한 값이 숫자인지 확인
-                                if (Pattern.matches("^[0-9]+$", settingdata1[2])) {
+//                                if (Pattern.matches("^[0-9]+$", settingdata1[2])) {
                                     // 숫자인 경우
                                     setting_unit_1.setText(et.getText().toString());
-                                } else {
+//                                } else {
                                     // 숫자가 아니네?
-                                    Toast.makeText(getApplicationContext(), "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
-                                }
+//                                    Toast.makeText(getApplicationContext(), "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
+//                                }
                             }
                         })
                         .setView(et);

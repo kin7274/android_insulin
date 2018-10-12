@@ -17,7 +17,7 @@ public class Intro extends AppCompatActivity {
         @Override
         public void run() {
             // 2초 뒤에 다음화면(MainActivity)으로 넘어간다
-            Intent intent = new Intent(Intro.this, MainActivity.class);
+            Intent intent = new Intent(Intro.this, I_want_to_know_you.class);
             startActivity(intent);
             finish();
         }

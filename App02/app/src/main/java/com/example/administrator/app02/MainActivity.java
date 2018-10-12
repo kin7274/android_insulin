@@ -62,11 +62,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = this;
-        // 오디오 권한 설정
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 5);
-            Toast.makeText(getApplicationContext(),"권한 허용 없이는 음성 인식 기능 사용 불가 ",Toast.LENGTH_SHORT).show();
-        }
         setToolbar();
         setStatusbar();
         set();

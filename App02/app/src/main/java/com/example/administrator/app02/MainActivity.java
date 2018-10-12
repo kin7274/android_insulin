@@ -5,17 +5,14 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.PatternMatcher;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -36,11 +33,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -62,72 +57,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String total_setting_data;
     String insulin_1of2, insulin_2of2;
 
-    AlarmManager alarm_manager;
-    TimePicker alarm_timepicker;
-    PendingIntent pendingIntent;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = this;
-
-        // 알람매니저 설정
-        alarm_manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-        // 타임피커 설정
-        alarm_timepicker = findViewById(R.id.time_picker);
-
-        // Calendar 객체 생성
-        final Calendar calendar = Calendar.getInstance();
-
-        // 알람리시버 intent 생성
-        final Intent my_intent = new Intent(MainActivity.this, Alarm_Reciver.class);
-
-        // 알람 시작 버튼
-        Button alarm_on = findViewById(R.id.btn_start);
-        alarm_on.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View v) {
-
-                // calendar에 시간 셋팅
-                calendar.set(Calendar.HOUR_OF_DAY, alarm_timepicker.getHour());
-                calendar.set(Calendar.MINUTE, alarm_timepicker.getMinute());
-
-                // 시간 가져옴
-                int hour = alarm_timepicker.getHour();
-                int minute = alarm_timepicker.getMinute();
-                Toast.makeText(MainActivity.this,"Alarm 예정 " + hour + "시 " + minute + "분",Toast.LENGTH_SHORT).show();
-
-                // reveiver에 string 값 넘겨주기
-                my_intent.putExtra("state","alarm on");
-
-                pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, my_intent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
-
-                // 알람셋팅
-                alarm_manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                        pendingIntent);
-            }
-        });
-
-        // 알람 정지 버튼
-        Button alarm_off = findViewById(R.id.btn_finish);
-        alarm_off.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this,"Alarm 종료",Toast.LENGTH_SHORT).show();
-                // 알람매니저 취소
-                alarm_manager.cancel(pendingIntent);
-
-                my_intent.putExtra("state","alarm off");
-
-                // 알람취소
-                sendBroadcast(my_intent);
-            }
-        });
-
         // 오디오 권한 설정
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 5);
@@ -570,5 +504,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString("PREF_STRNAME", total_setting_data);
         editor.apply();
         Log.d(TAG, "저장완료");
+    }
+
+    // 정해진 시간에 핸드폰을 켬
+    public void showAlarmDialog(View view){
+        TimePickerFragment timePickerFragment = new TimePickerFragment();
+        timePickerFragment.show(getSupportFragmentManager(), "timePicker");
     }
 }

@@ -1,6 +1,7 @@
 package com.example.administrator.app02;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -60,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setToolbar();
         setStatusbar();
         set();
-
         // 저장데이터 불러오기
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String str = pref.getString("PREF_STRNAME", "");
@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setting_name_1 = (TextView) findViewById(R.id.setting_name_1);
         setting_unit_1 = (TextView) findViewById(R.id.setting_unit_1);
         setting_status_1 = (TextView) findViewById(R.id.setting_status_1);
+        setting_kind_1.setOnClickListener(this);
         setting_kind_1.setOnClickListener(this);
         setting_name_1.setOnClickListener(this);
         setting_unit_1.setOnClickListener(this);
@@ -472,6 +473,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
 
     // 액티비티 종료 전에 저장!
     @Override

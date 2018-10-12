@@ -474,7 +474,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
     // 액티비티 종료 전에 저장!
     @Override
     protected void onStop() {
@@ -496,5 +495,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString("PREF_STRNAME", total_setting_data);
         editor.apply();
         Log.d(TAG, "저장완료");
+    }
+
+    // 정해진 시간에 핸드폰을 켬
+    public void showAlarmDialog(View view){
+        TimePickerFragment timePickerFragment = new TimePickerFragment();
+        timePickerFragment.show(getSupportFragmentManager(), "timePicker");
     }
 }

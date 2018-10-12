@@ -266,13 +266,14 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_above="@+id/next_btn"
         android:layout_alignParentStart="true"
+        android:layout_gravity="bottom"
         android:fontFamily="@font/my_font_family"
-        android:onClick="showAlarmDialog"
-        android:text="알람 설정"
+        android:text="알  람"
         android:textColor="#000000"
         android:textSize="20sp" />
 

@@ -2,13 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.administrator.app02">
-    <!-- 음성인식용(2) -->
-    <!-- 응용 프로그램이 네트워크 소켓을 열 수있게합니다. -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 응용 프로그램이 오디오를 녹음 할 수있게합니다. -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -49,11 +42,5 @@
         <activity
             android:name=".DeviceScanActivity"
             android:theme="@android:style/Theme.Holo.Light" />
-
-        <receiver android:name=".Alarm_Reciver" />
-
-        <service
-            android:name=".RingtonePlayingService"
-            android:enabled="true"></service>
     </application>
 </manifest>

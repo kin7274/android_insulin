@@ -505,10 +505,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.apply();
         Log.d(TAG, "저장완료");
     }
-
-    // 정해진 시간에 핸드폰을 켬
-    public void showAlarmDialog(View view){
-        TimePickerFragment timePickerFragment = new TimePickerFragment();
-        timePickerFragment.show(getSupportFragmentManager(), "timePicker");
-    }
 }

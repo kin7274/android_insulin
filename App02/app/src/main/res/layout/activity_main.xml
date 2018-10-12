@@ -265,18 +265,6 @@
         </android.support.v7.widget.CardView>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_above="@+id/next_btn"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="bottom"
-        android:fontFamily="@font/my_font_family"
-        android:text="알  람"
-        android:textColor="#000000"
-        android:textSize="20sp" />
-
     <!--설정이 끝났다면 다음페이지로 이동-->
     <Button
         android:id="@+id/next_btn"

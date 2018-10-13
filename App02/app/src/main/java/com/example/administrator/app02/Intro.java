@@ -2,6 +2,7 @@ package com.example.administrator.app02;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -17,8 +18,19 @@ public class Intro extends AppCompatActivity {
         @Override
         public void run() {
             // 2초 뒤에 다음화면(MainActivity)으로 넘어간다
-            Intent intent = new Intent(Intro.this, I_want_to_know_you.class);
-            startActivity(intent);
+
+            SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+            String exist_setting = pref.getString("PREF_STRNAME", "");
+            String[] str = exist_setting.split("&");
+            if (str[0].isEmpty()) {
+                // 설정값이 없으면 설정부터
+                Intent intent = new Intent(Intro.this, I_want_to_know_you.class);
+                startActivity(intent);
+            } else {
+                // 설정값이 존재한다면 메인으로 바로
+                Intent intent2 = new Intent(Intro.this, MainActivity.class);
+                startActivity(intent2);
+            }
             finish();
         }
     };

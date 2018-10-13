@@ -65,53 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setToolbar();
         setStatusbar();
         set();
-        // 저장데이터 불러오기
-        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        String str = pref.getString("PREF_STRNAME", "");
-        Log.d(TAG, "str = " + str);
-        if (str.equals("")) {
-            // 초기 1회
-            // 설정값이 없다
-            Log.d(TAG, "설정부터하세욥..");
-            // 사용자에게 알림띄우자
-            Toast.makeText(getApplicationContext(), "@@설정부터하세욥@@", Toast.LENGTH_SHORT).show();
-        }
-        // 설정값이 존재할 경우
-        else {
-            if (str.contains("&")) {
-                // 사용하는 약이 두개인 경우
-                String[] arr = str.split("&");
-                // 1of2
-                insulin_1of2 = arr[0];
-//                Log.d(TAG, "insulin_1of2 =" + insulin_1of2);
-                String[] insulin_1of2_setdata = insulin_1of2.split(",");
-                setting_kind_1.setText(insulin_1of2_setdata[0]);
-                setting_name_1.setText(insulin_1of2_setdata[1]);
-                setting_unit_1.setText(insulin_1of2_setdata[2]);
-                setting_status_1.setText(insulin_1of2_setdata[3]);
-                // 2of2
-                insulin_2of2 = arr[1];
-//                Log.d(TAG, "insulin_2of2 = " + insulin_2of2);
-                String[] insulin_2of2_setdata = insulin_2of2.split(",");
-                setting_kind_2.setText(insulin_2of2_setdata[0]);
-                setting_name_2.setText(insulin_2of2_setdata[1]);
-                setting_unit_2.setText(insulin_2of2_setdata[2]);
-                setting_status_2.setText(insulin_2of2_setdata[3]);
-                // 전역변수로 저장
-                Global.setData1(insulin_1of2);
-                Global.setData2(insulin_2of2);
-            } else {
-                // 사용하는 약이 한개인 경우
-                String[] arr = str.split(",");
-                setting_kind_1.setText(arr[0]);
-                setting_name_1.setText(arr[1]);
-                setting_unit_1.setText(arr[2]);
-                setting_status_1.setText(arr[3]);
-                // 전역변수로 저장
-                Global.setData1(str);
-                Global.setData2("없습니다");
-            }
-        }
     }
 
     // 툴바
@@ -312,10 +265,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 settingdata1[2] = et.getText().toString();
                                 // 입력한 값이 숫자인지 확인
 //                                if (Pattern.matches("^[0-9]+$", settingdata1[2])) {
-                                    // 숫자인 경우
-                                    setting_unit_1.setText(et.getText().toString());
+                                // 숫자인 경우
+                                setting_unit_1.setText(et.getText().toString());
 //                                } else {
-                                    // 숫자가 아니네?
+                                // 숫자가 아니네?
 //                                    Toast.makeText(getApplicationContext(), "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
 //                                }
                             }

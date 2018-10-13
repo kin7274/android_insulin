@@ -76,15 +76,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setting_unit_1.setText(small[2]);
         setting_status_1.setText(small[3]);
         // big[1] = 니들2
-        if (big[1] == null) {
-            Toast.makeText(getApplicationContext(), "띠용", Toast.LENGTH_SHORT).show();
-        } else {
-            String[] small2 = big[1].split("/");
+        String[] small2 = big[1].split("/");
+        try {
             setting_kind_2.setText(small2[0]);
             setting_name_2.setText(small2[1]);
             setting_unit_2.setText(small2[2]);
             setting_status_2.setText(small2[3]);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
     // 툴바
@@ -109,20 +110,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setting_name_1 = (TextView) findViewById(R.id.setting_name_1);
         setting_unit_1 = (TextView) findViewById(R.id.setting_unit_1);
         setting_status_1 = (TextView) findViewById(R.id.setting_status_1);
-        setting_kind_1.setOnClickListener(this);
-        setting_kind_1.setOnClickListener(this);
-        setting_name_1.setOnClickListener(this);
-        setting_unit_1.setOnClickListener(this);
-        setting_status_1.setOnClickListener(this);
         // 약품2
         setting_kind_2 = (TextView) findViewById(R.id.setting_kind_2);
         setting_name_2 = (TextView) findViewById(R.id.setting_name_2);
         setting_unit_2 = (TextView) findViewById(R.id.setting_unit_2);
         setting_status_2 = (TextView) findViewById(R.id.setting_status_2);
-        setting_kind_2.setOnClickListener(this);
-        setting_name_2.setOnClickListener(this);
-        setting_unit_2.setOnClickListener(this);
-        setting_status_2.setOnClickListener(this);
         // 장치 스캔 버튼
         Button scan_device = (Button) findViewById(R.id.scan_device);
         scan_device.setOnClickListener(this);
@@ -155,8 +147,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent_edu);
                 break;
             // 앱 평가하기
-            // 플레이스토어 댓글 링크 걸자 나중에
             case R.id.action_evaluate:
+                // 플레이스토어 댓글 링크 걸자 나중에
                 showDialog("앱 평가하기", "불편한 점 말씀해주셍..");
                 break;
             // 앱 소개하기
@@ -219,10 +211,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent4);
                 break;
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 }

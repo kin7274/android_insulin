@@ -42,38 +42,6 @@
             android:textColor="#000000"
             android:textSize="20sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/my_font_family"
-            android:text="설정한 1번 약 : "
-            android:textColor="#000000"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/text_data1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/my_font_family"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/my_font_family"
-            android:text="설정한 2번 약 : "
-            android:textColor="#000000"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/text_data2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/my_font_family"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,14 +79,6 @@
                 android:textSize="20sp" />
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/my_font_family"
-            android:textColor="#000000"
-            android:textSize="20sp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"

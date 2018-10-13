@@ -36,38 +36,24 @@ import static com.example.administrator.app02.MyRecyclerAdapter.MyRecyclerViewCl
 public class Timeline extends AppCompatActivity implements MyRecyclerViewClickListener, View.OnClickListener {
     private final static String TAG = Timeline.class.getSimpleName();
     Context mContext;
-
     myDBDB my;
     SQLiteDatabase sql;
-    public ArrayList<String> mUserNameArrayList = new ArrayList<String>();
     String user_name2;
-
     Button donggihwa, insert_db, load_db, delete_db;
-
     TextView textview;
-
     List<CardItem> lists;
     private MyRecyclerAdapter mAdapter;
     RecyclerView recycler_view;
-
     String[] INSULIN1, INSULIN2;
-
-    // Global변수
     String insulin_data1, insulin_data2;
-
     String aaa, bbb;
-    String dododo;
     String eat_status = "";
     String deviceAddress = "";
-    String settingdata22 = "";
-
-    String setting_insulin_kinds2 = "";
-    String setting_insulin_names2 = "";
-    String setting_insulin_unit2 = "";
 
     TextView text_data1, text_data2;
-    BluetoothLeService mBluetoothLeService = new BluetoothLeService();
 
+    BluetoothLeService mBluetoothLeService = new BluetoothLeService();
+    // 브로드캐스트
     private final BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -76,7 +62,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 final String message = intent.getStringExtra(EXTRA_DATA);
                 Log.d(TAG, "겟 메세지" + message);
                 Log.d(TAG, "message = 값 조쿠요");
-                // TODO 자릿수로 끊어서 하자
                 String[] MSG = message.split("");
                 Log.d(TAG, "MSG[1] = " + MSG[1]);
                 Log.d(TAG, "MSG[2] = " + MSG[2]);
@@ -98,9 +83,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 // settingdata22 :
                 String dsdfnkvlndsklcndslk = text_data2.getText().toString();
 
-                /////////////////////////////////////////////
                 // 설정한 약값이 하나면 고민할 필요가 없다!//
-                /////////////////////////////////////////////
                 if (dsdfnkvlndsklcndslk.equals("없습니다")) {
                     // searchImage() : 인슐린 종류에 따른 이미지 선택
                     // REALREALREAL : 현재 시간
@@ -143,7 +126,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     };
 
     // 투약 종류마다 리스트 맨 앞 색 구별!!!!!!
-    // 범례도 꼭 넣자!!
     int searchImage(String aa) {
         int a = 0;
         switch (aa) {
@@ -179,13 +161,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         }
     };
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // 메인
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -208,14 +184,14 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     }
 
     // 툴바
-    public void setToolbar(){
+    public void setToolbar() {
         Toolbar mytoolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mytoolbar);
         getSupportActionBar().setTitle("");
     }
 
     // 리사이클러뷰 + 어댑터
-    public void setRecyclerview(){
+    public void setRecyclerview() {
         // 객체 생성
         recycler_view = (RecyclerView) findViewById(R.id.recycler_view);
         recycler_view.setHasFixedSize(false);
@@ -238,10 +214,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     public void set() {
         // DB관련
         my = new myDBDB(this);
-        // 값 리시브
-        text_data1 = (TextView) findViewById(R.id.text_data1);
-        text_data2 = (TextView) findViewById(R.id.text_data2);
-        textview = (TextView) findViewById(R.id.textview);
         // 버튼 객체
         donggihwa = (Button) findViewById(R.id.donggihwa);
         insert_db = (Button) findViewById(R.id.insert_db);
@@ -251,45 +223,15 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         insert_db.setOnClickListener(this);
         load_db.setOnClickListener(this);
         delete_db.setOnClickListener(this);
-        // 설정한 1번 약
-        insulin_data1 = Global.getData1();
-        text_data1.setText(insulin_data1);
-        INSULIN1 = insulin_data1.split(",");
-        Log.d(TAG, "1번. 종류 = " + INSULIN1[0]);
-        Log.d(TAG, "1번. 품명 = " + INSULIN1[1]);
-        Log.d(TAG, "1번. 단위 = " + INSULIN1[2]);
-        // 식사상태에 공백제거...
-        aaa = INSULIN1[3].replace(" ", "");
-        Log.d(TAG, "1번. 식사상태 = " + aaa);
-
-        // 설정한 2번 약
-        // 없으면 없다고 떠!!
-        insulin_data2 = Global.getData2();
-        text_data2.setText(insulin_data2);
-        if (insulin_data2.equals("없습니다")) {
-            Log.d(TAG, "또잉..");
-        } else {
-            INSULIN2 = insulin_data2.split(",");
-            Log.d(TAG, "2번. 종류 = " + INSULIN2[0]);
-            Log.d(TAG, "2번. 품명 = " + INSULIN2[1]);
-            Log.d(TAG, "2번. 단위 = " + INSULIN2[2]);
-            bbb = INSULIN2[3].replace(" ", "");
-            Log.d(TAG, "2번. 식사상태 = " + bbb);
-        }
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////
     // 시간에 따른 식사상태 구분;
-    //
     // MSG[9] + MSG[10] = 현재 시간
     // 형식 : 00 ~ 24시
     // 21-05(8h) : 취침전;
     // 05-11(6h) : 아침식전;
     // 11-16(5h) : 점심식전;
     // 16-21(5h) : 저녁식전;
-
-    // 지금 시간이 18시니까
-    // 저녁식전이야
     public String hh_kinds(int hh) {
         if ((hh >= 05) && (hh < 11)) {
             eat_status = "아침식전";
@@ -352,17 +294,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    // 설정 후 돌아오면!
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
     protected void onDestroy() {
         unbindService(mServiceConnection);
         mBluetoothLeService = null;
@@ -375,7 +306,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         switch (v.getId()) {
             case R.id.donggihwa:
                 // sd카드 다 리드
-                // "a" 값 전송 / 0x61
+                // "a" 값 전송
                 mBluetoothLeService.writeCharacteristic("a");
                 break;
             // DB에 추가한다
@@ -409,7 +340,16 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     }
 
     @Override
-    public void onItemClicked(int position) {
+    protected void onPause() {
+        super.onPause();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onItemClicked(int position) {
     }
 }

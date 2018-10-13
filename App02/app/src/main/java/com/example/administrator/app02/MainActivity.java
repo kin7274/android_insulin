@@ -52,19 +52,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String[] settingdata2 = {"", "", "", ""};  // 2번 설정
     TextView deviceName, deviceAddress;  // 장치 정보 텍스트뷰
 
-    // 저장데이터
-    String set1, set2;
-    String total_setting_data;
-    String insulin_1of2, insulin_2of2;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = this;
+        set();
         setToolbar();
         setStatusbar();
-        set();
         shared_read();
     }
 
@@ -73,7 +68,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String set3 = pref.getString("PREF_STRNAME", "");
         // 나눠서 저장하자 텍스트뷰에
-        
+        String[] big = set3.split("&");
+        // big[0] = 니들1
+        String[] small = big[0].split("/");
+        setting_kind_1.setText(small[0]);
+        setting_name_1.setText(small[1]);
+        setting_unit_1.setText(small[2]);
+        setting_status_1.setText(small[3]);
+        // big[1] = 니들2
+        if (big[1] == null) {
+            Toast.makeText(getApplicationContext(), "띠용", Toast.LENGTH_SHORT).show();
+        } else {
+            String[] small2 = big[1].split("/");
+            setting_kind_2.setText(small2[0]);
+            setting_name_2.setText(small2[1]);
+            setting_unit_2.setText(small2[2]);
+            setting_status_2.setText(small2[3]);
+        }
     }
 
     // 툴바
@@ -112,9 +123,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setting_name_2.setOnClickListener(this);
         setting_unit_2.setOnClickListener(this);
         setting_status_2.setOnClickListener(this);
-        // 약품 저장
-        Button setting_set = (Button) findViewById(R.id.setting_set);
-        setting_set.setOnClickListener(this);
         // 장치 스캔 버튼
         Button scan_device = (Button) findViewById(R.id.scan_device);
         scan_device.setOnClickListener(this);
@@ -190,234 +198,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        //// 1번 설정에 관해
-        // 1번 종류
-        // spinner01 : 인슐린 종류(5)
-        final String[] items = {getResources().getString(R.string.insulin_name), getResources().getString(R.string.insulin_name1), getResources().getString(R.string.insulin_name2), getResources().getString(R.string.insulin_name3), getResources().getString(R.string.insulin_name4)};
-        // spinner02 : 하위 품목
-        // 초속효성
-        final String[] items1 = {getResources().getString(R.string.insulin_name0_0), getResources().getString(R.string.insulin_name0_1), getResources().getString(R.string.insulin_name0_2)};
-        // 속효성
-        final String[] items2 = {getResources().getString(R.string.insulin_name1_0)};
-        // 중간형
-        final String[] items3 = {getResources().getString(R.string.insulin_name2_0), getResources().getString(R.string.insulin_name2_1), getResources().getString(R.string.insulin_name2_2), getResources().getString(R.string.insulin_name2_3)};
-        // 혼합형
-        final String[] items4 = {getResources().getString(R.string.insulin_name3_0), getResources().getString(R.string.insulin_name3_1), getResources().getString(R.string.insulin_name3_2), getResources().getString(R.string.insulin_name3_3)};
-        // 지속형
-        final String[] items5 = {getResources().getString(R.string.insulin_name4_0), getResources().getString(R.string.insulin_name4_1)};
-        // spinner03 : 식사상태
-        final String[] items6 = {getResources().getString(R.string.state_0_0), getResources().getString(R.string.state_0_1), getResources().getString(R.string.state_0_2), getResources().getString(R.string.state_0_3)};
-        // 임시사용
-        final String[] items99;
-        //////////////
-        // 스위치문
         switch (v.getId()) {
-            case R.id.setting_kind_1:
-                ArrayAdapter<String> adapter11 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items);
-                adapter11.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-                AlertDialog.Builder builder11 = new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("1-1. 종류")
-                        .setNegativeButton("NO", null)
-                        .setItems(items, new DialogInterface.OnClickListener() {
-                            // 리스트 목록 클릭 이벤트
-                            @Override
-                            public void onClick(DialogInterface dialog, int position) {
-//                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items[position], Toast.LENGTH_SHORT).show();
-                                settingdata1[0] = items[position];
-                                // 메인 텍스트에 값 넣음
-                                setting_kind_1.setText(items[position]);
-                            }
-                        });
-                builder11.create();
-                builder11.show();
-                break;
-            // 1번 이름
-            case R.id.setting_name_1:
-                String mykinds = settingdata1[0];
-                if (mykinds.equals("초속효성")) {
-                    items99 = items1;
-                } else if (mykinds.equals("속효성")) {
-                    items99 = items2;
-                } else if (mykinds.equals("중간형")) {
-                    items99 = items3;
-                } else if (mykinds.equals("혼합형")) {
-                    items99 = items4;
-                } else {
-                    items99 = items5;
-                }
-                ArrayAdapter<String> adapter12 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items99);
-                adapter12.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-                AlertDialog.Builder builder12 = new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("1-2. 하위품명")
-                        .setNegativeButton("NO", null)
-                        .setItems(items99, new DialogInterface.OnClickListener() {
-                            // 리스트 목록 클릭 이벤트
-                            @Override
-                            public void onClick(DialogInterface dialog, int position) {
-//                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items99[position], Toast.LENGTH_SHORT).show();
-                                settingdata1[1] = items99[position];
-                                setting_name_1.setText(items99[position]);
-                            }
-                        });
-                builder12.create();
-                builder12.show();
-                break;
-            // 1번 단위
-            case R.id.setting_unit_1:
-                final EditText et = new EditText(MainActivity.this);
-                AlertDialog.Builder builder13 = new AlertDialog.Builder(MainActivity.this)
-                        // 숫자만 입력가능하도록, 키패드를 띄울까?
-                        .setTitle("1-3. 단위")
-                        .setPositiveButton("저장", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int position) {
-                                settingdata1[2] = et.getText().toString();
-                                // 입력한 값이 숫자인지 확인
-//                                if (Pattern.matches("^[0-9]+$", settingdata1[2])) {
-                                // 숫자인 경우
-                                setting_unit_1.setText(et.getText().toString());
-//                                } else {
-                                // 숫자가 아니네?
-//                                    Toast.makeText(getApplicationContext(), "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
-//                                }
-                            }
-                        })
-                        .setView(et);
-                builder13.create();
-                builder13.show();
-                break;
-            // 1번 식사상태
-            case R.id.setting_status_1:
-                ArrayAdapter<String> adapter14 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items6);
-                adapter14.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-                AlertDialog.Builder builder14 = new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("1-4. 식사상태")
-                        .setNegativeButton("NO", null)
-                        .setItems(items6, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int position) {
-//                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items6[position], Toast.LENGTH_SHORT).show();
-                                settingdata1[3] = items6[position];
-                                setting_status_1.setText(items6[position]);
-                            }
-                        });
-                builder14.create();
-                builder14.show();
-                break;
-            //// 2번 설정에 관해
-            // 2번 종류
-            case R.id.setting_kind_2:
-                ArrayAdapter<String> adapter21 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items);
-                adapter21.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-                AlertDialog.Builder builder21 = new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("2-1. 종류")
-                        .setNegativeButton("NO", null)
-                        .setItems(items, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int position) {
-//                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items[position], Toast.LENGTH_SHORT).show();
-                                settingdata2[0] = items[position];
-                                setting_kind_2.setText(items[position]);
-                            }
-                        });
-                builder21.create();
-                builder21.show();
-                break;
-            // 2번 이름
-            case R.id.setting_name_2:
-                String mykinds2 = settingdata2[0];
-                if (mykinds2.equals("초속효성")) {
-                    items99 = items1;
-                } else if (mykinds2.equals("속효성")) {
-                    items99 = items2;
-                } else if (mykinds2.equals("중간형")) {
-                    items99 = items3;
-                } else if (mykinds2.equals("혼합형")) {
-                    items99 = items4;
-                } else {
-                    items99 = items5;
-                }
-                ArrayAdapter<String> adapter22 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items99);
-                adapter22.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-                AlertDialog.Builder builder22 = new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("2-2. 하위품명")
-                        .setNegativeButton("NO", null)
-                        .setItems(items99, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int position) {
-//                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items99[position], Toast.LENGTH_SHORT).show();
-                                settingdata2[1] = items99[position];
-                                setting_name_2.setText(items99[position]);
-                            }
-                        });
-                builder22.create();
-                builder22.show();
-                break;
-            // 2번 단위
-            case R.id.setting_unit_2:
-                final EditText et2 = new EditText(MainActivity.this);
-                AlertDialog.Builder builder23 = new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("2-3. 단위")
-                        .setPositiveButton("저장", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int position) {
-                                settingdata2[2] = et2.getText().toString();
-                                // 입력값이 숫자인지 확인
-                                if (Pattern.matches("^[0-9]+$", settingdata2[2])) {
-                                    // 숫자인경우
-                                    setting_unit_2.setText(et2.getText().toString());
-                                } else {
-                                    // 숫자가 아니네?
-                                    Toast.makeText(getApplicationContext(), "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        })
-                        .setView(et2);
-                builder23.create();
-                builder23.show();
-                break;
-            // 2번 식사상태
-            case R.id.setting_status_2:
-                ArrayAdapter<String> adapter24 = new ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice, items6);
-                adapter24.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
-                AlertDialog.Builder builder24 = new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("2-4. 식사상태")
-                        .setNegativeButton("NO", null)
-                        .setItems(items6, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int position) {
-//                                Toast.makeText(getApplicationContext(), "선택한 값 : " + items[position], Toast.LENGTH_SHORT).show();
-                                settingdata2[3] = items6[position];
-                                setting_status_2.setText(items6[position]);
-                            }
-                        });
-                builder24.create();
-                builder24.show();
-                break;
-            // 설정값 저장
-            case R.id.setting_set:
-                // TODO NULL값이 있으면 저장X, 단 2번 다 비어있으면 1번만 된걸로
-                Toast.makeText(getApplicationContext(), "저장하겠습니다.", Toast.LENGTH_SHORT).show();
-                // 1번
-//                Log.d(TAG, "settingdata1[0] = " + settingdata1[0]);
-//                Log.d(TAG, "settingdata1[1] = " + settingdata1[1]);
-//                Log.d(TAG, "settingdata1[2] = " + settingdata1[2]);
-//                Log.d(TAG, "settingdata1[3] = " + settingdata1[3]);
-                // 2번
-//                Log.d(TAG, "settingdata2[0] = " + settingdata2[0]);
-//                Log.d(TAG, "settingdata2[1] = " + settingdata2[1]);
-//                Log.d(TAG, "settingdata2[2] = " + settingdata2[2]);
-//                Log.d(TAG, "settingdata2[3] = " + settingdata2[3]);
-
-                // 저장데이터
-                set1 = settingdata1[0] + "," + settingdata1[1] + "," + settingdata1[2] + "," + settingdata1[3];
-                set2 = settingdata2[0] + "," + settingdata2[1] + "," + settingdata2[2] + "," + settingdata2[3];
-
-                // 전역변수로 저장
-                Global.setData1(set1);
-                Global.setData2(set2);
-                break;
-            //// 블루투스
             // 블루투스 장치 검색
             case R.id.scan_device:
                 Intent intent1 = new Intent(MainActivity.this, DeviceScanActivity.class);
@@ -440,26 +221,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    // 액티비티 종료 전에 저장!
     @Override
     protected void onStop() {
         super.onStop();
-        String a = Global.getData1();
-        String b = Global.getData2();
-        if (b != null) {
-            // 2번까지 함
-            Log.d(TAG, "set1 = " + a + ", set2 = " + b);
-            total_setting_data = a + "&" + b;
-        } else {
-            // 1번만 있음
-            Log.d(TAG, "set1 = " + a + ", set2 = null이겠지?" + b);
-            total_setting_data = a;
-        }
-        Log.d(TAG, "쉐어드프레퍼런스값  = " + total_setting_data);
-        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("PREF_STRNAME", total_setting_data);
-        editor.apply();
-        Log.d(TAG, "저장완료");
     }
 }

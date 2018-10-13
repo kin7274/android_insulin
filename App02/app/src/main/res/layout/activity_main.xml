@@ -180,15 +180,6 @@
                         android:textColor="#000000"
                         android:textSize="20sp" />
                 </LinearLayout>
-
-                <Button
-                    android:id="@+id/setting_set"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/my_font_family"
-                    android:text="SET"
-                    android:textColor="#000000"
-                    android:textSize="20sp" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
 

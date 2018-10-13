@@ -30,6 +30,7 @@
         android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical">
 
+        <!--니들-->
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/my_font_family"
-                    android:text="잠시만요!! 사용하기 전에!!"
+                    android:text="NEEDLE"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
@@ -54,38 +55,63 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:orientation="horizontal"
-                    android:weightSum="4">
+                    android:weightSum="8">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/my_font_family"
+                        android:gravity="center"
+                        android:text="1."
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/setting_kind_1"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
                         android:layout_weight="2"
+                        android:background="@drawable/xml_border"
                         android:fontFamily="@font/my_font_family"
-                        android:gravity="left|center_vertical"
-                        android:text="1. 니들 사용하시쥬?"
+                        android:gravity="center"
+                        android:hint="종류"
                         android:textColor="#000000"
                         android:textSize="20sp" />
 
-                    <RadioButton
-                        android:id="@+id/yes_radiobtn"
+                    <TextView
+                        android:id="@+id/setting_name_1"
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
+                        android:background="@drawable/xml_border"
                         android:fontFamily="@font/my_font_family"
-                        android:gravity="left|center_vertical"
-                        android:checked="true"
-                        android:text="YES"
+                        android:gravity="center"
+                        android:hint="품명"
                         android:textColor="#000000"
                         android:textSize="20sp" />
 
-                    <RadioButton
-                        android:id="@+id/no_radiobtn"
+                    <TextView
+                        android:id="@+id/setting_unit_1"
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
                         android:layout_weight="1"
+                        android:background="@drawable/xml_border"
                         android:fontFamily="@font/my_font_family"
-                        android:gravity="left|center_vertical"
-                        android:text="NO"
+                        android:gravity="center"
+                        android:hint="단위"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/setting_status_1"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="2"
+                        android:background="@drawable/xml_border"
+                        android:fontFamily="@font/my_font_family"
+                        android:gravity="center"
+                        android:hint="식사상태"
                         android:textColor="#000000"
                         android:textSize="20sp" />
                 </LinearLayout>
@@ -94,42 +120,160 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:orientation="horizontal"
-                    android:weightSum="4">
+                    android:weightSum="8">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/my_font_family"
+                        android:gravity="center"
+                        android:text="2."
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/setting_kind_2"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
                         android:layout_weight="2"
+                        android:background="@drawable/xml_border"
                         android:fontFamily="@font/my_font_family"
-                        android:gravity="left|center_vertical"
-                        android:text="2. 약 몇개써요!!"
+                        android:gravity="center"
+                        android:hint="종류"
                         android:textColor="#000000"
                         android:textSize="20sp" />
 
-                    <RadioButton
-                        android:id="@+id/one_radiobtn"
+                    <TextView
+                        android:id="@+id/setting_name_2"
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
-                        android:layout_weight="1"
-                        android:checked="true"
+                        android:layout_weight="2"
+                        android:background="@drawable/xml_border"
                         android:fontFamily="@font/my_font_family"
-                        android:gravity="left|center_vertical"
-                        android:text="1개"
+                        android:gravity="center"
+                        android:hint="품명"
                         android:textColor="#000000"
                         android:textSize="20sp" />
 
-                    <RadioButton
-                        android:id="@+id/two_radiobtn"
+                    <TextView
+                        android:id="@+id/setting_unit_2"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/xml_border"
+                        android:fontFamily="@font/my_font_family"
+                        android:gravity="center"
+                        android:hint="단위"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/setting_status_2"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="2"
+                        android:background="@drawable/xml_border"
+                        android:fontFamily="@font/my_font_family"
+                        android:gravity="center"
+                        android:hint="식사상태"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <!--경구 혈당강하제-->
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            app:cardCornerRadius="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/my_font_family"
+                    android:text="혈당강하제"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
                         android:layout_weight="1"
                         android:fontFamily="@font/my_font_family"
-                        android:gravity="left|center_vertical"
-                        android:text="2개"
+                        android:gravity="center"
+                        android:text="1."
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/setting_medi_1"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="7"
+                        android:background="@drawable/xml_border"
+                        android:fontFamily="@font/my_font_family"
+                        android:gravity="center"
+                        android:hint="종류"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+                    android:weightSum="8">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/my_font_family"
+                        android:gravity="center"
+                        android:text="2."
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/setting_medi_2"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="7"
+                        android:background="@drawable/xml_border"
+                        android:fontFamily="@font/my_font_family"
+                        android:gravity="center"
+                        android:hint="종류"
                         android:textColor="#000000"
                         android:textSize="20sp" />
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
+
+
+    <Button
+        android:id="@+id/next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:fontFamily="@font/my_font_family"
+        android:text="설정 끝"
+        android:textColor="#000000"
+        android:textSize="20sp" />
 </RelativeLayout>

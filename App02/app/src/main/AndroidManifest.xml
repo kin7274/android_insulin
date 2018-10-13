@@ -31,6 +31,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".EducationActivity" />
         <activity android:name=".Timeline" />
+        <activity android:name=".I_want_to_know_you" />
 
         <service
             android:name=".BluetoothLeService"

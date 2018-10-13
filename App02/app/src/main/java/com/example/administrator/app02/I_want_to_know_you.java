@@ -340,7 +340,7 @@ public class I_want_to_know_you extends AppCompatActivity implements View.OnClic
                 // 저장하기
                 shared();
                 // 넘어가기
-                Intent intent = new Intent(I_want_to_know_you.this, DetailActivity.class);
+                Intent intent = new Intent(I_want_to_know_you.this, MainActivity.class);
                 startActivity(intent);
                 break;
         }

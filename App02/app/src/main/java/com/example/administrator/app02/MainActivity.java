@@ -65,6 +65,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setToolbar();
         setStatusbar();
         set();
+        shared_read();
+    }
+
+    // 캐시에 저장된 값(사용자설정) 불러오기
+    public void shared_read() {
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        String set3 = pref.getString("PREF_STRNAME", "");
+        // 나눠서 저장하자 텍스트뷰에
+        
     }
 
     // 툴바

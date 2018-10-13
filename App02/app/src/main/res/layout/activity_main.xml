@@ -47,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/my_font_family"
-                    android:text="사용자 설정"
+                    android:text="내가 설정한 걸 보여줄게"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 

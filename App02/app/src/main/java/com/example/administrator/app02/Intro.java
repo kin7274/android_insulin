@@ -18,7 +18,6 @@ public class Intro extends AppCompatActivity {
         @Override
         public void run() {
             // 2초 뒤에 다음화면(MainActivity)으로 넘어간다
-
             SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
             String exist_setting = pref.getString("PREF_STRNAME", "");
             String[] str = exist_setting.split("&");

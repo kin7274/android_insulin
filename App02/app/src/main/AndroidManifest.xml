@@ -4,11 +4,14 @@
     package="com.example.administrator.app02">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--알람-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <uses-feature android:name="android.hardware.bluetooth" />
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
+
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -32,7 +35,6 @@
         <activity android:name=".EducationActivity" />
         <activity android:name=".Timeline" />
         <activity android:name=".I_want_to_know_you" />
-        <activity android:name=".DetailActivity" />
 
         <service
             android:name=".BluetoothLeService"

@@ -248,7 +248,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     // DB에 저장하는 메서드
     public void setDB(String time, String setting) {
         sql = my.getWritableDatabase();
-        sql.execSQL("INSERT INTO tb_needle VALUES(null, '" + time + "', '" + setting + "')");
+        sql.execSQL("INSERT INTO tb_needle VALUES(null, '" + time + "/" + setting + "')");
 //        Toast.makeText(getApplicationContext(), "저장하였습니다", Toast.LENGTH_SHORT).show();
 //        Log.d(TAG, "TIME값은 " + time);
 //        Log.d(TAG, "SETTING값은 " + setting);
@@ -265,18 +265,16 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         Cursor cursor;
         cursor = sql.rawQuery("select*from tb_NEEDLE", null);
         while (cursor.moveToNext()) {
-            user_name2 += cursor.getString(0) + " : "
+            user_name2 += cursor.getString(0) + ":"
                     + cursor.getString(1) + "/"
                     + cursor.getString(2) + "\n";
-            String oioi = cursor.getString(2).substring(0, cursor.getString(2).indexOf(","));
+            String oioi = cursor.getString(2).substring(0, cursor.getString(2).indexOf("/"));
 //            Log.d(TAG, "oioi = " + oioi);
             lists.add(new CardItem(searchImage(oioi), cursor.getString(1), cursor.getString(2)));
         }
         // 텍스트뷰에 말고
         // 카드뷰로 저장을 해
         mAdapter.notifyDataSetChanged();
-
-        textview.setText(user_name2);
         cursor.close();
         sql.close();
         Toast.makeText(getApplicationContext(), "조회하였습니다.", Toast.LENGTH_SHORT).show();

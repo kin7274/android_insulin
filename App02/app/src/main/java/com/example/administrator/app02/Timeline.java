@@ -50,8 +50,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     String eat_status = "";
     String deviceAddress = "";
 
-    TextView text_data1, text_data2;
-
     BluetoothLeService mBluetoothLeService = new BluetoothLeService();
     // 브로드캐스트
     private final BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
@@ -81,7 +79,8 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 // searchImage() : 인슐린 종류에 따른 이미지 선택
                 // REALREALREAL : 현재 시간
                 // settingdata22 :
-                String dsdfnkvlndsklcndslk = text_data2.getText().toString();
+//                String dsdfnkvlndsklcndslk = text_data2.getText().toString();
+                String dsdfnkvlndsklcndslk = Global.getData2();
 
                 // 설정한 약값이 하나면 고민할 필요가 없다!//
                 if (dsdfnkvlndsklcndslk.equals("없습니다")) {

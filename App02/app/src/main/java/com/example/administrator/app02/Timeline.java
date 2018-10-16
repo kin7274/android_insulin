@@ -50,8 +50,6 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     String eat_status = "";
     String deviceAddress = "";
 
-    TextView text_data1, text_data2;
-
     BluetoothLeService mBluetoothLeService = new BluetoothLeService();
     // 브로드캐스트
     private final BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
@@ -81,7 +79,8 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
                 // searchImage() : 인슐린 종류에 따른 이미지 선택
                 // REALREALREAL : 현재 시간
                 // settingdata22 :
-                String dsdfnkvlndsklcndslk = text_data2.getText().toString();
+//                String dsdfnkvlndsklcndslk = text_data2.getText().toString();
+                String dsdfnkvlndsklcndslk = Global.getData2();
 
                 // 설정한 약값이 하나면 고민할 필요가 없다!//
                 if (dsdfnkvlndsklcndslk.equals("없습니다")) {
@@ -249,7 +248,7 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
     // DB에 저장하는 메서드
     public void setDB(String time, String setting) {
         sql = my.getWritableDatabase();
-        sql.execSQL("INSERT INTO tb_needle VALUES(null, '" + time + "', '" + setting + "')");
+        sql.execSQL("INSERT INTO tb_needle VALUES(null, '" + time + "/" + setting + "')");
 //        Toast.makeText(getApplicationContext(), "저장하였습니다", Toast.LENGTH_SHORT).show();
 //        Log.d(TAG, "TIME값은 " + time);
 //        Log.d(TAG, "SETTING값은 " + setting);
@@ -266,18 +265,16 @@ public class Timeline extends AppCompatActivity implements MyRecyclerViewClickLi
         Cursor cursor;
         cursor = sql.rawQuery("select*from tb_NEEDLE", null);
         while (cursor.moveToNext()) {
-            user_name2 += cursor.getString(0) + " : "
+            user_name2 += cursor.getString(0) + ":"
                     + cursor.getString(1) + "/"
                     + cursor.getString(2) + "\n";
-            String oioi = cursor.getString(2).substring(0, cursor.getString(2).indexOf(","));
+            String oioi = cursor.getString(2).substring(0, cursor.getString(2).indexOf("/"));
 //            Log.d(TAG, "oioi = " + oioi);
             lists.add(new CardItem(searchImage(oioi), cursor.getString(1), cursor.getString(2)));
         }
         // 텍스트뷰에 말고
         // 카드뷰로 저장을 해
         mAdapter.notifyDataSetChanged();
-
-        textview.setText(user_name2);
         cursor.close();
         sql.close();
         Toast.makeText(getApplicationContext(), "조회하였습니다.", Toast.LENGTH_SHORT).show();

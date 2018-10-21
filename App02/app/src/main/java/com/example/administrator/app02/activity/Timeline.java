@@ -1,4 +1,4 @@
-package com.example.administrator.app02;
+package com.example.administrator.app02.activity;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -12,7 +12,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -22,14 +21,21 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.app02.BluetoothLeService;
+import com.example.administrator.app02.model.CardItem;
+import com.example.administrator.app02.model.Global;
+import com.example.administrator.app02.adapter.MyRecyclerAdapter;
+import com.example.administrator.app02.R;
+import com.example.administrator.app02.model.myDBDB;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.administrator.app02.BluetoothLeService.ACTION_DATA_AVAILABLE;
 import static com.example.administrator.app02.BluetoothLeService.ACTION_DATA_AVAILABLE_CHANGE;
 import static com.example.administrator.app02.BluetoothLeService.EXTRA_DATA;
-import static com.example.administrator.app02.DeviceControlActivity.EXTRAS_DEVICE_ADDRESS;
-import static com.example.administrator.app02.MyRecyclerAdapter.MyRecyclerViewClickListener;
+import static com.example.administrator.app02.adapter.MyRecyclerAdapter.MyRecyclerViewClickListener;
+import static com.example.administrator.app02.activity.DeviceControlActivity.EXTRAS_DEVICE_ADDRESS;
 
 // 실질적으로 블루투스값 리시브 액티비티입니다.
 // 여기서 DB에도 저장합시다!

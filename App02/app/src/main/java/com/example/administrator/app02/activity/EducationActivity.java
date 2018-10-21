@@ -1,4 +1,4 @@
-package com.example.administrator.app02;
+package com.example.administrator.app02.activity;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.app02.R;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;

@@ -6,7 +6,7 @@
     android:layout_marginLeft="6dp"
     android:orientation="vertical"
     android:weightSum="4"
-    tools:context=".AppIntroductionActivity">
+    tools:context=".activity.AppIntroductionActivity">
 
     <TextView
         android:id="@+id/menu1"

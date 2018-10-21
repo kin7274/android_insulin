@@ -21,27 +21,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Intro">
+        <activity android:name=".activity.Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".EducationActivity" />
-        <activity android:name=".Timeline" />
-        <activity android:name=".I_want_to_know_you" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.EducationActivity" />
+        <activity android:name=".activity.Timeline" />
+        <activity android:name=".activity.I_want_to_know_you" />
 
         <service
             android:name=".BluetoothLeService"
             android:enabled="true" />
 
         <activity
-            android:name=".DeviceControlActivity"
+            android:name=".activity.DeviceControlActivity"
             android:theme="@android:style/Theme.Holo.Light" />
         <activity
-            android:name=".DeviceScanActivity"
+            android:name=".activity.DeviceScanActivity"
             android:theme="@android:style/Theme.Holo.Light" />
     </application>
 </manifest>

@@ -14,21 +14,18 @@
  * limitations under the License.
  */
 
-package com.example.administrator.app02;
+package com.example.administrator.app02.activity;
 
 import android.app.Activity;
 import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
-import android.bluetooth.le.ScanFilter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -40,8 +37,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.app02.R;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class DeviceScanActivity extends ListActivity {
     private final static String TAG = DeviceScanActivity.class.getSimpleName();

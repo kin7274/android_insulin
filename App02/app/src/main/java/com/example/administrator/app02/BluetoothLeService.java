@@ -32,6 +32,8 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.example.administrator.app02.model.SampleGattAttributes;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -164,7 +166,7 @@ public class BluetoothLeService extends Service {
     }
 
     public class LocalBinder extends Binder {
-        BluetoothLeService getService() {
+        public BluetoothLeService getService() {
             return BluetoothLeService.this;
         }
     }

@@ -1,15 +1,14 @@
-package com.example.administrator.app02;
+package com.example.administrator.app02.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Window;
 import android.view.WindowManager;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.administrator.app02.R;
 
 // 인트로 : 2초 대기화면
 public class Intro extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.example.administrator.app02;
+package com.example.administrator.app02.model;
 
 
 import android.graphics.drawable.Drawable;

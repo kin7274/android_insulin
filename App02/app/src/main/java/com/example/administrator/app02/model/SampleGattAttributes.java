@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.administrator.app02;
+package com.example.administrator.app02.model;
 
 import java.util.HashMap;
 

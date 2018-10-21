@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.administrator.app02;
+package com.example.administrator.app02.activity;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -36,6 +36,10 @@ import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.administrator.app02.BluetoothLeService;
+import com.example.administrator.app02.R;
+import com.example.administrator.app02.model.SampleGattAttributes;
 
 import java.util.ArrayList;
 import java.util.HashMap;

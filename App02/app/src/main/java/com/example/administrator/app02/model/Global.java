@@ -1,4 +1,4 @@
-package com.example.administrator.app02;
+package com.example.administrator.app02.model;
 
 // 설정한 약1, 2번값 저장용 전역변수
 public class Global {

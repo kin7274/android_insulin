@@ -1,4 +1,4 @@
-package com.example.administrator.app02;
+package com.example.administrator.app02.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.administrator.app02.R;
 
 public class AppIntroductionActivity extends AppCompatActivity implements View.OnClickListener {
     @Override

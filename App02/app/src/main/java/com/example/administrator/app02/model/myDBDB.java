@@ -1,4 +1,4 @@
-package com.example.administrator.app02;
+package com.example.administrator.app02.model;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
